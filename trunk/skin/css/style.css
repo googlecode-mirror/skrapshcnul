@@ -75,9 +75,11 @@ header ul li {padding: 0;margin: 0px;list-style: none;float: left;}
 
 /* Footer */
 footer {font-size: 0.8em; text-shadow: 0 -1px 0 #484D55;color: #CBD2DC;}
+footer a {text-shadow: 0 -1px 0 #484D55;color: #CBD2DC; text-decoration: none; padding:15px 10px;display: inline-block;}
+footer li:hover {background: #222222;}
 footer legend {margin: 10px 0;}
 footer ul {padding: 0;margin: 0;}
-footer ul li {padding: 0;margin: 15px 5px;list-style: none;float: left;}
+footer ul li {padding: 0;margin: 5px;list-style: none;float: left;}
 
 .f-copyright {float: left;font-weight: bold;}
 .f-socialmedia {float: right;}

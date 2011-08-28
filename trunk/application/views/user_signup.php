@@ -1,4 +1,14 @@
 <h1>Create an Account</h1>
+<div style="text-align: center;">
+	<?php
+echo validation_errors('<p class="error">');
+if($this->session->flashdata('message')) :
+	?>
+	<p class="error">
+		<?php echo $this -> session -> flashdata('message');?>
+	</p>
+	<?php endif;?>
+</div>
 <fieldset>
 	<legend>
 		Personal Information
@@ -21,7 +31,5 @@
 	echo form_input('password2', set_value('password2', 'Confirm Password'));
 
 	echo form_submit('submit', 'Create Account');
-
-	echo validation_errors('<p class="error">');
 	?>
 </fieldset>
