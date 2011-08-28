@@ -11,12 +11,16 @@ class Main extends CI_Controller {
 		$data['is_logged_in'] = $this->session->userdata('is_logged_in') ? TRUE : FALSE;
 	}
 	
-	public function index($value = '') {
+	function index($value = '') {
 		// Check if user is logged in
 		$data['is_logged_in'] = $this->session->userdata('is_logged_in') ? TRUE : FALSE;
 		
 		$data['main_content'] = 'main';
 		$this -> load -> view('includes/tmpl_public', $data);
 	}
+	
+	function _getTotalUsers() {
+		
+	} 
 }
 ?>
