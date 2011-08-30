@@ -4,7 +4,7 @@
  *
  */
 
-class Login extends CI_Controller {
+class Logout extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -13,16 +13,16 @@ class Login extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->database();
 		$this->load->helper('url');
-		// Set Global Variables
-		$this->data['is_logged_in'] = $this->ion_auth->logged_in();
+		// Check if user is logged in
+		$data['is_logged_in'] = $this -> session -> userdata('is_logged_in') ? TRUE : FALSE;
+		$data['is_logged_in'] = TRUE;
 	}
 
 	function index() {
 		if (!$this->ion_auth->logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
+			$this->login();
 		} else {
-			redirect('user/profile', 'refresh');
+			redirect('auth/logout', 'refresh');
 		}
 	}
 }

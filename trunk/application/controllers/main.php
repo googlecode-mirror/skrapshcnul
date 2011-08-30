@@ -7,16 +7,20 @@ class Main extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		// Check if user is logged in
-		$data['is_logged_in'] = $this->session->userdata('is_logged_in') ? TRUE : FALSE;
+		$this->load->library('ion_auth');
+		$this->load->library('session');
+		$this->load->library('form_validation');
+		$this->load->database();
+		$this->load->helper('url');
+		// Set Global Variables
+		$this->data['is_logged_in'] = $this->ion_auth->logged_in();
+		$this->session->set_flashdata('system_message', '');
 	}
 	
 	function index($value = '') {
-		// Check if user is logged in
-		$data['is_logged_in'] = $this->session->userdata('is_logged_in') ? TRUE : FALSE;
-		
-		$data['main_content'] = 'main';
-		$this -> load -> view('includes/tmpl_public', $data);
+		// Render view
+		$this->data['main_content'] = 'main';
+		$this -> load -> view('includes/tmpl_public', $this->data);
 	}
 	
 	function _getTotalUsers() {

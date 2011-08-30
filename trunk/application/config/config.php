@@ -15,7 +15,7 @@
 |
 */
 //$config['base_url']	= 'http://staging.lunchsparks.me/';
-$config['base_url']	= 'http://localhost/lunchsparks/';
+$config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------
