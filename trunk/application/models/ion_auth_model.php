@@ -704,6 +704,8 @@ class Ion_auth_model extends CI_Model
 					$this->remember_user($result->id);
 				}
 				
+				// Update Login Histroy Table
+				$this->add_login_history($identity);
 				
 				$this->trigger_events(array('post_login', 'post_login_successful'));
 				$this->set_message('login_successful');
@@ -1422,5 +1424,24 @@ class Ion_auth_model extends CI_Model
 		// If contain result (activation code), then its not activated.
 	    return !($this->db->where('id', id)
 			    ->count_all_results($this->tables['users']) > 0);
+	}
+	
+	public function add_login_history($identity) {
+		
+		$this->trigger_events('pre_add_login_history');
+		
+		$ip_address = $this->input->ip_address();
+		$user_agent = $this->input->user_agent();
+		
+		// Users table.
+	    $data = array(
+			'user_id'		=> $identity,
+			'ip_address'	=> $ip_address,
+			'user_agent'	=> $user_agent,
+			 );
+
+	    $this->db->insert($this->tables['users_login_history'], $data);
+			    
+		$this->trigger_events('post_add_login_history');
 	}
 }

@@ -32,7 +32,7 @@
 						<?php echo anchor('user/profile', 'Profiles', array('from' => 'main' )); ?>
 					</li>
 					<li>
-						<?php echo anchor('auth/settings', 'Settings', array('from' => 'main' )); ?>
+						<?php echo anchor('settings', 'Settings', array('from' => 'main' )); ?>
 					</li>
 					<li>
 						<?php echo anchor('logout', 'Logout', array('from' => 'main' )); ?>

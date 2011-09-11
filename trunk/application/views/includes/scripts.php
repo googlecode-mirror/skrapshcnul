@@ -1,5 +1,6 @@
 <title><?php echo $head_title = 'Lunchsparks';?></title>
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo base_url();?>skin/css/layout.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/carousel.css" type="text/css" media="screen" charset="utf-8" />
 <!-- Fonts -->
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />

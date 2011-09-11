@@ -127,14 +127,14 @@ INSERT INTO `lss_users_groups` (`id`, `user_id`, `group_id`) VALUES
 -- Table structure for table `lss_users_login_loc`
 --
 
-CREATE TABLE IF NOT EXISTS `lss_users_login_loc` (
+CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `userId` bigint(20) NOT NULL,
   `ipAddress` varchar(15) NOT NULL,
   `agentString` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

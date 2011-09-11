@@ -61,6 +61,7 @@ class Ion_auth
 		$this->ci->load->config('ion_auth', TRUE);
 		$this->ci->load->library('email');
 		$this->ci->load->library('session');
+		$this->ci->load->library('tweet');
 		$this->ci->lang->load('ion_auth');
 		$this->ci->load->model('ion_auth_model');
 		$this->ci->load->helper('cookie');
@@ -150,7 +151,7 @@ class Ion_auth
 		$this->ci->ion_auth_model->trigger_events('pre_password_change');
 		
 		$identity = $this->ci->config->item('identity', 'ion_auth');
-		$profile  = $this->ci->ion_auth_model->profile($code, true); //pass the code to profile
+		//$profile  = $this->ci->ion_auth_model->profile($code, true); //pass the code to profile
 		$this->ci->db->where($this->ci->ion_auth_model->tables['users'].'.forgotten_password_code', $code);
 	 	$profile = $this->users()->row();
 
@@ -162,6 +163,7 @@ class Ion_auth
 		}
 
 		$new_password = $this->ci->ion_auth_model->forgotten_password_complete($code, $profile->salt);
+		die($new_password);
 
 		if ($new_password)
 		{
@@ -320,8 +322,16 @@ class Ion_auth
 		$this->ci->ion_auth_model->trigger_events('logged_in');
 		
 		$identity = $this->ci->config->item('identity', 'ion_auth');
-
-		return (bool) $this->ci->session->userdata($identity);
+		
+		//return (bool) $this->ci->session->userdata($identity);
+		if ( $this->ci->session->userdata($identity) ){
+			return TRUE;
+		} elseif ($this->ci->tweet->loggedIn()) {
+			return TRUE;
+		}
+		
+		return FALSE;
+			
 	}
 
 	/**

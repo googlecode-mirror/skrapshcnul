@@ -10,11 +10,16 @@ class Auth extends Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->library('ion_auth');
+		// Load Common 
 		$this->load->library('session');
 		$this->load->library('form_validation');
-		$this->load->database();
 		$this->load->helper('url');
+		$this->load->database();
+		// Load Ion Auth
+		$this->load->library('ion_auth');
+		// Load Twitter Auth
+		$this->load->library('tweet');
+		$this->tweet->enable_debug(TRUE);
 		// Set Global Variables
 		$this->data['is_logged_in'] = $this->ion_auth->logged_in();
 	}
@@ -52,6 +57,13 @@ class Auth extends Controller {
 	//log the user in
 	function login()
 	{
+		
+		if ($this->data['is_logged_in'])
+		{
+			//redirect them to the profile page
+			redirect('user/profile', 'refresh');
+		}
+		
 		$this->data['title'] = "Login";
 
 		//validate form input
@@ -496,6 +508,68 @@ class Auth extends Controller {
 		}
 	}
 
+	/* External Auth(s) Starts HERE */
+	function twitter(){
+		if ( !$this->tweet->logged_in() )
+		{
+			// This is where the url will go to after auth.
+			// ( Callback url )
+			$this->tweet->set_callback(site_url('auth/twitter_authed'));
+			
+			// Send the user off for login!
+			$this->tweet->login();
+		}
+		else
+		{
+			// Logged in 
+			$this->_post_twitter_authed();
+		}
+		
+	}
+	
+	function twitter_authed() {
+		$this->_post_twitter_authed();
+	}
+	
+	/**
+	 * Private function to handle post twitter authentication.
+	 */
+	function _post_twitter_authed() {
+		
+		$tokens = $this->tweet->get_tokens();
+		
+		// put temp credentials in session, we need this in the callback
+		$this->session->set_userdata('oauth_token', $tokens['oauth_token']);
+		$this->session->set_userdata('oauth_token_secret', $tokens['oauth_token_secret']);
+		
+		$user = $this->tweet->call('get', 'account/verify_credentials');
+		
+		// TODO Write data to DB
+		print_r($user);
+		
+		$this->_users_provider_write($user);
+		
+		$this->data['temp_t_user'] = $user;
+		
+		$friendship 	= $this->tweet->call('get', 'friendships/show', array('source_screen_name' => $user->screen_name, 'target_screen_name' => 'elliothaughin'));
+		$this->data['temp_t_friendship'] = $friendship;
+		
+		// If !user exist, create new user
+		// else add to user account 
+		
+		// Render View
+		$this->data['main_content'] = '/auth/twitter_authed';
+		$this -> load -> view('includes/tmpl_layout', $this->data);
+	}
+	
+	
+	function _users_provider_write($user) {
+		
+		
+	}
+	
+	/* Private Functions Starts HERE */
+	
 	function _get_csrf_nonce()
 	{
 		$this->load->helper('string');
