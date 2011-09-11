@@ -27,7 +27,23 @@ class User extends CI_Controller {
 
 	function profile() {
 		
-		$this->data['main_content'] = 'user_profile';
+		/* dummy data */
+		$user_data['profile_img'] = "Profile Picture";
+		$user_data['name'] = "name";
+		$user_data['title'] = "Platform Engineer";
+		$user_data['company'] = "Lunchsparks Pte. Ltd.";
+		$this->data['user_profile'] = $user_data;
+		
+		$activity_item['data'] = "&lt;User&gt; had lunch with &lt;User2&gt;. ";
+		$this->data['activity_list'][] = $activity_item;
+		
+		$activity_item['data'] = "&lt;User&gt; has joined Lunchsparks. ";
+		$this->data['activity_list'][] = $activity_item;
+		
+		
+		
+		
+		$this->data['main_content'] = 'user/user_profile';
 		$this -> load -> view('includes/tmpl_layout', $this->data);
 	}
 

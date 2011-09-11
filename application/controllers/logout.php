@@ -20,7 +20,7 @@ class Logout extends CI_Controller {
 
 	function index() {
 		if (!$this->ion_auth->logged_in()) {
-			$this->login();
+			redirect('login', 'refresh');
 		} else {
 			redirect('auth/logout', 'refresh');
 		}
