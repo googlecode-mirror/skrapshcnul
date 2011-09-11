@@ -1,0 +1,16 @@
+.column-2-left {
+	float: left;
+	padding: 20px 0 0 2px;
+	width: 179px;
+	word-wrap: break-word;
+}
+.column-2-right {
+	border-left: 1px solid #B3B3B3;
+	margin-left: 181px;
+}
+
+
+.content-area {
+	background-color: white;
+	padding-top: 15px;
+}
