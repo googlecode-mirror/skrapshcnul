@@ -1,6 +1,9 @@
 <div class="clearfix"></div>
 <footer>
 	<div id="f-container">
+		<div id="f-twitter">
+		  &nbsp;
+		</div>
 		<div class="f-copyright">
 			<ul>
 				<li>

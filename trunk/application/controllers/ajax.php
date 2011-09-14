@@ -3,7 +3,7 @@
 /**
  * System Administrative Page
  */
-class Admin extends CI_Controller {
+class Ajax extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -18,19 +18,18 @@ class Admin extends CI_Controller {
 	}
 	
 	function index($value = '') {
+		echo "Welcome to API";
+	}
+	
+	function autosuggestusername($value = '') {
+		// TODO
 		// Render view
 		$this->data['main_content'] = 'admin/index';
 		$this -> load -> view('includes/tmpl_layout', $this->data);
 	}
 	
-	function users($value = '') {
-		// Render view
-		$this->data['main_content'] = 'admin/index';
-		$this -> load -> view('includes/tmpl_layout', $this->data);
-	}
-	
-	function _getTotalUsers() {
-		
+	function check_no_new_notifications() {
+		// TODO
 	} 
 }
 ?>

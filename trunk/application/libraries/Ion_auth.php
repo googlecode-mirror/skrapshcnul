@@ -128,7 +128,6 @@ class Ion_auth
 			}
 			else
 			{
-				die();
 				$this->set_error('forgot_password_unsuccessful');
 				return FALSE;
 			}

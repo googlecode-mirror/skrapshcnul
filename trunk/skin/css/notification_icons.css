@@ -1,0 +1,11 @@
+.notification-icon-xlhdpi {
+	width:15px; height:15px; 
+	background: url(../images/ls_notification_icons.png);
+	background-position-x: -15px;
+	display: inline-block;
+}
+.ni-h0-xlhdpi{background-position-y: 0px;}
+.ni-h15-xlhdpi{background-position-y: -15px;}
+.ni-h15-xlhdpi{background-position-y: -30px;}
+.ni-h15-xlhdpi{background-position-y: -45px;}
+.ni-h15-xlhdpi{background-position-y: -60px;}

@@ -3,7 +3,7 @@
 /**
  * System Administrative Page
  */
-class Admin extends CI_Controller {
+class Api extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -18,9 +18,7 @@ class Admin extends CI_Controller {
 	}
 	
 	function index($value = '') {
-		// Render view
-		$this->data['main_content'] = 'admin/index';
-		$this -> load -> view('includes/tmpl_layout', $this->data);
+		echo "Welcome to API";
 	}
 	
 	function users($value = '') {
