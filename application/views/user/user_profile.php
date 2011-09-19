@@ -1,28 +1,61 @@
-<div id="profile-container">
-	<div class="column-2-left">
-		<div id="profile-picture">
-			<a href="" class="edit-overlay">Edit Profile Picture</a>
-			<img src="<?php echo $user_profile['profile_img'] ?>" class="profile_img"/>
-		</div>
-	</div>
-	<div class="column-2-right">
-		<div class="header-area">
-			<div id="profile-data-name">
-				<h1><?php echo $user_profile['name'] ?></h1>
-			</div>
-			<div id="profile-data-company">
-				<?php echo $user_profile['title'] ?> at <?php echo $user_profile['company'] ?> 	
-			</div>
-		</div>
-		<div class="content-area">
-			<div class="title">Activity</div>
-			<div class="stream">
-				<?php foreach ($activity_list as $activity_item) {?>
-				<div class="stream-item">
-				  <?php echo $activity_item['data'] ?>
-				</div>
-				<?php } ?>
-			</div>
-		</div>
-	</div>
-</div>
+<?php
+  
+/**
+ * display user_profile
+ */
+
+if ($this->session->userdata('linkedin_pulled') == NULL) {
+  $this->session->set_userdata('linkedin_pulled', 
+          $this->linkedin_model->selectLinkedInDataForCurrentUser() != NULL);
+}
+
+//Logger::log($this->session->userdata);
+
+if ($this->session->userdata('linkedin_pulled') == FALSE) {
+  // if user's data has not been pulled before -> suggest user to sync profile 
+  // with Linkedin 
+  ?>
+  We have no information about you yet! Click to sync your profile with LinkedIn.
+  <form id="linkedin_sync_form" action="pullLinkedInData" method="get">
+    <input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" />
+    <input type="submit" value="Sync" />
+  </form>
+  <?php
+}
+else {
+  //query linkedin data from database
+  $info = $this->linkedin_model->selectLinkedInDataForCurrentUser();  
+  if ($info != NULL) {
+    // if user's data already there -> firstly, request to update data
+    ?>
+    Last profile update: <?php echo($info->timestamp) ?>     
+    <form id="linkedin_sync_form" action="pullLinkedInData" method="get">
+      Just updated your LinkedIn's profile? Click to sync the changes with LunchSparks <input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" />
+      <input type="submit" value="Sync" />
+    </form> 
+    <hr>    
+    <?php  
+    
+    //secondly, display user's profile    
+    $p = new SimpleXMLElement($info->data);
+    ?>
+        
+    <h2> <?php echo($p->{'first-name'}) ?> <?php echo($p->{'last-name'}) ?> </h2>
+    <?php echo($p->{'headline'}) ?>
+    
+            
+    <dl>
+    <?php foreach($p as $key => $value) { ?>
+      <dt> <?php echo($key) ?> </dt>
+      <dd> <?php echo($value) ?> </dd>      
+    <?php
+    }
+    ?>
+    </dl>;
+    <?php
+  }
+  else {
+    die('Server error! Please try again later.');
+  }
+}
+?>

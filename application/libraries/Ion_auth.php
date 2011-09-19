@@ -61,7 +61,7 @@ class Ion_auth
 		$this->ci->load->config('ion_auth', TRUE);
 		$this->ci->load->library('email');
 		$this->ci->load->library('session');
-		$this->ci->load->library('tweet');
+		//$this->ci->load->library('tweet');
 		$this->ci->lang->load('ion_auth');
 		$this->ci->load->model('ion_auth_model');
 		$this->ci->load->helper('cookie');
@@ -322,14 +322,14 @@ class Ion_auth
 		
 		$identity = $this->ci->config->item('identity', 'ion_auth');
 		
-		//return (bool) $this->ci->session->userdata($identity);
-		if ( $this->ci->session->userdata($identity) ){
+		return (bool) $this->ci->session->userdata($identity);
+		/*if ( $this->ci->session->userdata($identity) ){
 			return TRUE;
 		} elseif ($this->ci->tweet->loggedIn()) {
 			return TRUE;
-		}
+		}*/
 		
-		return FALSE;
+		//return FALSE;
 			
 	}
 
