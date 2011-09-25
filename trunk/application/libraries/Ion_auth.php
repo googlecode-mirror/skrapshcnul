@@ -403,6 +403,11 @@ class Ion_auth
 
 		return $this->ci->ion_auth_model->profile($identity);
 	}
+	
+	public function getTotalUsers() {
+		$results = $this -> ci -> ion_auth_model -> getTotalUsers();
+		return $results;
+	}
 
 	
 

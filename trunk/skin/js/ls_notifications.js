@@ -3,7 +3,9 @@ function bodyLoad() {
 	set_notification_toggle();
 
 	// Refresh notification bar every 3 seconds
-	self.setInterval("refresh_notifications()",5000);
+	refresh_notifications();
+	// Schedule Refresh Interval
+	setInterval("refresh_notifications()", 5000);
 }
 
 
@@ -47,10 +49,22 @@ function set_notification_toggle() {
 	});
 }
 
-function refresh_notifications() {
-	// TODO Set interval for Notification reload.
-	
-	//document.getElementById('txt').value=c;
-	
-	// fresh frame src.
+
+$(document).ready(function() {
+	$('.notification-new').hover(function() {
+		var result = $.post("/json/set_notifications_new_as_read", {
+			'notification_id' : this.id
+		});
+		$(this).stop().animate({
+			backgroundColor : '#EEF0F9'
+		}, 300);
+	}, function() {
+		$(this).stop().animate({
+			backgroundColor : '#EEF0F9'
+		}, 100);
+	});
+});
+
+function set_notification_as_read (notification_id) {
+  
 }

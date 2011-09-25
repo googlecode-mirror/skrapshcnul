@@ -1,61 +1,53 @@
-<?php
-  
-/**
- * display user_profile
- */
-
-if ($this->session->userdata('linkedin_pulled') == NULL) {
-  $this->session->set_userdata('linkedin_pulled', 
-          $this->linkedin_model->selectLinkedInDataForCurrentUser() != NULL);
-}
-
-//Logger::log($this->session->userdata);
-
-if ($this->session->userdata('linkedin_pulled') == FALSE) {
-  // if user's data has not been pulled before -> suggest user to sync profile 
-  // with Linkedin 
-  ?>
-  We have no information about you yet! Click to sync your profile with LinkedIn.
-  <form id="linkedin_sync_form" action="pullLinkedInData" method="get">
-    <input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" />
-    <input type="submit" value="Sync" />
-  </form>
-  <?php
-}
-else {
-  //query linkedin data from database
-  $info = $this->linkedin_model->selectLinkedInDataForCurrentUser();  
-  if ($info != NULL) {
-    // if user's data already there -> firstly, request to update data
-    ?>
-    Last profile update: <?php echo($info->timestamp) ?>     
-    <form id="linkedin_sync_form" action="pullLinkedInData" method="get">
-      Just updated your LinkedIn's profile? Click to sync the changes with LunchSparks <input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" />
-      <input type="submit" value="Sync" />
-    </form> 
-    <hr>    
-    <?php  
-    
-    //secondly, display user's profile    
-    $p = new SimpleXMLElement($info->data);
-    ?>
-        
-    <h2> <?php echo($p->{'first-name'}) ?> <?php echo($p->{'last-name'}) ?> </h2>
-    <?php echo($p->{'headline'}) ?>
-    
-            
-    <dl>
-    <?php foreach($p as $key => $value) { ?>
-      <dt> <?php echo($key) ?> </dt>
-      <dd> <?php echo($value) ?> </dd>      
-    <?php
-    }
-    ?>
-    </dl>;
-    <?php
-  }
-  else {
-    die('Server error! Please try again later.');
-  }
-}
-?>
+<div class="m-content">
+	<div id="announcements" class="shadow">
+		<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
+		<div  id="announcement-linkedin" class="ui-state-highlight ui-corner-all" style="padding: 10px;">
+			<div class="close-btn" onclick="$('#announcement-linkedin').toggle('slow')"></div>
+			<p>Opps, seems like we have no information about you yet!</p>
+			<a href="<?php echo base_url().'user/sync/'; ?>" class="button">Sync your profiles</a>
+			<div class="clearfix"></div>
+		</div>
+		<?php }?>
+	</div>
+	<div id="ls_cover">
+		<div class="cover_background">
+			<img src="<?php echo $user_profile['cover_background'];?>" />
+		</div>
+	</div>
+	<div id="ls_profile_card_container">
+		<div class="ls_profile_card">
+			<div class="profile-img">
+				<img src="<?php echo $user_profile['profile_img'];?>" />
+			</div>
+			<div class="profile-featured-data">
+				<div>
+					<?php echo $user_profile['name'];?>
+				</div>
+				<div>
+					<?php echo $user_profile['position'];?>
+					at <?php echo $user_profile['company'];?>
+				</div>
+				<div>
+					Lives in <?php echo $user_profile['country_lives'];?>
+				</div>
+			</div>
+			<div class="clearfix">
+				&nbsp;
+			</div>
+		</div>
+	</div>
+	<div class="clearfix">
+		&nbsp;
+	</div>
+	<div class="m-content-2-col-left">
+		<?php $this -> load -> view("user/people_had_lunch_with.php");?>
+	</div>
+	<div id="user-profile" class="m-content-2-col-right">
+		<div>
+			<?php $this -> load -> view("user/activities.php");?>
+		</div>
+		<div class="clearfix">
+			&nbsp;
+		</div>
+	</div>
+</div>

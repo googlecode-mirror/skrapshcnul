@@ -1,8 +1,8 @@
 <div id="notifications-mini-area">
-	<iframe id="notifications-mini-iframe" src="<?php echo site_url("notifications/minified");?>" 
-		scrolling="no" frameborder="0" allowtransparency="true" 
-		hspace="0" tabindex="-1" vspace="0" 
-		style="height: 100%">
+	<iframe id="notifications-mini-iframe" src="<?php echo site_url("notifications/minified");?>"
+	scrolling="no" frameborder="0" allowtransparency="true"
+	hspace="0" tabindex="-1" vspace="0"
+	style="height: 100%">
 		<p>
 			Your browser does not support iframes. Please update your browser.
 		</p>
@@ -16,13 +16,13 @@
 				?>
 				<ul>
 					<li id="lunchsparks-header-logo">
-						<?php echo anchor('', 'Lunchsparks', array('from' => 'main'));?>
+						<?php echo anchor('', '<img src="'.base_url().'/skin/images/ls_logo.png" height="32px">', array('from' => 'main'));?>
 					</li>
 					<li>
-						<?php echo anchor('friends', 'Friends', array('from' => 'main'));?>
+						<?php echo anchor('user/friends', 'Friends', array('from' => 'main'));?>
 					</li>
 					<li>
-						<?php echo anchor('messages', 'Messages', array('from' => 'main'));?>
+						<?php echo anchor('user/messages', 'Messages', array('from' => 'main'));?>
 					</li>
 				</ul>
 				<?php } else {?>
@@ -38,13 +38,13 @@
 				?>
 				<ul>
 					<li>
-						<?php echo anchor('user/profile', 'Profiles', array('from' => 'main'));?>
+						<?php echo anchor('user/profile', $this -> session -> userdata['email'], array('from' => 'main'));?>
 					</li>
 					<li>
 						<?php //echo anchor('notifications', 'Notifications', array('from' => 'main', 'id' => 'notification_toggle'));?>
 						<div class="notification-toggle-container">
 							<div id="notification-toggle" title="Notifications">
-								<span>0</span>
+								<span id="notification-toggle-count"></span>
 							</div>
 						</div>
 					</li>
