@@ -2,7 +2,6 @@
 <footer>
 	<div id="f-container">
 		<div id="f-twitter">
-		  &nbsp;
 		</div>
 		<div class="f-copyright">
 			<ul>
@@ -12,8 +11,9 @@
 			</ul>
 		</div>
 		<div class="f-language"></div>
-		<div class="f-quicklinks">
+		<div class="f-sitemap">
 			<ul>
+				<h4>Company</h4>
 				<li>
 					<?php echo anchor('pages/about', 'About', array('from' => 'main' )); ?>
 				</li>
@@ -21,7 +21,7 @@
 					<?php echo anchor('pages/press', 'Press', array('from' => 'main' )); ?>
 				</li>
 				<li>
-					<?php echo anchor('pages/career', 'Careers', array('from' => 'main' )); ?>
+					<?php echo anchor('pages/careers', 'Careers', array('from' => 'main' )); ?>
 				</li>
 				<li>
 					<?php echo anchor('pages/privacy', 'Privacy', array('from' => 'main' )); ?>
@@ -33,9 +33,8 @@
 					<?php echo anchor('pages/help', 'Help', array('from' => 'main' )); ?>
 				</li>
 			</ul>
-		</div>
-		<div class="f-socialmedia">
 			<ul>
+				<h4>Follow Us</h4>
 				<li>
 					<a href="https://www.facebook.com/pages/Lunchsparks/148121848608310">Facebook</a>
 				</li>
@@ -46,6 +45,9 @@
 					<a href="http://blog.lunchsparks.me/">Blog</a>
 				</li>
 			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="f-socialmedia">
 			<div class="clearfix"></div>
 		</div>
 		<div class="clearfix"></div>

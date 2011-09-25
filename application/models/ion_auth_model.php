@@ -1444,4 +1444,8 @@ class Ion_auth_model extends CI_Model
 			    
 		$this->trigger_events('post_add_login_history');
 	}
+	
+	public function getTotalUsers() {
+	    return $this->db->count_all_results($this->tables['users']);
+	}
 }

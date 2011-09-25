@@ -65,5 +65,49 @@ class Ls_notifications {
 		}
 	}
 
+	function check_notifications_new($identity) {
+		if (empty($identity)) {
+			return FALSE;
+		}
+
+		$results = $this -> ci -> ls_notifications_model -> check_notifications_new($identity);
+
+		if ($results) {
+			return $results;
+		} else {
+			return FALSE;
+		}
+	}
+
+	function get_notifications_new($identity) {
+		if (empty($identity)) {
+			return FALSE;
+		}
+
+		$results = $this -> ci -> ls_notifications_model -> get_notifications_new($identity);
+
+		if ($results) {
+			return $results;
+		} else {
+			return FALSE;
+		}
+	}
+
+	function set_notifications_new_as_read($identity = '', $notification_id = '') {
+		if (empty($identity)) {
+			return FALSE;
+		} elseif (empty($notification_id)) {
+			return FALSE;
+		}
+		
+		$results = $this -> ci -> ls_notifications_model -> set_notifications_new_as_read($identity, $notification_id);
+
+		if ($results) {
+			return $results;
+		} else {
+			return FALSE;
+		}
+	}
+
 }
 ?>

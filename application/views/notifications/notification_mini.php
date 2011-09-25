@@ -7,7 +7,7 @@
 	<div class="notification-stream">
 		<?php foreach($notifications as $item) {
 		?>
-		<div class="notification-item">
+		<div id="notification_<?php echo $item['id'] ?>" class="notification-item <?php echo (!$item['read_on']) ? "notification-new" : "" ?>">
 			<div class="message"></div><?php echo $item['message'];?>
 			<div class="clearfix metadata">
 				<div class="notification-icon-xlhdpi <?php echo $item['component_class'];?>-xlhdpi">&nbsp;</div>
