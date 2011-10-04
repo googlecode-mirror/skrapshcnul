@@ -24,6 +24,9 @@
 					<li>
 						<?php echo anchor('user/messages', 'Messages', array('from' => 'main'));?>
 					</li>
+          <li>
+            <?php echo anchor('schedules', 'Schedule', array('from' => 'main')); ?>
+          </li>
 				</ul>
 				<?php } else {?>
 				<ul>
@@ -39,7 +42,7 @@
 				<ul>
 					<li>
 						<?php echo anchor('user/profile', $this -> session -> userdata['email'], array('from' => 'main'));?>
-					</li>
+					</li>          
 					<li>
 						<?php //echo anchor('notifications', 'Notifications', array('from' => 'main', 'id' => 'notification_toggle'));?>
 						<div class="notification-toggle-container">
@@ -53,7 +56,7 @@
 					</li>
 					<li>
 						<?php echo anchor('logout', 'Logout', array('from' => 'main'));?>
-					</li>
+					</li>          
 				</ul>
 				<?php } else {?>
 				<ul>
