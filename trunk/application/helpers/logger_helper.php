@@ -9,7 +9,7 @@
 
 class Logger {
 
-	const _ENABLE = TRUE;
+	const _ENABLE = FALSE;
 	const _LOGFILE = '/tmp/log.txt';
 
 	function log($data) {
