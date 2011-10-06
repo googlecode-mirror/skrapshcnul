@@ -31,3 +31,18 @@ CREATE TABLE IF NOT EXISTS `lss_linkedin_data` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `lss_schedules`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_schedules` (
+  `user_id` int(10) unsigned NOT NULL,
+  `index` int(11) NOT NULL AUTO_INCREMENT,
+  `datetime` datetime NOT NULL,
+  `center_lat` double NOT NULL,
+  `center_lng` double NOT NULL,
+  `radius` double NOT NULL,
+  KEY `index` (`index`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
