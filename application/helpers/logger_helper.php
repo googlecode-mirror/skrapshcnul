@@ -13,7 +13,7 @@ class Logger {
 	const _LOGFILE = '/tmp/log.txt';
 
 	function log($data) {
-		$LOGFILE = $_SERVER['DOCUMENT_ROOT'].self::_LOGFILE;
+		$LOGFILE = dirname($_SERVER['SCRIPT_FILENAME']) . self::_LOGFILE;    
 		if (self::_ENABLE) {
 			$fh = fopen($LOGFILE, 'a') or fopen($LOGFILE, 'w') or die("Can't open file");
 
