@@ -20,16 +20,19 @@
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-1.6.4.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js"></script>
-<script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
 <script src="<?php echo base_url();?>skin/js/ls_notifications.js"></script>
 <script src="<?php echo base_url();?>skin/js/lunchsparks.js"></script>
 
+
+<?php if (isset($timepicker) && $timepicker == true) { ?>
+  <script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
+<?php } ?>
   
-<?php /*if (isset($googlemap) && $googlemap == true) {*/ ?>
+<?php if (isset($googlemap) && $googlemap == true) { ?>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
   <script type="text/javascript" src="<?php echo base_url();?>skin/js/googlemap/ls_googlemap.js"></script>
-<?php /*}*/ ?>  
+<?php } ?>  
 
 
 <?php // Dynamic scripts?>
