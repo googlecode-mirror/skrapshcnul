@@ -1,0 +1,44 @@
+#schedule-containers {
+	margin: 15px 0;
+}
+.schedule-item {
+}
+#schedule-containers .content-left-col {
+	width: 300px;
+	vertical-align: top;
+	display: inline-block;
+}
+#schedule-containers .content-right-col {
+	width: 400px;
+	vertical-align: top;
+	display: inline-block;
+}
+.g-static-maps img {
+	border: 1px solid #777777;
+	box-shadow: 1px 1px 1px #AAAAAA;
+	-moz-box-shadow: 1px 1px 1px #AAAAAA;
+	-webkit-box-shadow: 1px 1px 1px #AAAAAA;
+}
+.g-static-maps img:hover {
+	border: 1px solid #333333;
+}
+.inset-shadow {
+	-moz-box-shadow: inset 0 0 10px #000000;
+	-webkit-box-shadow: inset 0 0 10px #000000;
+	box-shadow: inset 0 0 10px #000000;
+}
+.ui-timepicker-div .ui-widget-header {
+	margin-bottom: 8px;
+}
+.ui-timepicker-div dl {
+	text-align: left;
+}
+.ui-timepicker-div dl dt {
+	height: 25px;
+}
+.ui-timepicker-div dl dd {
+	margin: -25px 0 10px 65px;
+}
+.ui-timepicker-div td {
+	font-size: 90%;
+}
