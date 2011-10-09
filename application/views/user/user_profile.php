@@ -11,40 +11,25 @@
 	</div>
 	<div id="ls_cover">
 		<div class="cover_background">
-			<img src="<?php echo $user_profile['cover_background'];?>" />
+			<img src="<?php echo (isset($user_profile['cover_background'])) ? $user_profile['cover_background'] : '';?>" />
 		</div>
 	</div>
 	<div id="ls_profile_card_container">
-		<div class="ls_profile_card">
-			<div class="profile-img">
-				<img src="<?php echo $user_profile['profile_img'];?>" />
-			</div>
-			<div class="profile-featured-data">
-				<div>
-					<?php echo $user_profile['name'];?>
-				</div>
-				<div>
-					<?php echo $user_profile['position'];?>
-					at <?php echo $user_profile['company'];?>
-				</div>
-				<div>
-					Lives in <?php echo $user_profile['country_lives'];?>
-				</div>
-			</div>
-			<div class="clearfix">
-				&nbsp;
-			</div>
-		</div>
+		<?php $this -> load -> view("user/profile/profile_card.php");?>
 	</div>
 	<div class="clearfix">
 		&nbsp;
 	</div>
 	<div class="m-content-2-col-left">
-		<?php $this -> load -> view("user/people_had_lunch_with.php");?>
+		<?php $this -> load -> view("user/profile/my_ratings.php");?>
+		<?php $this -> load -> view("user/profile/people_had_lunch_with.php");?>
 	</div>
 	<div id="user-profile" class="m-content-2-col-right">
 		<div>
-			<?php $this -> load -> view("user/activities.php");?>
+			<?php $this -> load -> view("user/profile/upcoming_lunches.php");?>
+		</div>
+		<div>
+			<?php $this -> load -> view("user/profile/activities.php");?>
 		</div>
 		<div class="clearfix">
 			&nbsp;

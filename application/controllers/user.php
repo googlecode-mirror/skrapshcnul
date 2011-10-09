@@ -21,7 +21,7 @@ class User extends CI_Controller {
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
-		
+
 		// Initialize
 		if ($this -> data['is_logged_in']) {
 			if ($this -> session -> userdata('linkedin_pulled') == NULL) {
@@ -44,14 +44,22 @@ class User extends CI_Controller {
 		// Check if user is logged in
 		if (!$this -> ion_auth -> logged_in()) {
 			//redirect them to the login page
-			redirect('auth/login', 'refresh');
+			redirect('auth/login?redirect='.uri_string(), 'refresh');
 		}
 
 		/* dummy data */
-		$user_data['cover_background'] = base_url() . "/skin/images/960/cover_background.jpg";
-		$user_data['profile_img'] = base_url() . "/skin/images/180/silhouette_male.jpg";
-		$user_data['profile_img_thumb'] = base_url() . "/skin/images/180/silhouette_male.jpg";
-		$user_data['name'] = "Bing Han, Goh";
+		if(!isset($user_data['cover_background'])) {
+			$user_data['cover_background'] = base_url() . "/skin/images/960/cover_background.jpg";
+		}
+		if(!isset($user_data['profile_img'])) {
+			$user_data['profile_img'] = base_url() . "/skin/images/180/silhouette_male.jpg";
+		}
+		if(!isset($user_data['profile_img_thumb'])) {
+			$user_data['profile_img_thumb'] = base_url() . "/skin/images/180/silhouette_male.jpg";
+		}
+		if(!isset($user_data['name'])) {
+			$user_data['name'] = "Bing Han, Goh";
+		}
 		$user_data['position'] = "Platform Engineer";
 		$user_data['company'] = "Lunchsparks Pte. Ltd.";
 		$user_data['country_lives'] = "Singapore";
@@ -74,37 +82,61 @@ class User extends CI_Controller {
 		}
 		$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
 		$this -> data['external_data'] = $external_data;
-
+		
+		// Render views
+		$this -> data['tpl_page_id'] = 'profile';
 		$this -> data['main_content'] = 'user/user_profile';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
 	function sync() {
 
-		switch($this->uri->segment(3)) {
-			case 'pullLinkedInData' :
-				$this -> _pullLinkedInData();
-		}
+		redirect('settings/sync', 'refresh');
 
-		$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
-		$this -> data['external_data'] = $external_data;
-
-		$this -> data['main_content'] = 'user/sync';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
-	function friends() {
+	function preferences() {
 		
+		// Render views
+		$this -> data['tpl_page_id'] = 'preferences';
+		$this -> data['main_content'] = 'user/preferences';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+	}
+
+	function friends() {
+
+		// Render views
+		$this -> data['tpl_page_id'] = 'friends';
 		$this -> data['main_content'] = 'user/friends';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
-		
+
 	}
-	
+
 	function messages() {
-		
+
+		$this -> data['tpl_page_id'] = 'messages';
 		$this -> data['main_content'] = 'user/messages';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
+
+	}
+
+	function invitation() {
+		$this -> invites();
+	}
+
+	function invites() {
+		// Check if user is logged in
+		if (!$this -> ion_auth -> logged_in()) {
+			//redirect them to the login page
+			redirect('auth/login/?redirect='.uri_string(), 'refresh');
+		}
 		
+		$this->data['user_invitation_list'] = array();
+
+		// Render views
+		$this -> data['tpl_page_id'] = 'invitations';
+		$this -> data['main_content'] = 'user/invites';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
 }

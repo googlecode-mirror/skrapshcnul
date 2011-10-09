@@ -6,6 +6,7 @@
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'sync') ? 'active' : '';?>">
 			<?php echo anchor('settings/sync', 'Sync', 'id="a-s-sync" class="a-s-icon-xlhdpi"'); ?>
 		</li>
+		<?php /*
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'security') ? 'active' : '';?>">
 			<?php echo anchor('settings/security', 'Security', 'id="a-s-security" class="a-s-icon-xlhdpi"'); ?>
 		</li>
@@ -21,6 +22,7 @@
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'payments') ? 'active' : '';?>">
 			<?php echo anchor('settings/payments', 'Payments', 'id="a-s-payment" class="a-s-icon-xlhdpi"'); ?>
 		</li>
+		 */ ?>
 	</ul>
 	<div class="clearfix">
 		&nbsp;

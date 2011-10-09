@@ -8,7 +8,7 @@
 	<?php echo form_open("auth/forgot_password");?>
 
 	<p>
-		Email Address:
+		<label>Email Address:</label>
 		<br />
 		<?php echo form_input($email);?>
 	</p>

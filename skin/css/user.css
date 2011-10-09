@@ -1,10 +1,10 @@
 #ls_cover {
-	height: 300px;
+	height: 100px;
 	position: relative;
 }
 
 .cover_background {
-	height: 300px;
+	height: 220px;
 	overflow: hidden;
 	z-index: -1;
 	-webkit-transition-duration: .29s;
@@ -55,15 +55,15 @@
 .m-content-2-col-left {
 	width: 200px;
 	padding: 0;
-	float:left;
+	position: absolute;
 	word-wrap: break-word;
 }
 
 .m-content-2-col-right {
+	padding: 0 0 50px 15px;
 	border-left: 1px solid #DDDDDD;
 	margin-left: 201px;
-	padding-left: 15px;
-	width: 750px;
+	width: 740px;
 }
 
 .widget-title {
@@ -242,4 +242,42 @@ a.a-s-icon-xlhdpi {
 	font-family: 'HelveticaNeue-Light','Helvetica Neue Light','Helvetica Neue',sans-serif;
 }
 
+#profile-stats {
+	position: absolute;
+	margin: 0 10px;
+	display: inline-block;
+}
+
+#user-verification {
+	margin: 0 5px;
+	padding: 0 10px;
+	min-width: 16px;
+	min-height: 16px;
+}
+
+.user-verification-icon {
+	width: 16px;
+	height: 16px;
+	margin-left: -10px;
+	z-index: 1;
+	background: url(../images/16/user_icons_set.png) no-repeat;
+	background-position: -16px;
+	display: inline-block;
+	position: absolute;
+}
+.user-verification-icon:hover {
+	background-position: 0px;
+}
+
+.user-verification-text {
+	display: inline-block;
+	float: left;
+	padding: 0 10px;
+	height: 16px;
+	font-size: 12px;
+	background-color: #E6E6E6;
+	color: #36C;
+	overflow: hidden;
+	display: none;
+}
 

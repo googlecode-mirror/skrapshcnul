@@ -1,8 +1,11 @@
 <div id="lunchsparks-features">
-	<h2>Features</h2>
+	<div class="hr">
+		<h2 class="hr-text">Features</h2>		
+	</div>
+	
 	<div class="feature-item">
 		<div class="title">
-			<img src="/skin/images/32/gear.png" style="float:left;" />
+			<img src="/skin/images/32/gear.png" />
 			<span>Algorithm System</span>
 		</div>
 		<div class="description">
@@ -11,7 +14,7 @@
 	</div>
 	<div class="feature-item">
 		<div class="title">
-			<img src="/skin/images/32/network.png" style="float:left;" />
+			<img src="/skin/images/32/network.png" />
 			<span>Expand your network with the right people - Preference indication</span>
 		</div>
 		<div class="description">
@@ -20,7 +23,7 @@
 	</div>
 	<div class="feature-item">
 		<div class="title">
-			<img src="/skin/images/32/schedule.png" style="float:left;" />
+			<img src="/skin/images/32/schedule.png" />
 			<span>One click scheduling</span>
 		</div>
 		<div class="description">
@@ -29,7 +32,7 @@
 	</div>
 	<div class="feature-item">
 		<div class="title">
-			<img src="/skin/images/32/id_card.png" style="float:left;" />
+			<img src="/skin/images/32/id_card.png" />
 			<span>Build Reputation</span>
 		</div>
 		<div class="description">
@@ -38,7 +41,7 @@
 	</div>
 	<div class="feature-item">
 		<div class="title">
-			<img src="/skin/images/32/award_star.png" style="float:left;" />
+			<img src="/skin/images/32/award_star.png" />
 			<span>Win Super Lunch</span>
 		</div>
 		<div class="description">

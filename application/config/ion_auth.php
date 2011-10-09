@@ -25,6 +25,7 @@
 	$config['tables']['users_groups']    = 'users_groups';
 	$config['tables']['meta']            = 'meta';
 	$config['tables']['users_login_history'] = 'users_login_history';
+	$config['tables']['users_invitations_log'] = 'users_invitations_log';
 	
 	/**
 	 * Site Title, example.com
@@ -34,7 +35,7 @@
 	/**
 	 * Admin Email, admin@example.com
 	 */
-	$config['admin_email']		   = "stiucsib86@gmail.com";
+	$config['admin_email']		   = "no-reply@lunchsparks.me";
 	
 	/**
 	 * Default group, use name

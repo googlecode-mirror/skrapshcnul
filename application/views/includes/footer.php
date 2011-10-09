@@ -5,9 +5,7 @@
 		</div>
 		<div class="f-copyright">
 			<ul>
-				<li>
-					<?php echo anchor('', '&copy; 2011 Lunchsparks.me', array('from' => 'main' )); ?>
-				</li>
+				<h4><?php echo anchor('', '&copy; 2011 Lunchsparks.me', array('from' => 'main' )); ?></h4>
 			</ul>
 		</div>
 		<div class="f-language"></div>

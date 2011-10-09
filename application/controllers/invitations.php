@@ -23,6 +23,7 @@ class Invitations extends CI_Controller {
 
 	function all($value = '') {
 		// Render view
+		$this -> data['tpl_page_id'] = 'all';
 		$this -> data['main_content'] = 'invitations/all';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
@@ -30,6 +31,7 @@ class Invitations extends CI_Controller {
 	function invite() {
 
 		// Render view
+		$this -> data['tpl_page_id'] = 'invite';
 		$this -> data['main_content'] = 'invitations/invite';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
@@ -42,6 +44,7 @@ class Invitations extends CI_Controller {
 		$this -> data['number_signup'] = 0;
 
 		// Render view
+		$this -> data['tpl_page_id'] = 'status';
 		$this -> data['main_content'] = 'invitations/status';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}

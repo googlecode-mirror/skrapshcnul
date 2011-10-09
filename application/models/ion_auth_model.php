@@ -1448,4 +1448,31 @@ class Ion_auth_model extends CI_Model
 	public function getTotalUsers() {
 	    return $this->db->count_all_results($this->tables['users']);
 	}
+	
+	public function check_invitation_code($invitation_code) {
+		
+		$this->trigger_events('pre_check_invitation_code');
+		
+	    if (empty($invitation_code))
+	    {
+			$this->set_message('No invitation code entered');
+			return FALSE;
+	    }
+		
+	    $query = $this->db->select('invitee_email')
+		                  ->where('invitation_code', $invitation_code)
+		                  ->limit(1)
+		                  ->get($this->tables['users_invitations_log']);
+
+	    $result = $query->row();
+
+	    if ($query->num_rows() == 1)
+	    {
+			return $result->invitee_email;
+	    }
+
+		$this->trigger_events('post_check_invitation_code_successful');
+		$this->set_message('Invalid invitation code');
+	    return FALSE;
+	}
 }

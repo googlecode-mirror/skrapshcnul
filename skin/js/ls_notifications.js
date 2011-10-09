@@ -9,7 +9,7 @@ function bodyLoad() {
 }
 
 
-$(document).click(function() {
+jQuery(document).click(function() {
 	// Notification Bar Toggle
 	var el = document.getElementById('notifications-mini-area');
 	if(el) {
@@ -43,23 +43,23 @@ function resizeNotificationIframeToFitContent() {
 }
 
 function set_notification_toggle() {
-	$("#notification-toggle").click(function(event) {
+	jQuery("#notification-toggle").click(function(event) {
 		toggle_notifications();
 		event.stopPropagation();
 	});
 }
 
 
-$(document).ready(function() {
-	$('.notification-new').hover(function() {
+jQuery(document).ready(function() {
+	jQuery('.notification-new').hover(function() {
 		var result = $.post("/json/set_notifications_new_as_read", {
 			'notification_id' : this.id
 		});
-		$(this).stop().animate({
+		jQuery(this).stop().animate({
 			backgroundColor : '#EEF0F9'
 		}, 300);
 	}, function() {
-		$(this).stop().animate({
+		jQuery(this).stop().animate({
 			backgroundColor : '#EEF0F9'
 		}, 100);
 	});
