@@ -65,6 +65,9 @@ class Ion_auth
 		$this->ci->lang->load('ion_auth');
 		$this->ci->load->model('ion_auth_model');
 		$this->ci->load->helper('cookie');
+		
+		$mail_config['mailtype'] = 'html';
+		$this->ci->email->initialize($mail_config);
 
 		//auto-login the user if they are remembered
 		if (!$this->logged_in() && get_cookie('identity') && get_cookie('remember_code'))
@@ -110,9 +113,10 @@ class Ion_auth
 			
 			$data = array(
 				'identity'		=> $user->{$this->ci->config->item('identity', 'ion_auth')},
-				'forgotten_password_code' => $user->forgotten_password_code
+				'forgotten_password_code' => $user->forgotten_password_code,
 			);
 
+			//$message = $this->ci->load->view($this->ci->config->item('email_templates', 'ion_auth').$this->ci->config->item('email_forgot_password', 'ion_auth'), $data, true);
 			$message = $this->ci->load->view($this->ci->config->item('email_templates', 'ion_auth').$this->ci->config->item('email_forgot_password', 'ion_auth'), $data, true);
 			$this->ci->email->clear();
 			$this->ci->email->set_newline("\r\n");
@@ -179,17 +183,17 @@ class Ion_auth
 			$this->ci->email->to($profile->email);
 			$this->ci->email->subject($this->ci->config->item('site_title', 'ion_auth') . ' - New Password');
 			$this->ci->email->message($message);
-
+			die();
 			if ($this->ci->email->send())
 			{
 				$this->set_message('password_change_successful');
-			$this->ci->ion_auth_model->trigger_events(array('post_password_change', 'password_change_successful'));
+				$this->ci->ion_auth_model->trigger_events(array('post_password_change', 'password_change_successful'));
 				return TRUE;
 			}
 			else
 			{
 				$this->set_error('password_change_unsuccessful');
-			$this->ci->ion_auth_model->trigger_events(array('post_password_change', 'password_change_unsuccessful'));
+				$this->ci->ion_auth_model->trigger_events(array('post_password_change', 'password_change_unsuccessful'));
 				return FALSE;
 			}
 		}
@@ -409,6 +413,19 @@ class Ion_auth
 		return $results;
 	}
 
-	
+	function check_invitation_code($invitation_code) {
+		
+		if (empty($invitation_code)) {
+			return FALSE;
+		}
+		
+		$result = $this -> ci -> ion_auth_model -> check_invitation_code($invitation_code);
+		
+		if($result) {
+			return $result;
+		} else {
+			return FALSE;
+		}
+	}
 
 }

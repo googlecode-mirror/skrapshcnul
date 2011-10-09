@@ -24,13 +24,19 @@
 					<li>
 						<?php echo anchor('user/messages', 'Messages', array('from' => 'main'));?>
 					</li>
-					 */ ?>
-          <li>
-            <?php echo anchor('schedules', 'Schedule', array('from' => 'main')); ?>
-          </li>
-				</ul>
-				<?php } else {?>
-				<ul>
+					*/ ?>
+					<li>
+						<?php echo anchor('settings/sync', 'Synchronize', array('from' => 'main')); ?>
+					</li>
+					<li>
+						<?php echo anchor('user/preferences', 'Preferences', array('from' => 'main')); ?>
+					</li>
+					<li>
+						<?php echo anchor('schedules', 'Schedule', array('from' => 'main')); ?>
+					</li>
+					<li>
+						<?php echo anchor('events', 'Events', array('from' => 'main')); ?>
+					</li>
 					<li>
 						<?php echo anchor('invitations', 'Invitations', array('from' => 'main'));?>
 					</li>
@@ -40,10 +46,7 @@
 			<div id="h-uacc">
 				<?php if ($is_logged_in) {
 				?>
-				<ul>
-					<li>
-						<?php echo anchor('user/profile', $this -> session -> userdata['email'], array('from' => 'main'));?>
-					</li>          
+				<ul>         
 					<li>
 						<?php //echo anchor('notifications', 'Notifications', array('from' => 'main', 'id' => 'notification_toggle'));?>
 						<div class="notification-toggle-container">
@@ -76,4 +79,3 @@
 		</div>
 	</div>
 </header>
-<script></script>

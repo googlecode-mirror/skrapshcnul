@@ -53,7 +53,7 @@ class Ls_notifications {
 		$number_of_notifications = 30;
 
 		$results = $this -> ci -> ls_notifications_model -> get_notifications($identity, $number_of_notifications);
-
+		
 		foreach ($results as $key => $value) {
 			$results[$key]['component_class'] = $this -> component_class[$value['component_id']];
 		}

@@ -2,8 +2,8 @@
 	<div style="float: right; width: 400px;">
 		<div class="invitation-box-green">
 			<span style="font-weight: bold;letter-spacing: 1px;line-height: 2.4em;text-transform: uppercase;"> Have a invitation key? Sign up here. </span>
-			<form>
-				<input type="text" size="10" placeholder="Invitation key" style="float: left;" />
+			<form id="invitation-signup" action="auth/signup">
+				<input id="invitation_key" name="invitation_key" type="text" size="10" placeholder="Invitation key" style="float: left;" required="required" />
 				<input type="submit" value="Sign up" style="float:left; padding: 8px; margin: 0 5px;" />
 			</form>
 			<div class="clearfix"></div>

@@ -38,4 +38,6 @@
 			<?php echo form_close();?>
 		</div>
 	</div>
+	<div class="clearfix"></div>
+	<br />
 </div>

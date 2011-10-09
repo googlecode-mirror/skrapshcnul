@@ -218,7 +218,7 @@ class Settings extends CI_Controller {
 								//Logger::log($linkedin_data);
 
 								if ($this -> linkedin_model -> insertLinkedInDataForCurrentUser($linkedin_data)) {
-									echo 'Your profile has been synchronized with Linkedin! Redirecting...';
+									//echo 'Your profile has been synchronized with Linkedin! Redirecting...';
 									redirect('user/profile', 'refresh');
 								} else {
 									echo 'Error occurred! Please try again later.';

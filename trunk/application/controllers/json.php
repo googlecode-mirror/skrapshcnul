@@ -87,7 +87,7 @@ class Json extends CI_Controller {
 	}
 
 	function getTotalUsers() {
-		echo json_encode($this -> ion_auth -> getTotalUsers($this -> session -> userdata['id']));
+		echo json_encode($this -> ion_auth -> getTotalUsers());
 	}
 
 }

@@ -1,21 +1,21 @@
-$(document).ready(function() {
+jQuery(document).ready(function() {
 	// Declare variables to hold twitter API url and user name
 	var twitter_api_url = 'http://search.twitter.com/search.json';
 	//var twitter_user = 'lupomontero';
 	var twitter_user = 'lunchsparks';
 
 	// Enable caching
-	$.ajaxSetup({
+	jQuery.ajaxSetup({
 		cache : true
 	});
 
 	// Send JSON request
 	// The returned JSON object will have a property called "results" where we find
 	// a list of the tweets matching our request query
-	$.getJSON(twitter_api_url + '?callback=?&rpp=5&q=from:' + twitter_user, function(data) {
-		$('#f-twitter').html('');
+	jQuery.getJSON(twitter_api_url + '?callback=?&rpp=5&q=from:' + twitter_user, function(data) {
+		jQuery('#f-twitter').html('');
 
-		$.each(data.results, function(i, tweet) {
+		jQuery.each(data.results, function(i, tweet) {
 			// Uncomment line below to show tweet data in Fire Bug console
 			// Very helpful to find out what is available in the tweet objects
 			//console.log(tweet);
@@ -39,8 +39,8 @@ $(document).ready(function() {
 				tweet_html += ' <\/div>';
 
 				// Append html string to tweet_container div
-				$('#f-twitter').append(tweet_html);
-				//$('#f-twitter').children("div:nth-child(1)").slideUp('slow');
+				jQuery('#f-twitter').append(tweet_html);
+				//jQuery('#f-twitter').children("div:nth-child(1)").slideUp('slow');
 			}
 		});
 	});
@@ -49,13 +49,13 @@ $(document).ready(function() {
 var tweet_count = 1;
 
 var animateTweet = function(){
-	var tweet_size = $('#f-twitter').children().size();
-	$('#f-twitter').children("div:nth-child("+tweet_count+")").slideUp('slow');
+	var tweet_size = jQuery('#f-twitter').children().size();
+	jQuery('#f-twitter').children("div:nth-child("+tweet_count+")").slideUp('slow');
 	if (tweet_count+1 <= tweet_size) {
 		tweet_count++
 	} else {
 		// reset slides and count
-		$('#f-twitter').children().toggle('slow');
+		jQuery('#f-twitter').children().toggle('slow');
 		tweet_count = 1;
 	}
 }
@@ -65,13 +65,13 @@ setInterval(animateTweet, 7000);
 var testimonial_count = 1;
 
 var animateTestimonial = function(){
-	var testimonial_size = $('#lunchsparks-testimonial').children().size();
-	$('#lunchsparks-testimonial').children("div:nth-child("+testimonial_count+")").slideUp('slow');
+	var testimonial_size = jQuery('#lunchsparks-testimonial').children().size();
+	jQuery('#lunchsparks-testimonial').children("div:nth-child("+testimonial_count+")").slideUp('slow');
 	if (testimonial_count+1 <= testimonial_size) {
 		testimonial_count++
 	} else {
 		// reset slides and count
-		$('#lunchsparks-testimonial').children().toggle('slow');
+		jQuery('#lunchsparks-testimonial').children().toggle('slow');
 		testimonial_count = 1;
 	}
 }
