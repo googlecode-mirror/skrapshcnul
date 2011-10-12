@@ -11,15 +11,18 @@ function displayPickHistory() {
 }
 
 jQuery(document).ready( function() {
-	jQuery(".datepicker").datepicker({})
-
-	jQuery('.timepicker').timepicker({
-		ampm : true, //don't change; modifying this requires changes in schedules_model
-		hourMin : 8,
-		hourMax : 23
-	});
+	try {
+		jQuery(".datepicker").datepicker({})
 	
-	initialize_lunchsparks_googlemap();
+		jQuery('.timepicker').timepicker({
+			ampm : true, //don't change; modifying this requires changes in schedules_model
+			hourMin : 8,
+			hourMax : 23
+		});
+		
+	} catch (e) {
+		
+	}
 	
 	jQuery("#add_pick_button").click(function() {
 		jQuery("#9").innerHTML = "a";
@@ -39,7 +42,7 @@ jQuery(document).ready( function() {
 		jQuery('input[name=radius]').val(radius);
 		return true;
 		
-		jQuery.post("schedules/insert", {
+		/*jQuery.post("schedules/insert", {
 			'date' : date,
 			'time' : time,
 			'center_lat' : center_lat,
@@ -49,12 +52,38 @@ jQuery(document).ready( function() {
 			//displayPickHistory();
 			//refresh pick-history-ul
 			alert(data);
-		});
+		});*/
 	});
 });
 
-/*
-jQuery(document).ready(function() {
+ScheduleController.$inject = ['$resource'];
+function ScheduleController($resource) {
+	var scope = this;
+	
+	this.Schedules = $resource(
+	  'schedules/:func/',
+	  { alt: 'json', callback: 'JSON_CALLBACK'},
+	  { get:  {method: 'JSON', params: {func: 'select', visibility: '@self'}},
+	    del:  {method: 'JSON', params: {func: 'delete', visibility: '@self'}}
+	  });
+    
+}
+
+ScheduleController.prototype = {
+	getList : function() {
+		this.schedules = this.Schedules.get();
+	},
+	deleteSchedules : function(data, schedule) {
+		if(confirm('Are you sure you want to delete?')) {
+			this.schedules = this.Schedules.del({index: data.index});
+		}
+	},
+	getGMapStaticEncodedURL : function(center_lat, center_lng, radius_meter) {
+		return getGStaticMapEncoded(center_lat, center_lng, radius_meter);
+	}
+}
+
+/*jQuery(document).ready(function() {
 	jQuery("#datepicker").datepicker({
 	});
 
@@ -64,15 +93,13 @@ jQuery(document).ready(function() {
 		hourMax : 23
 	});
 
-	jQuery(".delete-link").live('click', function() {
-		jQuery.post("schedules/delete", {
+	jQuery(".delete-schedule").live('click', function() {
+		/*jQuery.post("schedules/delete", {
 			'index' : this.id
 		}, function(data) {
-			displayPickHistory();
 			console.log(data);
 		});
+		
 	});
-	displayPickHistory();
 	
-});
-*/
+});*/

@@ -124,15 +124,3 @@ function getGStaticMapEncoded(center_lat, center_lng, radius_meter) {
 function meterToDecimalDegree(value) {
 	return (value / 1.11) * 0.00001;
 }
-
-function returntxt() {
-	return "test.png";
-}
-
-function ScheduleController() {
-	var scope = this;
-
-	scope.returntxt = function(center_lat, center_lng, radius_meter) {
-		return getGStaticMapEncoded(center_lat, center_lng, radius_meter);
-	};
-}

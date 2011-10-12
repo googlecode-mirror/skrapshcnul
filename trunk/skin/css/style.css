@@ -70,7 +70,7 @@ fieldset {
 	font-size: 15px;
 }
 #login_form {
-	width: 350px;
+	width: 450px;
 }
 /* Header */
 header {
@@ -132,7 +132,8 @@ header ul li {
 }
 /* Content */
 #m-container-outer {
-	background: url(../images/5/body_bg.jpg) #FFFFFF;
+	/*background: url(../images/5/body_bg.jpg) #FFFFFF;*/
+	background: #FFFFFF;
 	padding: 36px 0 0 0;
 }
 #m-container { /*margin:auto;padding:10px;min-height: 200px;
@@ -161,7 +162,8 @@ header ul li {
 }
 /* Footer */
 footer {
-	margin: 0 auto 20px 0;
+	margin: auto;
+	padding: 0 0 20px 0;
 	font-size: 1em;
 	color: #FFFFFF;
 	background: url(../images/footer_bg.png) repeat-x 0 0;
@@ -217,7 +219,8 @@ footer ul li {
 	vertical-align: bottom;
 }
 .f-copyright {
-	float: right;
+	float: left;
+	line-height: 25px;
 	font-weight: bold;
 }
 .f-sitemap ul {
@@ -534,7 +537,6 @@ input[type=submit]:hover, .button-set a:hover {
 .button-grey a {
 	color: #333333 !important;
 }
-
 .submit, .login {
 	line-height: 24px;
 	margin: 5px;
@@ -606,7 +608,7 @@ input[type=submit]:hover, .button-set a:hover {
 	line-height: 29px;
 	position: relative;
 	margin: 0;
-	background: url("../images/hr.png") repeat-x scroll left center transparent;
+	background: url(../images/hr.png) repeat-x scroll left center transparent;
 	text-align: center;
 }
 .hr-text {
@@ -620,6 +622,7 @@ input[type=submit]:hover, .button-set a:hover {
 	padding: 0px 15px;
 	margin: 0 auto;
 	text-shadow: 0 1px 0 #444;
+	text-transform: uppercase;
 }
 .f-options-set {
 	float: right;
@@ -635,4 +638,50 @@ input[type=submit]:hover, .button-set a:hover {
 }
 .f-options-set ul li {
 	float: left;
+}
+.infobox {
+	font-family: 'Myriad Pro', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background: #F7F7F7 !important;
+	border-bottom: 1px solid #DBDBDB !important;
+	padding: 30px 40px 10px !important;
+	margin: 0 0 20px;
+	text-align: justify;
+}
+.infobox .block {
+	width: 400px;
+	padding: 0 20px;
+	float: left;
+}
+.infobox .hr {
+	padding: 5px 0;
+}
+#f-widgets .block {
+	text-align: justify;
+	float: left;
+	width: 280px;
+}
+#f-widgets .block p {
+	color: #EEEEEE;
+	line-height: 21px;
+	padding: 5px 0;
+}
+.f-sitemap {
+	float:right;
+}
+#f-widgets .block,
+.f-copyright {
+	padding: 0 20px;
+}
+.f-sitemap li {
+	float:left;
+}
+#f-bottom-bar {
+	clear: both;
+	padding: 10px 0;
+	font-size: 90%;
+	background: url(../images/1/bg-footer-hr.png) repeat-x;
 }
