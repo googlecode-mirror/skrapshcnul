@@ -1,0 +1,49 @@
+/* 16px */
+#a-s-overview {
+	background-position-y: 0px;
+}
+#a-s-sync {
+	background-position-y: -16px;
+}
+#a-s-security {
+	background-position-y: -32px;
+}
+#a-s-privacy {
+	background-position-y: -48px;
+}
+#a-s-language {
+	background-position-y: -64px;
+}
+#a-s-mobile {
+	background-position-y: -80px;
+}
+#a-s-payment {
+	background-position-y: -96px;
+}
+#s-s-overview {
+	background-position-y: -112px;
+}
+#s-s-add {
+	background-position-y: -128px;
+}
+#a-s-profile {
+	background-position-y: -144px;
+}
+#a-s-preferences {
+	background-position-y: -160px;
+}
+#a-s-events {
+	background-position-y: -176px;
+}
+#a-s-suggestions {
+	background-position-y: -192px;
+}
+#a-s-invitations {
+	background-position-y: -208px;
+}
+#a-s-invite {
+	background-position-y: -208px;
+}
+#a-s-status {
+	background-position-y: -208px;
+}

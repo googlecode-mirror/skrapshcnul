@@ -1,47 +1,46 @@
 <div id="lunchsparks-features">
 	<div class="hr">
-		<h2 class="hr-text">Features</h2>		
+		<h2 class="hr-text">Awesome Features on Lunchsparks</h2>
 	</div>
-	
 	<div class="feature-item">
+		<img src="/skin/images/32/gear.png" />
 		<div class="title">
-			<img src="/skin/images/32/gear.png" />
 			<span>Algorithm System</span>
 		</div>
 		<div class="description">
-			When we design the system, we focus on bringing together people which are of the same interest and which are relevant to each other, so that users can connect with each other straight away when they meet up. We assign different weightage to the various fields through our algorithm and ensure that great values are created through the networking session.
+			When we design the system, we focus on connecting users with professionals whom are relevant to them, helping them to network more effective and efficiently. This greatly maximizes the chances of possible collaboration and partnership. 
 		</div>
 	</div>
 	<div class="feature-item">
+		<img src="/skin/images/32/network.png" />
 		<div class="title">
-			<img src="/skin/images/32/network.png" />
 			<span>Expand your network with the right people - Preference indication</span>
 		</div>
 		<div class="description">
-			We allow you to indicate your preference on whom you would like to meet and we try to make it happen by assigning more weightage to your preference. We let you decide who is relevant to you, thereby increasing the likelihood of possible collaboration and partnerships. Ultimately what we want to do is to help you network with the correct people.
+			We allow users to indicate their preference on whom they would like to meet. Ultimately, they are the one who should decide who are relevant to them. What we want to achieve is to help users network with the correct people.
 		</div>
 	</div>
 	<div class="feature-item">
+		<img src="/skin/images/32/schedule.png" />
 		<div class="title">
-			<img src="/skin/images/32/schedule.png" />
 			<span>One click scheduling</span>
 		</div>
 		<div class="description">
-			Provide us with your zip code and pick the days that you are available for lunch. Our algorithm then matches you and recommends you where and who you are having lunch with.
+			Scheduling is easy with Lunchsparks. Users simply provide us with the date and time that they are available for lunch. We would then match users and recommend where and who users are meeting up with.
 		</div>
 	</div>
 	<div class="feature-item">
+		<img src="/skin/images/32/id_card.png" />
 		<div class="title">
-			<img src="/skin/images/32/id_card.png" />
 			<span>Build Reputation</span>
 		</div>
 		<div class="description">
-			We combine your social reputation (Linkedin, Facebook, Twitter) with feedback from the people you meet to evaluate your reputation, and through that, pair you up with someone of the similar reputation and background.
+			Our Users with the highest feedback score are invited to Super lunches with high profile professionals and entrepreneurs. This selection is based on merit only.
 		</div>
 	</div>
 	<div class="feature-item">
+		<img src="/skin/images/32/award_star.png" />
 		<div class="title">
-			<img src="/skin/images/32/award_star.png" />
 			<span>Win Super Lunch</span>
 		</div>
 		<div class="description">

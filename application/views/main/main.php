@@ -8,7 +8,7 @@
 		<div class="g-content-container">
 			<div class="counter-stats-container">
 				<div class="title">
-					<span style="line-height: 40px;">Users on Lunchsparks</span>
+					<span style="line-height: 40px;">Users on Lunchsparks: </span>
 				</div>
 				<div id="user-count" class="data counter-digit">
 					00
@@ -16,7 +16,7 @@
 			</div>
 			<div class="counter-stats-container">
 				<div class="title">
-					<span style="line-height: 40px;">Tech VIPs on Lunchsparks</span>
+					<span style="line-height: 40px;">Successful lunches: </span>
 				</div>
 				<div id="user-count" class="data counter-digit">
 					00

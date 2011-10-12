@@ -18,6 +18,7 @@ class User extends CI_Controller {
 		$this -> load -> helper('logger');
 		$this -> load -> helper('linkedin/linkedin_api');
 		$this -> load -> model('linkedin/linkedin_model');
+		$this -> load -> model('preferences_model');
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
@@ -28,6 +29,13 @@ class User extends CI_Controller {
 				$this -> session -> set_userdata('linkedin_pulled', $this -> linkedin_model -> selectLinkedInDataForCurrentUser() != NULL);
 			}
 		}
+		
+		// Request Params: alt = json | , 
+		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
+		$this -> call = (isset($_REQUEST['call'])) ? $_REQUEST['call'] : '';
+		$this -> callback = (isset($_REQUEST['callback'])) ? $_REQUEST['callback'] : '';
+		
+		$this -> start_time = time();
 	}
 
 	function index() {
@@ -97,10 +105,49 @@ class User extends CI_Controller {
 	
 	function preferences() {
 		
-		// Render views
-		$this -> data['tpl_page_id'] = 'preferences';
-		$this -> data['main_content'] = 'user/preferences';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		if ($this -> alt == 'json') {
+			
+			$this -> _preferences_json();
+			
+		} else {
+			
+			$result = $this -> preferences_model -> selectForCurrentUser();
+			
+			// Render views
+			$this -> data['tpl_page_id'] = 'preferences';
+			$this -> data['main_content'] = 'user/preferences';
+			$this -> load -> view('includes/tmpl_layout', $this -> data);
+		}
+		
+	}
+
+	function _preferences_json() {
+		
+		if( isset($_REQUEST['preferences']) ) {
+			$preferences = $_REQUEST['preferences'] ;
+		}
+		
+		switch($this -> call) {
+			case 'select' : 
+				$result = $this -> preferences_model -> selectForCurrentUser()-> result();
+				break;
+			case 'insert' :
+				$this -> preferences_model -> insertForCurrentUser($preferences);
+				$result = $this -> preferences_model -> selectForCurrentUser()-> result();
+				break;
+			case 'update' :
+				$this -> preferences_model -> updateForCurrentUser($preferences);
+				$result = $this -> preferences_model -> selectForCurrentUser()-> result();
+				break;
+			case 'delete' :
+				$this -> preferences_model -> deleteForCurrentUser();
+				$result = $this -> preferences_model -> selectForCurrentUser()-> result();
+				break;
+			default :
+				$result = 'error';
+		}
+		
+		$this -> _json_prep($result);
 	}
 
 	function friends() {
@@ -137,6 +184,12 @@ class User extends CI_Controller {
 		$this -> data['tpl_page_id'] = 'invitations';
 		$this -> data['main_content'] = 'user/invites';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
+	}
+
+	function _json_prep($result) {
+		$json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
+		$json_result['results'] = $result;
+		print_r($this -> callback. '('.json_encode($json_result) .')');
 	}
 
 }

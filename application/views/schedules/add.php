@@ -50,3 +50,10 @@
 		<br />
 	</div>
 </div>
+
+<script>
+	jQuery(document).ready( function() {
+		initialize_lunchsparks_googlemap();
+	}
+	); 
+</script>

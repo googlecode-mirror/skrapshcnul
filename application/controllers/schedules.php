@@ -16,6 +16,13 @@ class Schedules extends CI_Controller {
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
+		
+		// Request Params: alt = json | , 
+		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
+		$this -> callback = (isset($_REQUEST['callback'])) ? $_REQUEST['callback'] : '';
+		
+		$this -> start_time = time();
+		
 	}
 
 	function index() {
@@ -30,7 +37,7 @@ class Schedules extends CI_Controller {
 			// load google map js
 			
 			
-			$this -> data['fixed_schedules'] = $this -> schedules_model -> selectPickForCurrentUser() -> result();
+			$this -> data['fixed_schedules']['results'] = $this -> schedules_model -> selectPickForCurrentUser() -> result();
 
 			$this -> data['main_content'] = 'schedules/index';
 			$this -> data['tpl_page_id'] = 'index';
@@ -99,21 +106,41 @@ class Schedules extends CI_Controller {
 	}
 
 	function select() {
+				
 		$result = $this -> schedules_model -> selectPickForCurrentUser();
-		print_r(json_encode($result -> result()));
+		
+		if ($this -> alt == 'json') {
+			$this -> _json_prep($result -> result());
+		} else {
+			print_r(json_encode($result -> result()));
+		}
+		
 	}
 
 	function delete() {
+		// URL format /schedules/delete/:index/
+		
 		// Check if the schedule id is present
 		$array = $this->uri->uri_to_assoc(3);
-		if(isset($array['id']) && !empty($array['id'])) {
-			$schedule_id = $array['id'];
+		if(isset($array['index']) && !empty($array['index'])) {
+			$schedule_id = $array['index'];
+		} elseif( $this->input->post('index') ) {
+			$schedule_id = $this->input->post('index');
+		} elseif( isset($_REQUEST['index']) ) {
+			$schedule_id = $_REQUEST['index'] ;
 		} else {
 			redirect('/404/', 'refresh');
 		}
 		
-		$result = $this -> schedules_model -> deletePickForCurrentUser($array['id']);
-		redirect('schedules', 'refresh');
+		if ($this -> alt == 'json') {
+			$this -> schedules_model -> deletePickForCurrentUser($schedule_id);
+			$this -> select();
+		} else {
+			
+		}
+		
+		$result = $this -> schedules_model -> deletePickForCurrentUser($schedule_id);
+		//redirect('schedules', 'refresh');
 		
 		/*if ($result) {
 			$data['result'] = "Successfully deleted";
@@ -123,6 +150,12 @@ class Schedules extends CI_Controller {
 		$this -> data['tpl_page_id'] = 'delete';
 		$this -> data['main_content'] = 'schedules/delete';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);*/
+	}
+	
+	function _json_prep($result) {
+		$json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
+		$json_result['results'] = $result;
+		print_r($this -> callback. '('.json_encode($json_result) .')');
 	}
 
 }

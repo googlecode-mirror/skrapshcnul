@@ -12,8 +12,12 @@ class Json extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> library('ls_notifications');
 		$this -> load -> library('ion_auth');
+		$this -> load -> library('input');
 		$this -> load -> database();
 		$this -> load -> helper('url');
+		$this -> load -> model('schedules_model');
+		$this -> load -> helper('logger');
+		
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> session -> set_flashdata('system_message', '');
@@ -87,7 +91,14 @@ class Json extends CI_Controller {
 	}
 
 	function getTotalUsers() {
-		echo json_encode($this -> ion_auth -> getTotalUsers());
+		echo json_encode($this -> ion_auth -> getTotalUsers() + 11);
+	}
+	
+	function schedules() {
+		
+		$callback = $_REQUEST['callback'];
+		$call = $_REQUEST['call'];
+		
 	}
 
 }

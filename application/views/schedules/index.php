@@ -10,13 +10,13 @@
 		<div>
 			<?php //echo json_encode($fixed_schedules);?>
 		</div>
-		<div ng:init='schedules = <?php echo json_encode($fixed_schedules);?>'></div>
+		<div ng:init='schedules = (<?php echo json_encode($fixed_schedules);?>)'></div>
 		<div>
 			<span>Search: </span>
 			<input type="text" name="searchText" placeholder="search keywords." style="display: inline-block;" />
 		</div>
 		<div id="schedule-containers" ng:controller="ScheduleController">
-			<div ng:repeat="schedule in schedules.$filter(searchText)" class="schedule-item row-item">
+			<div ng:repeat="schedule in schedules.results.$filter(searchText)" class="schedule-item row-item">
 				<div class="content-top-row">
 					<div class="f-options-set">
 						<ul>
@@ -24,8 +24,8 @@
 								<a href="/schedules/edit/id/{{schedule.index}}">Edit</a>
 							</li>
 							<li class="button button-grey">
-								<a href="/schedules/delete/id/{{schedule.index}}"
-								onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+								<a href="" id="{{schedule.index}}" class="delete-schedule" 
+									ng:click="deleteSchedules({index: schedule.index}, schedule);">Delete</a>
 							</li>
 						</ul>
 					</div>
@@ -48,7 +48,7 @@
 				<div class="content-right-col">
 					<div class="g-static-maps">
 						<span class="title">Location: </span>
-						<img src="{{returntxt(schedule.center_lat,schedule.center_lng,schedule.radius)}}" />
+						<img src="{{getGMapStaticEncodedURL(schedule.center_lat,schedule.center_lng,schedule.radius);}}" />
 					</div>
 				</div>
 			</div>

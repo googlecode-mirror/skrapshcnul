@@ -195,28 +195,6 @@ a.a-s-icon-xlhdpi {
 	background: url(../images/16/settings-icons.png) no-repeat;
 }
 
-#a-s-overview {
-	background-position-y: 0px;
-}
-#a-s-sync {
-	background-position-y: -16px;
-}
-#a-s-security {
-	background-position-y: -32px;
-}
-#a-s-privacy {
-	background-position-y: -48px;
-}
-#a-s-language {
-	background-position-y: -64px;
-}
-#a-s-mobile {
-	background-position-y: -80px;
-}
-#a-s-payment {
-	background-position-y: -96px;
-}
-
 .invitation-box-green {
 	background-color: #698C2E !important;
 	background-image: -moz-linear-gradient(top, #a7cf62, #698c2e) !important;
@@ -226,9 +204,9 @@ a.a-s-icon-xlhdpi {
 	padding: 10px !important;
 	border-top-color: #C6F17A;
 	border-bottom-color: #344616;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 	border-style: solid;
 	border-top-width: 1px;
 	border-right-width: 0px;

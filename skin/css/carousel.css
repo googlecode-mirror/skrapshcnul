@@ -17,18 +17,25 @@
 }
 
 .feature-item {
-	width: 280px;
-	height: 200px;
+	width: 400px;
+	height: 150px;
 	overflow: hidden;
-	margin: 18px;
+	margin: 15px;
+	padding: 0 20px;
 	float: left;
 	text-shadow: white 1px 1px 1px;
 }
 
 .feature-item .title {
+	margin-left: 55px;
 	color: #111111 !important;
-	height: 40px;
+	height: 45px;
 	vertical-align: middle;
+	font-size: 130%;
+	font-family: "Myriad Pro", "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+}
+.feature-item img {
+	float: left;
 }
 
 .feature-item .title img {
@@ -41,6 +48,7 @@
 .feature-item .description {
 	color: #4f5155;
 	clear:both;
+	margin-left: 55px;
 	padding: 5px 0;
 	border-top: 1px solid #C6C6C6;
 }
@@ -48,6 +56,11 @@
 #lunchsparks-testimonials {
 	padding: 10px 5px;
 	background: url(../images/1/bg_opacity04.png);
+}
+
+#lunchsparks-testimonial {
+	height: 160px;
+	overflow: hidden;
 }
 
 .lunchsparks-testimonial-item {
@@ -59,6 +72,8 @@
 	margin: 10px 0;
 	border-radius: 5px;
 	border: 1px solid #EFEFEF;
+	height: 120px;
+	overflow: hidden;
 }
 
 .l-t-i-headings {

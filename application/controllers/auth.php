@@ -151,6 +151,7 @@ class Auth extends Controller {
 		}
 		
 		if (!($this->data['email'] = $this->ion_auth->check_invitation_code($this->data['invitation_key']))) {
+		//if (FALSE) {
 			
 			// Render View
 			//$this->load->view('auth/create_user', $this->data);
