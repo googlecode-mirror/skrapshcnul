@@ -86,4 +86,5 @@
 			A: Not really, quality is more important than quantity. If you have a lot of lunches, your rating will probably reach its true value faster, that's it.
 		</p>
 	</div>
+	<div class="clearfix">&nbsp;</div>
 </div>

@@ -32,4 +32,5 @@
 			No. Your information will not be shared with anyone, except in cases where information may be subpoenaed by law.
 		</p>
 	</div>
+	<div class="clearfix">&nbsp;</div>
 </div>

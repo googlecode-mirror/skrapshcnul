@@ -26,7 +26,7 @@
 		</div>
 	</div>
 </div>
-<div id="m-content">
+<div id="m-content" class="main-page-content-bg">
 	<div class="m-wrapper">
 		<div class="g-content-container">
 			<div class="main-content-sidebar">
@@ -35,8 +35,9 @@
 			<div class="main-content-left">
 				
 			</div>
-			<?php $this -> load -> view('main/features');?>
-			<?php $this -> load -> view('main/testimonial');?>
+			<?php $this -> load -> view('main/_featured_users');?>
+			<?php $this -> load -> view('main/_features');?>
+			<?php //$this -> load -> view('main/_testimonial');?>
 			<div class="clearfix"></div>
 		</div>
 	</div>
