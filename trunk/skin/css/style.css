@@ -8,7 +8,8 @@
 * {
 }
 body {
-	background: #254cb8;
+	/*background: #254cb8;*/
+	background: #232323;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
@@ -166,8 +167,8 @@ footer {
 	padding: 0 0 20px 0;
 	font-size: 1em;
 	color: #FFFFFF;
-	background: url(../images/footer_bg.png) repeat-x 0 0;
-	background-color: #254CB8;
+	background: #232323 url(../images/footer_bg.png) repeat-x 0 0;
+	/*background-color: #254CB8;*/
 	text-shadow: black 1px 1px 1px;
 	border-top: 1px solid #C1C1C1;
 }
@@ -662,10 +663,10 @@ input[type=submit]:hover, .button-set a:hover {
 #f-widgets .block {
 	text-align: justify;
 	float: left;
-	width: 280px;
+	width: 190px;
 }
 #f-widgets .block p {
-	color: #EEEEEE;
+	color: #BBBBBB;
 	line-height: 21px;
 	padding: 5px 0;
 }
@@ -684,4 +685,7 @@ input[type=submit]:hover, .button-set a:hover {
 	padding: 10px 0;
 	font-size: 90%;
 	background: url(../images/1/bg-footer-hr.png) repeat-x;
+}
+.main-page-content-bg {
+	/*background: url(../images/960/ls_logo_opa_05.png) no-repeat 0 40%;*/
 }

@@ -1,8 +1,7 @@
 #carousel {
 	margin: auto;
-	background: url(../images/carousel_bg.jpg) center;
+	background: #063154 url(../images/1800/aero-blue-bg.jpg) center;
 }
-
 .carousel-item {
 	padding: 50px 0;
 	color: #FFFFFF;
@@ -10,12 +9,10 @@
 	/*font-family: "HelveticaNeue-Light", "Helvetica Neue Light","Helvetica Neue", sans-serif;*/
 	font-family: 'Open Sans', sans-serif;
 }
-
 #lunchsparks-features {
 	padding: 10px 5px;
 	background: url(../images/1/bg_opacity04.png);
 }
-
 .feature-item {
 	width: 400px;
 	height: 150px;
@@ -25,7 +22,6 @@
 	float: left;
 	text-shadow: white 1px 1px 1px;
 }
-
 .feature-item .title {
 	margin-left: 55px;
 	color: #111111 !important;
@@ -37,64 +33,81 @@
 .feature-item img {
 	float: left;
 }
-
 .feature-item .title img {
 	margin: 0 5px;
 	vertical-align: middle;
 	float: left;
 	margin: 0 5px;
 }
-
 .feature-item .description {
 	color: #4f5155;
-	clear:both;
+	clear: both;
 	margin-left: 55px;
 	padding: 5px 0;
 	border-top: 1px solid #C6C6C6;
 }
-
 #lunchsparks-testimonials {
 	padding: 10px 5px;
 	background: url(../images/1/bg_opacity04.png);
+	opacity: 0.9;
 }
-
 #lunchsparks-testimonial {
-	height: 160px;
+	height: 240px;
 	overflow: hidden;
 }
-
 .lunchsparks-testimonial-item {
 	/*background: #254CB8;*/
 	/*background: #4298bb;*/
-	background: url(../images/1/bg_opacity03.png);
+	/*background: url(../images/1/bg_opacity03.png);*/
 	color: #FFFFFF;
 	padding: 10px;
 	margin: 10px 0;
-	border-radius: 5px;
-	border: 1px solid #EFEFEF;
-	height: 120px;
+	/*border-radius: 5px;
+	border: 1px solid #EFEFEF;*/
+	height: 200px;
 	overflow: hidden;
+	text-align: left;
 }
-
 .l-t-i-headings {
 	/*color: #FFFFFF;
-	text-shadow: #333333 1px 1px 1px;*/
+	 text-shadow: #333333 1px 1px 1px;*/
 	color: #E69B19;
 	font-weight: bold;
 	font-size: 105%;
 }
-
 .l-t-i-msg {
 	background: url(../images/32/quotes.png) no-repeat top left;
 	/*color: #FFFFFF;
-	text-shadow: #333333 1px 1px 1px;*/
+	 text-shadow: #333333 1px 1px 1px;*/
 	margin-top: 10px;
-	padding-left: 50px;
+	padding-left: 30px;
 	min-height: 55px;
 	color: #777;
 	display: block;
 	font-family: Georgia, 'Times New Roman', Times, serif;
 	font-size: 14px;
 	font-style: italic;
-
+}
+.featured-user {
+	width: 190px;
+	float: left;
+	text-align: center;
+}
+.featured-user .photo {
+	margin: auto;
+	width: 120px;
+	height: 120px;
+	overflow: hidden;
+	box-shadow: 1px 1px 3px #333;
+	border: 2px solid #F8F8F8;
+}
+.featured-user .photo img {
+	max-width: 120px;
+}
+.featured-user .name {
+	margin: 10px 0;
+	font-size: 120%;
+}
+.featured-user .company {
+	font-size: 90%;
 }

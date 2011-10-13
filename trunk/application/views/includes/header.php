@@ -14,7 +14,7 @@
 			<div id="h-menu">
 				<ul>
 					<li id="lunchsparks-header-logo">
-						<?php echo anchor('', '<img src="'.base_url().'/skin/images/ls_logo.png" height="32px">', array('from' => 'main'));?>
+						<?php echo anchor('', '<img src="'.base_url().'/skin/images/ls_logo_white.png" height="32px">', array('from' => 'main'));?>
 					</li>
 					<?php if ($is_logged_in) { ?>
 					<?php /*

@@ -1,10 +1,10 @@
 <div id="lunchsparks-testimonials" class="infobox">
 	<div class="block">
 		<div class="hr">
-			<h2 class="hr-text">We are we?</h2>
+			<h2 class="hr-text">Who are we:</h2>
 		</div>
 		<p>
-			We are very excited to finally able to address the problem of inefficiency in networking. With Lunchsparks, you can now decide who are you networking with, instead of showing up at an networking event and network with people whom might not be relevant to you. How can we do that? We let you indicate your preference of your preferred meetup partner. Our algorithm screen users' Linkedin profile and takes into account the motivation of every user. At the very least, we connect you with someone that is as awesome as you are!
+			We are very excited to finally be able to address the problem of inefficiency in networking. With Lunchsparks, you can now decide who you want to network with, instead of showing up at an networking event and network with people whom might not be relevant to you. How can we do that? We let you indicate your preference of your preferred connection. Networking will now be effective and efficient! At the very least, we connect you with someone who is as awesome as you are!
 		</p>
 	</div>
 	<div class="block">

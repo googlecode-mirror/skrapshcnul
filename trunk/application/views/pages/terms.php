@@ -74,4 +74,5 @@
 			The failure of Company to exercise or enforce any right or provision of the Terms of Service shall not constitute a waiver of such right or provision. The Terms of Service constitutes the entire agreement between you and Company and govern your use of the Service, superceding any prior agreements between you and Company (including, but not limited to, any prior versions of the Terms of Service).
 		</p>
 	</div>
+	<div class="clearfix">&nbsp;</div>
 </div>
