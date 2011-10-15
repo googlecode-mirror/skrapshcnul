@@ -135,7 +135,7 @@ header ul li {
 #m-container-outer {
 	/*background: url(../images/5/body_bg.jpg) #FFFFFF;*/
 	background: #FFFFFF;
-	padding: 36px 0 0 0;
+	padding: 36px 0 10px 0;
 }
 #m-container { /*margin:auto;padding:10px;min-height: 200px;
 	 background: #F9F9F9;
@@ -191,7 +191,12 @@ footer ul li {
 	margin: 5px;
 	list-style: none;
 }
+#f-twitter-icon {
+	margin-top: -20px;
+	position: absolute;
+}
 #f-twitter {
+	margin-left: 50px;
 	padding: .8em 0;
 	position: relative;
 	height: 16px;
@@ -226,7 +231,7 @@ footer ul li {
 }
 .f-sitemap ul {
 	float: left;
-	margin: 0 30px 0 0;
+	margin: 0px;
 }
 .f-sitemap h6 {
 	margin: 15px 0;
@@ -659,6 +664,9 @@ input[type=submit]:hover, .button-set a:hover {
 }
 .infobox .hr {
 	padding: 5px 0;
+}
+.drop-shadow {
+	background: url(../images/1/shadow_down.png) repeat-x;
 }
 #f-widgets .block {
 	text-align: justify;
