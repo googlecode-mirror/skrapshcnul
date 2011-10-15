@@ -1,6 +1,7 @@
 <div class="clearfix"></div>
 <footer>
 	<div id="f-container">
+		<div id="f-twitter-icon"><img src="/skin/images/footer-twitter.png"></div>
 		<div id="f-twitter"></div>
 		<?php if ($main_content == "main/main") {
 		?>

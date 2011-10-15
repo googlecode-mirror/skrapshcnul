@@ -34,8 +34,15 @@ class User extends CI_Controller {
 		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
 		$this -> call = (isset($_REQUEST['call'])) ? $_REQUEST['call'] : '';
 		$this -> callback = (isset($_REQUEST['callback'])) ? $_REQUEST['callback'] : '';
+		$this -> request_method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : '';
 		
 		$this -> start_time = time();
+		
+		// Check if user is logged in
+		if (!$this -> ion_auth -> logged_in()) {
+			//redirect them to the login page
+			redirect('auth/login?redirect='.uri_string(), 'refresh');
+		}
 	}
 
 	function index() {
@@ -49,11 +56,6 @@ class User extends CI_Controller {
 	}
 
 	function profile() {
-		// Check if user is logged in
-		if (!$this -> ion_auth -> logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login?redirect='.uri_string(), 'refresh');
-		}
 
 		/* dummy data */
 		if(!isset($user_data['cover_background'])) {
@@ -111,7 +113,11 @@ class User extends CI_Controller {
 			
 		} else {
 			
-			$result = $this -> preferences_model -> selectForCurrentUser();
+			$results = $this -> preferences_model -> selectForCurrentUser();
+			$this -> data['preferences'] =  json_encode($results);
+			$this -> data['networking'] =  $results;
+			$this -> data['career'] =  $results;
+			$this -> data['offer'] =  $results;
 			
 			// Render views
 			$this -> data['tpl_page_id'] = 'preferences';
@@ -123,31 +129,36 @@ class User extends CI_Controller {
 
 	function _preferences_json() {
 		
-		if( isset($_REQUEST['preferences']) ) {
-			$preferences = $_REQUEST['preferences'] ;
-		}
+		$preferences_ref_id = isset($_REQUEST['preferences_ref_id']) ? $_REQUEST['preferences_ref_id'] : '';
+		$tag_value = isset($_REQUEST['tag_value']) ? $_REQUEST['tag_value'] : '';
 		
-		switch($this -> call) {
-			case 'select' : 
-				$result = $this -> preferences_model -> selectForCurrentUser()-> result();
+		//$this -> request_method = 'POST';
+		
+		$data = 'Some file data';
+
+		Logger::log($data);
+		
+		switch ($this -> request_method) {
+			case 'GET' : 
+				$results = $this -> preferences_model -> selectForCurrentUser();
 				break;
-			case 'insert' :
-				$this -> preferences_model -> insertForCurrentUser($preferences);
-				$result = $this -> preferences_model -> selectForCurrentUser()-> result();
+			case 'POST' :
+				if ($tag_value) {
+					$results = $this -> preferences_model -> insertForCurrentUser($preferences_ref_id, $tag_value);
+				} else {
+					$results = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_ref_id);
+				}
 				break;
-			case 'update' :
-				$this -> preferences_model -> updateForCurrentUser($preferences);
-				$result = $this -> preferences_model -> selectForCurrentUser()-> result();
-				break;
-			case 'delete' :
-				$this -> preferences_model -> deleteForCurrentUser();
-				$result = $this -> preferences_model -> selectForCurrentUser()-> result();
+			case 'DELETE' :
+				$results = $this -> preferences_model -> deleteForCurrentUser();
 				break;
 			default :
-				$result = 'error';
+				$results = 'error';
 		}
 		
-		$this -> _json_prep($result);
+			//var_dump($results);
+			//die();
+		$this -> _json_prep($results);
 	}
 
 	function friends() {
@@ -186,10 +197,21 @@ class User extends CI_Controller {
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
-	function _json_prep($result) {
-		$json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
-		$json_result['results'] = $result;
-		print_r($this -> callback. '('.json_encode($json_result) .')');
+	function _json_prep($results) {
+		//header('Cache-Control: no-cache, must-revalidate');
+		//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		//header('Content-type: application/json');
+		
+		
+		if ($this -> callback) {
+			$json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
+			$json_result['results'][] = $results;
+			print_r($this -> callback. '('.json_encode($json_result) .')');
+		} else {
+			$json_result = $results;
+			print_r(json_encode($json_result));
+		}
+		
 	}
 
 }

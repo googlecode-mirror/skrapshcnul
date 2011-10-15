@@ -8,11 +8,10 @@
 			</form>
 			<div class="clearfix"></div>
 			<div>
-				Don't have Invitation key? Interested? Join our <?php echo anchor('http://eepurl.com/ftkI-/', 'mailing list', 'style="color: #FFFFFF;"');?>. 
+				Don't have Invitation key? Interested? Join our <?php echo anchor('http://eepurl.com/ftkI-/', 'mailing list', 'style="color: #FFFFFF;"');?>.
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		
 		<div style="padding:5px 0;margin:5px 0;">
 			<a href="http://eepurl.com/ftkI-/" class="button" style="padding: 10px 65px;font-size: 110%;box-shadow: 1px 1px 1px #333;">Signup to be our Alpha Testers</a>
 		</div>
