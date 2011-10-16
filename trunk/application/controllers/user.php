@@ -129,28 +129,42 @@ class User extends CI_Controller {
 
 	function _preferences_json() {
 		
-		$preferences_ref_id = isset($_REQUEST['preferences_ref_id']) ? $_REQUEST['preferences_ref_id'] : '';
-		$tag_value = isset($_REQUEST['tag_value']) ? $_REQUEST['tag_value'] : '';
+		$preferences_id = $this->uri->segment(3);
+		$tag_value = $this->uri->segment(4);
+		
+		//$preferences_ref_id = isset($_REQUEST['preferences_ref_id']) ? $_REQUEST['preferences_ref_id'] : '';
+		//$tag_value = isset($_REQUEST['tag_value']) ? $_REQUEST['tag_value'] : '';
+		//$preferences_ref_id = isset($_POST['preferences_ref_id']) ? $_POST['preferences_ref_id'] : '';
+		//$tag_value = isset($_POST['tag_value']) ? $_POST['tag_value'] : '';
 		
 		//$this -> request_method = 'POST';
 		
-		$data = 'Some file data';
-
-		Logger::log($data);
+		//Logger::log($_SERVER);
+		Logger::log('$_POST');
+		Logger::log($_POST);
+		Logger::log('$_GET');
+		Logger::log($_GET);
+		Logger::log('$_REQUEST');
+		Logger::log($_REQUEST);
 		
-		switch ($this -> request_method) {
-			case 'GET' : 
+		switch ($this -> call) {
+			case 'get' : 
 				$results = $this -> preferences_model -> selectForCurrentUser();
 				break;
-			case 'POST' :
+			case 'save' :
 				if ($tag_value) {
-					$results = $this -> preferences_model -> insertForCurrentUser($preferences_ref_id, $tag_value);
+					$results = $this -> preferences_model -> insertForCurrentUser($preferences_id, $tag_value);
 				} else {
-					$results = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_ref_id);
+					$results = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
 				}
+				Logger::log($results);
 				break;
-			case 'DELETE' :
-				$results = $this -> preferences_model -> deleteForCurrentUser();
+			case 'delete' :
+				if ($tag_value) {
+					$results = $this -> preferences_model -> deleteForCurrentUser($preferences_id, $tag_value);
+				} else {
+					$results = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
+				}
 				break;
 			default :
 				$results = 'error';
@@ -198,9 +212,9 @@ class User extends CI_Controller {
 	}
 
 	function _json_prep($results) {
-		//header('Cache-Control: no-cache, must-revalidate');
-		//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-		//header('Content-type: application/json');
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header('Content-type: application/json');
 		
 		
 		if ($this -> callback) {

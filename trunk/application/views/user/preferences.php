@@ -9,6 +9,29 @@
 		</div>
 		<div>Enter your preferences here. Our system will pickup the keywords from here.</div>
 		
+		<?php /* foreach(json_decode($preferences) as $value) { ?>
+			<div class="preferences-container">
+			<div class="title">
+				<?php echo $value->preferences_name ?>  
+				<div class="description"><?php echo $value->description ?></div>
+			</div>
+			<div class="preferences-data">
+				<?php foreach($value->data as $tag) { ?>
+				<div class="preferences-data-item">
+					<img src="/skin/images/tag_before.png" />
+					<div class="preferences-data-item-content">
+						<?php echo $tag ?>
+						<a ng:click="removeTag(preference.id, tag)"> [x] </a>
+					</div>
+					<img src="/skin/images/tag_after.png" />
+				</div>
+				<?php } ?>
+			</div>
+			<input type="text" id="tag_value_{{preference.id}}" name="tag_value_{{preference.id}}" size="35" placeholder="New keywords here" style="display: inline-block;">
+      		<input type="submit" value="add" required="required" onclick="savePreferences({{preference.id}})">
+		</div>
+		<?php } */?>
+		
 		<div class="preferences-container" ng:repeat="preference in preferences">
 			<div class="title">
 				{{preference.preferences_name}} 
@@ -19,70 +42,21 @@
 					<img src="/skin/images/tag_before.png" />
 					<div class="preferences-data-item-content">
 						{{tag}}
-						<a ng:click="removeTag(preference.id, tag)"> [x] </a>
+						<a ng:click="deleteTag(preference.id, tag);(preference.data).$remove(tag)"> [x] </a>
+						<?php /* <a ng:click="(preference.data).$remove(tag)"> [x] </a> */ ?>
 					</div>
 					<img src="/skin/images/tag_after.png" />
 				</div>
 			</div>
-			<input type="text" name="tag_value" size="35" placeholder="New keywords here" style="display: inline-block;">
-      		<input type="submit" value="add" ng:click="addTag(preference.id, tag_value)">
+			<input type="text" id="tag_value_{{preference.id}}" name="tag_value" size="35" placeholder="New keywords here" style="display: inline-block;">
+      		<input type="submit" value="add" required="required" ng:click="addTag(preference.id,tag_value)">
 		</div>
 	</div>
-	<pre>{{preferences}}</pre>
-	<pre>{{preferences2}}</pre>
-	<pre>{{preferences3}}</pre>
+	
+	<pre style="display: none;">{{preferences}}</pre>
 	
 	<script>
 	
-	PreferenceCtrl.$inject = ['$resource', '$defer'];
-    function PreferenceCtrl($resource,$defer) {
-		var scope = this;
-		scope.preferences = <?php echo $preferences; ?>;
-  		
-  		scope.Preferences = $resource(
-  			'/user/preferences',
-		    {alt: 'json'},
-			{ test: {method: 'GET', params: {}},
-			  save: {method:'POST', params: {}},
-			}
-  		);
-  		
-  		//scope.preferences = scope.Preferences.get();
-  		
-		scope.addTag = function(preference_id, tag_value) {
-			//scope.preferences[preference_id].data.push(tag_value);
-			alert(preference_id + ', ' + tag_value);
-			scope.preferences[preference_id].data = scope.Preferences.save({'preference_id': preference_id, 'tag_value': tag_value});
-			//scope.preferences[preference_id].data = ["banking"," finanace"];
-			//scope.todoText = '';
-		};
-   
-		scope.remaining = function(){
-			return angular.Array.count(scope.preferences.data, function(todo){
-				return !todo.done;
-			});
-		};
-   
-		scope.removeDone = function() {
-			var oldpreferences = scope.preferences;
-			scope.preferences = [];
-			angular.forEach(oldpreferences.data, function(todo) {
-				if (!todo.done) scope.preferences.data.push(todo);
-			});
-		};
-
-		scope.refresh = function() {
-			function poll() {
-				scope.preferences = scope.preferences;
-				$defer(poll, 3000);
-			}
-			poll();
-		};
-		scope.refresh();
-		
-    }
-	PreferenceCtrl.prototype = {
-	};
     
 	</script>
 </div>

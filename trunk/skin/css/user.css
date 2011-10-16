@@ -250,12 +250,12 @@ a.a-s-icon-xlhdpi {
 	margin-top: 1px;
 }
 .preferences-container {
-	margin: 10px 0;
+	margin: 20px 0 10px 0;
 }
 .preferences-container .title {
 	padding: 8px;
 	background: #F8F8F8;
-	border-top: 1px solid #DDDDDD;
+	border-top: 1px solid #AAAAAA;
 	border-bottom: 1px solid #EFEFEF;
 	margin: 20px 0;
 }
@@ -264,7 +264,7 @@ a.a-s-icon-xlhdpi {
 	color: #777777;
 }
 .preferences-data {
-	margin: 5px 0;
+	margin: 10px 0;
 }
 .preferences-data-item {
 	display: inline-block;
