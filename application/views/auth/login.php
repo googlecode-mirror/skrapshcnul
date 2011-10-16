@@ -14,8 +14,8 @@
 				</p>
 				<?php endif;?>
 			</div>
+			
 			<?php echo form_open("auth/login");?>
-
 			<p>
 				<label for="email">Email:</label>
 				<?php echo form_input($email);?>
@@ -35,7 +35,7 @@
 			<p>
 				<small><?php echo anchor('auth/forgot_password', 'Forgot Password?');?></small>
 			</p>
-			<?php echo form_close();?>
+			<?php echo form_close(); ?>
 		</div>
 	</div>
 	<div class="clearfix"></div>

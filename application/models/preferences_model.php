@@ -82,16 +82,25 @@ class Preferences_Model extends CI_Model {
 		return $result;
 	}
 
-	function deleteForCurrentUser() {
+	function deleteForCurrentUser($preferences_ref_id, $tag_value) {
 		$user_id = $this -> session -> userdata('user_id');
-		$query = 
-			" UPDATE lss_users_preferences " . 
-			" SET " .
-			" is_deleted = 1, " . 
-			" updated_on = NOW() " .
-			" WHERE user_id = " . $user_id ;
-		$result = $this -> db -> query($query);
-		return $result;
+		$tag_value = trim($tag_value);
+		
+		if($tag_value) {
+			$data_arr = $this -> selectForCurrentUser_byPreferencesRefId($preferences_ref_id);
+			$remo_arr = explode(',', $tag_value);
+			$data_arr = array_diff($data_arr, $remo_arr);
+			
+			$data = implode(',', $data_arr);
+			$query = 
+				" UPDATE lss_users_preferences " .
+				" SET data = '$data', updated_on = NOW() " . 
+				" WHERE user_id = $user_id " .
+				" AND preferences_ref_id = $preferences_ref_id ;";
+			$mysql_result = $this -> db -> query($query);
+		}
+		
+		return $this -> selectForCurrentUser_byPreferencesRefId($preferences_ref_id);
 	}
 	
 }

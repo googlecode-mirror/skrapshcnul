@@ -9,7 +9,7 @@
 
 class Logger {
 
-	const _ENABLE = FALSE;
+	const _ENABLE = TRUE;
 	const _LOGFILE = '/tmp/log.txt';
 
 	function log($data) {
@@ -18,7 +18,7 @@ class Logger {
 			$fh = fopen($LOGFILE, 'a') or fopen($LOGFILE, 'w') or die("Can't open file");
 
 			ob_start();
-			print_r(time());
+			print_r(date('Y-m-d H:i:s', time()));
 			print_r("\n");
 			print_r($data);
 			print_r("\n");
