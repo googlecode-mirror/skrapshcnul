@@ -4,7 +4,10 @@
 	</div>
 	<div class="m-content-2-col-right">
 		<div id="invitations-invites">
-			<h2>Invitation Status</h2>
+			
+			<div class="hr">
+				<h2 class="hr-text">Invitation Status</h2>
+			</div>
 			<?php if (isset($invites)) {
 			?>
 			<table class="invite-table table">

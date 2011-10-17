@@ -1,5 +1,6 @@
 RewriteEngine On
 Options +FollowSymLinks
+RewriteBase /
 RewriteCond $1 !^(index\.php|skin|media|css|images|robots\.txt|css)
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]

@@ -185,10 +185,10 @@ class Settings extends CI_Controller {
 
 						// send a request for a LinkedIn access token
 						$response = $OBJ_linkedin -> retrieveTokenRequest();
-						if ($response['success'] === TRUE) {
+						if ($response['success'] === TRUE) {		
 							// store the request token
 							$_SESSION['oauth']['linkedin']['request'] = $response['linkedin'];
-
+					
 							// redirect the user to the LinkedIn authentication/authorisation page to initiate validation.
 							header('Location: ' . LINKEDIN::_URL_AUTH . $response['linkedin']['oauth_token']);
 						} else {

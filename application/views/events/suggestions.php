@@ -3,12 +3,19 @@
 		<?php $this -> load -> view('events/includes/sidetab');?>
 	</div>
 	<div class="m-content-2-col-right">
-		<h2>Suggestions</h2>
 		<div class="hr">
-			<h2 class="hr-text">Upcoming Events</h2>		
+			<h2 class="hr-text">Event Suggestions</h2>		
 		</div>
 		<div>
-			Here you can find suggestions for upcoming lunches.
+			<?php if(!empty($events['suggestions'])) { ?>
+				<?php foreach($events['suggestions'] as $item) { ?>
+				<div class="stream-item">
+					<div class="clearfix"></div>
+				</div>
+				<?php }?>
+			<?php } else { ?>
+				<div class="">You have no event suggestions.</div>
+			<?php }?>
 		</div>
 	</div>
 </div>

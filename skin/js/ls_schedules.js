@@ -14,15 +14,18 @@ jQuery(document).ready( function() {
 	try {
 		jQuery(".datepicker").datepicker({})
 	
-		jQuery('.timepicker').timepicker({
-			ampm : true, //don't change; modifying this requires changes in schedules_model
+		jQuery('#start_time.timepicker').timepicker({
+			ampm : false, //don't change; modifying this requires changes in schedules_model
+			hourMin : 8,
+			hourMax : 23
+		});
+		jQuery('#end_time.timepicker').timepicker({
+			ampm : false, //don't change; modifying this requires changes in schedules_model
 			hourMin : 8,
 			hourMax : 23
 		});
 		
-	} catch (e) {
-		
-	}
+	} catch (e) {}
 	
 	jQuery("#add_pick_button").click(function() {
 		jQuery("#9").innerHTML = "a";
@@ -103,3 +106,35 @@ ScheduleController.prototype = {
 	});
 	
 });*/
+
+function schedule_add_time_validation() {
+	var start_time = (jQuery('#start_time.timepicker').val());
+	var end_time = (jQuery('#end_time.timepicker').val());
+	var dtStart = new Date("1/1/2007 " + start_time);
+	var dtEnd = new Date("1/1/2007 " + end_time);
+	if (start_time && end_time) {
+		if ((dtEnd - dtStart) <= 0) {
+			jQuery("#timepicker_message").html(
+					'<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">'+ 
+					'<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>'+ 
+					'<strong>Alert:</strong> Start time cannot be earlier than end time.</p>'+
+					'</div>'
+				);
+			jQuery("#timepicker_message").focus();
+			return false;
+		} else {
+			jQuery("#timepicker_message").html('');
+			return true;
+		}
+	}
+}
+
+function schedule_repeat_toggle() {
+	jQuery('#day_checkbox_container').toggle('slow');
+}
+
+function schedule_validate() {
+	if(!schedule_add_time_validation()) {
+		return false;
+	};
+}
