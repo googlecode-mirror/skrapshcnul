@@ -1,19 +1,27 @@
 <div id="carousel-1" class="carousel-item">
 	<div style="float: right; width: 400px;">
 		<div class="invitation-box-green">
-			<span style="font-weight: bold;letter-spacing: 1px;line-height: 2.4em;text-transform: uppercase;"> Have a invitation key? Register here. </span>
-			<form id="invitation-signup" action="/auth/signup">
-				<input id="invitation_key" name="invitation_key" type="text" size="10" placeholder="Invitation key" style="float: left;" required="required" />
-				<input type="submit" value="Register" style="float:left; padding: 8px; margin: 0 5px;" />
-			</form>
-			<div class="clearfix"></div>
-			<div>
-				Don't have Invitation key? Interested? Join our <?php echo anchor('http://eepurl.com/ftkI-/', 'mailing list', 'style="color: #FFFFFF;"');?>.
+			<!-- Begin MailChimp Signup Form -->
+			<style type="text/css">
+				#mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; }
+				/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+				   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+			</style>
+			<div id="mc_embed_signup invitation-signup">
+				<form action="http://lunchsparks.us2.list-manage1.com/subscribe/post?u=b0d6bea48dc98c28a438f7e10&amp;id=cfcf6f5774" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+					<label for="mce-EMAIL">Want to start connecting now <strong>right now</strong>? Sign up <?php echo anchor('http://eepurl.com/ftkI-/', 'here', 'style="color: #FFFFFF;"');?>.</label>
+					<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="enter email address" required style="float: left;width: 305px;">
+					<div class="clearfix">
+						<input type="submit" value="Signup to be Alpha Testers" name="subscribe" id="mc-embedded-subscribe" class="button" style="min-width: 321px;margin: 0;padding:5px 55px;;font-size: 110%;box-shadow: 1px 1px 1px #333;">
+					</div>
+				</form>
 			</div>
 			<div class="clearfix"></div>
-		</div>
-		<div style="padding:5px 0;margin:5px 0;">
-			<a href="http://eepurl.com/ftkI-/" class="button" style="padding: 10px 65px;font-size: 110%;box-shadow: 1px 1px 1px #333;">Signup to be our Alpha Testers</a>
+			<!--End mc_embed_signup-->
+			
+			<div style="margin: 15px 0 0 0;"> Have an Invitation key? Register <?php echo anchor('auth/signup', 'here', 'style="color: #FFFFFF;"');?>. </div>
+			
+			<div class="clearfix"></div>
 		</div>
 	</div>
 	<div style="width: 550px;">

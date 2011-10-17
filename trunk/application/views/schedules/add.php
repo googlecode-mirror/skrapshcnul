@@ -16,23 +16,63 @@
 		
 		<?php echo form_open("schedules/add");?>
 		<div id="pick">
-			<div>
-				<label>Name: </label>
-				<input type="text" name="name" id="name" value="<?php echo isset($_REQUEST['name']) ? $_REQUEST['name'] : ''; ?>" placeholder="A name for reference.">
+			<div class="box-container">
+				<div class="title">
+					Name:
+					<div class="description">A name for your own reference.</div>  
+				</div>
+				<input required="required" type="text" name="name" id="name" value="<?php echo isset($_REQUEST['name']) ? $_REQUEST['name'] : ''; ?>" placeholder="A name for reference." >
 			</div>
-			<div id="pick-a-date">
-				<label>Pick a date: </label>
-				<input type="text" name="start_date" id="start_date" class="datepicker" value="<?php echo isset($_REQUEST['start_date']) ? $_REQUEST['start_date'] : '';?>" placeholder="mm/dd/yyyy">
+			<div id="pick-a-date" class="box-container">
+				<div class="title">
+					Pick a date: 
+					<div class="description"></div> 
+				</div>
+				<input required="required" type="text" name="start_date" id="start_date" class="datepicker" value="<?php echo isset($_REQUEST['start_date']) ? $_REQUEST['start_date'] : '';?>" placeholder="mm/dd/yyyy">
+				<div>
+					<div style="200px;display: inline-block;float:left;width:100px;">
+						<input type="checkbox" name="schedule_repeat" value="Repeat" onchange="schedule_repeat_toggle()" /><span>Repeat</span>
+					</div>
+					<div style="display: inline-block;">
+						<div id="day_checkbox_container" style="display: none;">
+							<div>
+								<select id="repeat_frequency" name="repeat_frequency">
+									<option value="weekly">Weekly</option>
+									<option value="monthly">Monthly</option>
+									<option value="yearly">Yearly</option>
+								</select>
+							</div>
+							
+							<?php $days_in_week = array(
+								'SU' => 'Sunday',
+								'MO' => 'Monday',
+								'TU' => 'Tuesday',
+								'WE' => 'Wednesday',
+								'TH' => 'Thursday',
+								'FR' => 'Friday',
+								'SA' => 'Saturday',
+							); ?>
+							<?php foreach ($days_in_week as $key => $value) { ?>
+							<span class="">
+								<input id="repeat_<?php echo $key; ?>" name="<?php echo $key; ?>" type="checkbox">
+								<label for="repeat_<?php echo $key; ?>"><?php echo $value; ?></label>
+							</span>
+							<?php } ?>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div id="pick-a-time">
-				<label>Pick a time</label>
-				<div></div>
-				<input type="text" name="start_time" id="start_time" class="timepicker" value="<?php echo isset($_REQUEST['start_time']) ? $_REQUEST['start_time'] : '';?>" style="display:inline-block;" placeholder="08:00 am">
-				<span> to </span>
-				<input type="text" name="end_time" id="end_time" class="timepicker" value="<?php echo isset($_REQUEST['end_time']) ? $_REQUEST['end_time'] : '';?>" style="display:inline-block;" placeholder="08:00 am">
+			<div id="pick-a-time" class="box-container">
+				 <div class="title">Pick a time</div>
+				<div>
+					<input onchange="schedule_add_time_validation()" type="text" name="start_time" id="start_time" class="timepicker" value="<?php echo isset($_REQUEST['start_time']) ? $_REQUEST['start_time'] : '';?>" style="display:inline-block;" placeholder="08:00">
+					<span> to </span>
+					<input onchange="schedule_add_time_validation()" type="text" name="end_time" id="end_time" class="timepicker" value="<?php echo isset($_REQUEST['end_time']) ? $_REQUEST['end_time'] : '';?>" style="display:inline-block;" placeholder="23:00">
+				</div>
+				<div id="timepicker_message"></div>
 			</div>
-			<div id="pick-a-location">
-				<label>Pick a location: </label>
+			<div id="pick-a-location" class="box-container">
+				<div class="title">Pick a location: </div>
 				<div id="map_canvas" style="width:100%; height:300px; border: 1px solid #CCC;"></div>
 				<i>Hint: Click on the map to choose your place,
 				move the mouse to specify how far you wish to travel,
@@ -44,7 +84,7 @@
 		</div>
 		<br />
 		<div class="button-set">
-			<input type="submit" id="add_pick_button" value="Add Schedule">
+			<input type="submit" id="add_pick_button" value="Add Schedule" onclick="return schedule_validate();">
 		</div>
 		<?php echo form_close();?>
 		<br />
@@ -54,6 +94,5 @@
 <script>
 	jQuery(document).ready( function() {
 		initialize_lunchsparks_googlemap();
-	}
-	); 
+	}); 
 </script>

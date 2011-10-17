@@ -3,19 +3,34 @@
 		<?php $this -> load -> view('events/includes/sidetab');?>
 	</div>
 	<div class="m-content-2-col-right">
-		<h2>Events</h2>
 		<div class="hr">
 			<h2 class="hr-text">Upcoming Events</h2>		
 		</div>
 		<div>
-			Heres the container for upcoming events.
+			<?php if(!empty($events['upcoming'])) { ?>
+				<?php foreach($events['upcoming'] as $item) { ?>
+				<div class="stream-item">
+					<div class="clearfix"></div>
+				</div>
+				<?php }?>
+			<?php } else { ?>
+				<div class="">You have no upcoming event.</div>
+			<?php }?>
 		</div>
 		
 		<div class="hr">
 			<h2 class="hr-text">Past Events</h2>		
 		</div>
 		<div>
-			Heres the container for past events.
+			<?php if(!empty($events['past'])) { ?>
+				<?php foreach($events['past'] as $item) { ?>
+				<div class="stream-item">
+					<div class="clearfix"></div>
+				</div>
+				<?php }?>
+			<?php } else { ?>
+				<div class="">You have no past event.</div>
+			<?php }?>
 		</div>
 	</div>
 </div>

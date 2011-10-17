@@ -1,0 +1,13 @@
+#invitation_left_box {
+	border-top: 1px solid #EFEFEF;
+	border-bottom: 1px solid #EFEFEF;
+	background: #F8F8F8;
+	padding: 5px 0;
+	margin-bottom: 30px;
+}
+.invitation-left {
+	text-align: center;
+	color: #808185;
+	font-size: 250%;
+	font-weight: bold;
+}
