@@ -11,3 +11,19 @@
 	font-size: 250%;
 	font-weight: bold;
 }
+/* Invitations */
+.invite-table {
+	width: 100%;
+	margin-bottom: 30px;
+}
+.invite-table thead th {
+	text-align: left;
+	border-top: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+}
+.invite-table th {
+	padding: 10px 5px;
+}
+.invite-table td {
+	padding: 5px;
+}

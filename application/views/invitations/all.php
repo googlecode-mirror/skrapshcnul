@@ -10,5 +10,7 @@
 			Although we are still in closed Alpha stage, we are giving out invitations to you so that you can invite those who you think will benefit from this platform
 		</p>
 		<br />
+		
+		<?php $this -> load -> view('invitations/includes/invite');?>
 	</div>
 </div>
