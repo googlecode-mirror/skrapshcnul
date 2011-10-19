@@ -61,12 +61,12 @@ class Schedules_Model extends CI_Model {
 		$datetime_end = $date_end . " " . $time_end;
 		$query = 
 			"UPDATE lss_schedules " . 
-      " SET name = '$name' " . 
-      " , STR_TO_DATE('$datetime_start','%m/%d/%Y %T') " . 
-      " , end_date = STR_TO_DATE('$datetime_end','%m/%d/%Y %T') " . 
-      " , center_lat = '$center_lat', center_lng = '$center_lng' " . 
-      " , radius = '$radius' " .
-      " WHERE user_id = '$userid' AND `index` = '$index';";
+			" SET name = '$name' " . 
+		    " , start_date = STR_TO_DATE('$datetime_start','%m/%d/%Y %T') " . 
+		    " , end_date = STR_TO_DATE('$datetime_end','%m/%d/%Y %T') " . 
+		    " , center_lat = '$center_lat', center_lng = '$center_lng' " . 
+		    " , radius = '$radius' " .
+		    " WHERE user_id = '$userid' AND `index` = '$index';";
 		$success = $this -> db -> query($query);
 		return $success;
   }

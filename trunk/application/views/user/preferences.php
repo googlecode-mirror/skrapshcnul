@@ -42,14 +42,14 @@
 					<img src="/skin/images/tag_before.png" />
 					<div class="preferences-data-item-content">
 						{{tag}}
-						<a ng:click="deleteTag(preference.id, tag);(preference.data).$remove(tag)"> [x] </a>
+						<a ng:click="deleteTag(preference.preferences_ref_id, tag);(preference.data).$remove(tag)"> [x] </a>
 						<?php /* <a ng:click="(preference.data).$remove(tag)"> [x] </a> */ ?>
 					</div>
 					<img src="/skin/images/tag_after.png" />
 				</div>
 			</div>
-			<input type="text" id="tag_value_{{preference.id}}" name="tag_value" size="35" placeholder="New keywords here" style="display: inline-block;">
-      		<input type="submit" value="add" required="required" ng:click="addTag(preference.id,tag_value)">
+			<input type="text" id="tag_value_{{preference.preferences_ref_id}}" name="tag_value" size="35" placeholder="New keywords here" style="display: inline-block;">
+      		<input type="submit" value="add" required="required" ng:click="addTag(preference.preferences_ref_id,tag_value);">
 		</div>
 	</div>
 	

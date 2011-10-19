@@ -9,7 +9,7 @@ $config['tables']['invitations'] = 'users_invitations';
 $config['tables']['invitations_log'] = 'users_invitations_log';
 
 $config['salt_length'] = 10;
-$config['store_salt'] = 'random_salt_for_invitation';
+$config['store_salt'] = '';
 
 
 

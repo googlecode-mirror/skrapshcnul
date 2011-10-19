@@ -411,15 +411,6 @@ footer ul li {
 #notification-toggle span {
 	color: #333;
 }
-/* Invitations */
-.invite-table {
-	width: 100%;
-	margin-bottom: 30px;
-}
-.invite-table thead th {
-	text-align: left;
-	border-bottom: 1px dotted #000000;
-}
 .widget-box {
 	margin: 0 0 10px 0;
 }
@@ -498,7 +489,7 @@ input[type=submit]:hover, .button-set a:hover {
 	margin: 0 1px;
 	white-space: nowrap;
 	position: relative;
-	float: left;
+	/*float: left;*/
 	padding: 0 9px;
 	width: auto !important;
 	font-weight: bold;
@@ -715,4 +706,16 @@ input[type=submit]:hover, .button-set a:hover {
 }
 .main-page-content-bg {
 	/*background: url(../images/960/ls_logo_opa_05.png) no-repeat 0 40%;*/
+}
+.thead {
+	background: #EFEFEF;
+}
+.row-0 {
+	background: #EFFFEF;
+}
+.row-1 {
+	background: #F8F8F8;
+}
+td {
+	border: 1px solid #F8F8F8;
 }

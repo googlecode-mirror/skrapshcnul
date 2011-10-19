@@ -7,11 +7,13 @@
 			<div class="pageTitleBorder"></div>
 			<div class="error-msg">
 				<?php echo validation_errors('<p class="error">');?>
-				<?php if($this->session->flashdata('message' )) :
-				?>
-				<p class="error">
-					<?php echo $this -> session -> flashdata('message');?>
-				</p>
+				<?php if($this->session->flashdata('message' )) : ?>
+				<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+					<p>
+						<span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span> 
+						<?php echo $this -> session -> flashdata('message');?>
+					</p>
+				</div>
 				<?php endif;?>
 			</div>
 			
