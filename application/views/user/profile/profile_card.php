@@ -1,17 +1,10 @@
 <div class="ls_profile_card">
-	<?php
-	if (isset($profile['profile_img'])) {
-		$image_size= getimagesize($profile['profile_img']);
-		$margin_left = (160 - $image_size[0])/2; 
-		$margin_top = (180 - $image_size[1])/2; ?>
-		<div class="profile-img">
-			<img src="<?php echo $profile['profile_img'];?>" 
-				style="margin-left: <?php echo $margin_left ?>px;margin-top: <?php echo $margin_top ?>px;" />
-		</div>
-	<?php } ?>
+	<div class="profile-img">
+		<img src="<?php echo (isset($user_profile['profile_img'])) ? $user_profile['profile_img'] : '';?>" />
+	</div>
 	<div class="profile-featured-data">
 		<div class="profile-name">
-			<span><?php echo $profile['first_name'];?>,<?php echo $profile['last_name'];?></span>
+			<span><?php echo $user_profile['name'];?></span>
 			<div id="profile-stats">
 				<?php if(isset($user_status['verified_name'])) { ?>
 					<div id="user-verification u-v-verified">
@@ -19,20 +12,19 @@
 						<div>Verified</div>
 					</div>
 				<?php } else { ?>
-					<?php /* <div id="user-verification">
+					<div id="user-verification">
 						<div class="user-verification-icon"></div>
 						<div class="user-verification-text">Not verified</div>
-					</div> */ ?>
+					</div>
 				<?php }?>
 			</div>
 		</div>
 		<div>
-			<?php echo $profile['headline'];?>
+			<?php echo $user_profile['position'];?>
+			at <?php echo $user_profile['company'];?>
 		</div>
 		<div>
-			<?php if(!empty($profile['location'])) { ?>
-				Lives in <?php echo $profile['location']->name;?>
-			<?php } ?>
+			Lives in <?php echo $user_profile['country_lives'];?>
 		</div>
 	</div>
 	<div class="clearfix">

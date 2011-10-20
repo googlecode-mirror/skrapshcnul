@@ -42,15 +42,7 @@
 						<span class="title">Time: </span>{{schedule.startTime}} to {{schedule.endTime}}
 					</div>
 					<div>
-						<span class="title">Repeat: </span>
-						<span>
-							{{schedule.repeat_params.repeat_frequency}}
-						</span>
-						<div>
-							<span ng:repeat="day in schedule.repeat_params.repeat_day">
-								{{day}}, 
-							</span>
-						</div>
+						<span class="title">Repeat: </span>{{schedule.params}}
 					</div>
 				</div>
 				<div class="content-right-col">

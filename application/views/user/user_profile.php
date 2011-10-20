@@ -11,7 +11,7 @@
 	</div>
 	<div id="ls_cover">
 		<div class="cover_background">
-			<img src="<?php echo $profile['cover_background']; ?>" />
+			<img src="<?php echo (isset($user_profile['cover_background'])) ? $user_profile['cover_background'] : '';?>" />
 		</div>
 	</div>
 	<div id="ls_profile_card_container">
@@ -36,4 +36,3 @@
 		</div>
 	</div>
 </div>
-<div class="clearfix"></div>
