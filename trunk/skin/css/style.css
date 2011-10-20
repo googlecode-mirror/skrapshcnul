@@ -464,7 +464,7 @@ input[type=submit], .button-set a, .btn {
 	text-decoration: none;
 	white-space: nowrap;
 	position: relative;
-	/*margin: 6px;*/
+	margin: 6px;
 	padding: 6px;
 	width: auto !important;
 	font-weight: bold;
@@ -495,7 +495,7 @@ input[type=submit]:hover, .button-set a:hover {
 	font-weight: bold;
 	font-size: .916em;
 	color: white;
-	/*height: 24px;*/
+	height: 24px;
 	line-height: 24px;
 	text-shadow: 0 -1px 0 #777;
 	border: 1px solid #0088C3;
@@ -659,25 +659,6 @@ input[type=submit]:hover, .button-set a:hover {
 .drop-shadow {
 	background: url(../images/1/shadow_down.png) repeat-x;
 }
-.box-container {
-	margin: 10px 0;
-}
-.box-container {
-	margin: 20px 0 10px 0;
-}
-.box-container .title {
-	padding: 8px;
-	background: #F8F8F8;
-	border-top: 1px solid #AAAAAA;
-	border-bottom: 1px solid #EFEFEF;
-	margin: 20px 0;
-}
-.box-container .title .description {
-	font-size: 85%;
-	color: #777777;
-}
-
-/* Others */
 #f-widgets .block {
 	text-align: justify;
 	float: left;

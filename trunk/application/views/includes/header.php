@@ -40,6 +40,9 @@
 					<li>
 						<?php echo anchor('invitations', 'Invitations', array('from' => 'main'));?>
 					</li>
+          <li>
+						<?php echo anchor('suggestion', 'Suggestions', array('from' => 'main'));?>
+					</li>
 					<?php } ?>
 				</ul>
 			</div>

@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/notification_icons.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/user.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/schedules.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="<?php echo base_url();?>skin/css/invitation.css" type="text/css" media="screen" charset="utf-8" />
 
 <!-- Fonts -->
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />

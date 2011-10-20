@@ -12,10 +12,10 @@ class Invitations extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> database();
 		$this -> load -> helper('url');
-		$this -> load -> model('invitation_model');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> session -> set_flashdata('system_message', '');
+    $this -> load -> model('invitation_model');
 
 		// Initialize
 		if (!$this -> data['is_logged_in']) {
@@ -23,8 +23,7 @@ class Invitations extends CI_Controller {
 			redirect('login', 'refresh');
 		}
 		
-		$this->user_id = $this -> session -> userdata('user_id');
-		
+		$this->user_id = $this -> session -> userdata('user_id');		
 	}
 
 	function index($value = '') {
@@ -45,7 +44,7 @@ class Invitations extends CI_Controller {
 				$this -> session -> set_flashdata('message', 'Invitation Sent!');
 			}
 		}
-		
+    
 		$this -> _prep_all_data();
 
 		// Render view

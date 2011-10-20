@@ -46,3 +46,19 @@ CREATE TABLE IF NOT EXISTS `lss_schedules` (
   `radius` double NOT NULL,
   KEY `index` (`index`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_suggestion`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_suggestion` (
+  `userid` int(10) unsigned NOT NULL,
+  `suggested_userid` int(10) unsigned NOT NULL,
+  `reason` text NOT NULL,
+  `respond` text NOT NULL,
+  `expired` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
