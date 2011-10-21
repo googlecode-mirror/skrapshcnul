@@ -6,22 +6,23 @@
 
 class Schedules_Model extends CI_Model {
   
-	function _insertPick($userid, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius) {
-		$datetime_start = $date . " " . $time;
-		$datetime_end = $date_end . " " . $time_end;
+	function _insertPick($userid, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius, $repeat) {
+		$datetime_start = trim($date) . " " . trim($time);
+		$datetime_end = trim($date_end) . " " . trim($time_end);
 		$query = 
-			"INSERT INTO lss_schedules (user_id, name, start_date, end_date, center_lat, center_lng, radius) " . 
+			"INSERT INTO lss_schedules (user_id, name, start_date, end_date, repeat_params, center_lat, center_lng, radius) " . 
 			" VALUES ('$userid', '$name', " . 
-			" STR_TO_DATE('$datetime_start','%m/%d/%Y %h:%i %p'), " . 
-			" STR_TO_DATE('$datetime_end','%m/%d/%Y %h:%i %p'), " . 
+			" STR_TO_DATE('$datetime_start','%m/%d/%Y %T'), " . 
+			" STR_TO_DATE('$datetime_end','%m/%d/%Y %T'), " .
+			" '$repeat', " .
 			" '$center_lat', '$center_lng', '$radius')";
 		$success = $this -> db -> query($query);
 		return $success;
 	}
 
-	function insertPickForCurrentUser($name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius) {
+	function insertPickForCurrentUser($name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius, $repeat) {
 		$userid = $this -> session -> userdata('user_id');
-		return $this -> _insertPick($userid, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius);
+		return $this -> _insertPick($userid, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius, $repeat);
 	}
 
 	function _selectPick($userid) {
@@ -30,7 +31,7 @@ class Schedules_Model extends CI_Model {
 			" user_id, `index`, " . 
 			" DATE(start_date) as startDate, TIME(start_date) as startTime, " . 
 			" DATE(end_date) as endDate, TIME(end_date) as endTime, " . 
-			" name, center_lat, center_lng, radius, params " . 
+			" name, center_lat, center_lng, radius, repeat_params " . 
 			" FROM lss_schedules " . 
 			" WHERE user_id = '$userid';";
 		$result = $this -> db -> query($query);
