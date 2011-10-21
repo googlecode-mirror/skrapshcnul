@@ -185,10 +185,10 @@ class Settings extends CI_Controller {
 
 						// send a request for a LinkedIn access token
 						$response = $OBJ_linkedin -> retrieveTokenRequest();
-						if ($response['success'] === TRUE) {
+						if ($response['success'] === TRUE) {		
 							// store the request token
 							$_SESSION['oauth']['linkedin']['request'] = $response['linkedin'];
-
+					
 							// redirect the user to the LinkedIn authentication/authorisation page to initiate validation.
 							header('Location: ' . LINKEDIN::_URL_AUTH . $response['linkedin']['oauth_token']);
 						} else {
@@ -206,47 +206,7 @@ class Settings extends CI_Controller {
 							$_SESSION['oauth']['linkedin']['authorized'] = TRUE;
 
 							// pulling everything in LinkedIn
-							$fields = "id," . 
-                      "first-name," . 
-                      "last-name," . 
-                      "headline," . 
-                      "location," . 
-                      "industry," . 
-                      "distance," . 
-                      "relation-to-viewer," . 
-                      "current-share," . 
-                      "connections," . 
-                      "num-connections," . 
-                      "num-connections-capped," . 
-                      "summary," . 
-                      "specialties," . 
-                      "proposal-comments," . 
-                      "associations," . 
-                      "honors," . 
-                      "interests," . 
-                      "positions," . 
-                      "publications," . 
-                      "patents," . 
-                      "languages," . 
-                      "skills," . 
-                      "certifications," . 
-                      "educations," . 
-                      "three-current-positions," . 
-                      "three-past-positions," . 
-                      "num-recommenders," . 
-                      "recommendations-received," . 
-                      "phone-numbers," . 
-                      "im-accounts," . 
-                      "twitter-accounts," . 
-                      "date-of-birth," . 
-                      "main-address," . 
-                      "member-url-resources," . 
-                      "picture-url," . 
-                      "site-standard-profile-request," . 
-                      "api-public-profile-request," . 
-                      "site-public-profile-request," . 
-                      "api-standard-profile-request," . 
-                      "public-profile-url";
+							$fields = "id," . "first-name," . "last-name," . "headline," . "location," . "industry," . "distance," . "relation-to-viewer," . "current-share," . "connections," . "num-connections," . "num-connections-capped," . "summary," . "specialties," . "proposal-comments," . "associations," . "honors," . "interests," . "positions," . "publications," . "patents," . "languages," . "skills," . "certifications," . "educations," . "three-current-positions," . "three-past-positions," . "num-recommenders," . "recommendations-received," . "phone-numbers," . "im-accounts," . "twitter-accounts," . "date-of-birth," . "main-address," . "member-url-resources," . "picture-url," . "site-standard-profile-request," . "api-public-profile-request," . "site-public-profile-request," . "api-standard-profile-request," . "public-profile-url";
 
 							$info = $OBJ_linkedin -> profile('~:(' . $fields . ')');
 
