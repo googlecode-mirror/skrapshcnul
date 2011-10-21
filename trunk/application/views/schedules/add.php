@@ -1,4 +1,5 @@
 <div class="m-content">
+  
 	<div class="m-content-2-col-left">
 		<?php $this -> load -> view('schedules/includes/sidetab');?>
 	</div>
