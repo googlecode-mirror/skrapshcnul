@@ -16,55 +16,57 @@ class Schedules extends CI_Controller {
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
+			
+		// Check if user is logged in
+		if (!$this -> ion_auth -> logged_in()) {
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
 		
 		// Request Params: alt = json | , 
 		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
 		$this -> callback = (isset($_REQUEST['callback'])) ? $_REQUEST['callback'] : '';
 		
 		$this -> start_time = time();
-		
-	}
+		}
 
 	function index() {
-		// Check if user is logged in
-		if (!$this -> ion_auth -> logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		} else {
-			$this -> data['timepicker'] = true;
-			// load timepicker js
-			$this -> data['googlemap'] = true;
-			// load google map js
-			
-			
-			$this -> data['fixed_schedules']['results'] = $this -> schedules_model -> selectPickForCurrentUser() -> result();
-
-			$this -> data['main_content'] = 'schedules/index';
-			$this -> data['tpl_page_id'] = 'index';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> data['timepicker'] = true;
+		// load timepicker js
+		$this -> data['googlemap'] = true;
+		// load google map js
+		
+		
+		$schedule = $this -> schedules_model -> selectPickForCurrentUser() -> result();
+		
+		foreach ($schedule as $key => $item) {
+			if (!empty($item->repeat_params)) {
+				$repeat_arr = explode(',', $item->repeat_params);
+				$repeat_params['repeat_frequency'] = $repeat_arr[0];
+				$repeat_params['repeat_day'] = explode('|', $repeat_arr[1]);
+				$schedule[$key]->repeat_params = ($repeat_params);
+			}
 		}
+		$this -> data['fixed_schedules']['results'] = $schedule;
+
+		$this -> data['main_content'] = 'schedules/index';
+		$this -> data['tpl_page_id'] = 'index';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
 	function add() {
-		// Check if user is logged in
-		if (!$this -> ion_auth -> logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		} else {
-			
-			if ($this->input->post()) {
-				$this -> insert();
-			}
-			
-			$this -> data['timepicker'] = true;
-			// load timepicker js
-			$this -> data['googlemap'] = true;
-			// load google map js
-
-			$this -> data['main_content'] = 'schedules/add';
-			$this -> data['tpl_page_id'] = 'add';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
+		if ($this->input->post()) {
+			$this -> insert();
 		}
+		
+		$this -> data['timepicker'] = true;
+		// load timepicker js
+		$this -> data['googlemap'] = true;
+		// load google map js
+
+		$this -> data['main_content'] = 'schedules/add';
+		$this -> data['tpl_page_id'] = 'add';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
 	function edit() {
@@ -93,6 +95,21 @@ class Schedules extends CI_Controller {
 	}
 
 	function insert() {
+		
+		if($this -> input -> post("schedule_repeat")) {
+			$repeat['repeat_frequency'] = $this -> input -> post("repeat_frequency");
+			if (trim($this -> input -> post("SU"))) $repeat_day[] = "SU";
+			if (trim($this -> input -> post("MO"))) $repeat_day[] = "MO";
+			if (trim($this -> input -> post("TU"))) $repeat_day[] = "TU";
+			if (trim($this -> input -> post("WE"))) $repeat_day[] = "WE";
+			if (trim($this -> input -> post("TH"))) $repeat_day[] = "TH";
+			if (trim($this -> input -> post("FR"))) $repeat_day[] = "FR";
+			if (trim($this -> input -> post("SA"))) $repeat_day[] = "SA";
+			$repeat['repeat_day'] = implode('|', $repeat_day);
+		}
+		
+		$this->repeat = implode(',', $repeat);
+		
 		$result = $this -> schedules_model -> insertPickForCurrentUser(
 			$this -> input -> post("name"), 
 			$this -> input -> post("start_date"), 
@@ -101,7 +118,8 @@ class Schedules extends CI_Controller {
 			$this -> input -> post("end_time"), 
 			$this -> input -> post("center_lat"), 
 			$this -> input -> post("center_lng"), 
-			$this -> input -> post("radius"));
+			$this -> input -> post("radius"),
+			$this->repeat);
 		redirect('schedules', 'refresh');
 	}
 

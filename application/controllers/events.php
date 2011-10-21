@@ -16,41 +16,39 @@ class Events extends CI_Controller {
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
+		
+		if (!$this -> ion_auth -> logged_in()) {
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
 	}
 
 	function index() {
-		// Check if user is logged in
-		if (!$this -> ion_auth -> logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		} else {
-			$this -> data['timepicker'] = true;
-			// load timepicker js
-			$this -> data['googlemap'] = true;
-			// load google map js
-			
-			
-			$this -> data['tpl_page_id'] = 'index';
-			$this -> data['main_content'] = 'events/index';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
-		}
+		$this -> data['timepicker'] = true;
+		// load timepicker js
+		$this -> data['googlemap'] = true;
+		// load google map js
+		
+		$this -> data['events']['upcoming'] = array();
+		$this -> data['events']['past'] = array();
+		
+		
+		$this -> data['tpl_page_id'] = 'index';
+		$this -> data['main_content'] = 'events/index';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
 	function suggestions() {
-		// Check if user is logged in
-		if (!$this -> ion_auth -> logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		} else {
-			$this -> data['timepicker'] = true;
-			// load timepicker js
-			$this -> data['googlemap'] = true;
-			// load google map js
-			
-			$this -> data['tpl_page_id'] = 'suggestions';
-			$this -> data['main_content'] = 'events/suggestions';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
-		}
+		$this -> data['timepicker'] = true;
+		// load timepicker js
+		$this -> data['googlemap'] = true;
+		// load google map js
+		
+		$this -> data['events']['suggestions'] = array();
+		
+		$this -> data['tpl_page_id'] = 'suggestions';
+		$this -> data['main_content'] = 'events/suggestions';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
 	function insert() {
