@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `lss_schedules` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 
+
 -- --------------------------------------------------------
 
 --
