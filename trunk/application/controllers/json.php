@@ -92,7 +92,11 @@ class Json extends CI_Controller {
 	}
 
 	function getTotalUsers() {
-		echo json_encode($this -> ion_auth -> getTotalUsers() + 11);
+		echo json_encode($this -> ion_auth -> getTotalUsers() + 31);
+	}
+	
+	function getTotalLunches() {
+		echo json_encode(6);
 	}
 	
 	function schedules() {

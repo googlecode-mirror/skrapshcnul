@@ -18,7 +18,7 @@
 				<div class="title">
 					<span style="line-height: 40px;">Successful lunches: </span>
 				</div>
-				<div id="user-count" class="data counter-digit">
+				<div id="lunches-count" class="data counter-digit">
 					00
 				</div>
 			</div>

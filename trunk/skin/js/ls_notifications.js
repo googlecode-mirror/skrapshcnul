@@ -89,3 +89,7 @@ function refresh_notifications() {
 jQuery.getJSON("/json/getTotalUsers", function(data) {
 	jQuery('#user-count').html(data);
 });
+jQuery.getJSON("/json/getTotalLunches", function(data) {
+	jQuery('#lunches-count').html(data);
+});
+

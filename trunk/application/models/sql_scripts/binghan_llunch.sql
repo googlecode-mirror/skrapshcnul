@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 17, 2011 at 04:09 PM
+-- Generation Time: Oct 23, 2011 at 03:25 PM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.4
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `lss_meta` (
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `lss_users` (
   `last_login` int(11) unsigned DEFAULT NULL,
   `active` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_groups` (
   `user_id` mediumint(8) NOT NULL,
   `group_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
@@ -157,13 +157,12 @@ CREATE TABLE IF NOT EXISTS `lss_users_groups` (
 --
 
 CREATE TABLE IF NOT EXISTS `lss_users_invitations` (
-  `invitation_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `invitation_left` int(11) NOT NULL,
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
-  PRIMARY KEY (`invitation_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -172,15 +171,14 @@ CREATE TABLE IF NOT EXISTS `lss_users_invitations` (
 --
 
 CREATE TABLE IF NOT EXISTS `lss_users_invitations_log` (
-  `invitation_log_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `invitee_email` varchar(100) NOT NULL,
   `invitation_code` varchar(32) NOT NULL,
-  `salt` int(11) NOT NULL,
-  `created_on` int(11) NOT NULL,
-  `joined_on` int(11) DEFAULT NULL,
-  PRIMARY KEY (`invitation_log_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `salt` varchar(40) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `joined_on` datetime DEFAULT NULL,
+  PRIMARY KEY (`invitee_email`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -195,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 -- --------------------------------------------------------
 
@@ -212,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_preferences` (
   `updated_on` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
