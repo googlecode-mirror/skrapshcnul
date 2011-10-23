@@ -13,9 +13,9 @@ jQuery(document).ready( function() {
 			// Enable caching
 			jQuery.ajaxSetup({
 				"error":function(XMLHttpRequest,textStatus, errorThrown) {   
-			      alert(textStatus);
-			      alert(errorThrown);
-			      alert(XMLHttpRequest.responseText);}
+			      console.log(textStatus);
+			      console.log(errorThrown);
+			      console.log(XMLHttpRequest.responseText);}
 			});
 			jQuery.getJSON('/invitations/invite', 
 				{ alt: "json", invitee_email: invitee_email, call: 'sendInvitation'}, 
