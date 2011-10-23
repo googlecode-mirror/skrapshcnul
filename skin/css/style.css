@@ -719,3 +719,16 @@ input[type=submit]:hover, .button-set a:hover {
 td {
 	border: 1px solid #F8F8F8;
 }
+
+.input-tooltip {
+	position: absolute;
+	display: none;
+	margin-top: -8px;
+	color: #999999;
+}
+.ajax-highlight { 
+	margin: 10px auto;
+	padding: 0 .7em; 
+	width: 300px;
+	display: none;
+}

@@ -4,9 +4,11 @@
 		<p>
 			Please enter the users information below.
 		</p>
-		<div id="infoMessage">
+		<?php if (isset($message)) { ?>
+		<div id="infoMessage" class="ui-state-highlight ui-corner-all" style="padding:0 10px; margin: 5px 0;">
 			<?php echo $message;?>
 		</div>
+		<?php } ?>
 		<?php echo form_open("auth/signup");?>
 		<fieldset>
 			<legend>
@@ -42,6 +44,7 @@
 			</p>
 			<p>
 				<?php echo form_submit('submit', 'Create User');?>
+				<?php echo form_input($invitation_key);?>
 			</p>
 			<?php echo form_close();?>
 		</fieldset>

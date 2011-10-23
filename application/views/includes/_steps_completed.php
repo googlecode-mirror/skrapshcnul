@@ -5,4 +5,4 @@
 	<div class="steps-completed-item"><?php echo anchor('events', 'Step 4: Accept Event Invitation', array('from' => 'main')); ?></div>
 	<div class="clearfix"></div>
 </div>
-<div style="text-align: center; padding-bottom: 10px;font-size: 90%;color: #AAAAAA;">Complete this 4 simple steps to get listed for lunches! </div>
+<div style="text-align: center; padding-bottom: 10px;font-size: 90%;color: #AAAAAA;">Complete these 4 simple steps to get listed for lunches! </div>

@@ -20,7 +20,7 @@
 					<td><?php echo $invite['invitee_email']; ?></td>
 					<td><?php echo $invite['invitation_code']; ?></td>
 					<td><?php echo ($invite['joined_on']) ? "Joined" : 'Invited'; ?></td>
-					<td>Resend</td>
+					<td><a href="" id="resendInvitation" onclick="resendInvitation(<?php echo $invite['invitee_email']; ?>)">Resend</a></td>
 				</tr>
 			</tbody>
 			<?php } ?>
@@ -30,12 +30,18 @@
 			</tr>
 		<?php } ?>
 	</table>
+	
+	<div class="ui-state-highlight ui-corner-all ajax-highlight"> 
+		<p id="invitee_email_results">
+		</p>
+	</div>
+	
 	<div style="text-align: center">
 		<p>
 			You have invited <?php echo count($invite_logs);?> friends and <?php echo count($invite_logs_number_signup);?> friends signed up.
 		</p>
 		<p>
-			Invite more friends to join Lunchsparks!
+			<?php echo anchor('/invitations/all', 'Invite more friends to join Lunchsparks!'); ?>
 		</p>
 	</div>
 	<?php } else { ?>

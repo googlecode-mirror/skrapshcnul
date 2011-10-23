@@ -49,7 +49,9 @@ class Preferences_Model extends CI_Model {
 			{
 			    if(!empty($row['data'])) {
 			    	$row['data'] = explode(',', $row['data']);
-			    } 
+			    } else {
+			    	$row['data'] = array();
+			    }
 			    $result[$row['preferences_ref_id']] = $row;
 			}
 		   

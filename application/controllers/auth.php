@@ -16,7 +16,8 @@ class Auth extends Controller {
 		$this->load->helper('url');
 		$this->load->database();
 		// Load Ion Auth
-		$this->load->library('ion_auth');
+		$this -> load -> library('ion_auth');
+		$this -> load -> model('invitation_model');
 		// Load Twitter Auth
 		$this->load->library('tweet');
 		$this->tweet->enable_debug(TRUE);
@@ -143,22 +144,22 @@ class Auth extends Controller {
 		$this->data['title'] = "Signup";
 		
 		if (isset($_REQUEST['invitation_key'])) {
-			$this->data['invitation_key'] = $_REQUEST['invitation_key'];
+			$this->data['invitation_key_val'] = $_REQUEST['invitation_key'];
 		} elseif (($this->input->post('invitation_key'))) {
-			$this->data['invitation_key'] = $this->input->post('invitation_key');
+			$this->data['invitation_key_val'] = $this->input->post('invitation_key');
 		} else {
-			$this->data['invitation_key'] = '';
+			$this->data['invitation_key_val'] = '';
 		}
 		
-		if (!($this->data['email'] = $this->ion_auth->check_invitation_code($this->data['invitation_key']))) {
+		if (!($this->data['email_val'] = $this->ion_auth->check_invitation_code($this->data['invitation_key_val']))) {
 		//if (FALSE) {
-			
 			// Render View
 			//$this->load->view('auth/create_user', $this->data);
 			$this->data['main_content'] = '/auth/signup_invalid_invitation_code';
 			$this -> load -> view('includes/tmpl_layout', $this->data);
-		} else {
 			
+		} else {
+						
 			//validate form input
 			$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 			$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
@@ -181,7 +182,11 @@ class Auth extends Controller {
 			}
 	
 			if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
-			{ 
+			{
+				if ($this->data['invitation_key_val']) {
+					$this -> invitation_model-> updateJoinedOn($this->data['email_val']);
+				}
+				 
 				//check to see if we are creating the user
 				$message = "User successfully created.";
 				$this->session->set_flashdata('message', $message);
@@ -199,7 +204,7 @@ class Auth extends Controller {
 				$this->data['invitation_key'] = array(
 					'name' => 'invitation_key',
 					'id' => 'invitation_key',
-					'value' => $this->data['invitation_key'],
+					'value' => $this->data['invitation_key_val'],
 					'type' => 'hidden',
 				);
 	
@@ -220,7 +225,8 @@ class Auth extends Controller {
 				$this->data['email'] = array('name' => 'email',
 					'id' => 'email',
 					'type' => 'text',
-					'value' => $this->form_validation->set_value('email'),
+					//'value' => $this->form_validation->set_value('email'),
+					'value' => $this->data['email_val'],
 	  				'placeholder' => 'Email',
 	  				'required' => 'required',
 	  				'readonly' => 'readonly',

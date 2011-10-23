@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:ng="http://angularjs.org">
+<html>
 	<head http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<?php $this -> load -> view('includes/scripts');?>
 	</head>
@@ -18,4 +18,7 @@
 		</div><div class="clearfix"></div>
 		<?php $this -> load -> view('includes/footer');?><div class="clearfix"></div>
 	</body>
+	<script>
+		mpq.name_tag('<?php echo $this->session->userdata['email']?>');
+	</script>
 </html>
