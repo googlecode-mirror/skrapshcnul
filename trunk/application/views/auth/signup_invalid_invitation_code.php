@@ -3,7 +3,7 @@
 		<div class="forms">
 			<div id="login_form">
 				<h1>Signup</h1>
-				<?php if ($invitation_key) {
+				<?php if (isset($invitation_key_val) && !empty($invitation_key_val)) {
 				?>
 				<div class="ui-widget">
 					<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">

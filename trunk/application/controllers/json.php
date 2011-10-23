@@ -16,6 +16,7 @@ class Json extends CI_Controller {
 		$this -> load -> database();
 		$this -> load -> helper('url');
 		$this -> load -> model('schedules_model');
+		$this -> load -> model('invitation_model');
 		$this -> load -> helper('logger');
 		
 		// Set Global Variables
@@ -100,6 +101,7 @@ class Json extends CI_Controller {
 		$call = $_REQUEST['call'];
 		
 	}
+	
 
 }
 ?>

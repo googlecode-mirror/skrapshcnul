@@ -13,14 +13,15 @@
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400' rel='stylesheet' type='text/css'>
 <!-- Scripts -->
-<?php /*
-	 ?><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-	 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-	 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.0.22/webfont.js"></script><?php */
-?>
+<?php /* ?>
+<script src="<?php echo base_url();?>skin/js/jquery-1.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.0.22/webfont.js"></script><?php 
+*/ ?>
 
 <!-- offline -->
-<script src="<?php echo base_url();?>skin/js/jquery-1.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="text/javascript">$.noConflict();</script>
 <script src="<?php echo base_url();?>skin/js/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
@@ -29,15 +30,16 @@
 <script src="<?php echo base_url();?>skin/js/ls_notifications.js"></script>
 <script src="<?php echo base_url();?>skin/js/ls_users.js"></script>
 <script src="<?php echo base_url();?>skin/js/ls_schedules.js"></script>
+<script src="<?php echo base_url();?>skin/js/ls_invitations.js"></script>
 <script src="<?php echo base_url();?>skin/js/lunchsparks.js"></script>
 
 <?php if (isset($timepicker) && $timepicker == true) { ?>
-  <script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
 <?php } ?>
   
 <?php if (isset($googlemap) && $googlemap == true) { ?>
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>skin/js/googlemap/ls_googlemap.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
+<script type="text/javascript" src="<?php echo base_url();?>skin/js/googlemap/ls_googlemap.js"></script>
 <?php } ?>  
 
 
@@ -58,3 +60,6 @@
   })();
 
 </script>
+<!-- start Mixpanel -->
+<script type="text/javascript">var mpq=[];mpq.push(["init","5f033e0ea3da3e277ef6cdd07d582b36"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script><!-- end Mixpanel -->

@@ -81,33 +81,54 @@ class Invitation_Model extends CI_Model {
 	function insertInvitationLog($userid, $invitee_email) {
 		// Generate Invitation Code
 		$salt = $this -> salt();
-		$invitation_code = $this -> hash_invitation_code($invitee_email, $salt);
+		$invitation_code = $this -> _hash_invitation_code($invitee_email, $salt);
 		
 		$query = 
-			"INSERT INTO lss_users_invitations_log ".
+			" INSERT INTO lss_users_invitations_log ".
 			" (user_id, invitee_email, invitation_code, salt, created_on) " . 
-			" VALUES ('$userid', '$invitee_email', '$invitation_code', '$salt', NOW() )";
+			" VALUES ('$userid', '$invitee_email', '$invitation_code', '$salt', NOW() ) " .
+			" ON DUPLICATE KEY UPDATE invitee_email = '$invitee_email' ";
 		$mysql_result = $this -> db -> query($query);
 		
-		// Update Invitation left
-		$query = 
-			" SELECT invitation_left " . 
-			" FROM lss_users_invitations " . 
-			" WHERE user_id = '$userid';";
-		$mysql_result= $this -> db -> query($query);
-		$invitation_left = ($mysql_result->row() -> invitation_left) - 1;
-		
-		$query = 
-			" UPDATE lss_users_invitations " . 
-			" SET invitation_left = '$invitation_left' " . 
-			" , updated_on = NOW() " . 
-			" WHERE `user_id` = '$userid';";
-		$mysql_result = $this -> db -> query($query);
+		if ($this->db->affected_rows()) {
+			// Update Invitation left
+			$query = 
+				" INSERT INTO lss_users_invitations " . 
+				" ( user_id, updated_on ) " .
+				" VALUES ('$userid', NOW() )" . 
+				" ON DUPLICATE KEY UPDATE invitation_left = invitation_left - 1 ";
+			$mysql_result = $this -> db -> query($query);
+		}
 		
 		return $this->db->affected_rows();
 	}
+	
+	function selectInvitationLogForEmail($invitee_email) {
+		$query = 
+			" SELECT `user_id`, `email`, `invitee_email`, `invitation_code`, luil.`created_on`, `joined_on` " . 
+			" FROM `lss_users_invitations_log` AS luil " . 
+			" LEFT JOIN lss_users ON user_id = id " .
+			" WHERE `invitee_email` = '$invitee_email' ".
+			" AND `joined_on` IS NULL";
+		$result = $this -> db -> query($query);
+		return $result->row();
+	}
+	
+	function updateJoinedOn($invitee_email = '') {
+		if (empty($invitee_email)) {
+			return FALSE;
+		} else {
+			$query = 
+				" UPDATE  `lss_users_invitations_log` " . 
+				" SET  `joined_on` = NOW( ) " . 
+				" WHERE `invitee_email` =  '$invitee_email';";
+			$mysql_result = $this -> db -> query($query);
+			return $this->db->affected_rows();
+		}
+	}
+	
 
-	function hash_invitation_code($invitee_email, $salt=false) {
+	function _hash_invitation_code($invitee_email, $salt=false) {
 		if (empty($invitee_email)) {
 	    	return FALSE;
 	    }
