@@ -79,25 +79,32 @@ class User extends CI_Controller {
 	}
 
 	function _prepare_profile_data() {
-		// Linked In 
-		$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
-		$linkedin_data = new SimpleXMLElement($external_data['linkedin'] -> data);
-		
-		// Setup Profile Picture
-		if ($linkedin_data->{'picture-url'}) {
-			$this->data['profile']['profile_img'] = ($linkedin_data->{'picture-url'}) ;
-		}
-		if(($linkedin_data->{'first-name'})) {
-			$this->data['profile']['first_name'] = ($linkedin_data->{'first-name'});
-		}
-		if(($linkedin_data->{'last-name'})) {
-			$this->data['profile']['last_name'] = ($linkedin_data->{'last-name'});
-		}
-		if(($linkedin_data->{'headline'})) {
-			$this->data['profile']['headline'] = ($linkedin_data->{'headline'});
-		}
-		if(($linkedin_data->{'location'})) {
-			$this->data['profile']['location'] = ($linkedin_data->{'location'});
+		try {
+			// Linked In 
+			$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
+			if (isset($external_data['linkedin'] -> data)) {
+				$linkedin_data = new SimpleXMLElement($external_data['linkedin'] -> data);
+				
+				// Setup Profile Picture
+				if ($linkedin_data->{'picture-url'}) {
+					$this->data['profile']['profile_img'] = ($linkedin_data->{'picture-url'}) ;
+				}
+				if(($linkedin_data->{'first-name'})) {
+					$this->data['profile']['first_name'] = ($linkedin_data->{'first-name'});
+				}
+				if(($linkedin_data->{'last-name'})) {
+					$this->data['profile']['last_name'] = ($linkedin_data->{'last-name'});
+				}
+				if(($linkedin_data->{'headline'})) {
+					$this->data['profile']['headline'] = ($linkedin_data->{'headline'});
+				}
+				if(($linkedin_data->{'location'})) {
+					$this->data['profile']['location'] = ($linkedin_data->{'location'});
+				}
+			}
+			
+		} catch (exception $e) {
+			
 		}
 	}
 
@@ -110,7 +117,7 @@ class User extends CI_Controller {
 		// Setup Profile Picture
 		if (!isset($this->data['profile']['profile_img'])) {
 			$this->data['profile']['profile_img'] = base_url().'skin/images/100/icon_no_photo_no_border_offset_100x100.png';
-			$this->data['profile']['profile_img'] = base_url() . "/skin/images/180/silhouette_male.jpg";
+			$this->data['profile']['profile_img'] = base_url() . "/skin/images/160/silhouette_male.jpg";
 		}
 		// Setup first name last name
 		if(!isset($this->data['profile']['first_name'])) {

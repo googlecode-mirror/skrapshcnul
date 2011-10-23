@@ -164,10 +164,8 @@ class Ion_auth
 			$this->set_error('password_change_unsuccessful');
 			return FALSE;
 		}
-
+		
 		$new_password = $this->ci->ion_auth_model->forgotten_password_complete($code, $profile->salt);
-		die($new_password);
-
 		if ($new_password)
 		{
 			$data = array(
@@ -183,7 +181,7 @@ class Ion_auth
 			$this->ci->email->to($profile->email);
 			$this->ci->email->subject($this->ci->config->item('site_title', 'ion_auth') . ' - New Password');
 			$this->ci->email->message($message);
-			die();
+			
 			if ($this->ci->email->send())
 			{
 				$this->set_message('password_change_successful');

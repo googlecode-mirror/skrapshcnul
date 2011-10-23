@@ -53,7 +53,7 @@
 		</div>
 	</div>
 	
-	<pre style="display: block;">{{preferences}}</pre>
+	<pre style="display: none;">{{preferences}}</pre>
 	
 	<script>
 	
