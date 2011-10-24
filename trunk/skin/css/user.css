@@ -238,7 +238,12 @@ a.a-s-icon-xlhdpi {
 	text-align: center;
 	padding: 15px 0;
 	border-bottom: 1px solid #C1CCD6;
-	background: #FCFCFC url(../images/1/header_gradient.png) repeat-x left top;
+	/*background: #FCFCFC url(../images/1/header_gradient.png) repeat-x left top;*/
+	background: #FCFCFC url(../images/1/bg-grad-green.png) repeat-x left top;
+	
+}
+.steps-completed-item a {
+	color: #333333 !important;
 }
 .steps-completed-item.done {
 	background: #DDDDDD !important;
@@ -248,8 +253,10 @@ a.a-s-icon-xlhdpi {
 	text-decoration: line-through;
 }
 .steps-completed-item:hover {
-	background: #F0F0F0;
-	border: 1px solid #CCCCCC;
+	/*background: #F0F0F0;*/
+	background: #8db943;
+	border: 1px solid #333333;
+	box-shadow: 1px 1px 1px #AAAAAA;
 }
 .steps-completed-item:active {
 	margin-top: 1px;

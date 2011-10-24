@@ -25,20 +25,21 @@
 						<?php echo anchor('user/messages', 'Messages', array('from' => 'main'));?>
 					</li>
 					*/ ?>
+					<li><div style="width: 20px;">&nbsp;</div></li>
 					<li>
-						<?php echo anchor('settings/sync', 'Synchronize', array('from' => 'main')); ?>
+						<?php echo anchor('settings/sync', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-synchronize', 'title'=>'Synchronize')); ?>
 					</li>
 					<li>
-						<?php echo anchor('user/preferences', 'Preferences', array('from' => 'main')); ?>
+						<?php echo anchor('user/preferences', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-preferences', 'title'=>'Preferences')); ?>
 					</li>
 					<li>
-						<?php echo anchor('schedules', 'Schedule', array('from' => 'main')); ?>
+						<?php echo anchor('schedules', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-schedules', 'title'=>'Schedule')); ?>
 					</li>
 					<li>
-						<?php echo anchor('events', 'Events', array('from' => 'main')); ?>
+						<?php echo anchor('events', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-events', 'title'=>'Events')); ?>
 					</li>
 					<li>
-						<?php echo anchor('invitations', 'Invitations', array('from' => 'main'));?>
+						<?php echo anchor('invitations', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-invitations', 'title'=>'Invitations'));?>
 					</li>
           			<?php /* <li>
 						<?php echo anchor('suggestion', 'Suggestions', array('from' => 'main'));?>
