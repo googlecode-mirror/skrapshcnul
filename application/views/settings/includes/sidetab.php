@@ -1,4 +1,4 @@
-<div id="account-setting-sidebar">
+<div id="account-setting-sidebar" class="main-content-sidebar">
 	<ul>
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'overview') ? 'active' : '';?>">
 			<?php echo anchor('settings/overview', 'Account Overview', 'id="a-s-overview" class="a-s-icon-xlhdpi"'); ?>

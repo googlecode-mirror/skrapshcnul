@@ -1,4 +1,4 @@
-<div id="account-setting-sidebar">
+<div id="account-setting-sidebar" class="main-content-sidebar">
 	<ul>
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'profile') ? 'active' : '';?>">
 			<?php echo anchor('user/profile', 'Profile Overview', 'id="a-s-profile" class="a-s-icon-xlhdpi"'); ?>

@@ -1,55 +1,55 @@
 /* 16px */
 #a-s-overview {
-	background-position-y: 0px;
+	background-position: 0px 0px;
 }
 #a-s-sync {
-	background-position-y: -16px;
+	background-position: 0px -16px;
 }
 #a-s-security {
-	background-position-y: -32px;
+	background-position: 0px -32px;
 }
 #a-s-privacy {
-	background-position-y: -48px;
+	background-position: 0px -48px;
 }
 #a-s-language {
-	background-position-y: -64px;
+	background-position: 0px -64px;
 }
 #a-s-mobile {
-	background-position-y: -80px;
+	background-position: 0px -80px;
 }
 #a-s-payment {
-	background-position-y: -96px;
+	background-position: 0px -96px;
 }
 #s-s-overview {
-	background-position-y: -112px;
+	background-position: 0px -112px;
 }
 #s-s-add {
-	background-position-y: -128px;
+	background-position: 0px -128px;
 }
 #a-s-profile {
-	background-position-y: -144px;
+	background-position: 0px -144px;
 }
 #a-s-preferences {
-	background-position-y: -160px;
+	background-position: 0px -160px;
 }
 #a-s-events {
-	background-position-y: -176px;
+	background-position: 0px -176px;
 }
 #a-s-suggestions {
-	background-position-y: -192px;
+	background-position: 0px -192px;
 }
 #a-s-invitations {
-	background-position-y: -208px;
+	background-position: 0px -208px;
 }
 #a-s-invite {
-	background-position-y: -208px;
+	background-position: 0px -208px;
 }
 #a-s-status {
-	background-position-y: -208px;
+	background-position: 0px -208px;
 }
 
 .ls-h-m-icon {
-	background: url(../images/32/header_menu_icon.png) no-repeat !important;
+	background: url(../images/32/header_menu_icon.png) no-repeat;
 	width: 30px;
 	height: 30px;
 	overflow: hidden;
@@ -58,20 +58,21 @@
 	margin: 2px 5px;
 }
 .ls-h-m-icon:hover {
+	background-color: transparent !important;
 	background-position-x: -30px !important;
 }
 #ls-h-m-synchronize {
-	background-position-y: 0px !important;
+	background-position: 0px 0px;
 }
 #ls-h-m-preferences {
-	background-position-y: -30px !important;
+	background-position: 0px -30px;
 }
 #ls-h-m-schedules {
-	background-position-y: -60px !important;
+	background-position: 0px -60px;
 }
 #ls-h-m-events {
-	background-position-y: -90px !important;
+	background-position: 0px -90px;
 }
 #ls-h-m-invitations {
-	background-position-y: -120px !important;
+	background-position: 0px -120px;
 }

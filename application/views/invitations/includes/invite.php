@@ -35,9 +35,9 @@
 			?>
 			<div style="display: inline-block;">
 				<input type="email" placeholder="Enter your friend's email here." name="invitee_email" id="invitee_email" class="withToolTip" style="display: inline-block;" required="required">
-				<span id="invitee_email_tooltip" class="input-tooltip">
+				<div id="invitee_email_tooltip" class="input-tooltip">
 					Enter your friend's email here.
-				</span>
+				</div>
 			</div>		
 			<button type="submit" value="Invite" name="invitee_email_btn" id="invitee_email_btn" class="button" style="padding:5px 25px;font-size: 110%; display: inline-block;">Invite</button>
 			<?php /* <input onclick="invitee_email_submit();" type="submit" value="Invite" name="invitee_email_btn" id="invitee_email_btn" class="button" style="padding:5px 25px;font-size: 110%; display: inline-block;">*/ ?>
