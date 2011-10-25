@@ -1,4 +1,4 @@
-<div id="account-setting-sidebar">
+<div id="account-setting-sidebar" class="main-content-sidebar">
 	<ul>
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'index') ? 'active' : '';?>">
 			<?php echo anchor('schedules', 'Schedule Overview', 'id="s-s-overview" class="a-s-icon-xlhdpi"'); ?>

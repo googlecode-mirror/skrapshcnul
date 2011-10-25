@@ -23,6 +23,7 @@
 	<div class="m-content-2-col-left">
 		<?php $this -> load -> view("user/profile/my_ratings.php");?>
 		<?php $this -> load -> view("user/profile/people_had_lunch_with.php");?>
+		<div class="clearfix">&nbsp;<br /></div>
 	</div>
 	<div id="user-profile" class="m-content-2-col-right">
 		<div>

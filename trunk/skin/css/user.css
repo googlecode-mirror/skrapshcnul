@@ -51,6 +51,7 @@
 }
 .m-content-2-col-left {
 	width: 200px;
+	height: 100%;
 	padding: 0;
 	position: absolute;
 	word-wrap: break-word;
@@ -60,6 +61,7 @@
 	border-left: 1px solid #DDDDDD;
 	margin-left: 201px;
 	width: 740px;
+	min-height: 300px;
 }
 .widget-title {
 	border-bottom: 1px solid #666666;
@@ -77,8 +79,8 @@
 	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .07);
 }
 .connections-profile-img {
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	overflow: hidden;
 	float: left;
 }
@@ -230,20 +232,46 @@ a.a-s-icon-xlhdpi {
 	height: 50px;
 	width: 962px;
 	overflow: hidden;
+	margin-top: 5px;
 }
 .steps-completed-item {
-	float: left;
-	width: 240px;
-	display: inline-block;
+	/*float: left;*/
+	display: inline;
 	text-align: center;
-	padding: 15px 0;
-	border-bottom: 1px solid #C1CCD6;
-	/*background: #FCFCFC url(../images/1/header_gradient.png) repeat-x left top;*/
-	background: #FCFCFC url(../images/1/bg-grad-green.png) repeat-x left top;
-	
+}
+.steps-completed-item .arrow{
+	margin: -2px -20px 0 0;
+	width: 23px;
+height: 48px;
+	z-index: 100;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: url(../images/24/btn_span_bg_arrow_right_light_grey.png) no-repeat right top;
+}
+.steps-completed-item.first-item a {
+	border-left: 1px solid #C1CCD6;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
 }
 .steps-completed-item a {
+	/*width: 238px;*/
 	color: #333333 !important;
+	padding: 0 32px 0 32px;
+	margin-right: -4px;
+	line-height: 46px;
+	height: 46px;
+	display: inline-block;
+	position: relative;
+	border-top: 1px solid #C1CCD6;
+	border-bottom: 1px solid #C1CCD6;
+	/*background: #FCFCFC url(../images/1/header_gradient.png) repeat-x left top;*/
+	background: #FCFCFC url(../images/1/btn-bg-light-grey.png) repeat-x right bottom;
+}
+.steps-completed-item a:hover {
+	/*background: #F0F0F0;*/
+	background: #ECECEC;
+	box-shadow: 1px 1px 1px #AAAAAA;
 }
 .steps-completed-item.done {
 	background: #DDDDDD !important;
@@ -251,12 +279,6 @@ a.a-s-icon-xlhdpi {
 .steps-completed-item.done a {
 	color: #AAAAAA !important;
 	text-decoration: line-through;
-}
-.steps-completed-item:hover {
-	/*background: #F0F0F0;*/
-	background: #8db943;
-	border: 1px solid #333333;
-	box-shadow: 1px 1px 1px #AAAAAA;
 }
 .steps-completed-item:active {
 	margin-top: 1px;

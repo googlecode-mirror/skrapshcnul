@@ -1,4 +1,4 @@
-<div id="account-setting-sidebar">
+<div id="account-setting-sidebar" class="main-content-sidebar">
 	<ul>
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'all') ? 'active' : '';?>">
 			<?php echo anchor('invitations', 'Overview', 'id="a-s-invitations" class="a-s-icon-xlhdpi"'); ?>

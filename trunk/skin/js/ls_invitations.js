@@ -1,10 +1,10 @@
 jQuery(document).ready( function() {
 	
 	jQuery('.withToolTip').focusin(function(){
-		jQuery(this).next('span').show();
+		jQuery(this).next().show();
 	});
 	jQuery('.withToolTip').focusout(function(){
-		jQuery(this).next('span').fadeOut('slow');
+		jQuery(this).next().fadeOut('slow');
 	});
 	
 	jQuery('#invitee_email_frm').submit(function() {
