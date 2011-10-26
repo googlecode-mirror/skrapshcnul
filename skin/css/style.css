@@ -418,6 +418,28 @@ footer ul li {
 .widget-box {
 	margin: 0 0 10px 0;
 }
+.widget-box-title-bar {
+	border: 1px solid #DDDDDD;
+	border-bottom-color: #6B808D;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	background: url(../images/1/btn-bg-light-grey.png) repeat bottom;
+}
+.widget-box-container {
+	padding: 10px 0;
+	background: #F8F8F8;
+	border: 1px solid #EFEFEF;
+	border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+}
+.widget-box h4 {
+	margin: 5px;
+}
+.widget-title {
+	color: #555555;
+}
 /* Menu Toggle Visibility Items*/
 .overlay-frame {
 	-moz-box-shadow: #333 0 1px 3px 0px;

@@ -85,6 +85,8 @@ class User extends CI_Controller {
 			if (isset($external_data['linkedin'] -> data)) {
 				$linkedin_data = new SimpleXMLElement($external_data['linkedin'] -> data);
 				
+				//var_dump($linkedin_data);
+				
 				// Setup Profile Picture
 				if ($linkedin_data->{'picture-url'}) {
 					$this->data['profile']['profile_img'] = ($linkedin_data->{'picture-url'}) ;
@@ -101,6 +103,24 @@ class User extends CI_Controller {
 				if(($linkedin_data->{'location'})) {
 					$this->data['profile']['location'] = ($linkedin_data->{'location'});
 				}
+				if(($linkedin_data->{'positions'})) {
+					foreach($linkedin_data->{'positions'}->position as $position) {
+						$this->data['profile']['positions'][] = $position;
+					}
+				}
+				if(($linkedin_data->{'public-profile-url'})) {
+					$this->data['profile']['social_network']['linkedin_url'] = $linkedin_data->{'public-profile-url'};
+				}
+				if(($linkedin_data->{'educations'})) {
+					foreach($linkedin_data->{'educations'}->education as $education) {
+						$this->data['profile']['educations'][] = $education;
+					}
+				}
+				if(($linkedin_data->{'interests'})) {
+					$this->data['profile']['interests'] = $linkedin_data->{'interests'};
+				}
+				
+				//var_dump($this->data['profile']);
 			}
 			
 		} catch (exception $e) {

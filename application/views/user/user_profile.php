@@ -1,3 +1,9 @@
+
+<?php if ($is_logged_in) { ?>
+<?php $this -> load -> view('includes/_steps_completed');?>
+<?php } ?>
+
+
 <div class="m-content">
 	<div id="announcements" class="shadow">
 		<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
@@ -9,32 +15,37 @@
 		</div>
 		<?php }?>
 	</div>
-	<div id="ls_cover">
-		<div class="cover_background">
-			<img src="<?php echo $profile['cover_background']; ?>" />
+	
+	<div id="user-profile" class="m-content-2-col-left-xl dashboard">
+		
+		<div id="ls_cover">
+			<div class="cover_background">
+				<img src="<?php echo $profile['cover_background']; ?>" />
+			</div>
 		</div>
-	</div>
-	<div id="ls_profile_card_container">
-		<?php $this -> load -> view("user/profile/profile_card.php");?>
-	</div>
-	<div class="clearfix">
-		&nbsp;
-	</div>
-	<div class="m-content-2-col-left">
-		<?php $this -> load -> view("user/profile/my_ratings.php");?>
-		<?php $this -> load -> view("user/profile/people_had_lunch_with.php");?>
-		<div class="clearfix">&nbsp;<br /></div>
-	</div>
-	<div id="user-profile" class="m-content-2-col-right">
-		<div>
-			<?php $this -> load -> view("user/profile/upcoming_lunches.php");?>
-		</div>
-		<div>
-			<?php $this -> load -> view("user/profile/activities.php");?>
+		<div id="ls_profile_card_container">
+			<?php $this -> load -> view("user/profile/profile_card.php");?>
 		</div>
 		<div class="clearfix">
 			&nbsp;
 		</div>
+		
+		<div class="dashboard-activity">
+			<?php $this -> load -> view("user/profile/upcoming_lunches.php");?>
+			<?php $this -> load -> view("user/profile/activities.php");?>
+		</div>
+		<div class="clearfix">&nbsp;</div>
+		
 	</div>
+	
+	
+	<div class="m-content-2-col-right-xs">
+		<?php $this -> load -> view("user/profile/social_elements.php");?>
+		<?php $this -> load -> view("user/profile/my_ratings.php");?>
+		<?php $this -> load -> view("user/profile/people_had_lunch_with.php");?>
+		<div class="clearfix">&nbsp;<br /></div>
+		
+	</div>
+	
 </div>
 <div class="clearfix"></div>
