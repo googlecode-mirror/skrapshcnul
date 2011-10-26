@@ -82,7 +82,8 @@ class Auth extends Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect($this->config->item('base_url'), 'refresh');
+				//redirect($this->config->item('base_url'), 'refresh');
+				redirect('dashboard', 'refresh');
 			}
 			else
 			{ 
@@ -110,6 +111,7 @@ class Auth extends Controller {
 				//$this->data['main_content'] = '/auth/login';
 				//$this -> load -> view('includes/tmpl_layout', $this->data);
 				redirect('auth/login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
+				
 			}
 		} else { 
 			//the user is not logging in so display the login page

@@ -13,3 +13,41 @@
 	background-color: white;
 	padding-top: 15px;
 }
+.m-content-2-col-left {
+	width: 200px;
+	height: 100%;
+	padding: 0;
+	position: absolute;
+	word-wrap: break-word;
+}
+.m-content-2-col-right {
+	padding: 0 0 50px 15px;
+	border-left: 1px solid #DDDDDD;
+	margin-left: 201px;
+	width: 740px;
+	min-height: 300px;
+}
+.m-content-2-col-left-xl {
+	width: 725px;
+	min-height: 300px;
+	padding: 0 15px 50px 15px;
+	border-left: 1px solid #DDDDDD;
+	display: inline-block;
+}
+.m-content-2-col-right-xs {
+	width: 200px;
+	height: 100%;
+	padding: 0;
+	word-wrap: break-word;
+	display: inline-block;
+	position: absolute;
+}
+.dashboard-activity {
+	padding: 10px 0;
+}
+.dashboard-stream-box {
+	
+}
+.dashboard-stream-box-container {
+	margin: 10px 20px;
+}

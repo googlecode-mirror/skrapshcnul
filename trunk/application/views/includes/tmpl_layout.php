@@ -9,9 +9,6 @@
 		<div id="m-container-outer">
 			<div id="m-container">
 				<div class="m-wrapper">
-					<?php if ($is_logged_in) { ?>
-					<?php $this -> load -> view('includes/_steps_completed');?>
-					<?php } ?>
 					<?php $this -> load -> view($main_content);?>
 				</div>
 			</div>

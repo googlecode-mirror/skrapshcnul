@@ -78,4 +78,31 @@ jQuery(document).ready(function() {
 		}
 	);
 	
+	
+	var profile_card_index = 0; 
+	var profile_card_total = jQuery(".ls_profile_card_container").size();
+	//console.log('profile_card_total: '+profile_card_total);
+	
+	jQuery("#ls_profile_card").bind("click",function(){
+	    profile_card_flip();
+	    return false;
+	});
+	
+	function profile_card_flip() {
+		//console.log('profile_card_index: '+profile_card_index);
+		jQuery("#ls_profile_card").flip({
+			direction:'tb',
+			speed:300,
+			content: jQuery(".ls_profile_card_"+profile_card_index)
+		});
+		profile_card_index = profile_card_index + 1;
+		if (profile_card_index >= profile_card_total) { profile_card_index = 0; }
+		//console.log('profile_card_index: '+profile_card_index);
+	}
+	
+	jQuery(document).ready(function() {
+		profile_card_flip();
+	});
+	
 });
+

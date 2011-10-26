@@ -76,3 +76,38 @@
 #ls-h-m-invitations {
 	background-position: 0px -120px;
 }
+.steps-completed-number.one {
+	background-position: 0px 0px;
+}
+.steps-completed-number.two {
+	background-position: -80px 0px;
+}
+.steps-completed-number.three {
+	background-position: -160px 0px;
+}
+.steps-completed-number.four {
+	background-position: -240px 0px;
+}
+.user-icon-set {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(../images/16/user_icons_set.png) no-repeat;
+}
+.u-i-s-dashboard-widget-icon {
+	background-position: 0px -16px;
+}
+.add-to-lunch-wishlist-btn {
+	border: 1px solid #DDDDDD;
+	background: #F6F6F6;
+}
+.add-to-lunch-wishlist-btn:hover {
+	border: 1px solid #0073EA;
+	background: #0073EA;
+	color: #FFFFFF;
+}
+.add-to-lunch-wishlist-btn.added {
+	border: 1px solid #0073EA;
+	background: #0073EA;
+	color: #FFFFFF;
+}
