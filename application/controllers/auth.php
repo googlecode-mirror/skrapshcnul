@@ -279,7 +279,7 @@ class Auth extends Controller {
 		{
 			redirect('auth/login', 'refresh');
 		}
-		$user = $this->session->userdata('user_id');
+		$user_id = $this->session->userdata('user_id');
 
 		if ($this->form_validation->run() == false)
 		{ //display the form
@@ -301,7 +301,7 @@ class Auth extends Controller {
 			$this->data['user_id'] = array('name' => 'user_id',
 				'id' => 'user_id',
 				'type' => 'hidden',
-				'value' => $user->id,
+				'value' => $user_id,
 			);
 
 			//render

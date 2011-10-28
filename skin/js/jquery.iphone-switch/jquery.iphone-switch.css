@@ -1,0 +1,6 @@
+.state-iphone-switch-on {
+	background: url(iphone_switch_container_on.png);
+}
+.state-iphone-switch-off {
+	background: url(iphone_switch_container_off.png);
+}
