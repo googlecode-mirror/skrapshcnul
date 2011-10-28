@@ -36,6 +36,22 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+/*
+|--------------------------------------------------------------------------
+| user type
+|--------------------------------------------------------------------------
+*/
+define('U_SYSTEM', 1026101101);
+define('U_USER', 1026201102);
+
+/*
+|--------------------------------------------------------------------------
+| message type
+|--------------------------------------------------------------------------
+*/
+define('M_SUGGESTION', 1026101111);
+define('M_COMFIRM', 1026101112);
+define('M_CHAT', 1026101113);
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
