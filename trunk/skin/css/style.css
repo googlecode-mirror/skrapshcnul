@@ -328,7 +328,8 @@ footer ul li {
 .notification-stream {
 }
 .row-item, .notification-item {
-	background: #EEF0F9;
+	/*background: #EEF0F9;*/
+	background: #F8F8F8;
 	color: #666;
 	border-top: 1px solid #DDDFE7;
 	cursor: pointer;
@@ -757,4 +758,10 @@ td {
 	padding: 0 .7em; 
 	width: 300px;
 	display: none;
+}
+.divider {
+	background-color: #D2D2D2;
+	border: 0;
+	height: 1px;
+	margin: 20px 0 20px 0;
 }

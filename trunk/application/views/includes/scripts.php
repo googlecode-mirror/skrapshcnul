@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/layout.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/carousel.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery-ui-1.8.16/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/icons.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/notification_icons.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/user.css" type="text/css" media="screen" charset="utf-8" />
@@ -24,6 +25,8 @@
 <script type="text/javascript">$.noConflict();</script>
 <script src="<?php echo base_url();?>skin/js/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-flip-0.9.9/jquery.flip.min.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.js"></script>
+
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
 <script src="<?php echo base_url();?>skin/js/angular-0.9.19.min.js" ng:autobind></script>

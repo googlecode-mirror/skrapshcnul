@@ -51,3 +51,13 @@
 .dashboard-stream-box-container {
 	margin: 10px 20px;
 }
+.content-table-2-col-left {
+	display: inline-block;
+	width: 250px;
+	vertical-align: middle;
+}
+.content-table-2-col-right {
+	display: inline-block;
+	width: 400px;
+	vertical-align: middle;
+}

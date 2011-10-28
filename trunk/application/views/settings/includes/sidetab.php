@@ -4,12 +4,15 @@
 			<?php echo anchor('settings/overview', 'Account Overview', 'id="a-s-overview" class="a-s-icon-xlhdpi"'); ?>
 		</li>
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'sync') ? 'active' : '';?>">
-			<?php echo anchor('settings/sync', 'Sync', 'id="a-s-sync" class="a-s-icon-xlhdpi"'); ?>
+			<?php echo anchor('settings/sync', 'Linked Account', 'id="a-s-sync" class="a-s-icon-xlhdpi"'); ?>
 		</li>
-		<?php /*
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'security') ? 'active' : '';?>">
 			<?php echo anchor('settings/security', 'Security', 'id="a-s-security" class="a-s-icon-xlhdpi"'); ?>
 		</li>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'mobile') ? 'active' : '';?>">
+			<?php echo anchor('settings/notifications', 'Notifications', 'id="a-s-mobile" class="a-s-icon-xlhdpi"'); ?>
+		</li>
+		<?php /*
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'privacy') ? 'active' : '';?>">
 			<?php echo anchor('settings/privacy', 'Privacy', 'id="a-s-privacy" class="a-s-icon-xlhdpi"'); ?>
 		</li>

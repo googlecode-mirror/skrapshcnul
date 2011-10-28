@@ -103,7 +103,7 @@
 .external-data-settings {
 	margin-left: 120px;
 }
-.table-connections {
+/*.table-connections {
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -112,7 +112,7 @@
 	padding: 5px;
 	border-top: 1px solid #E1E1E1 !important;
 	border-bottom: 1px solid #E1E1E1 !important;
-}
+}*/
 .service-icon {
 	height: 24px;
 	line-height: 24px;
