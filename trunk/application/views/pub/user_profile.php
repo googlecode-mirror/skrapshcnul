@@ -1,13 +1,5 @@
 <div class="m-content">
 	<div id="announcements" class="shadow">
-		<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
-		<div  id="announcement-linkedin" class="ui-state-highlight ui-corner-all" style="padding: 10px;">
-			<div class="close-btn" onclick="$('#announcement-linkedin').toggle('slow')"></div>
-			<p>Opps, seems like we have no information about you yet!</p>
-			<a href="<?php echo base_url().'user/sync/'; ?>" class="button">Sync your profiles</a>
-			<div class="clearfix"></div>
-		</div>
-		<?php }?>
 	</div>
 	
 	<div id="user-profile" class="m-content-2-col-left-xl dashboard">

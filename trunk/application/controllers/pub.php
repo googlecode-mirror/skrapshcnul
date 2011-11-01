@@ -23,6 +23,7 @@ class Pub extends CI_Controller {
 		$this -> load -> model('user_model');
 		$this -> load -> model('user_rating_model');
 		$this -> load -> model('user_lunch_wishlist_model');
+		$this -> load -> model('user_lunch_buddy_model');
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
@@ -161,14 +162,15 @@ class Pub extends CI_Controller {
 		
 		// Lunch buddy list
 		if(!isset($this->data['profile_stats']['lunch_buddy_list'])) {
-			$this->data['profile_stats']['lunch_buddy_list'] = array();
+			$this->data['profile_stats']['lunch_buddy_list'] =$this->user_lunch_buddy_model->select_list($this->user_id);
 		}
-		
+		/*
 		$lunch_buddy_list[] = array('name' => 'Mike Shinoda', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/275478_100002977900608_1522924766_q.jpg');
 		$lunch_buddy_list[] = array('name' => 'Chris Kalani', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-ash2/276072_506749663_2438631_q.jpg');
 		$lunch_buddy_list[] = array('name' => 'Robert Scoble', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/174530_501319654_5423543_q.jpg');
 		$lunch_buddy_list[] = array('name' => 'Julie Zhuo', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/49138_206186_1910_q.jpg');
 		$this->data['profile_stats']['lunch_buddy_list'] = $lunch_buddy_list;
+		*/
 		
 		if(!isset($this->data['profile_stats']['activity_list'])) {
 			$this->data['profile_stats']['activity_list'] = array();
