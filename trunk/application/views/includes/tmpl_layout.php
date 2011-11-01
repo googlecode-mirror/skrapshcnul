@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 	<head http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,6 +10,14 @@
 		<div id="m-container-outer">
 			<div id="m-container">
 				<div class="m-wrapper">
+					
+					<?php if ($is_logged_in) { ?>
+						<?php $not_in = array('auth', 'invitations'); ?>
+						<?php if (!in_array(current(explode('/', $main_content)), $not_in)) { ?> 
+							<?php $this -> load -> view('includes/_steps_completed');?>
+						<?php } ?>
+					<?php } ?>
+					
 					<?php $this -> load -> view($main_content);?>
 				</div>
 			</div>

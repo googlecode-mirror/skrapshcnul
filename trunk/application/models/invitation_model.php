@@ -79,6 +79,8 @@ class Invitation_Model extends CI_Model {
 	}
 	
 	function insertInvitationLog($userid, $invitee_email) {
+		
+		$invitee_email = trim($invitee_email);
 		// Generate Invitation Code
 		$salt = $this -> salt();
 		$invitation_code = $this -> _hash_invitation_code($invitee_email, $salt);

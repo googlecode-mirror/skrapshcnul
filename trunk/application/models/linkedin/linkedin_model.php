@@ -37,6 +37,10 @@ class Linkedin_Model extends CI_Model {
     $userid = $this->session->userdata('user_id');
     return $this->_selectLinkedinData($userid);
   }
+  
+  function selectLinkedInData($userid) {
+  	return $this->_selectLinkedinData($userid);
+  }
 }
 
 ?>

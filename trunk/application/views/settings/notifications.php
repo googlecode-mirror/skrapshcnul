@@ -59,8 +59,39 @@
 			</div>
 		</div>
 		
+		<div id="settings-system-notification">
+			<h3>Desktop Notifications</h3>
+			<div class="row-item">
+				<div class="content-table-2-col-left">
+					Chrome Notification
+				</div>
+				<div class="content-table-2-col-right">
+					<div class="iphoneSwitch">
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 	</div>
 	<div class="clearfix"></div>
 </div>
 
 <script>jQuery(".buttonset").buttonset();</script>
+<script>
+jQuery(function() {
+	jQuery( ".iphoneSwitch" ).iphoneSwitch("on",
+	function() {
+		//$('#ajax').load('on.html');
+	},
+	function() {
+		//$('#ajax').load('off.html');
+	},
+	{
+		switch_on_container_path: '/skin/js/jquery.iphone-switch/iphone_switch_container_on.png',
+		switch_off_container_path: '/skin/js/jquery.iphone-switch/iphone_switch_container_off.png',
+		switch_path: '/skin/js/jquery.iphone-switch/iphone_switch.png',
+	});
+	
+});
+</script>
