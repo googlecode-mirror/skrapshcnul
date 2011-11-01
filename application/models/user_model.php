@@ -4,7 +4,21 @@
  * User Name
  */
 class User_model extends CI_Model {
-
+	
+	function select_user_id_by_username($username) {
+		
+		if(!$username) {
+			return FALSE;
+		} else {
+			$query = " SELECT id AS user_id FROM `lss_users` WHERE `username` = '$username' ;";
+			$mysql_result = $this -> db -> query($query);
+			if ($mysql_result->num_rows() > 0) {
+				return $mysql_result->row()->user_id;
+			} else {
+				return FALSE;
+			}
+		}
+	}
 	public function getAll($value = '') {
 		$q = $this -> db -> get('lss_users');
 
@@ -70,6 +84,7 @@ class User_model extends CI_Model {
 		$secret = "THIS IS THE SECRET KEY TO ENCRYP THE PASSWORD";
 		return sha1($value.$secret);
 	}
+	
 
 }
 ?>

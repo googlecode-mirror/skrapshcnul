@@ -23,6 +23,15 @@ class Settings extends CI_Controller {
 			// Not Logged in? Redirect them back to login page.
 			redirect('login', 'refresh');
 		}
+		
+		// Request Params: alt = json | , 
+		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
+		$this -> call = (isset($_REQUEST['call'])) ? $_REQUEST['call'] : '';
+		$this -> callback = (isset($_REQUEST['callback'])) ? $_REQUEST['callback'] : '';
+		$this -> request_method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : '';
+		
+		$this -> start_time = time();
+		
 	}
 
 	function index($value = '') {

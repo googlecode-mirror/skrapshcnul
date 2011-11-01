@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class Pub extends CI_Controller {
 
 	function __construct() {
 		//default constructor
@@ -20,19 +20,13 @@ class User extends CI_Controller {
 		$this -> load -> helper('linkedin/linkedin_api');
 		$this -> load -> model('linkedin/linkedin_model');
 		$this -> load -> model('preferences_model');
+		$this -> load -> model('user_model');
 		$this -> load -> model('user_rating_model');
 		$this -> load -> model('user_lunch_wishlist_model');
-		$this -> load -> model('user_lunch_buddy_model');
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
-		
-		// Check if user is logged in
-		if (!$this -> ion_auth -> logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login?redirect='.uri_string(), 'refresh');
-		}
-		
+
 		// Initialize
 		if ($this -> data['is_logged_in']) {
 			if ($this -> session -> userdata('linkedin_pulled') == NULL) {
@@ -49,43 +43,34 @@ class User extends CI_Controller {
 		$this -> request_method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : '';
 		
 		$this -> start_time = time();
-		
+	}
+
+	function _remap($method) {
+		$this->index();
 	}
 
 	function index() {
-		// Check if user is logged in
-		if (!$this -> ion_auth -> logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		} else {
-			$this -> profile();
-		}
-	}
 
-	function profile() {
+		$this->data['target_user_id'] = $this->uri->segment(2);
+		if (!is_numeric($this->data['target_user_id'])) {
+			$this->data['target_user_id'] = $this->user_model->select_user_id_by_username($this->uri->segment(2));
+		}
 		
 		$this -> _prepare_profile_data();
 		$this -> _prepare_profile_data_default();
 		$this -> _prepare_profile_statistics();
 		
-		// Initialize
-		if ($this -> session -> userdata('linkedin_pulled') == NULL) {
-			$this -> session -> set_userdata('linkedin_pulled', $this -> linkedin_model -> selectLinkedInDataForCurrentUser() != NULL);
-		}
-		
-		$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
-		$this -> data['external_data'] = $external_data;
-		
 		// Render views
 		$this -> data['tpl_page_id'] = 'profile';
-		$this -> data['main_content'] = 'user/user_profile';
+		$this -> data['main_content'] = 'pub/user_profile';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		
 	}
 
 	function _prepare_profile_data() {
 		try {
 			// Linked In 
-			$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
+			$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInData($this->data['target_user_id']);
 			if (isset($external_data['linkedin'] -> data)) {
 				$linkedin_data = new SimpleXMLElement($external_data['linkedin'] -> data);
 				
@@ -176,15 +161,14 @@ class User extends CI_Controller {
 		
 		// Lunch buddy list
 		if(!isset($this->data['profile_stats']['lunch_buddy_list'])) {
-			$this->data['profile_stats']['lunch_buddy_list'] =$this->user_lunch_buddy_model->select_list($this->user_id);
+			$this->data['profile_stats']['lunch_buddy_list'] = array();
 		}
-		/*
+		
 		$lunch_buddy_list[] = array('name' => 'Mike Shinoda', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/275478_100002977900608_1522924766_q.jpg');
 		$lunch_buddy_list[] = array('name' => 'Chris Kalani', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-ash2/276072_506749663_2438631_q.jpg');
 		$lunch_buddy_list[] = array('name' => 'Robert Scoble', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/174530_501319654_5423543_q.jpg');
 		$lunch_buddy_list[] = array('name' => 'Julie Zhuo', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/49138_206186_1910_q.jpg');
 		$this->data['profile_stats']['lunch_buddy_list'] = $lunch_buddy_list;
-		*/
 		
 		if(!isset($this->data['profile_stats']['activity_list'])) {
 			$this->data['profile_stats']['activity_list'] = array();
@@ -203,109 +187,6 @@ class User extends CI_Controller {
 		$this -> data['activity_list'] = $activity_list;
 		*/
 		
-	}
-
-	function sync() {
-
-		redirect('settings/sync', 'refresh');
-
-	}
-	
-	function preferences() {
-		
-		if ($this -> alt == 'json') {
-			
-			$this -> _preferences_json();
-			
-		} else {
-			
-			$results = $this -> preferences_model -> selectForCurrentUser();
-			$this -> data['preferences'] =  json_encode($results);
-			$this -> data['networking'] =  $results;
-			$this -> data['career'] =  $results;
-			$this -> data['offer'] =  $results;
-			
-			// Render views
-			$this -> data['tpl_page_id'] = 'preferences';
-			$this -> data['main_content'] = 'user/preferences';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
-		}
-		
-	}
-
-	function _preferences_json() {
-		
-		$preferences_id = $this->uri->segment(3);
-		$tag_value = $this->uri->segment(4);
-		
-		//$preferences_ref_id = isset($_REQUEST['preferences_ref_id']) ? $_REQUEST['preferences_ref_id'] : '';
-		//$tag_value = isset($_REQUEST['tag_value']) ? $_REQUEST['tag_value'] : '';
-		//$preferences_ref_id = isset($_POST['preferences_ref_id']) ? $_POST['preferences_ref_id'] : '';
-		//$tag_value = isset($_POST['tag_value']) ? $_POST['tag_value'] : '';
-		
-		//$this -> request_method = 'POST';
-		
-		switch ($this -> call) {
-			case 'get' : 
-				$results = $this -> preferences_model -> selectForCurrentUser();
-				break;
-			case 'save' :
-				if ($tag_value) {
-					$results = $this -> preferences_model -> insertForCurrentUser($preferences_id, $tag_value);
-				} else {
-					$results = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
-				}
-				break;
-			case 'delete' :
-				if ($tag_value) {
-					$results = $this -> preferences_model -> deleteForCurrentUser($preferences_id, $tag_value);
-				} else {
-					$results = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
-				}
-				break;
-			default :
-				$results = 'error';
-		}
-		
-			//var_dump($results);
-			//die();
-		$this -> _json_prep($results);
-	}
-
-	function friends() {
-
-		// Render views
-		$this -> data['tpl_page_id'] = 'friends';
-		$this -> data['main_content'] = 'user/friends';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
-
-	}
-
-	function messages() {
-
-		$this -> data['tpl_page_id'] = 'messages';
-		$this -> data['main_content'] = 'user/messages';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
-
-	}
-
-	function invitation() {
-		$this -> invites();
-	}
-
-	function invites() {
-		// Check if user is logged in
-		if (!$this -> ion_auth -> logged_in()) {
-			//redirect them to the login page
-			redirect('auth/login/?redirect='.uri_string(), 'refresh');
-		}
-		
-		$this->data['user_invitation_list'] = array();
-
-		// Render views
-		$this -> data['tpl_page_id'] = 'invitations';
-		$this -> data['main_content'] = 'user/invites';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
 	function _json_prep($results) {

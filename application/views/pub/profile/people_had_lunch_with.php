@@ -1,6 +1,6 @@
 <div class="widget-box">
 	<div class="widget-box-title-bar">
-		<h4 class="widget-title">People I had lunch with (<?php echo sizeof($profile_stats['lunch_buddy_list']);?>)</h4>
+		<h4 class="widget-title">People had lunch with (<?php echo sizeof($profile_stats['lunch_buddy_list']);?>)</h4>
 	</div>
 	<div class="widget-box-container">
 		<div id="user-lunch-buddy-list">

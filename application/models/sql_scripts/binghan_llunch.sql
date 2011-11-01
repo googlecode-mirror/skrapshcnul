@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 23, 2011 at 03:25 PM
+-- Generation Time: Nov 01, 2011 at 12:49 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.4
 
@@ -193,7 +193,35 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_lunch_buddy`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_lunch_buddy` (
+  `user_id` int(11) NOT NULL,
+  `target_user_id` int(11) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`,`target_user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_lunch_wishlist`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_lunch_wishlist` (
+  `user_id` int(11) NOT NULL,
+  `target_user_id` int(11) NOT NULL,
+  `is_added` tinyint(1) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`,`target_user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -210,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_preferences` (
   `updated_on` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -225,6 +253,23 @@ CREATE TABLE IF NOT EXISTS `lss_users_preferences_ref` (
   `created_on` datetime NOT NULL,
   PRIMARY KEY (`preferences_ref_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_profile`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_profile` (
+  `user_id` int(11) NOT NULL,
+  `alias` varchar(100) DEFAULT NULL,
+  `firstname` varchar(250) DEFAULT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `mobile_number` varchar(50) DEFAULT NULL,
+  `profile_img` int(11) DEFAULT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -266,13 +311,12 @@ CREATE TABLE IF NOT EXISTS `lss_users_providers_data` (
 --
 
 CREATE TABLE IF NOT EXISTS `lss_users_ratings` (
-  `rating_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `points` int(11) NOT NULL,
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
-  PRIMARY KEY (`rating_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -284,10 +328,26 @@ CREATE TABLE IF NOT EXISTS `lss_users_ratings_log` (
   `rating_log_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `point_change` int(11) NOT NULL,
+  `remarks` text,
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`rating_log_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_verification_status`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_verification_status` (
+  `user_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `remarks` text NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
