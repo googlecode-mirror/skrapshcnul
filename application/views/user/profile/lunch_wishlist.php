@@ -1,6 +1,6 @@
 <div class="widget-box">
 	<div class="widget-box-title-bar">
-		<h4 class="widget-title">My Wishlist (<?php echo sizeof($profile_stats['lunch_wishlist']);?>)</h4>
+		<h4 class="widget-title">My Lunch Wishlist (<?php echo  ($profile_stats['lunch_wishlist']) ? count($profile_stats['lunch_wishlist']) : '0';?>)</h4>
 	</div>
 	<div class="widget-box-container">
 		<div id="user-wishlist">
