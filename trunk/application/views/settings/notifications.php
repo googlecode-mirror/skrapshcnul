@@ -15,8 +15,8 @@
 				</div>
 				<div class="content-table-2-col-right">
 					<div class="buttonset">
-						<input type="checkbox" id="check_sys_ann_email" /><label for="check_sys_ann_email">Email</label>
-						<input type="checkbox" id="check_sys_ann_phone" /><label for="check_sys_ann_phone">Phone</label>
+						<input class="toggleable" title="sys_ann_email" type="checkbox" id="check_sys_ann_email" /><label for="check_sys_ann_email">Email</label>
+						<input class="toggleable" title="sys_ann_phone" type="checkbox" id="check_sys_ann_phone" /><label for="check_sys_ann_phone">Phone</label>
 					</div>
 				</div>
 			</div>
@@ -77,20 +77,43 @@
 	<div class="clearfix"></div>
 </div>
 
+
+<?php 
+if(!empty($settings['notification']['chrome_desktop_notification'])) {
+	$chrome_desktop_notification = $settings['notification']['chrome_desktop_notification'] ? 'on' : 'off';
+} else {
+	$chrome_desktop_notification = 'off';
+} 
+?>
+
 <script>jQuery(".buttonset").buttonset();</script>
 <script>
 jQuery(function() {
-	jQuery( ".iphoneSwitch" ).iphoneSwitch("on",
-	function() {
-		//$('#ajax').load('on.html');
-	},
-	function() {
-		//$('#ajax').load('off.html');
-	},
-	{
-		switch_on_container_path: '/skin/js/jquery.iphone-switch/iphone_switch_container_on.png',
-		switch_off_container_path: '/skin/js/jquery.iphone-switch/iphone_switch_container_off.png',
-		switch_path: '/skin/js/jquery.iphone-switch/iphone_switch.png',
+	jQuery( ".iphoneSwitch" ).iphoneSwitch("<?php echo $chrome_desktop_notification; ?>",
+		function() {
+			//$('#ajax').load('on.html');
+			console.log('on');
+			jQuery.getJSON('/settings/notifications?alt=json&callback=?', {
+				datafld: 'chrome_desktop_notification',
+				value: 1
+			}, function(data) {
+				//console.log(data);
+			});
+		},
+		function() {
+			//$('#ajax').load('off.html');
+			console.log('off');
+			jQuery.getJSON('/settings/notifications?alt=json&callback=?', {
+				datafld: 'chrome_desktop_notification',
+				value: 0
+			}, function(data) {
+				//console.log(data);
+			});
+		},
+		{
+			switch_on_container_path: '/skin/js/jquery.iphone-switch/iphone_switch_container_on.png',
+			switch_off_container_path: '/skin/js/jquery.iphone-switch/iphone_switch_container_off.png',
+			switch_path: '/skin/js/jquery.iphone-switch/iphone_switch.png',
 	});
 	
 });

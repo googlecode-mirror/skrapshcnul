@@ -23,7 +23,7 @@
 					Secure Browsing
 				</div>
 				<div class="content-table-2-col-right">
-					<div class="iphoneSwitch">
+					<div id="secure_browsing_switch">
 					</div>
 				</div>
 			</div>
@@ -38,14 +38,36 @@
 	<div class="clearfix"></div>
 </div>
 
+<?php 
+if(!empty($settings['security']['secure_browsing'])) {
+	$secure_browsing = $settings['security']['secure_browsing'] ? 'on' : 'off';
+} else {
+	$secure_browsing = 'off';
+} 
+?>
+
 <script>
 jQuery(function() {
-	jQuery( ".iphoneSwitch" ).iphoneSwitch("on",
+	jQuery( "#secure_browsing_switch" ).iphoneSwitch('<?php echo $secure_browsing; ?>',
 	function() {
 		//$('#ajax').load('on.html');
+		console.log('on');
+		jQuery.getJSON('/settings/security?alt=json&callback=?', {
+			datafld: 'secure_browsing',
+			value: 1
+		}, function(data) {
+			//console.log(data);
+		});
 	},
 	function() {
 		//$('#ajax').load('off.html');
+		console.log('off');
+		jQuery.getJSON('/settings/security?alt=json&callback=?', {
+			datafld: 'secure_browsing',
+			value: 0
+		}, function(data) {
+			//console.log(data);
+		});
 	},
 	{
 		switch_on_container_path: '/skin/js/jquery.iphone-switch/iphone_switch_container_on.png',

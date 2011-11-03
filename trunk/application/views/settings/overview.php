@@ -11,10 +11,32 @@
 			<h3>Profile</h3>
 			<div class="row-item">
 				<div class="content-table-2-col-left">
-					Name
+					First Name
 				</div>
 				<div class="content-table-2-col-right">
-					
+					<div class="editable">
+						<span title="firstname" class="editable-value">
+							<?php echo !empty($settings['firstname']) ? ($settings['firstname']) : '<i>[firstname]</i>' ?>
+						</span>
+					</div>
+					<div style="display: none;">
+						<input title="firstname" type="text" value="<?php echo !empty($settings['firstname']) ? ($settings['firstname']) : '' ?>" placeholder="firstname" />
+					</div>
+				</div>
+			</div>
+			<div class="row-item">
+				<div class="content-table-2-col-left">
+					Last Name
+				</div>
+				<div class="content-table-2-col-right">
+					<div class="editable">
+						<span title="lastname" class="editable-value">
+							<?php echo !empty($settings['lastname']) ? ($settings['lastname']) : '<i>[lastname]</i>' ?>
+						</span>
+					</div>
+					<div style="display: none;">
+						<input title="lastname" type="text" value="<?php echo !empty($settings['lastname']) ? ($settings['lastname']) : '' ?>" placeholder="lastname" />
+					</div>
 				</div>
 			</div>
 			<div class="row-item">
@@ -22,7 +44,12 @@
 					Username
 				</div>
 				<div class="content-table-2-col-right">
-					http://lunchsparks.me/pub/<strong>username</strong>
+					<div title="alias" class="editable">
+						http://lunchsparks.me/pub/<span class="editable-value" style="font-weight: bold;"><?php echo !empty($settings['alias']) ? ($settings['alias']) : '<i>[username]</i>' ?></span>
+					</div>
+					<div style="display: none;">
+						<input title="alias" type="text" value="<?php echo !empty($settings['alias']) ? ($settings['alias']) : '' ?>" placeholder="username" />
+					</div>
 				</div>
 			</div>
 			<div class="row-item">
@@ -43,7 +70,12 @@
 					Email
 				</div>
 				<div class="content-table-2-col-right">
-					<input type="text" name="email" value="" />
+					<div class="editable">
+						<span title="delivery_email" class="editable-value"><?php echo !empty($settings['delivery_email']) ? ($settings['delivery_email']) : '<i>[email@example.com]</i>' ?></span>
+					</div>
+					<div style="display: none;">
+						<input title="delivery_email" type="text" value="<?php echo !empty($settings['delivery_email']) ? ($settings['delivery_email']) : '' ?>" placeholder="email@example.com" />
+					</div>
 				</div>
 			</div>
 			<div class="row-item">
@@ -51,7 +83,12 @@
 					Phone
 				</div>
 				<div class="content-table-2-col-right">
-					<input type="text" name="email" value="" />
+					<div class="editable">
+						<span title="mobile_number" class="editable-value"><?php echo !empty($settings['mobile_number']) ? ($settings['mobile_number']) : '<i>[+6599998888]</i>' ?></span>
+					</div>
+					<div style="display: none;">
+						<input title="mobile_number" type="text" value="<?php echo !empty($settings['mobile_number']) ? ($settings['mobile_number']) : '' ?>" placeholder="+6599998888" />
+					</div>
 				</div>
 			</div>
 		</div>

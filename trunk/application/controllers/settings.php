@@ -7,14 +7,16 @@ class Settings extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this -> load -> database();
+		$this -> load -> config('linkedin_oauth', TRUE);
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('session');
 		$this -> load -> library('form_validation');
 		$this -> load -> helper('logger');
+		$this -> load -> helper('url');
 		$this -> load -> helper('linkedin/linkedin_api');
 		$this -> load -> model('linkedin/linkedin_model');
-		$this -> load -> helper('url');
-		$this -> load -> config('linkedin_oauth', TRUE);
+		$this -> load -> model('user_profile_model');
+		$this -> load -> model('user_settings_model');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> session -> set_flashdata('system_message', '');
@@ -23,6 +25,8 @@ class Settings extends CI_Controller {
 			// Not Logged in? Redirect them back to login page.
 			redirect('login', 'refresh');
 		}
+		
+		$this->user_id = $this -> session -> userdata('user_id');
 		
 		// Request Params: alt = json | , 
 		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
@@ -40,14 +44,29 @@ class Settings extends CI_Controller {
 	}
 
 	function overview($value = '') {
+		
+		if ($this -> alt == 'json') {
+			$datafld = isset($_REQUEST['datafld']) ? $_REQUEST['datafld'] : '';
+			$value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
+			if ($datafld && $value) {
+				$fields = array($datafld => $value);
+				$result = $this -> user_profile_model -> update($this->user_id, $fields);
+			} else {
+				$result = FALSE;
+			}
+			
+			$this -> _json_prep($result);
+		} else {
+			
+			$this -> data['settings'] = $this -> user_profile_model -> select($this->user_id);
 
-		// Tpl setup
-		$this -> data['tpl_page_id'] = "overview";
-		$this -> data['tpl_page_title'] = "Account Overview";
-
-		// Render view
-		$this -> data['main_content'] = 'settings/overview';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+			// Tpl setup
+			$this -> data['tpl_page_id'] = "overview";
+			$this -> data['tpl_page_title'] = "Account Overview";
+			// Render view
+			$this -> data['main_content'] = 'settings/overview';
+			$this -> load -> view('includes/tmpl_layout', $this -> data);
+		}
 	}
 
 	function sync() {
@@ -70,13 +89,30 @@ class Settings extends CI_Controller {
 
 	function security() {
 
-		// Tpl setup
-		$this -> data['tpl_page_id'] = "security";
-		$this -> data['tpl_page_title'] = "Security";
-
-		// Render view
-		$this -> data['main_content'] = 'settings/security';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		if ($this -> alt == 'json') {
+			$datafld = isset($_REQUEST['datafld']) ? $_REQUEST['datafld'] : '';
+			$value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
+			if (!empty($datafld)) {
+				$fields = array($datafld => $value);
+				$result = $this -> user_settings_model -> update_security($this->user_id, $fields);
+			} else {
+				$result = FALSE;
+			}
+			
+			$this -> _json_prep($result);
+		} else {
+			
+			$this -> data['settings']['security'] = $this -> user_settings_model -> select_security($this->user_id);
+			//var_dump($this -> data['settings']['security']);
+			
+			// Tpl setup
+			$this -> data['tpl_page_id'] = "security";
+			$this -> data['tpl_page_title'] = "Security";
+	
+			// Render view
+			$this -> data['main_content'] = 'settings/security';
+			$this -> load -> view('includes/tmpl_layout', $this -> data);
+		}
 	}
 
 	function privacy() {
@@ -103,13 +139,30 @@ class Settings extends CI_Controller {
 
 	function notifications() {
 
-		// Tpl setup
-		$this -> data['tpl_page_id'] = "notifications";
-		$this -> data['tpl_page_title'] = "Notifications";
-
-		// Render view
-		$this -> data['main_content'] = 'settings/notifications';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		if ($this -> alt == 'json') {
+			$datafld = isset($_REQUEST['datafld']) ? $_REQUEST['datafld'] : '';
+			$value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
+			if (!empty($datafld)) {
+				$fields = array($datafld => $value);
+				$result = $this -> user_settings_model -> update_notification($this->user_id, $fields);
+			} else {
+				$result = FALSE;
+			}
+			
+			$this -> _json_prep($result);
+		} else {
+			
+			$this -> data['settings']['notification'] = $this -> user_settings_model -> select_notification($this->user_id);
+			//var_dump($this -> data['settings']['notification']);
+			
+			// Tpl setup
+			$this -> data['tpl_page_id'] = "notifications";
+			$this -> data['tpl_page_title'] = "Notifications";
+	
+			// Render view
+			$this -> data['main_content'] = 'settings/notifications';
+			$this -> load -> view('includes/tmpl_layout', $this -> data);
+		}
 	}
 
 	function applications() {
@@ -251,6 +304,12 @@ class Settings extends CI_Controller {
 			// exception raised by library call
 			echo $e -> getMessage();
 		}
+	}
+
+	function _json_prep($result) {
+		$json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
+		$json_result['results'] = $result;
+		print_r($this -> callback. '('.json_encode($json_result) .')');
 	}
 
 }

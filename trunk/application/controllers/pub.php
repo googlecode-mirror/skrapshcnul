@@ -56,6 +56,10 @@ class Pub extends CI_Controller {
 		if (!is_numeric($this->data['target_user_id'])) {
 			$this->data['target_user_id'] = $this->user_model->select_user_id_by_username($this->uri->segment(2));
 		}
+
+		if (!$this->data['target_user_id'] || empty($this->data['target_user_id'])) {
+			redirect('404');
+		}
 		
 		$this -> _prepare_profile_data();
 		$this -> _prepare_profile_data_default();
