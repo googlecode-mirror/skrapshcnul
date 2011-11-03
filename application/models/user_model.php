@@ -19,6 +19,7 @@ class User_model extends CI_Model {
 			}
 		}
 	}
+	
 	public function getAll($value = '') {
 		$q = $this -> db -> get('lss_users');
 

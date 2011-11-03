@@ -33,13 +33,13 @@ class User_Lunch_Buddy_Model extends CI_Model {
 	function update($user_id, $target_user_id) {
 		if(!$user_id || !$target_user_id) {
 			return FALSE;
-		} else {
-			$query = "INSERT INTO " . self::_TABLE_ . 
-				" (user_id, target_user_id, created_on) " . 
-				" VALUES (user_id, target_user_id, NOW()) " .
-				" ON DUPLICATE KEY UPDATE updated_on = NOW();";
-			return $this -> db -> query($query);
-		}
+		} 
+		
+		$query = "INSERT INTO " . self::_TABLE_ . 
+			" (user_id, target_user_id, created_on) " . 
+			" VALUES ($user_id, $target_user_id, NOW()) " .
+			" ON DUPLICATE KEY UPDATE updated_on = NOW();";
+		return $this -> db -> query($query);
 	}
 
 }

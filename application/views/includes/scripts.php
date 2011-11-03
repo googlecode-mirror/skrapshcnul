@@ -34,6 +34,7 @@
 <script src="<?php echo base_url();?>skin/js/ls_notifications.js"></script>
 <script src="<?php echo base_url();?>skin/js/ls_users.js"></script>
 <script src="<?php echo base_url();?>skin/js/ls_schedules.js"></script>
+<script src="<?php echo base_url();?>skin/js/ls_settings.js"></script>
 <script src="<?php echo base_url();?>skin/js/ls_invitations.js"></script>
 <script src="<?php echo base_url();?>skin/js/lunchsparks.js"></script>
 
