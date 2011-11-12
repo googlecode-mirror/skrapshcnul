@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2011 at 01:53 AM
+-- Generation Time: Nov 13, 2011 at 12:51 AM
 -- Server version: 5.5.13
 -- PHP Version: 5.2.17
 
@@ -94,6 +94,24 @@ CREATE TABLE IF NOT EXISTS `lss_notifications` (
   `is_hidden` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_page_completed_step`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_page_completed_step` (
+  `user_id` int(11) NOT NULL,
+  `step1` tinyint(1) NOT NULL,
+  `step2` tinyint(1) NOT NULL,
+  `step3` tinyint(1) NOT NULL,
+  `step4` tinyint(1) NOT NULL,
+  `is_hidden` tinyint(1) NOT NULL,
+  `is_disabled` tinyint(1) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -193,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=96 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=107 ;
 
 -- --------------------------------------------------------
 
@@ -303,7 +321,8 @@ CREATE TABLE IF NOT EXISTS `lss_users_providers_data` (
   `id` bigint(20) NOT NULL,
   `auth_id` int(11) NOT NULL,
   `data` text NOT NULL,
-  `createdOn` datetime NOT NULL
+  `createdOn` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -345,6 +364,36 @@ CREATE TABLE IF NOT EXISTS `lss_users_ratings_log` (
 CREATE TABLE IF NOT EXISTS `lss_users_settings_notification` (
   `user_id` int(11) NOT NULL,
   `chrome_desktop_notification` tinyint(1) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_settings_notification_email`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_settings_notification_email` (
+  `user_id` int(11) NOT NULL,
+  `system_notification` tinyint(1) NOT NULL DEFAULT '1',
+  `event_notification` tinyint(1) NOT NULL DEFAULT '1',
+  `added_to_wishlist_notification` tinyint(1) NOT NULL DEFAULT '1',
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_settings_notification_phone`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_settings_notification_phone` (
+  `user_id` int(11) NOT NULL,
+  `system_notification` tinyint(1) NOT NULL DEFAULT '1',
+  `event_notification` tinyint(1) NOT NULL DEFAULT '1',
+  `added_to_wishlist_notification` tinyint(1) NOT NULL DEFAULT '1',
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
