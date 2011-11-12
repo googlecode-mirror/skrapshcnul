@@ -1,24 +1,27 @@
 #ls_cover {
-	height: 100px;
+	height: 10px;
 	position: relative;
 }
 .cover_background {
-	height: 220px;
+	height: 228px;
 	overflow: hidden;
 	z-index: -1;
 	-webkit-transition-duration: .29s;
 	-webkit-transition-timing-function: ease-in-out;
 	-webkit-transition-property: height, left, margin, padding, width;
 }
+#ls_social_share_container {
+	position:relative;
+	margin: 5px 0;
+}
 #ls_profile_card_container {
 	position: relative;
-	margin-top: -50px;
 	height: 190px;
 }
 #ls_profile_card {
 	height: 180px;
 	overflow: hidden;
-	background: url(../images/1/bg_opacity09.png);
+	background: url(../images/1/bg_opacity07.png);
 	border-bottom: 1px solid #CCCCCC;
 	border-left: 1px solid #CCCCCC;
 	border-right: 1px solid #CCCCCC;

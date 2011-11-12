@@ -15,6 +15,7 @@ class Settings extends CI_Controller {
 		$this -> load -> helper('url');
 		$this -> load -> helper('linkedin/linkedin_api');
 		$this -> load -> model('linkedin/linkedin_model');
+		$this -> load -> model('page_steps_completed_model');
 		$this -> load -> model('user_profile_model');
 		$this -> load -> model('user_settings_model');
 		// Set Global Variables
@@ -27,6 +28,8 @@ class Settings extends CI_Controller {
 		}
 		
 		$this->user_id = $this -> session -> userdata('user_id');
+		
+		$this->data['steps_completed'] = $this -> page_steps_completed_model -> select($this->user_id);
 		
 		// Request Params: alt = json | , 
 		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
@@ -307,6 +310,10 @@ class Settings extends CI_Controller {
 	}
 
 	function _json_prep($result) {
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header('Content-type: application/json');
+		
 		$json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
 		$json_result['results'] = $result;
 		print_r($this -> callback. '('.json_encode($json_result) .')');

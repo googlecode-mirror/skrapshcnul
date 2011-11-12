@@ -11,6 +11,7 @@ class Schedules extends CI_Controller {
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('session');
 		$this -> load -> library('input');
+		$this -> load -> model('page_steps_completed_model');
 		$this -> load -> model('schedules_model');
 		$this -> load -> helper('logger');
 
@@ -22,6 +23,10 @@ class Schedules extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		
+		$this->user_id = $this -> session -> userdata('user_id');
+		
+		$this->data['steps_completed'] = $this -> page_steps_completed_model -> select($this->user_id);
 		
 		// Request Params: alt = json | , 
 		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';

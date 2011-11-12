@@ -1,1 +1,10 @@
-## This file is the log file for DB changes.
+## 2011-11-12 - Rev58
++ [Updated] Store states for completed Steps.
++ [Fix] Add to Lunch Wishlist button now working
++ Added Minify Driver to minify JS and CSS (on Live Site: lunchsparks.me)
+
+## 2011-11-01 - Rev55
++ [Updated] profile page.
++ [Added] public profile page. Accessible via /pub/<user id> or /pub/alias
++ [DB] Added lss_users_lunch_buddy table
++ [DB] Added lss_users_lunch_wishlist table

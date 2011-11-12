@@ -83,26 +83,66 @@ jQuery(document).ready(function() {
 	var profile_card_total = jQuery(".ls_profile_card_container").size();
 	//console.log('profile_card_total: '+profile_card_total);
 	
-	jQuery("#ls_profile_card").bind("click",function(){
-	    profile_card_flip();
-	    return false;
-	});
-	
 	function profile_card_flip() {
 		//console.log('profile_card_index: '+profile_card_index);
 		jQuery("#ls_profile_card").flip({
 			direction:'tb',
 			speed:300,
+			dontChangeColor: true,
 			content: jQuery(".ls_profile_card_"+profile_card_index)
 		});
 		profile_card_index = profile_card_index + 1;
 		if (profile_card_index >= profile_card_total) { profile_card_index = 0; }
 		//console.log('profile_card_index: '+profile_card_index);
 	}
-	
-	jQuery(document).ready(function() {
-		profile_card_flip();
+
+	jQuery("#ls_profile_card").bind("click",function(){
+	    profile_card_flip();
+	    return false;
 	});
+	
+	/* Initialize Profile Card */
+	profile_card_flip();
+	
+	/* Initialize Add to Cart Button */
+	
 	
 });
 
+function updateLuncWishlistBtn(el, data) {
+	console.log(data);
+	if(data.results.followed) {
+		el.children().html('Added To Lunch Wishlist');
+		el.addClass('lw-btn-added');
+		el.button();
+	} else {
+		el.children().html('Add To Lunch Wishlist');
+		el.removeClass('lw-btn-added');
+		el.button();
+	}
+	
+	if (data.results.disabled) {
+		el.children().html('Add To Lunch Wishlist');
+		el.button({'disabled':'true'});
+	} else {
+		el.button();
+	}
+}
+
+jQuery(document).ready(function() {
+	jQuery(".add-to-lunch-wishlist-btn").click(function() {
+		var el = jQuery(this);
+		var t_uid = el.attr('ls:t_uid');
+		jQuery.getJSON('/json/addToLunchWishList', {target_user_id: t_uid}, function(data) {
+				updateLuncWishlistBtn(el, data);
+		});
+	});
+	
+	jQuery.each(jQuery(".add-to-lunch-wishlist-btn"), function() {
+		var el = jQuery(this);
+		var t_uid = el.attr('ls:t_uid');
+		jQuery.getJSON('/json/checkAddToLunchWishList', {target_user_id: t_uid}, function(data) {
+				updateLuncWishlistBtn(el, data);
+		});
+	})
+});

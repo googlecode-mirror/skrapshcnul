@@ -58,6 +58,21 @@ class User_Profile_model extends CI_Model {
 
 	}
 
+	function select_user_id_by_alias($alias) {
+		
+		if(!$alias) {
+			return FALSE;
+		} else {
+			$query = " SELECT user_id FROM `lss_users_profile` WHERE `alias` = '$alias' ;";
+			$mysql_result = $this -> db -> query($query);
+			if ($mysql_result->num_rows() > 0) {
+				return $mysql_result->row()->user_id;
+			} else {
+				return FALSE;
+			}
+		}
+	}
+
 	function is_alias_available($alias) {
 		if (!$alias) {
 			return FALSE;
