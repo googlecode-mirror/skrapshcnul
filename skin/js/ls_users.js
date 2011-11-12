@@ -112,17 +112,16 @@ jQuery(document).ready(function() {
 function updateLuncWishlistBtn(el, data) {
 	console.log(data);
 	if(data.results.followed) {
+		el.button();
 		el.children().html('Added To Lunch Wishlist');
 		el.addClass('lw-btn-added');
-		el.button();
 	} else {
+		el.button();
 		el.children().html('Add To Lunch Wishlist');
 		el.removeClass('lw-btn-added');
-		el.button();
 	}
 	
 	if (data.results.disabled) {
-		el.children().html('Add To Lunch Wishlist');
 		el.button({'disabled':'true'});
 	} else {
 		el.button();
