@@ -106,8 +106,13 @@
 	background: #0073EA;
 	color: #FFFFFF;
 }
-.add-to-lunch-wishlist-btn.added {
+.add-to-lunch-wishlist-btn.lw-btn-added {
 	border: 1px solid #0073EA;
 	background: #0073EA;
+	color: #FFFFFF;
+}
+.add-to-lunch-wishlist-btn.lw-btn-added:hover {
+	border: 1px solid #025fc0;
+	background: #025fc0;
 	color: #FFFFFF;
 }

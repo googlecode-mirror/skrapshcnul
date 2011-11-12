@@ -17,12 +17,13 @@
 				<img src="<?php echo $profile['cover_background']; ?>" />
 			</div>
 		</div>
+		<div id="ls_social_share_container">
+			<?php $this -> load -> view("user/profile/social_share.php");?>
+		</div>
 		<div id="ls_profile_card_container">
 			<?php $this -> load -> view("user/profile/profile_card.php");?>
 		</div>
-		<div class="clearfix">
-			&nbsp;
-		</div>
+		<div class="clearfix">&nbsp;</div>
 		
 		<div class="dashboard-activity">
 			<?php $this -> load -> view("user/profile/upcoming_lunches.php");?>
@@ -34,7 +35,7 @@
 	
 	
 	<div class="m-content-2-col-right-xs">
-		<?php //$this -> load -> view("user/profile/social_elements.php");?>
+		<?php $this -> load -> view("user/profile/social_elements.php");?>
 		<?php $this -> load -> view("user/profile/my_ratings.php");?>
 		<?php $this -> load -> view("user/profile/people_had_lunch_with.php");?>
 		<?php $this -> load -> view("user/profile/lunch_wishlist.php");?>

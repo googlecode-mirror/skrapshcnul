@@ -10,13 +10,7 @@
 			<?php /* <button id="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
 				<span class="ui-button-text"></span>
 			</button> */ ?>
-			<a id="add_to_lunch_wishlist" class="add-to-lunch-wishlist-btn" href="#">Add to Lunch Wishlist</a>
-			<script>
-				jQuery(function() {
-					jQuery( "#add_to_lunch_wishlist" ).button();
-					jQuery( "#add_to_lunch_wishlist" ).click(function() { return false; });
-				});
-			</script>
+			<a id="add_to_lunch_wishlist" class="add-to-lunch-wishlist-btn" href="javascript:void(0);"  ls:t_uid="<?php echo $target_user_id ?>">Add To Lunch Wishlist</a>
 		</div>
 	</div>
 	<div class="clearfix"></div>

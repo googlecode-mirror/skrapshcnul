@@ -20,6 +20,22 @@ class User_model extends CI_Model {
 		}
 	}
 	
+	function is_user_account_valid($user_id) {
+		
+		if(!$user_id) {
+			return FALSE;
+		} else {
+			$query = " SELECT id AS user_id FROM `lss_users` WHERE `id` = '$user_id' AND active=1;";
+			$mysql_result = $this -> db -> query($query);
+			
+			if ($mysql_result->num_rows() > 0) {
+				return TRUE;
+			} else {
+				return FALSE;
+			}
+		}
+	}
+	
 	public function getAll($value = '') {
 		$q = $this -> db -> get('lss_users');
 

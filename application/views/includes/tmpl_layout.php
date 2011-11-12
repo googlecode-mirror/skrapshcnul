@@ -12,9 +12,11 @@
 				<div class="m-wrapper">
 					
 					<?php if ($is_logged_in) { ?>
-						<?php $not_in = array('auth', 'invitations'); ?>
+						<?php $not_in = array('auth', 'invitations', 'pub'); ?>
 						<?php if (!in_array(current(explode('/', $main_content)), $not_in)) { ?> 
-							<?php $this -> load -> view('includes/_steps_completed');?>
+							<?php if (!$steps_completed['is_disabled']) { ?>
+								<?php $this -> load -> view('includes/_steps_completed');?>
+							<?php } ?>
 						<?php } ?>
 					<?php } ?>
 					

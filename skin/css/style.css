@@ -14,6 +14,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-size: 13px;
+	min-width: 1024px;
 }
 a {
 	text-decoration: none;
@@ -48,7 +49,7 @@ fieldset {
 	margin: auto;
 }
 .m-content {
-	padding: 1px 0 0 0;
+	padding: 5px 0 0 0;
 	position: relative;
 	background: url(../images/1/bg_opacity04.png);
 }

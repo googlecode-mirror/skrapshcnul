@@ -17,11 +17,23 @@ class Json extends CI_Controller {
 		$this -> load -> helper('url');
 		$this -> load -> model('schedules_model');
 		$this -> load -> model('invitation_model');
+		$this -> load -> model('page_steps_completed_model');
+		$this -> load -> model('user_lunch_wishlist_model');
 		$this -> load -> helper('logger');
 		
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
-		$this -> session -> set_flashdata('system_message', '');
+		
+		$this->user_id = $this -> session -> userdata('user_id');
+		
+		// Request Params: alt = json | , 
+		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
+		$this -> call = (isset($_REQUEST['call'])) ? $_REQUEST['call'] : '';
+		$this -> callback = (isset($_REQUEST['callback'])) ? $_REQUEST['callback'] : '';
+		$this -> request_method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : '';
+		
+		$this -> start_time = time();
+		
 	}
 
 	function index($value = '') {
@@ -99,10 +111,99 @@ class Json extends CI_Controller {
 		echo json_encode(6);
 	}
 	
-	function schedules() {
+	function checkAddToLunchWishList() {
 		
-		$callback = $_REQUEST['callback'];
-		$call = $_REQUEST['call'];
+		$this -> target_user_id = (isset($_REQUEST['target_user_id'])) ? $_REQUEST['target_user_id'] : '';
+		$results = '';
+			
+		if(!$this -> user_id || !is_numeric($this -> user_id)) {
+			$this -> json_result['error'][] = "NoUserId"; 
+			$this -> json_result['results']['followed'] = FALSE;
+			$this -> json_result['results']['disabled'] = TRUE;
+		} elseif (!$this -> target_user_id || !is_numeric($this -> target_user_id)) {
+			$this -> json_result['error'][] = "NoTargetUserId"; 
+		} elseif ($this -> user_id == $this -> target_user_id) {
+			$this -> json_result['results']['followed'] = TRUE;
+			$this -> json_result['results']['disabled'] = TRUE;
+		} else {
+			$results = $this -> user_lunch_wishlist_model -> select_addToLunchStatus($this->user_id, $this -> target_user_id);
+			if (empty($results)) {
+				$this -> json_result['results']['followed'] = FALSE;
+				$this -> json_result['results']['disabled'] = FALSE;
+			} elseif ($results[0]['is_added']) {
+				$this -> json_result['results']['followed'] = TRUE;
+				$this -> json_result['results']['disabled'] = FALSE;
+			} else {
+				$this -> json_result['results']['followed'] = FALSE;
+				$this -> json_result['results']['disabled'] = FALSE;
+			}
+		}
+		
+		$this->_json_prep($this -> json_result);
+	}
+	
+	function addToLunchWishList() {
+		
+		$this -> target_user_id = (isset($_REQUEST['target_user_id'])) ? $_REQUEST['target_user_id'] : '';
+		$results = '';
+			
+		if(!$this -> user_id) {
+			$this -> json_result['error'][] = "NoUserId"; 
+		} elseif (!$this -> target_user_id) {
+			$this -> json_result['error'][] = "NoTargetUserId"; 
+		} elseif ($this -> user_id == $this -> target_user_id) {
+			$this -> json_result['results']['disabled'] = TRUE;
+		} else {
+			$results = $this -> user_lunch_wishlist_model -> toggle_addToLunchStatus($this->user_id, $this -> target_user_id);
+			if ($results[0]['is_added']) {
+				$this -> json_result['results']['followed'] = TRUE;
+				$this -> json_result['results']['disabled'] = FALSE;
+			} else {
+				$this -> json_result['results']['followed'] = FALSE;
+				$this -> json_result['results']['disabled'] = FALSE;
+			}
+		}
+		
+		$this->_json_prep($this -> json_result);
+	}
+	
+	function steps_completed_toggle_hide() {
+		
+		if(!$this -> user_id) {
+			$this -> json_result['error'][] = "No user selected"; 
+		} else {
+			$results = $this -> page_steps_completed_model -> toggle_is_hidden($this->user_id);
+			$this -> json_result['results'] = $results;
+		}
+		
+		$this->_json_prep($this -> json_result);
+	}
+	
+	function steps_completed_toggle_disabled() {
+		
+		if(!$this -> user_id) {
+			$this -> json_result['error'][] = "No user selected"; 
+		} else {
+			$results = $this -> page_steps_completed_model -> toggle_is_disabled($this->user_id);
+			$this -> json_result['results'] = $results;
+		}
+		
+		$this->_json_prep($this -> json_result);
+	}
+	
+	function _json_prep($results) {
+		//header('Cache-Control: no-cache, must-revalidate');
+		//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		//header('Content-type: application/json');
+		
+		if ($this -> callback) {
+			$this -> json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
+			$this -> json_result['results'][] = $results;
+			print_r($this -> callback. '('.json_encode($this -> json_result) .')');
+		} else {
+			$this -> json_result = $results;
+			print_r(json_encode($this -> json_result));
+		}
 		
 	}
 	
