@@ -58,6 +58,33 @@ class User_Profile_model extends CI_Model {
 
 	}
 
+	function update_fromLinkedInData($user_id, $fields) {
+		// Get existing records
+		$data = $this -> select($user_id);
+		
+		// Prepare Data to Write to DB
+		$alias 		= isset($data['alias']) && !empty($data['alias']) ? $data['alias'] : $fields['alias'] ;
+		$firstname	= isset($data['firstname']) && !empty($data['firstname']) ? $data['firstname'] : $fields['firstname'] ;
+		$lastname	= isset($data['lastname']) && !empty($data['lastname']) ? $data['lastname'] : $fields['lastname'];
+		$mobile_number	= isset($data['mobile_number']) && !empty($data['mobile_number']) ? $data['mobile_number'] : $fields['mobile_number'] ;
+		$delivery_email	= isset($data['delivery_email']) && !empty($data['delivery_email']) ? $data['delivery_email'] : $fields['delivery_email'];
+		$profile_img	= isset($data['profile_img']) && !empty($data['profile_img']) ? $data['profile_img'] : $fields['profile_img'];
+		
+		// DB Query
+		$query = "INSERT INTO " . self::_TABLE_ . 
+			" (user_id, alias, firstname, lastname, mobile_number, delivery_email, profile_img, updated_on) " . 
+			" VALUES ('$user_id', '$alias', '$firstname', '$lastname', '$mobile_number', '$delivery_email', '$profile_img', NOW()) " . 
+			" ON DUPLICATE KEY UPDATE " .
+				" `alias` = '$alias', ".
+				" `firstname` = '$firstname', " .
+				" `lastname` = '$lastname', " .
+				" `mobile_number` = '$mobile_number', " .
+				" `delivery_email` = '$delivery_email', " .
+				" `profile_img` = '$profile_img', " .
+				" `updated_on` = NOW();";
+		return $this -> db -> query($query);
+	}
+
 	function select_user_id_by_alias($alias) {
 		
 		if(!$alias) {
@@ -86,6 +113,6 @@ class User_Profile_model extends CI_Model {
 			return TRUE;
 		}
 	}
-
+	
 }
 ?>

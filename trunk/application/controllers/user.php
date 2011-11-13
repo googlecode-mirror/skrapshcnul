@@ -71,6 +71,7 @@ class User extends CI_Controller {
 		$this -> data['user_id'] = $this -> session -> userdata('user_id');
 		$this -> data['target_user_id'] = $this -> session -> userdata('user_id');
 		
+			
 		$this -> data['profile'] = $this -> ls_profile -> _prepare_profile_data_default();
 		$this -> data['profile'] = $this -> ls_profile -> _prepare_profile_data($this->user_id);
 		$this -> data['profile_stats'] = $this -> ls_profile -> _prepare_profile_statistics($this->user_id);
@@ -80,8 +81,8 @@ class User extends CI_Controller {
 			$this -> session -> set_userdata('linkedin_pulled', $this -> linkedin_model -> selectLinkedInDataForCurrentUser() != NULL);
 		}
 		
-		$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
-		$this -> data['external_data'] = $external_data;
+		//$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
+		//$this -> data['external_data'] = $external_data;
 		
 		// Render views
 		$this -> data['head_title']		= $this -> data['profile']['first_name'] .' | Lunchsparks'; 
