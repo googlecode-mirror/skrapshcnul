@@ -1,0 +1,41 @@
+/* Comfortable Layout */
+.comfortable-table {
+	width: 100%;
+	margin-bottom: 30px;
+	text-align: center;
+}
+.comfortable-table thead tr {
+	background: #EFEFEF;
+}
+.comfortable-table thead th {
+	padding: 15px;
+	border-top: 1px solid #AAA;
+	border-bottom: 1px solid #AAA;
+}
+.comfortable-table td {
+	padding: 8px;
+}
+.comfortable-table tbody tr {
+	background: #EFFFEF;
+}
+.comfortable-table tbody tr:hover {
+	background: #F4F6FF;
+}
+
+/* Cozy Layout */
+.cozy-table {
+	width: 100%;
+	margin-bottom: 30px;
+}
+.cozy-table td {
+	padding: 5px;
+}
+
+/* Compact Layout */
+.compact-table {
+	width: 100%;
+	margin-bottom: 30px;
+}
+.compact-table td {
+	padding: 0px;
+}

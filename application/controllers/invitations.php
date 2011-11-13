@@ -16,6 +16,7 @@ class Invitations extends CI_Controller {
 		$this -> load -> model('invitation_model');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
+		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
 		$this -> session -> set_flashdata('system_message', '');
 
 		// Initialize

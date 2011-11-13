@@ -29,6 +29,7 @@ class User extends CI_Controller {
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
+		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
 		
 		// Check if user is logged in
 		if (!$this -> ion_auth -> logged_in()) {
@@ -71,9 +72,9 @@ class User extends CI_Controller {
 		$this -> data['user_id'] = $this -> session -> userdata('user_id');
 		$this -> data['target_user_id'] = $this -> session -> userdata('user_id');
 		
-		$this -> data['profile']		= $this -> ls_profile -> _prepare_profile_data_default();
 		$this -> data['profile']		= $this -> ls_profile -> _prepare_profile_data($this->user_id);
 		$this -> data['profile_stats']	= $this -> ls_profile -> _prepare_profile_statistics($this->user_id);
+		$this -> data['profile']['social_links'] = $this -> ls_profile -> prepare_profile_social_links($this->user_id);
 		
 		// Initialize
 		if ($this -> session -> userdata('linkedin_pulled') == NULL) {
@@ -83,9 +84,10 @@ class User extends CI_Controller {
 		//$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
 		//$this -> data['external_data'] = $external_data;
 		
-		// Render views
+		// Render view data
 		$this -> data['head_title']		= $this -> data['profile']['first_name'] .' | Lunchsparks'; 
 		$this -> data['tpl_page_id']	= 'profile';
+		// Render view layout
 		$this -> data['main_content']	= 'user/user_profile';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}

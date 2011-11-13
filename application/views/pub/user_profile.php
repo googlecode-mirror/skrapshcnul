@@ -26,7 +26,7 @@
 	
 	
 	<div class="m-content-2-col-right-xs">
-		<?php $this -> load -> view("pub/profile/social_elements.php");?>
+		<?php $this -> load -> view("user/profile/social_elements.php");?>
 		<?php $this -> load -> view("pub/profile/my_ratings.php");?>
 		<?php $this -> load -> view("pub/profile/lunch_wishlist.php");?>
 		<?php $this -> load -> view("pub/profile/people_had_lunch_with.php");?>

@@ -16,34 +16,40 @@
 					<li id="lunchsparks-header-logo">
 						<?php echo anchor('', '<img src="'.base_url().'/skin/images/ls_logo_white.png" height="32px">', array('from' => 'main'));?>
 					</li>
-					<?php if ($is_logged_in) { ?>
-					<?php /*
-					<li>
-						<?php echo anchor('user/friends', 'Friends', array('from' => 'main'));?>
-					</li>
-					<li>
-						<?php echo anchor('user/messages', 'Messages', array('from' => 'main'));?>
-					</li>
-					*/ ?>
-					<li><div style="width: 20px;">&nbsp;</div></li>
-					<li>
-						<?php echo anchor('settings/sync', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-synchronize', 'title'=>'Synchronize')); ?>
-					</li>
-					<li>
-						<?php echo anchor('user/preferences', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-preferences', 'title'=>'Preferences')); ?>
-					</li>
-					<li>
-						<?php echo anchor('schedules', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-schedules', 'title'=>'Schedule')); ?>
-					</li>
-					<li>
-						<?php echo anchor('events', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-events', 'title'=>'Events')); ?>
-					</li>
-					<li>
-						<?php echo anchor('invitations', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-invitations', 'title'=>'Invitations'));?>
-					</li>
-          			<?php /* <li>
-						<?php echo anchor('suggestion', 'Suggestions', array('from' => 'main'));?>
-					</li> */ ?>
+					<?php if (isset($is_logged_in) && $is_logged_in ) { ?>
+						<?php /*
+						<li>
+							<?php echo anchor('user/friends', 'Friends', array('from' => 'main'));?>
+						</li>
+						<li>
+							<?php echo anchor('user/messages', 'Messages', array('from' => 'main'));?>
+						</li>
+						*/ ?>
+						<li><div style="width: 20px;">&nbsp;</div></li>
+						<li>
+							<?php echo anchor('settings/sync', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-synchronize', 'title'=>'Synchronize')); ?>
+						</li>
+						<li>
+							<?php echo anchor('user/preferences', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-preferences', 'title'=>'Preferences')); ?>
+						</li>
+						<li>
+							<?php echo anchor('schedules', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-schedules', 'title'=>'Schedule')); ?>
+						</li>
+						<li>
+							<?php echo anchor('events', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-events', 'title'=>'Events')); ?>
+						</li>
+						<li>
+							<?php echo anchor('invitations', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-invitations', 'title'=>'Invitations'));?>
+						</li>
+	          			<?php /* <li>
+							<?php echo anchor('suggestion', 'Suggestions', array('from' => 'main'));?>
+						</li> */ ?>
+					<?php } ?>
+					
+					<?php if (isset($this->data['is_logged_in_admin']) && $this->data['is_logged_in_admin']) { ?>
+						<li>
+							<?php echo anchor('admin/dashboard', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-admin', 'title'=>'Admin Dashboard'));?>
+						</li>
 					<?php } ?>
 				</ul>
 			</div>

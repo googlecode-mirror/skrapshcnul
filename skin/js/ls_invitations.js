@@ -64,3 +64,13 @@ function resendInvitation(invitee_email) {
 			}
 	});
 }
+
+function addInvitation(user_id) {
+	var add_invites = prompt("Additional invites to add", "0");
+	jQuery.getJSON('/admin/json/addInvitation', 
+		{ alt: "json", user_id: user_id, add_invites: add_invites}, 
+		function(data) {
+			console.log(data);
+			jQuery("#"+user_id+"_invitation_left").html(data.invitation_left);
+	});
+}

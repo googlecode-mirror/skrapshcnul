@@ -44,7 +44,11 @@ class Ls_Profile {
 	
 	function _prepare_profile_data($user_id) {
 		try {
-			// Linked In 
+			$this -> _prepare_profile_data_default();
+			
+			#####################
+			##  Linked In
+			###################### 
 			$external_data['linkedin'] = $this -> ci -> linkedin_model -> selectLinkedInData($user_id);
 			
 			if (isset($external_data['linkedin'] -> data)) {
@@ -85,16 +89,26 @@ class Ls_Profile {
 					$this->data['profile']['interests'] = $linkedin_data->{'interests'};
 				}
 				
-				// Update ls_profile fields
+				## Update ls_profile fields
 				$fields['firstname']		= $linkedin_data->{'first-name'};
 				$fields['lastname']			= $linkedin_data->{'last-name'};
 				$fields['profile_img']		= $linkedin_data->{'picture-url'};
 				$fields['mobile_number']	= $linkedin_data->{'phone-numbers'}->{'phone-number'}->{'phone-number'};
-				
 				$this -> ci -> user_profile_model -> update_fromLinkedInData($user_id, $fields);
 				
-				return $this->data['profile'];
+				## Update Profile Social Links
+				$linkedin_public_profile_url = $linkedin_data->{'public-profile-url'};
+				if (!empty($linkedin_public_profile_url)) {
+					$fields['linkedin'] = $linkedin_public_profile_url;
+					$this -> ci -> user_profile_model -> update_social_links($user_id, $fields);
+				}
+				
 			}
+			
+			## TODO Twitter
+			
+			## Finally
+			return $this->data['profile'];
 			
 		} catch (exception $e) {
 			
@@ -173,6 +187,15 @@ class Ls_Profile {
 		*/
 		
 		return $this->data['profile_stats'];
+		
+	}
+
+	function prepare_profile_social_links($user_id) {
+		if (empty($user_id)) {
+			return FALSE;
+		}
+		
+		return $this -> ci -> user_profile_model -> select_social_links($user_id);
 		
 	}
 

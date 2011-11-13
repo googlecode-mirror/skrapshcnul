@@ -1,7 +1,10 @@
+## 2011-11-13 - Rev65
++ [Added] Admin Panel to view users, add invitations for users
+
 ## 2011-11-12 - Rev61
 + [Updated] Store states for completed Steps.
 + [Fix] Add to Lunch Wishlist button now working
-+ Added Minify Driver to minify JS and CSS (on Live Site: lunchsparks.me)
++ [Added] Minify Driver to minify JS and CSS (on Live Site: lunchsparks.me)
 + [Fix] File naming convention changed to lower case in /application/libraries/.
 + [DB] updated sql_scripts/binghan_lsparks.sql
 
