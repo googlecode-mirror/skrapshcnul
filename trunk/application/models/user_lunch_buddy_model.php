@@ -18,8 +18,7 @@ class User_Lunch_Buddy_Model extends CI_Model {
 		} else {
 			$query = "SELECT * " .
 				" FROM " . self::_TABLE_ . " AS ulw " . 
-				//" LEFT JOIN `lss_users` AS u ON u.`id` = ulw.`user_id` " .
-				" LEFT JOIN `lss_users_profile` AS up ON up.`user_id` = ulw.`user_id` " .
+				" LEFT JOIN `lss_users_profile` AS up ON up.`user_id` = ulw.`target_user_id` " .
 				" WHERE ulw.`user_id` = $user_id ;";
 			$mysql_result = $this -> db -> query($query);
 			if ($mysql_result->num_rows() > 0) {
