@@ -71,10 +71,9 @@ class User extends CI_Controller {
 		$this -> data['user_id'] = $this -> session -> userdata('user_id');
 		$this -> data['target_user_id'] = $this -> session -> userdata('user_id');
 		
-			
-		$this -> data['profile'] = $this -> ls_profile -> _prepare_profile_data_default();
-		$this -> data['profile'] = $this -> ls_profile -> _prepare_profile_data($this->user_id);
-		$this -> data['profile_stats'] = $this -> ls_profile -> _prepare_profile_statistics($this->user_id);
+		$this -> data['profile']		= $this -> ls_profile -> _prepare_profile_data_default();
+		$this -> data['profile']		= $this -> ls_profile -> _prepare_profile_data($this->user_id);
+		$this -> data['profile_stats']	= $this -> ls_profile -> _prepare_profile_statistics($this->user_id);
 		
 		// Initialize
 		if ($this -> session -> userdata('linkedin_pulled') == NULL) {
