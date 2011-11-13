@@ -15,6 +15,7 @@ class Main extends CI_Controller {
 		$this -> load -> model('mainpage_elements_model');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
+		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
 		$this -> session -> set_flashdata('system_message', '');
 	}
 
