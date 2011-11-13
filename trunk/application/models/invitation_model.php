@@ -29,8 +29,17 @@ class Invitation_Model extends CI_Model {
 		$query = 
 			" SELECT * FROM " . self::_TABLE_INVITATION_ . 
 			" WHERE user_id = '$user_id';";
-		$result = $this -> db -> query($query);
-		return $result->row();
+		$mysql_result = $this -> db -> query($query);
+		if ($mysql_result->num_rows() > 0) {
+			return $mysql_result->row();
+		} else {
+			$query = 
+				" INSERT INTO " . self::_TABLE_INVITATION_ . 
+				" (user_id, invitation_left, created_on, updated_on) VALUE " . 
+				" ('$user_id', 0, NOW(), NOW() ) ;";
+			$mysql_result = $this -> db -> query($query);
+			return $this->selectInvitation($user_id);
+		}
 	}
 	
 	function updateInvitation($user_id, $add_invites) {
