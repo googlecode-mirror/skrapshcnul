@@ -20,6 +20,7 @@ class Settings extends CI_Controller {
 		$this -> load -> model('user_settings_model');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
+		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
 		$this -> session -> set_flashdata('system_message', '');
 
 		if (!$this -> ion_auth -> logged_in()) {
@@ -63,10 +64,11 @@ class Settings extends CI_Controller {
 			
 			$this -> data['settings'] = $this -> user_profile_model -> select($this->user_id);
 
-			// Tpl setup
+			// Render views data
+			$this -> data['head_title']		= 'Settings | Lunchsparks';
 			$this -> data['tpl_page_id'] = "overview";
 			$this -> data['tpl_page_title'] = "Account Overview";
-			// Render view
+			// Render Views
 			$this -> data['main_content'] = 'settings/overview';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}

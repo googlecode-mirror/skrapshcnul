@@ -17,6 +17,7 @@ class Ls_Scripts {
 		$this -> ci -> load -> driver('minify');
 		
 		$this -> js_files = array(
+			'skin/js/ls_bubble_info.js',
 			'skin/js/ls_notifications.js', 
 			'skin/js/ls_schedules.js',
 			'skin/js/ls_settings.js',
@@ -27,6 +28,7 @@ class Ls_Scripts {
 		);
 			
 		$this -> css_files = array(
+			'skin/css/bubble_info.css',
 			'skin/css/style.css',
 			'skin/css/layout.css',
 			'skin/css/carousel.css',
@@ -34,7 +36,8 @@ class Ls_Scripts {
 			'skin/css/notification_icons.css',
 			'skin/css/user.css',
 			'skin/css/schedules.css',
-			'skin/css/invitation.css'
+			'skin/css/invitation.css',
+			'skin/css/tables.css',
 		);
 		
 		if (!strstr(base_url(), 'lunchsparks.me')){

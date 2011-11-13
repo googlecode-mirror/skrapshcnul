@@ -2,6 +2,8 @@
 
 class Invitation_Model extends CI_Model {
 
+	const _TABLE_INVITATION_ = "lss_users_invitations";
+	
 	public function __construct() {
 		parent::__construct();
 		$this->load->database();
@@ -18,43 +20,40 @@ class Invitation_Model extends CI_Model {
 		$this->salt_length     = $this->config->item('salt_length', 'invitations');
 	}
 
-	function selectInvitation($userid) {
+	function selectInvitation($user_id) {
+		
+		if (!isset($user_id) && empty($user_id)) {
+			return FALSE;
+		}
+		
 		$query = 
-			" SELECT * " . 
-			" FROM lss_users_invitations " . 
-			" WHERE user_id = '$userid';";
+			" SELECT * FROM " . self::_TABLE_INVITATION_ . 
+			" WHERE user_id = '$user_id';";
 		$result = $this -> db -> query($query);
 		return $result->row();
 	}
 	
-	function insertRating($userid, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius, $repeat) {
-		$datetime_start = trim($date) . " " . trim($time);
-		$datetime_end = trim($date_end) . " " . trim($time_end);
+	function updateInvitation($user_id, $add_invites) {
+		
+		if (!isset($user_id) && empty($user_id)) {
+			return FALSE;
+		}
+		
+		if (!is_numeric($add_invites)) {
+			return FALSE;
+		}
+		
 		$query = 
-			"INSERT INTO lss_schedules (user_id, name, start_date, end_date, repeat_params, center_lat, center_lng, radius) " . 
-			" VALUES ('$userid', '$name', " . 
-			" STR_TO_DATE('$datetime_start','%m/%d/%Y %T'), " . 
-			" STR_TO_DATE('$datetime_end','%m/%d/%Y %T'), " . 
-			" '$repeat', " . " '$center_lat', '$center_lng', '$radius')";
-		$success = $this -> db -> query($query);
-		return $success;
-	}
-
-	function updatePick($userid, $index, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius) {
-
-		$datetime_start = $date . " " . $time;
-		$datetime_end = $date_end . " " . $time_end;
-		$query = 
-			" UPDATE lss_schedules " . 
-			" SET name = '$name' " . 
-			" , STR_TO_DATE('$datetime_start','%m/%d/%Y %T') " . 
-			" , end_date = STR_TO_DATE('$datetime_end','%m/%d/%Y %T') " . 
-			" , center_lat = '$center_lat', center_lng = '$center_lng' " . 
-			" , radius = '$radius' " . 
-			" WHERE user_id = '$userid' " .
-			" AND `index` = '$index';";
-		$success = $this -> db -> query($query);
-		return $success;
+			" INSERT INTO " . self::_TABLE_INVITATION_ . 
+			" (user_id, invitation_left, created_on, updated_on) VALUE" . 
+			" ($user_id, $add_invites, NOW(), NOW() ) " . 
+			" ON DUPLICATE KEY UPDATE invitation_left = invitation_left + $add_invites, updated_on = NOW()";
+		$result = $this -> db -> query($query);
+		if ($this->db->affected_rows()) {
+			return $this->selectInvitation($user_id);
+		} else {
+			return FALSE;
+		}
 	}
 	
 	// Invitation_Log Section
