@@ -13,7 +13,7 @@
 			<?php $this -> load -> view("pub/profile/social_share.php");?>
 		</div>
 		<div id="ls_profile_card_container">
-			<?php $this -> load -> view("pub/profile/profile_card.php");?>
+			<?php $this -> load -> view("user/profile/profile_card.php");?>
 		</div>
 		<div class="clearfix">&nbsp;</div>
 		

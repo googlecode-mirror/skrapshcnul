@@ -11,6 +11,7 @@ jQuery(document).ready(function($) {
 	});
 });
 
+/*
 PreferenceCtrl.$inject = ['$resource', '$defer'];
 function PreferenceCtrl($resource,$defer) {
 	var scope = this;
@@ -31,7 +32,7 @@ function PreferenceCtrl($resource,$defer) {
 		try {
 			var result = scope.Preferences.save({preference_id:preference_id, tag_value:tag_value});
 			console.log(result);
-			scope.preferences[preference_id].data.push(tag_value);
+			//scope.preferences[preference_id].data.push(tag_value);
 			jQuery('#tag_value_'+preference_id).val('');
 		} catch (e) {}
 	};
@@ -54,6 +55,7 @@ function PreferenceCtrl($resource,$defer) {
 
 PreferenceCtrl.prototype = {
 };
+*/
 
 jQuery(document).ready(function() {
 	jQuery(".steps-completed-item a").hover(

@@ -15,13 +15,15 @@
 		<div>Total records: <?php echo isset($results['total_records']) ? $results['total_records'] : 0; ?></div>
 		
 		<div>
+			<?php if (!empty($results['users'])) { ?>
 			<table class="comfortable-table" cellspacing="0">
 				<thead>
 					<tr>
 						<th>User Id</th>
-						<th>Alias</th>
-						<th>Remaining Invites</th>
+						<th>Email</th>
+						<th>Name</th>
 						<th>Last Updated</th>
+						<th>Remaining Invites</th>
 						<th>Option</th>
 					</tr>
 				</thead>
@@ -31,7 +33,7 @@
 						<td><?php echo $user->user_id; ?></td>
 						<td style="text-align: left;">
 							<div class="bubbleInfo">
-								<span class="trigger"><?php echo $user->alias ?></span>
+								<span class="trigger"><?php echo !empty($user->alias) ? $user->alias : "[ no alias ]"?></span>
 								<div class="popup">
 									<a href="<?php echo $user->lunchsparks ?>">
 										<img src="<?php echo $user->profile_img ?>">
@@ -39,8 +41,9 @@
 								</div>
 							</div>
 						</td>
-						<td><span id="<?php echo $user->user_id; ?>_invitation_left"><?php echo $user->invitation_left; ?></span></td>
+						<td style="text-align: left;"><?php echo $user->firstname ?>, <?php echo $user->lastname ?></td>
 						<td><?php echo $user->updated_on; ?></td>
+						<td><span id="<?php echo $user->user_id; ?>_invitation_left"><?php echo $user->invitation_left; ?></span></td>
 						<td>
 							<a href="javascript:void(0)" onclick="addInvitation(<?php echo $user->user_id ?>);">
 								Add
@@ -50,6 +53,8 @@
 					<?php } ?>
 				</tbody>
 			</table>
+			<?php } ?>
+			
 			<?php echo ($pagination_links) ?>
 		</div>
 		
