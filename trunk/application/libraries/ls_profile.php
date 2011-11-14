@@ -24,6 +24,7 @@ class Ls_Profile {
 		$this -> ci -> load -> helper('logger');
 		$this -> ci -> load -> helper('linkedin/linkedin_api');
 		$this -> ci -> load -> model('linkedin/linkedin_model');
+		$this -> ci -> load -> model('invitation_model');
 		$this -> ci -> load -> model('preferences_model');
 		$this -> ci -> load -> model('user_model');
 		$this -> ci -> load -> model('user_rating_model');
@@ -41,9 +42,18 @@ class Ls_Profile {
 
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
 	}
+
+	function _init($user_id) {
+		
+		$this -> ci -> user_profile_model -> select($user_id);
+		$this -> ci -> user_profile_model -> select_social_links($user_id);
+		$this -> ci -> invitation_model -> selectInvitation($user_id);
+		
+	}
 	
 	function _prepare_profile_data($user_id) {
 		try {
+			$this -> _init($user_id);
 			$this -> _prepare_profile_data_default();
 			
 			#####################

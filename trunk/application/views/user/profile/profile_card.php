@@ -47,23 +47,25 @@
 			<?php if(!empty($profile['positions'])) { ?>
 				<div><strong>Working Experience</strong></div>
 				<ul>
+				<?php $i = 0; ?>
 				<?php foreach($profile['positions'] as $position) { ?>
-						<li><?php echo $position->title ?> at <?php echo $position->company->{'name'} ?></li>
+					<li><?php echo $position->title ?> at <?php echo $position->company->{'name'} ?></li>
+					<?php  if (++$i > 6) { break; }  ?>
 				<?php } ?>
 				</ul>
 			<?php } ?>
 			
-			<?php if(!empty($profile['educations'])) { ?>
+			<?php /*if(!empty($profile['educations'])) { ?>
 			<div><strong>Education</strong></div>
-			<?php foreach($profile['educations'] as $education) { ?>
-				<ul>
-					<li><?php echo $education->{'school-name'} ?> 
-						(<?php echo $education->{'start-date'}->{'year'} ?> - 
-						<?php echo $education->{'end-date'}->{'year'} ?>)
-					</li>
-				</ul>
-			<?php } ?>
-			<?php } ?>
+				<?php foreach($profile['educations'] as $education) { ?>
+					<ul>
+						<li><?php echo $education->{'school-name'} ?> 
+							(<?php echo $education->{'start-date'}->{'year'} ?> - 
+							<?php echo $education->{'end-date'}->{'year'} ?>)
+						</li>
+					</ul>
+				<?php } ?>
+			<?php } */ ?>
 		</div>
 	</div>
 </div>

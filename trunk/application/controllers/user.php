@@ -21,11 +21,11 @@ class User extends CI_Controller {
 		$this -> load -> library('input');
 		$this -> load -> library('ls_profile');
 		$this -> load -> model('linkedin/linkedin_model');
-		$this -> load -> model('preferences_model');
-		$this -> load -> model('user_rating_model');
-		$this -> load -> model('user_lunch_wishlist_model');
-		$this -> load -> model('user_lunch_buddy_model');
 		$this -> load -> model('page_steps_completed_model');
+		$this -> load -> model('preferences_model');
+		$this -> load -> model('user_lunch_buddy_model');
+		$this -> load -> model('user_lunch_wishlist_model');
+		$this -> load -> model('user_rating_model');
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
@@ -106,11 +106,7 @@ class User extends CI_Controller {
 			
 		} else {
 			
-			$results = $this -> preferences_model -> selectForCurrentUser();
-			$this -> data['preferences'] =  json_encode($results);
-			$this -> data['networking'] =  $results;
-			$this -> data['career'] =  $results;
-			$this -> data['offer'] =  $results;
+			$this -> data['preferences'] = $this -> preferences_model -> selectForCurrentUser();
 			
 			// Render views
 			$this -> data['tpl_page_id'] = 'preferences';
@@ -122,15 +118,11 @@ class User extends CI_Controller {
 
 	function _preferences_json() {
 		
-		$preferences_id = $this->uri->segment(3);
-		$tag_value = $this->uri->segment(4);
+		/*$preferences_id	= $this->uri->segment(3);
+		$tag_value		= $this->uri->segment(4);*/
 		
-		//$preferences_ref_id = isset($_REQUEST['preferences_ref_id']) ? $_REQUEST['preferences_ref_id'] : '';
-		//$tag_value = isset($_REQUEST['tag_value']) ? $_REQUEST['tag_value'] : '';
-		//$preferences_ref_id = isset($_POST['preferences_ref_id']) ? $_POST['preferences_ref_id'] : '';
-		//$tag_value = isset($_POST['tag_value']) ? $_POST['tag_value'] : '';
-		
-		//$this -> request_method = 'POST';
+		$preferences_id	= isset($_REQUEST['preference_id']) ? $_REQUEST['preference_id'] : '';
+		$tag_value	= isset($_REQUEST['preference_tag']) ? $_REQUEST['preference_tag'] : '';
 		
 		switch ($this -> call) {
 			case 'get' : 
@@ -151,11 +143,10 @@ class User extends CI_Controller {
 				}
 				break;
 			default :
-				$results = 'error';
+				$this->$json_result['error'] = TRUE;
+				$results = FALSE;
 		}
 		
-			//var_dump($results);
-			//die();
 		$this -> _json_prep($results);
 	}
 
@@ -200,14 +191,13 @@ class User extends CI_Controller {
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 		header('Content-type: application/json');
 		
-		
 		if ($this -> callback) {
-			$json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
-			$json_result['results'][] = $results;
-			print_r($this -> callback. '('.json_encode($json_result) .')');
+			$this->json_result['completed_in']	=  number_format(time() - $this -> start_time, 3, '.', '');
+			$this->json_result['results'][]		= $results;
+			print_r($this -> callback. '('.json_encode($this->json_result) .')');
 		} else {
-			$json_result = $results;
-			print_r(json_encode($json_result));
+			$this->json_result['results'] = $results;
+			print_r(json_encode($this->json_result));
 		}
 		
 	}

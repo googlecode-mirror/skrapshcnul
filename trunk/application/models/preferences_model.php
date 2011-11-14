@@ -1,37 +1,19 @@
 <?php
 
 class Preferences_Model extends CI_Model {
-
-	function insertForCurrentUser($preferences_ref_id, $tag_value) {
-		$user_id = $this -> session -> userdata('user_id');
-		$tag_value = trim($tag_value);
+	
+	public $tables = array();
+	
+	public function __construct() {
 		
-		$data_arr = $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
-		//$data = !empty($result[0]->data) ? $result[0]->data : '';
-		/*if(empty($data_arr)) {
-			$query = 
-				" INSERT INTO lss_users_preferences (user_id, preferences_ref_id, data, created_on, updated_on, is_deleted) " . 
-				" VALUES ('$user_id', '$preferences_ref_id', '$tag_value', NOW(), NOW(), 0);";
-			$mysql_result = $this -> db -> query($query);
-		} else {
-		}*/
+		parent::__construct();
 		
-		if ($tag_value) {
-			if (!in_array($tag_value, $data_arr)) {
-				array_push($data_arr, $tag_value);
-				$data = implode(',', $data_arr);
-				$query = 
-					" UPDATE lss_users_preferences " .
-					" SET data = '$data', updated_on = NOW() " . 
-					" WHERE user_id = $user_id " .
-					" AND preferences_ref_id = $preferences_ref_id ;";
-				$mysql_result = $this -> db -> query($query);
-			}
-		}
+		// Table names
+		$this -> tables['users_preferences'] = "lss_users_preferences";
+		$this -> tables['global_preferences'] = "lss_global_preferences";
 		
-		return $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
 	}
-
+	
 	function selectForCurrentUser() {
 		$user_id = $this -> session -> userdata('user_id');
 		$query = 
@@ -125,12 +107,44 @@ class Preferences_Model extends CI_Model {
 		return $result;
 	}
 
+	function insertForCurrentUser($preferences_ref_id, $tag_value) {
+		$user_id = $this -> session -> userdata('user_id');
+		$tag_value = urldecode(trim($tag_value));
+		
+		if (!isset($tag_value) || empty($tag_value)) {
+			return FALSE;
+		}
+		
+		$data_arr = $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
+		
+		if (!in_array($tag_value, $data_arr)) {
+			array_push($data_arr, $tag_value);
+			$data = implode(',', $data_arr);
+			$query = 
+				" UPDATE lss_users_preferences " .
+				" SET data = '$data', updated_on = NOW() " . 
+				" WHERE user_id = $user_id " .
+				" AND preferences_ref_id = $preferences_ref_id ;";
+			$mysql_result = $this -> db -> query($query);
+			
+			$this->_global_preferences_add($tag_value);
+			
+		}
+		
+		return $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
+	}
+	
 	function deleteForCurrentUser($preferences_ref_id, $tag_value) {
 		$user_id = $this -> session -> userdata('user_id');
-		$tag_value = trim($tag_value);
+		$tag_value = urldecode(trim($tag_value));
 		
-		if($tag_value) {
-			$data_arr = $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
+		if (!isset($tag_value) || empty($tag_value)) {
+			return FALSE;
+		}
+		
+		$data_arr = $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
+		
+		if (in_array($tag_value, $data_arr)) {
 			$remo_arr = explode(',', $tag_value);
 			$data_arr = array_diff($data_arr, $remo_arr);
 
@@ -141,9 +155,61 @@ class Preferences_Model extends CI_Model {
 				" WHERE user_id = $user_id " .
 				" AND preferences_ref_id = $preferences_ref_id ;";
 			$mysql_result = $this -> db -> query($query);
+			
+			$this -> _global_preferences_delete($tag_value);
 		}
 		
 		return $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
+	}
+	
+	##########################
+	## Global Preference Data
+	##########################
+	
+	function _global_preferences_select_count($keywords) {
+		$query = $this->db->select('*')
+			     ->where('keywords', $keywords)
+			     ->limit(1)
+			     ->get($this->tables['global_preferences']);
+
+	    $result = $query->row();
+
+	    if ($query->num_rows() !== 1)
+	    {
+		return FALSE;
+	    }
+	}
+	
+	function _global_preferences_add($keywords) {
+		
+		if(!$keywords) {
+			return FALSE;
+		} 
+		
+		$query = 
+			" INSERT INTO " . $this -> tables['global_preferences'] . 
+			" (`keywords`, `count`, `updated_on`) " . 
+			" VALUES ('$keywords', 1, NOW()) " .
+			" ON DUPLICATE KEY UPDATE COUNT = COUNT + 1, updated_on = NOW();";
+		return $this -> db -> query($query);
+	}
+	
+	function _global_preferences_delete($keywords) {
+		
+		if(!$keywords) {
+			return FALSE;
+		} 
+		
+		$query = 
+			" INSERT INTO " . $this -> tables['global_preferences'] . 
+			" (keywords, count, updated_on) " . 
+			" VALUES ('$keywords', 0, NOW()) " .
+			" ON DUPLICATE KEY UPDATE COUNT = COUNT - 1, updated_on = NOW();";
+		return $this -> db -> query($query);
+	}
+	
+	function _global_preferences_recount($keywords) {
+		
 	}
 	
 }

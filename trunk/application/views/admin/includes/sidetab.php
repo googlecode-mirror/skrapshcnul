@@ -9,10 +9,10 @@
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'users_invites') ? 'active' : '';?>">
 			<?php echo anchor('admin/dashboard/users_invites', 'Users Invitations', 'id="a-s-security" class="a-s-icon-xlhdpi"'); ?>
 		</li>
-		<?php /*
-		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'mobile') ? 'active' : '';?>">
-			<?php echo anchor('settings/notifications', 'Notifications', 'id="a-s-mobile" class="a-s-icon-xlhdpi"'); ?>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'preferences') ? 'active' : '';?>">
+			<?php echo anchor('admin/dashboard/preferences', 'Preferences', 'id="a-s-mobile" class="a-s-icon-xlhdpi"'); ?>
 		</li>
+		<?php /*
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'privacy') ? 'active' : '';?>">
 			<?php echo anchor('settings/privacy', 'Privacy', 'id="a-s-privacy" class="a-s-icon-xlhdpi"'); ?>
 		</li>

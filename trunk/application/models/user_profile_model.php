@@ -7,7 +7,7 @@ class User_Profile_model extends CI_Model {
 
 	const _TABLE_ = "lss_users_profile";
 	const _TABLE_SOCIAL_LINKS = "lss_users_profile_social_links";
-
+	
 	function select($user_id) {
 
 		if (!$user_id) {
@@ -19,7 +19,13 @@ class User_Profile_model extends CI_Model {
 		if ($mysql_result -> num_rows() > 0) {
 			return $mysql_result -> row_array();
 		} else {
-			return FALSE;
+			$query = 
+				" INSERT INTO " . self::_TABLE_ . 
+				" (user_id, updated_on) " . 
+				" VALUES ('$user_id', NOW()) ";
+			$this -> db -> query($query);
+			
+			return $this->select($user_id);
 		}
 	}
 
@@ -86,7 +92,7 @@ class User_Profile_model extends CI_Model {
 		if (isset($data['firstname']) && !empty($data['firstname'])) {
 			 $firstname = $data['firstname'];
 		} else {
-			$firstname = $isset($fields['firstname']) ? $fields['firstname'] : "";
+			$firstname = isset($fields['firstname']) ? $fields['firstname'] : "";
 		}
 		## Lastname
 		if (isset($data['lastname']) && !empty($data['lastname'])) { $lastname =  $data['lastname'];
@@ -114,10 +120,9 @@ class User_Profile_model extends CI_Model {
 		
 		// DB Query
 		$query = "INSERT INTO " . self::_TABLE_ . 
-			" (user_id, alias, firstname, lastname, mobile_number, delivery_email, profile_img, updated_on) " . 
-			" VALUES ('$user_id', '$alias', '$firstname', '$lastname', '$mobile_number', '$delivery_email', '$profile_img', NOW()) " . 
+			" (user_id, firstname, lastname, mobile_number, delivery_email, profile_img, updated_on) " . 
+			" VALUES ('$user_id', '$firstname', '$lastname', '$mobile_number', '$delivery_email', '$profile_img', NOW()) " . 
 			" ON DUPLICATE KEY UPDATE " .
-				" `alias` = '$alias', ".
 				" `firstname` = '$firstname', " .
 				" `lastname` = '$lastname', " .
 				" `mobile_number` = '$mobile_number', " .
@@ -167,7 +172,13 @@ class User_Profile_model extends CI_Model {
 		if ($mysql_result -> num_rows() > 0) {
 			return $mysql_result -> row_array();
 		} else {
-			return FALSE;
+			$query = 
+				" INSERT INTO " . self::_TABLE_SOCIAL_LINKS . 
+				" (user_id, lunchsparks, updated_on) " . 
+				" VALUES ('$user_id', '".base_url("/pub/".$user_id)."', NOW()) ";
+			$this -> db -> query($query);
+			
+			return $this->select_social_links($user_id);
 		}
 	}
 	
