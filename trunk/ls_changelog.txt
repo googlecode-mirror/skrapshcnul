@@ -1,3 +1,10 @@
+## 2011-11-15 - Rev69
++ [Fix] User Preferences
++ [Add] Recount function for global preference in Admin panel.+ [Fix] User preferences.
++ [DB] Global preference keyword.
++ [Add] Global preference keyword statistic in Admin Panel.
++ [Fix] Invitation_Model select()
+
 ## 2011-11-13 - Rev65
 + [Added] Admin Panel to view users, add invitations for users
 

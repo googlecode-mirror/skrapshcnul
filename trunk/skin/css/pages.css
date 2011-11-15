@@ -1,0 +1,40 @@
+
+.c-pages {
+	background: #FFFFFF;
+	margin: 5px 0;
+	padding: 20px 50px;
+	text-align: justify;
+}
+
+.c-pages p {
+	margin: 20px 0;
+}
+
+.page-img-container img {
+	border: 5px solid #EFEFEF;
+	box-shadow: 1px 1px 1px #ccc;
+}
+
+.page-photo-container.profile {
+	width: 150px;
+	margin: 10px;
+	float: left;
+	border: 5px solid #EFEFEF;
+	box-shadow: 1px 1px 1px #ccc;
+}
+
+.page-image-container {
+	width: 150px;
+	height: 200px;
+	overflow: hidden;
+}
+
+.page-photo-container.profile img {
+	max-width: 150px;
+}
+
+.page-image-caption {
+	margin: 5px;
+	text-align: center;
+	font-size: 90%;
+}

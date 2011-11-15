@@ -3,23 +3,36 @@
 		<h1>About</h1>
 		<div>
 			<p>
-				Lunchsparks is a platform connecting professionals with each other.
+				Founded in August 2011, Lunchsparks is an exclusive networking platform that helps connect you with the correct people. Lunchsparks simplifies the whole process of networking and directs you with exactly the person you are looking for. Lunchsparks allows you to networking effectively despite your busy schedule and recommends you to the right people who are professionally relevant to you. With Lunchsparks, you decide who you want to meet.
 			</p>
 			<p>
-				We believe that ultimately, it is whom you know that determines how far you go. Our goal is to make networking effective and efficient by ensuring that you are paired up with someone who is relevant professionally to you through our platform, as defined by yourself.
+				When we design the system, we want to make sure that the person that we connect you to clicks instantly with you, and that the time spent is a quality one. Your connected lunch/meetup partner will be someone that has potential value to you. Through our algorithm, we maximize the value created through the networking session over lunch, thereby increasing the chances of collaboration and partnership, making great contacts for your career.
 			</p>
 			<p>
-				When we design the algorithm, we want to make sure that the person that we connect you to clicks instantly with you, and that the time spent is a quality one. Your connected lunch/meetup partner will be someone that has potential value to you.
+				Increasing your business network can mean the difference between success and obscurity. Lunchsparks uses the time you have at lunch to have you meet other professionals, including those that are beyond your network.
 			</p>
 			<p>
-				Increasing your business network can mean the difference between success and obscurity. Lunchsparks uses the time you have at lunch to have you meet other professionals, using a unique algorithm that finds relevant people you don't know yet.
+				Lunchsparks is founded by Jacky Yap, Goh Bing Han and Nguyen Hoanh Tien and is based in Singapore.
 			</p>
 			<p>
-				Lunchsparks is founded by Jacky Yap, Goh Bing Han and Nguyen Hoanh Tien
+				
+				<div class="page-photo-container profile">
+					<div class="page-image-container">
+						<img src="http://4.bp.blogspot.com/-2hfxcZjXbHo/TsKGl-G__OI/AAAAAAAAE-0/EiwdNq2ZTdA/s1600/jacky_yap.jpg" title="Jacky Yap" />
+					</div>
+				</div>
+				<div class="page-photo-container profile">
+					<div class="page-image-container">
+						<img src="http://2.bp.blogspot.com/-3XOogVNsMxU/TsKGlIYpGtI/AAAAAAAAE-w/N3yyBBDD2hk/s1600/binghan.jpg" title="Bing Han" />
+					</div>
+				</div>
+				<div class="page-photo-container profile">
+					<div class="page-image-container">
+						<img src="http://3.bp.blogspot.com/-Jo5lh-YAO-g/TsKGmSWIx2I/AAAAAAAAE-8/umW9m2-MxV0/s1600/tien.jpg" title="Tien" />
+					</div>
+				</div>
 			</p>
-			<p>
-				<a href="http://blog.lunchsparks.me/?page_id=28">http://blog.lunchsparks.me/?page_id=28</a>
-			</p>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 	<div class="clearfix">&nbsp;</div>
