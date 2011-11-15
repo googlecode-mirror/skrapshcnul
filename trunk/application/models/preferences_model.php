@@ -15,13 +15,16 @@ class Preferences_Model extends CI_Model {
 	}
 	
 	function selectForCurrentUser() {
+			
 		$user_id = $this -> session -> userdata('user_id');
+		
 		$query = 
-			" SELECT id, user_id, lup.preferences_ref_id, preferences_name, description, data, lup.created_on, lup.updated_on " . 
+			" SELECT user_id, lup.preferences_ref_id, preferences_name, description, data, lup.created_on, lup.updated_on " . 
 			" FROM lss_users_preferences AS lup" . 
 			" LEFT JOIN lss_users_preferences_ref AS lupr ON lup.preferences_ref_id = lupr.preferences_ref_id " . 
 			" WHERE user_id = '$user_id' " .
-			" AND is_deleted = 0;";
+			" AND is_deleted = 0 ".
+			" ORDER BY lup.preferences_ref_id ASC;";
 		$mysql_result = $this -> db -> query($query);
 		
 		$result = array();
@@ -36,26 +39,26 @@ class Preferences_Model extends CI_Model {
 			    }
 			    $result[$row['preferences_ref_id']] = $row;
 			}
+			
+			return $result;
 		   
-		} 
-
-		{
-			// DATA completeness check
-			$query = 
-				" SELECT * " . 
-				" FROM lss_users_preferences_ref AS lupf;";
+		} else {
+			
+			## Initialize user preference rows// DATA completeness check
+			$query = " SELECT * FROM lss_users_preferences_ref AS lupf;";
 			$mysql_result = $this -> db -> query($query);
 			foreach ($mysql_result->result_array() as $row)
-			{
-				// Build empty rows
+			{// Build empty rows
 				if (!isset($result[$row['preferences_ref_id']])) {
 					
 					$preferences_ref_id = $row['preferences_ref_id'];
 					
 					// Do INSERT of empty prefereces 
 					$query = 
-						" INSERT INTO lss_users_preferences (user_id, preferences_ref_id, data, created_on, updated_on, is_deleted) " . 
-						" VALUES ('$user_id', '$preferences_ref_id', '', NOW(), NOW(), 0);";
+						" INSERT INTO lss_users_preferences " .
+						" (user_id, preferences_ref_id, data, created_on, updated_on, is_deleted) " . 
+						" VALUES ('$user_id', '$preferences_ref_id', '', NOW(), NOW(), 0) " .
+						" ON DUPLICATE KEY UPDATE updated_on=NOW();";
 					$mysql_result = $this -> db -> query($query);
 					$id = $this -> db -> insert_id();
 					
@@ -67,14 +70,17 @@ class Preferences_Model extends CI_Model {
 				    	'description'=>$row['description']) ;
 				}
 			}
+			
+			return $this->selectForCurrentUser();
+				
 		}
-		return $result;
+
 	}
 	
 	function selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id) {
 		$user_id = $this -> session -> userdata('user_id');
 		$query = 
-			" SELECT id, user_id, lup.preferences_ref_id, preferences_name, description, data, lup.created_on, lup.updated_on " . 
+			" SELECT user_id, lup.preferences_ref_id, preferences_name, description, data, lup.created_on, lup.updated_on " . 
 			" FROM lss_users_preferences AS lup" . 
 			" LEFT JOIN lss_users_preferences_ref AS lupr ON lup.preferences_ref_id = lupr.preferences_ref_id " . 
 			" WHERE user_id = '$user_id' " .
@@ -92,19 +98,6 @@ class Preferences_Model extends CI_Model {
 		    }
 			return $result;
 		}
-	}
-
-	function updateForCurrentUser($preferences_ref_id, $data_item_value) {
-		$user_id = $this -> session -> userdata('user_id');
-		$query = 
-			" UPDATE lss_users_preferences " . 
-			" SET " .
-			" preferences = '" . $preferences . "', ".
-			" updated_on = NOW() " .
-			" WHERE user_id = " . $user_id .
-			" AND is_deleted = 0 ;";
-		$result = $this -> db -> query($query);
-		return $result;
 	}
 
 	function insertForCurrentUser($preferences_ref_id, $tag_value) {
