@@ -143,7 +143,7 @@ class User extends CI_Controller {
 				}
 				break;
 			default :
-				$this->$json_result['error'] = TRUE;
+				$this -> json_result['error'] = TRUE;
 				$results = FALSE;
 		}
 		

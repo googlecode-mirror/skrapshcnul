@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 13, 2011 at 12:51 AM
+-- Generation Time: Nov 15, 2011 at 01:20 AM
 -- Server version: 5.5.13
 -- PHP Version: 5.2.17
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `lss_meta` (
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 -- --------------------------------------------------------
 
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `lss_schedules` (
   `center_lng` double NOT NULL,
   `radius` double NOT NULL,
   KEY `index` (`index`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `lss_users` (
   `last_login` int(11) unsigned DEFAULT NULL,
   `active` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_groups` (
   `user_id` mediumint(8) NOT NULL,
   `group_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=107 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=120 ;
 
 -- --------------------------------------------------------
 
@@ -285,10 +285,26 @@ CREATE TABLE IF NOT EXISTS `lss_users_profile` (
   `lastname` varchar(100) DEFAULT NULL,
   `mobile_number` varchar(50) DEFAULT NULL,
   `delivery_email` varchar(250) DEFAULT NULL,
-  `profile_img` int(11) DEFAULT NULL,
+  `profile_img` varchar(250) DEFAULT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `alias` (`alias`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_profile_social_links`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_profile_social_links` (
+  `user_id` int(11) NOT NULL,
+  `lunchsparks` varchar(250) DEFAULT NULL,
+  `linkedin` varchar(250) DEFAULT NULL,
+  `twitter` varchar(250) DEFAULT NULL,
+  `facebook` varchar(250) DEFAULT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
