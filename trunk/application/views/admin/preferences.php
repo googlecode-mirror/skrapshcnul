@@ -17,6 +17,7 @@
 					<tr>
 						<th>Keywords</th>
 						<th>Count</th>
+						<th>Options</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,6 +25,7 @@
 					<tr>
 						<td><?php echo $preference->keywords ?></td>
 						<td><?php echo $preference->count ?></td>
+						<td><a href="javascript:void(0);" onclick="preference_tag_recount(this);" ls:pref_tag="<?php echo $preference->keywords ?>">Recount</a></td>
 					</tr>
 					<?php } ?>
 				</tbody>

@@ -57,3 +57,16 @@ function preference_tag_delete(el) {
 	});
 }
 
+function preference_tag_recount(el) {
+	var preference_tag = escape(jQuery(el).attr('ls:pref_tag'));
+	
+	jQuery.getJSON('/json/preferences', 
+		{alt: 'json', call: 'gselect', preference_tag: preference_tag}, 
+		function(data){
+			console.log(data);
+			if (data.results) {
+				console.log(data.results.count);
+				jQuery(el).parent().prev().html(data.results.count);
+			}
+	});
+}

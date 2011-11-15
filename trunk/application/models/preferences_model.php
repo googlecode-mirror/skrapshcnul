@@ -127,7 +127,10 @@ class Preferences_Model extends CI_Model {
 				" AND preferences_ref_id = $preferences_ref_id ;";
 			$mysql_result = $this -> db -> query($query);
 			
-			$this->_global_preferences_add($tag_value);
+			if ($this->db->affected_rows() > 0 ) {
+				## Update global preference statistics
+				$this->_global_preferences_add($tag_value);
+			}
 			
 		}
 		
@@ -156,7 +159,10 @@ class Preferences_Model extends CI_Model {
 				" AND preferences_ref_id = $preferences_ref_id ;";
 			$mysql_result = $this -> db -> query($query);
 			
-			$this -> _global_preferences_delete($tag_value);
+			if ($this->db->affected_rows() > 0 ) {
+				## Update global preference statistics
+				$this->_global_preferences_delete($tag_value);
+			}
 		}
 		
 		return $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
@@ -190,7 +196,7 @@ class Preferences_Model extends CI_Model {
 			" INSERT INTO " . $this -> tables['global_preferences'] . 
 			" (`keywords`, `count`, `updated_on`) " . 
 			" VALUES ('$keywords', 1, NOW()) " .
-			" ON DUPLICATE KEY UPDATE COUNT = COUNT + 1, updated_on = NOW();";
+			" ON DUPLICATE KEY UPDATE count = count + 1, updated_on = NOW();";
 		return $this -> db -> query($query);
 	}
 	
@@ -204,12 +210,41 @@ class Preferences_Model extends CI_Model {
 			" INSERT INTO " . $this -> tables['global_preferences'] . 
 			" (keywords, count, updated_on) " . 
 			" VALUES ('$keywords', 0, NOW()) " .
-			" ON DUPLICATE KEY UPDATE COUNT = COUNT - 1, updated_on = NOW();";
+			" ON DUPLICATE KEY UPDATE count = count - 1, updated_on = NOW();";
 		return $this -> db -> query($query);
 	}
 	
-	function _global_preferences_recount($keywords) {
+	function global_preferences_select($keywords) {
 		
+		$keywords = urldecode(trim($keywords));
+		
+		if(!$keywords) {
+			return FALSE;
+		} 
+		
+		$query = 
+			" SELECT COUNT(data) AS count FROM " . $this -> tables['users_preferences'] . 
+			" WHERE data LIKE '%$keywords%' ";
+		$mysql_result = $this -> db -> query($query);
+		
+		$new_count = $mysql_result->row()->count;
+		
+		$query = 
+			" UPDATE " . $this -> tables['global_preferences'] . 
+			" SET count = $new_count ".
+			" WHERE keywords = '$keywords' ";
+		$mysql_result = $this -> db -> query($query);
+		
+		$query = 
+			" SELECT count FROM " . $this -> tables['global_preferences'] . 
+			" WHERE keywords = '$keywords' ";
+		$mysql_result = $this -> db -> query($query);
+		
+		if ($mysql_result->num_rows() > 0) {
+			return $mysql_result->row();
+		} else {
+			return FALSE;
+		}
 	}
 	
 }

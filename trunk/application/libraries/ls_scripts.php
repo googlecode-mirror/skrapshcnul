@@ -43,6 +43,11 @@ class Ls_Scripts {
 			'skin/css/fonts/open_sans.css',
 		);
 		
+		if(isset($_REQUEST['minify']) && ($_REQUEST['minify']) == 1) {
+			$scripts['css_combined']	= $this->_minify_css(); 
+			$scripts['js_combined']		= $this->_minify_js();
+		}
+		
 		if (!strstr(base_url(), 'lunchsparks.me')){
 			$scripts['css_combined']	= $this->_normal_css();
 			$scripts['js_combined']		= $this->_normal_js();

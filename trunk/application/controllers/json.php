@@ -15,9 +15,10 @@ class Json extends CI_Controller {
 		$this -> load -> library('input');
 		$this -> load -> database();
 		$this -> load -> helper('url');
-		$this -> load -> model('schedules_model');
 		$this -> load -> model('invitation_model');
 		$this -> load -> model('page_steps_completed_model');
+		$this -> load -> model('preferences_model');
+		$this -> load -> model('schedules_model');
 		$this -> load -> model('user_lunch_wishlist_model');
 		$this -> load -> helper('logger');
 		
@@ -167,6 +168,45 @@ class Json extends CI_Controller {
 		$this->_json_prep($this -> json_result);
 	}
 	
+	function preferences() {
+		
+		$preferences_id	= isset($_REQUEST['preference_id']) ? $_REQUEST['preference_id'] : '';
+		$tag_value	= isset($_REQUEST['preference_tag']) ? $_REQUEST['preference_tag'] : '';
+		
+		switch ($this -> call) {
+			case 'get' : 
+				$this -> json_result['results'] = $this -> preferences_model -> selectForCurrentUser();
+				break;
+			case 'save' :
+				if ($tag_value) {
+					$this -> json_result['results'] = $this -> preferences_model -> insertForCurrentUser($preferences_id, $tag_value);
+				} else {
+					$this -> json_result['results'] = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
+				}
+				break;
+			case 'delete' :
+				if ($tag_value) {
+					$this -> json_result['results'] = $this -> preferences_model -> deleteForCurrentUser($preferences_id, $tag_value);
+				} else {
+					$this -> json_result['results'] = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
+				}
+				break;
+			case 'gselect' :
+				if ($tag_value) {
+					$this -> json_result['results'] = $this -> preferences_model -> global_preferences_select($tag_value);
+				} else {
+					$this -> json_result['results'] = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
+				}
+				break;
+			default :
+				$this -> json_result['error'] = TRUE;
+				$this -> json_result['results'] = FALSE;
+		}
+		
+		$this->_json_prep($this -> json_result);
+		
+	}
+	
 	function steps_completed_toggle_hide() {
 		
 		if(!$this -> user_id) {
@@ -201,7 +241,9 @@ class Json extends CI_Controller {
 			$this -> json_result['results'][] = $results;
 			print_r($this -> callback. '('.json_encode($this -> json_result) .')');
 		} else {
-			$this -> json_result = $results;
+			if (empty($this -> json_result['results'])) {
+				$this -> json_result['results'] = FALSE;
+			}
 			print_r(json_encode($this -> json_result));
 		}
 		
