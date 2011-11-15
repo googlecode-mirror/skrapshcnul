@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 15, 2011 at 01:20 AM
+-- Generation Time: Nov 15, 2011 at 11:18 AM
 -- Server version: 5.5.13
 -- PHP Version: 5.2.17
 
@@ -19,6 +19,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `binghan_lsparks`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_global_preferences`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_global_preferences` (
+  `keywords` varchar(100) NOT NULL,
+  `count` int(11) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`keywords`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -211,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=120 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=129 ;
 
 -- --------------------------------------------------------
 
@@ -248,15 +261,14 @@ CREATE TABLE IF NOT EXISTS `lss_users_lunch_wishlist` (
 --
 
 CREATE TABLE IF NOT EXISTS `lss_users_preferences` (
-  `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(11) NOT NULL,
   `preferences_ref_id` int(11) NOT NULL,
   `data` text NOT NULL,
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   `is_deleted` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+  PRIMARY KEY (`user_id`,`preferences_ref_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
