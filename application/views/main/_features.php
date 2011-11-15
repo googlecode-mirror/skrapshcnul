@@ -36,7 +36,7 @@
 				<span>Build Reputation</span>
 			</div>
 			<div class="description">
-				Our Users with the highest feedback score are invited to Super lunches with high profile professionals and entrepreneurs. This selection is based on merit only.
+				Your online reputation is combined with feedbacks from users that had lunch with you to reflect your Lunchsparks reputation. This ensures that you meet with relevant and awesome users as well.
 			</div>
 		</div>
 		<div class="feature-item">

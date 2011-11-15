@@ -5,13 +5,13 @@
 			Your privacy is critically important to us.
 		</p>
 		<p>
-			Lunchsparks.me ("Service") strongly support online privacy and individual rights. We only collect data necessary to run the Service effectively. Any data you share through and store on the Service is treated as confidential. We don't sell it or share it with anyone, unless required by law. Below are some specific questions we get and answers to them.
+			Lunchsparks.me (“Service”) strongly support online privacy and individual rights. We only collect data necessary to run the Service effectively. Any data you share through and store on the Service is treated as confidential. We don’t sell it or share it with anyone, unless required by law. Below are some specific questions we get and answers to them.
 		</p>
 		<p>
 			<strong>What information is collected about me?</strong>
 		</p>
 		<p>
-			We collect data you provide us at sign-up, specifically, when you are prompt to enter your Facebook profile and Linkedin Profile, thereby authorizing us to access your data on both the platform. It is assumed that you comply to the privacy policy of the respective platforms. We do not ask for any other personal identifying information. We may collect data from users about other users. We protect this data and the anonymity of users who provide it. We do not collect data without your knowledge.
+			We collect data you provide us at sign-up, specifically, when you are prompt to enter your Linkedin Profile, thereby authorizing us to access your data on the platform. It is assumed that you comply to the privacy policy of the platform. We do not ask for any other personal identifying information. We may collect data from users about other users. We protect this data and the anonymity of users who provide it. We do not collect data without your knowledge.
 		</p>
 		<p>
 			<strong>How do you use collected information?</strong>

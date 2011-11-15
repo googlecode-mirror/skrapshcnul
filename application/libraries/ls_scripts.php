@@ -35,6 +35,7 @@ class Ls_Scripts {
 			'skin/css/invitation.css',
 			'skin/css/layout.css',
 			'skin/css/notification_icons.css',
+			'skin/css/pages.css',
 			'skin/css/schedules.css',
 			'skin/css/style.css',
 			'skin/css/tables.css',
