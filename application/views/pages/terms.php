@@ -2,7 +2,7 @@
 	<div class="c-pages shadow-rounded">
 		<h1>Terms</h1>
 		<p>
-			By using the Lunchsparks.me web site (“Service”), (other than to read this page for the first time), you agree to be bound by the following terms and conditions (“Terms of Service”).
+			By using the Lunchsparks.me web site ("Service"), (other than to read this page for the first time), you agree to be bound by the following terms and conditions ("Terms of Service").
 		</p>
 		<p>
 			Company reserves the right to update and change the Terms of Service from time to time without notice. Any new features that augment or enhance the current Service, including the release of new tools and resources, shall be subject to the Terms of Service. Continued use of the Service after any such changes shall constitute your consent to such changes. You can review the most current version of the Terms of Service at any time at: www.lunchsparks.me/terms.
@@ -17,7 +17,7 @@
 			You must be 18 years or older to use this Service.
 		</p>
 		<p>
-			You must be a human. Accounts registered by “bots” of other automated methods are not permitted.
+			You must be a human. Accounts registered by "bots" of other automated methods are not permitted.
 		</p>
 		<p>
 			You must provide your legal full name, a valid email address, and any other truthful information requested in order to complete the sign-up process.
@@ -65,7 +65,7 @@
 			<strong>General Conditions</strong>
 		</p>
 		<p>
-			Your use of the Service is at your sole risk. The service is provided on an “as is” and “as available” basis. Verbal, physical, written or other abuse (including threats of abuse or retribution) of any Company customer, employee, member, or officer will result in immediate account termination.
+			Your use of the Service is at your sole risk. The service is provided on an "as is" and "as available" basis. Verbal, physical, written or other abuse (including threats of abuse or retribution) of any Company customer, employee, member, or officer will result in immediate account termination.
 		</p>
 		<p>
 			You expressly understand and agree that Company shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for use, goodwill, data or other intangible losses (even if Company has been advised of the possibility of such damages), resulting from: (i) the use or the inability to use the Service; (ii) statements or conduct of any third party on the Service; (iii) or any other matter relating to the Service.

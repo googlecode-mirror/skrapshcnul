@@ -23,7 +23,7 @@
 		<p>
 			<strong>Q: How much does this cost?</strong>
 			<br />
-			A: Setting up your profile and search preferences and scheduling meetings or joining someone else’s meeting is totally free. You only pay for your lunch.
+			A: Setting up your profile and search preferences and scheduling meetings or joining someone else's meeting is totally free. You only pay for your lunch.
 		</p>
 		<p>
 			<strong>Q: What should we talk about during the lunch?</strong>
@@ -48,7 +48,7 @@
 		<p>
 			<strong>Q: How do I cancel a lunch?</strong>
 			<br />
-			A: We understand that schedules can change, even last minute. But once you have accepted a lunch or someone has accepted a lunch you created, you can only cancel the lunch by directly contacting your lunch partner. Click on your Booked lunch on your event dashboard to display that person’s contact information. You can cancel an Open lunch by opening that lunch on your calendar and clicking “Cancel.”
+			A: We understand that schedules can change, even last minute. But once you have accepted a lunch or someone has accepted a lunch you created, you can only cancel the lunch by directly contacting your lunch partner. Click on your Booked lunch on your event dashboard to display that person's contact information. You can cancel an Open lunch by opening that lunch on your calendar and clicking "Cancel."
 		</p>
 		<p>
 			<strong>Q: How can I browse all users on Lunchsparks?</strong>

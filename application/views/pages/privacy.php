@@ -5,7 +5,7 @@
 			Your privacy is critically important to us.
 		</p>
 		<p>
-			Lunchsparks.me (“Service”) strongly support online privacy and individual rights. We only collect data necessary to run the Service effectively. Any data you share through and store on the Service is treated as confidential. We don’t sell it or share it with anyone, unless required by law. Below are some specific questions we get and answers to them.
+			Lunchsparks.me ("Service") strongly support online privacy and individual rights. We only collect data necessary to run the Service effectively. Any data you share through and store on the Service is treated as confidential. We don't sell it or share it with anyone, unless required by law. Below are some specific questions we get and answers to them.
 		</p>
 		<p>
 			<strong>What information is collected about me?</strong>

@@ -76,12 +76,17 @@ class Schedules extends CI_Controller {
 	}
 	
 	function edit() {
+		
 		// Check if the schedule id is present
 		$array = $this->uri->uri_to_assoc(3);
 		if(isset($array['id']) && !empty($array['id'])) {
-			$schedule_id = $array['id'];
+			$this -> schedule_id = $array['id'];
 		} else {
 			redirect('/404/', 'refresh');
+		}
+		
+		if ($this->input->post()) {
+			$this -> _update();
 		}
 		
 		// Check if user is logged in
@@ -89,12 +94,21 @@ class Schedules extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		} else {
+				
+			$schedule = $this -> schedules_model -> selectSchedule($this -> schedule_id);
+			$this -> data['schedule'] = $schedule;
+			if ($schedule['repeat_params']) {
+				$repeat_params = explode(",", $schedule['repeat_params']);
+				$this -> data['schedule']['repeat_frequency'] = current($repeat_params);
+				$this -> data['schedule']['repeat_days'] = explode("|", end($repeat_params));
+			}
+			
 			$this -> data['timepicker'] = true;
 			// load timepicker js
 			$this -> data['googlemap'] = true;
 			// load google map js
 
-			$this -> data['tpl_page_id'] = 'add';
+			$this -> data['tpl_page_id'] = 'edit';
 			$this -> data['main_content'] = 'schedules/edit';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}
@@ -126,6 +140,39 @@ class Schedules extends CI_Controller {
 			$this -> input -> post("center_lng"), 
 			$this -> input -> post("radius"),
 			$this->repeat);
+		redirect('schedules', 'refresh');
+	}
+
+
+	function _update() {
+		
+		if($this -> input -> post("schedule_repeat")) {
+			$repeat['repeat_frequency'] = $this -> input -> post("repeat_frequency");
+			if (trim($this -> input -> post("SU"))) $repeat_day[] = "SU";
+			if (trim($this -> input -> post("MO"))) $repeat_day[] = "MO";
+			if (trim($this -> input -> post("TU"))) $repeat_day[] = "TU";
+			if (trim($this -> input -> post("WE"))) $repeat_day[] = "WE";
+			if (trim($this -> input -> post("TH"))) $repeat_day[] = "TH";
+			if (trim($this -> input -> post("FR"))) $repeat_day[] = "FR";
+			if (trim($this -> input -> post("SA"))) $repeat_day[] = "SA";
+			$repeat['repeat_day'] = implode('|', $repeat_day);
+		}
+		$this -> repeat_params = implode(',', $repeat);
+		
+		## Prepare Data Fields.
+		$fields['user_id']			= $this -> user_id;
+		$fields['schedule_id']		= $this -> schedule_id;
+		$fields['name']				= $this -> input -> post("name");
+		$fields['start_date']		= $this -> input -> post("start_date");
+		$fields['start_time']		= $this -> input -> post("start_time");
+		$fields['end_date']			= $this -> input -> post("start_date");
+		$fields['end_time']			= $this -> input -> post("end_time");
+		$fields['repeat_params']	= $this -> repeat_params;
+		$fields['center_lat']		= $this -> input -> post("center_lat");
+		$fields['center_lng']		= $this -> input -> post("center_lng");
+		$fields['radius']			= $this -> input -> post("radius");
+		
+		$result = $this -> schedules_model -> updateScheduleForCurrentUser($fields);
 		redirect('schedules', 'refresh');
 	}
 
