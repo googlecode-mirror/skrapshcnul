@@ -17,9 +17,24 @@
 		</div>
 		<div class="clearfix">&nbsp;</div>
 		
-		<div class="dashboard-activity">
-			<?php $this -> load -> view("pub/profile/upcoming_lunches.php");?>
-			<?php $this -> load -> view("pub/profile/activities.php");?>
+		<div id="tabs" class="dashboard-activity" style="border: 1px solid #EFEFEF;">
+			<ul>
+				<li><a href="#tabs-1">Activites</a></li>
+				<li><a href="#tabs-2">Preferences</a></li>
+			</ul>
+			
+			<div id="tabs-1">
+				<?php $this -> load -> view("user/profile/upcoming_lunches.php");?>
+				<?php $this -> load -> view("user/profile/activities.php");?>
+			</div>
+			<div id="tabs-2">
+				<?php $this -> load -> view("user/profile/preferences.php");?>
+			</div>
+			<script>
+			jQuery(function() {
+				jQuery( "#tabs" ).tabs();
+			});
+			</script>
 		</div>
 		<div class="clearfix">&nbsp;</div>
 	</div>

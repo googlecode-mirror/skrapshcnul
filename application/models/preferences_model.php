@@ -15,10 +15,8 @@ class Preferences_Model extends CI_Model {
 		
 	}
 	
-	function selectForCurrentUser() {
+	function selectPreferences($user_id) {
 			
-		$user_id = $this -> session -> userdata('user_id');
-		
 		$query = 
 			" SELECT user_id, lup.preferences_ref_id, preferences_name, description, data, lup.created_on, lup.updated_on " . 
 			" FROM lss_users_preferences AS lup" . 
@@ -72,10 +70,14 @@ class Preferences_Model extends CI_Model {
 				}
 			}
 			
-			return $this->selectForCurrentUser();
+			return $this->selectPreferences($user_id);
 				
 		}
-
+	}
+	
+	function selectForCurrentUser() {
+		$user_id = $this -> session -> userdata('user_id');
+		return $this->selectPreferences($user_id);
 	}
 	
 	function selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id) {
