@@ -62,6 +62,7 @@ class Pub extends CI_Controller {
 		$this -> data['profile']		= $this -> ls_profile -> _prepare_profile_data($this->data['target_user_id']);
 		$this -> data['profile_stats']	= $this -> ls_profile -> _prepare_profile_statistics($this->data['target_user_id']);
 		$this -> data['profile']['social_links'] = $this -> ls_profile -> prepare_profile_social_links($this->data['target_user_id']);
+		$this -> data['preferences'] = $this -> preferences_model -> selectPreferences($this->data['target_user_id']);
 		
 		// Render views
 		$this -> data['tpl_page_id'] = 'profile';

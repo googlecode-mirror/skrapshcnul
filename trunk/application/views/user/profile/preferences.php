@@ -21,10 +21,12 @@
 			</div>
 		<?php } ?>
 	<?php } ?>
-	<div>How I like to add value</div>
+	
+	
+	<?php /* <div>How I like to add value</div>
 	<div>What I'm looking for</div>
 	<div>What I've done</div>
-	<div></div>
+	<div></div> */ ?>
 	
 	
 	
