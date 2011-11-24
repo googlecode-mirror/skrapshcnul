@@ -9,8 +9,9 @@ class Preferences_Model extends CI_Model {
 		parent::__construct();
 		
 		// Table names
-		$this -> tables['users_preferences'] = "lss_users_preferences";
-		$this -> tables['global_preferences'] = "lss_global_preferences";
+		$this -> tables['users_preferences']	= "lss_users_preferences";
+		$this -> tables['global_preferences']	= "lss_global_preferences";
+		$this -> tables['users_profile']		= "lss_users_profile";
 		
 	}
 	
@@ -161,22 +162,25 @@ class Preferences_Model extends CI_Model {
 		return $this -> selectForCurrentUser_data_byPreferencesRefId($preferences_ref_id);
 	}
 	
-	##########################
-	## Global Preference Data
-	##########################
+	############################
+	## Global Preference Data ##
+	############################
 	
-	function _global_preferences_select_count($keywords) {
-		$query = $this->db->select('*')
-			     ->where('keywords', $keywords)
-			     ->limit(1)
-			     ->get($this->tables['global_preferences']);
-
-	    $result = $query->row();
-
-	    if ($query->num_rows() !== 1)
-	    {
-		return FALSE;
-	    }
+	function global_preferences_select_count($keywords) {
+		$keywords = urldecode($keywords);
+		
+		$query = 
+			" SELECT * FROM " . $this->tables['global_preferences'] . 
+			" WHERE `keywords` LIKE '%$keywords%' " . 
+			" LIMIT 0, 50";
+		//echo $query;
+		$mysql_result = $this -> db -> query($query);
+		
+		if ($mysql_result->num_rows() > 0) {
+			return $mysql_result->result_array();
+		} else {
+			return FALSE;
+		}
 	}
 	
 	function _global_preferences_add($keywords) {
@@ -207,7 +211,7 @@ class Preferences_Model extends CI_Model {
 		return $this -> db -> query($query);
 	}
 	
-	function global_preferences_select($keywords) {
+	function global_preferences_recount($keywords) {
 		
 		$keywords = urldecode(trim($keywords));
 		
@@ -240,5 +244,33 @@ class Preferences_Model extends CI_Model {
 		}
 	}
 	
+	###############################
+	## Preferences Search ##
+	###############################
+	
+	function searchTag($keywords) {
+		
+		$keywords = urldecode(trim($keywords));
+		
+		if(!$keywords) {
+			return FALSE;
+		}
+		
+		$query = 
+			" SELECT * FROM " . $this -> tables['users_preferences'] . " AS upre " . 
+			" LEFT JOIN " . $this -> tables['users_profile'] . " AS up " .
+			" ON `up`.`user_id` = `upre`.`user_id` " .
+			" WHERE data LIKE '%$keywords%' " .
+			" LIMIT 0, 500 ";
+		$mysql_result = $this -> db -> query($query);
+		
+		if ($mysql_result->num_rows() > 0) {
+			return $mysql_result->result_array();
+		} else {
+			return FALSE;
+		}
+		
+		
+	}
 }
 ?>

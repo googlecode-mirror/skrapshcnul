@@ -191,9 +191,9 @@ class Json extends CI_Controller {
 					$this -> json_result['results'] = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
 				}
 				break;
-			case 'gselect' :
+			case 'global_recount' :
 				if ($tag_value) {
-					$this -> json_result['results'] = $this -> preferences_model -> global_preferences_select($tag_value);
+					$this -> json_result['results'] = $this -> preferences_model -> global_preferences_recount($tag_value);
 				} else {
 					$this -> json_result['results'] = $this -> preferences_model -> selectForCurrentUser_byPreferencesRefId($preferences_id);
 				}
@@ -229,6 +229,10 @@ class Json extends CI_Controller {
 		}
 		
 		$this->_json_prep($this -> json_result);
+	}
+	
+	function test() {
+		var_dump($_REQUEST);
 	}
 	
 	function _json_prep($results) {

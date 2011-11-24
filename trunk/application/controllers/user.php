@@ -75,6 +75,7 @@ class User extends CI_Controller {
 		$this -> data['profile']		= $this -> ls_profile -> _prepare_profile_data($this->user_id);
 		$this -> data['profile_stats']	= $this -> ls_profile -> _prepare_profile_statistics($this->user_id);
 		$this -> data['profile']['social_links'] = $this -> ls_profile -> prepare_profile_social_links($this->user_id);
+		$this -> data['preferences'] = $this -> preferences_model -> selectForCurrentUser();
 		
 		// Initialize
 		if ($this -> session -> userdata('linkedin_pulled') == NULL) {

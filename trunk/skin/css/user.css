@@ -1,3 +1,4 @@
+@charset "utf-8";
 #ls_cover {
 	height: 10px;
 	position: relative;
@@ -401,10 +402,53 @@ height: 48px;
 }
 .preferences-data-item-content {
 	background: #232323;
+	font-size: 13px;
 	color: white;
-	padding: 5px;
+	margin: 0px 2px 0px 15px;
 	display: inline-block;
 	float: left;
+	position: relative;
+	border-radius: 0px 4px 4px 0px;
+}
+.preferences-data-item-content:hover {
+	background: #646464;
+}
+.preferences-data-item-content div {
+	padding: 5px 10px;
+}
+.preferences-data-item-content div::before {
+	content: "";
+	float: left;
+	position: absolute;
+	top: 0;
+	left: -13px;
+	width: 0;
+	height: 0;
+	border-color: transparent #232323 transparent transparent;
+	border-style: solid;
+	border-width: 13px 13px 13px 0;
+}
+.preferences-data-item-content div:hover::before {
+	border-color: transparent #646464 transparent transparent;
+}
+.preferences-data-item-content div::after {
+	content: "";
+	position: absolute;
+	top: 12px;
+	left: 0;
+	float: left;
+	width: 4px;
+	height: 4px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	background: white;
+	-moz-box-shadow: -1px -1px 2px #004977;
+	-webkit-box-shadow: -1px -1px 2px #004977;
+	box-shadow: -1px -1px 2px #004977;
+}
+.preferences-data-item-content div:hover::after {
+	border-color: transparent #646464 transparent transparent;
 }
 .rating-points {
 	text-align: center;
