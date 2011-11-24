@@ -31,12 +31,11 @@ jQuery(document).ready(function() {
 function preference_tag_add_html(preference_id, preference_tag) {
 	var el = jQuery(
 		'<div class="preferences-data-item">'+
-			'<img src="/skin/images/tag_before.png" />'+
 			'<div class="preferences-data-item-content">'+
-				preference_tag+
+				'<div>'+preference_tag+
 				' <a href="javascript:void(0)" class="preference-tag-btn-remove" ls:pref_id="'+preference_id+'" ls:pref_tag="'+preference_tag+'" onclick="preference_tag_delete(this)"> [x] </a>'+
+				'</div>'+
 			'</div>'+
-			'<img src="/skin/images/tag_after.png" />'+
 		'</div>');
 	jQuery("#preferences-data-container-"+preference_id).append(el);
 }
@@ -61,7 +60,7 @@ function preference_tag_recount(el) {
 	var preference_tag = escape(jQuery(el).attr('ls:pref_tag'));
 	
 	jQuery.getJSON('/json/preferences', 
-		{alt: 'json', call: 'gselect', preference_tag: preference_tag}, 
+		{alt: 'json', call: 'global_recount', preference_tag: preference_tag}, 
 		function(data){
 			console.log(data);
 			if (data.results) {

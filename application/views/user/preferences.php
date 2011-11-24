@@ -23,12 +23,12 @@
 				<div id="preferences-data-container-<?php echo $value['preferences_ref_id']; ?>" class="preferences-data">
 					<?php foreach($value['data'] as $tag) { ?>
 						<div class="preferences-data-item">
-							<img src="/skin/images/tag_before.png" />
 							<div class="preferences-data-item-content">
+								<div>
 								<?php echo $tag ?>
 								<a href="javascript:void(0)" class="preference-tag-btn-remove" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" ls:pref_tag="<?php echo $tag; ?>" onclick="preference_tag_delete(this)"> [x] </a>
+								</div>
 							</div>
-							<img src="/skin/images/tag_after.png" />
 						</div>
 					<?php } ?>
 				</div>
