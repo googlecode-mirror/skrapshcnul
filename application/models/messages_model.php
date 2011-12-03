@@ -1,11 +1,11 @@
 <?php
 
 /*
- * Messages is a underneat system for suggestion, chat
+ * Messages is the main system for user communications
  */
 class Messages_Model extends CI_Model {
 
-  const _TABLE_ = "lss_messages";
+  const _TABLE_ = "lss_users_messages";
       
   function clear() { // clear all data in lss_messages table
     $query = "TRUNCATE TABLE " . self::_TABLE_ . ";";

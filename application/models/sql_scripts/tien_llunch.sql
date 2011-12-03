@@ -63,3 +63,83 @@ CREATE TABLE IF NOT EXISTS `lss_suggestion` (
   `expired` tinyint(1) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `lss_0_accepted_recs`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_0_accepted_recs` (
+  `index` int(11) NOT NULL,
+  `valid` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_0_auto_recs`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_0_auto_recs` (
+  `index` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `rec_id` int(11) NOT NULL,
+  `rec_reason` text,
+  `valid` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_0_negotiated_recs`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_0_negotiated_recs` (
+  `index` int(11) NOT NULL,
+  `valid` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_0_selected_recs`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_0_selected_recs` (
+  `index` int(11) NOT NULL,
+  `valid` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_0_successful_recs`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_0_successful_recs` (
+  `index` int(11) NOT NULL,
+  `valid` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_states`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_states` (
+  `user_id` int(11) NOT NULL,
+  `valid` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`,`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
