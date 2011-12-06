@@ -48,9 +48,7 @@ class User_states_model_tests extends Toast
                 
                 // get the state and check consistency
                 $result = $this -> user_states_model -> selectStateByUserId($i);
-                $this -> _assert_equals($result -> num_rows(), 1);
-                $result = $result -> result();
-                $this -> _assert_equals($result[0] -> state, $state);
+                $this -> _assert_equals($result, $state);
             }
         }        
     }

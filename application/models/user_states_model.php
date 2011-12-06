@@ -35,10 +35,15 @@ class User_States_Model extends CI_Model {
         else return FALSE;
     }
         
-    function selectStateByUserId($user_id) {
+    function selectStateByUserId($user_id) { // return state of user as a string
         $query = "SELECT * FROM " . self::_STATE_TABLE_ .
                  " WHERE user_id = '$user_id' AND valid = '1';";
-        return $this -> db -> query($query);
+        $result = $this -> db -> query($query);
+        if ($result -> num_rows() != 1) return NULL; // error or nothing
+        else {
+            $result = $result -> result();
+            return $result[0] -> state;
+        }
     }
 }
 ?>
