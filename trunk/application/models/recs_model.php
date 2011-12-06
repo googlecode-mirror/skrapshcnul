@@ -66,7 +66,7 @@ class Recs_Model extends CI_Model {
                  " (user_id, rec_id, rec_reason, valid) VALUES" . 
                  " ('$user_id', '$rec_id', '$rec_reason', '1');";
          
-        return $this -> db -> query($query);        
+        return $this -> db -> query($query);
     }
     
     function insertRecs($table, $index) {

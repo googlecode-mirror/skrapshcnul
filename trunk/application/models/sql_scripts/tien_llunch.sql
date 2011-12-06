@@ -139,7 +139,10 @@ CREATE TABLE IF NOT EXISTS `lss_0_successful_recs` (
 
 CREATE TABLE IF NOT EXISTS `lss_users_states` (
   `user_id` int(11) NOT NULL,
+  `state` int(11) NOT NULL,
   `valid` tinyint(1) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`,`timestamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
