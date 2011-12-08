@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tien: I haven't tested updatePick because it is not easy to test it without the layout.
- */
-
 class User_Rating_Model extends CI_Model {
 
 	function selectRating($userid) {
