@@ -1,4 +1,10 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function() {	
+	
+	jQuery(".abc").stars({
+		inputType: "select",
+		cancelShow: "false"
+	});	
+
 	// Declare variables to hold twitter API url and user name
 	var twitter_api_url = 'http://search.twitter.com/search.json';
 	//var twitter_user = 'lupomontero';
