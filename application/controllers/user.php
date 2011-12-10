@@ -87,7 +87,8 @@ class User extends CI_Controller {
 		
 		// Render view data
 		$this -> data['head_title']		= $this -> data['profile']['first_name'] .' | Lunchsparks'; 
-		$this -> data['tpl_page_id']	= 'profile';
+		$this -> data['tpl_page_id']	= 'user#profile';
+		$this -> data['tpl_page_title'] = "Profile Overview";
 		// Render view layout
 		$this -> data['main_content']	= 'user/user_profile';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
@@ -109,12 +110,26 @@ class User extends CI_Controller {
 			
 			$this -> data['preferences'] = $this -> preferences_model -> selectForCurrentUser();
 			
+			// Render view data
+			$this -> data['head_title']		= 'Preferences | Lunchsparks'; 
+			$this -> data['tpl_page_id']	= 'user#preferences';
+			$this -> data['tpl_page_title'] = "Profile Overview";
 			// Render views
-			$this -> data['tpl_page_id'] = 'preferences';
 			$this -> data['main_content'] = 'user/preferences';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}
 		
+	}
+	
+	function location() {
+		
+		// Render views data
+		$this -> data['head_title']		= 'User Account | Lunchsparks';
+		$this -> data['tpl_page_id'] = "user#location";
+		$this -> data['tpl_page_title'] = "Location";
+		// Render Views
+		$this -> data['main_content'] = 'user/location';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
 	function _preferences_json() {

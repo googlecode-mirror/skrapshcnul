@@ -22,10 +22,12 @@ class Ls_Scripts {
 			'skin/js/ls_notifications.js', 
 			'skin/js/ls_preferences.js',
 			'skin/js/ls_schedules.js',
+			'skin/js/ls_search.js',
 			'skin/js/ls_settings.js',
 			'skin/js/ls_steps_completed.js',
 			'skin/js/ls_users.js',
 			'skin/js/lunchsparks.js',
+			'skin/js/googlemap/ls_googlemap.js',
 		);
 			
 		$this -> css_files = array(
@@ -36,6 +38,7 @@ class Ls_Scripts {
 			'skin/css/layout.css',
 			'skin/css/notification_icons.css',
 			'skin/css/pages.css',
+			'skin/css/search.css',
 			'skin/css/schedules.css',
 			'skin/css/style.css',
 			'skin/css/tables.css',

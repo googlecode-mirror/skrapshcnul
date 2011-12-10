@@ -6,7 +6,7 @@
 	<div class="m-content-2-col-right">
 		
 		<div class="hr">
-			<h2 class="hr-text">Preferences</h2>
+			<h2 class="hr-text"><?php echo $tpl_page_title ?></h2>
 		</div>
 		<div>Enter your preferences here. Our system will pickup the keywords from here.</div>
 		
@@ -24,10 +24,12 @@
 					<?php foreach($value['data'] as $tag) { ?>
 						<div class="preferences-data-item">
 							<div class="preferences-data-item-content">
-								<div>
-								<?php echo $tag ?>
-								<a href="javascript:void(0)" class="preference-tag-btn-remove" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" ls:pref_tag="<?php echo $tag; ?>" onclick="preference_tag_delete(this)"> [x] </a>
-								</div>
+								<a href="/search/tag/<?php echo $tag ?>">
+									<div>
+									<?php echo $tag ?>
+									<a href="javascript:void(0)" class="preference-tag-btn-remove" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" ls:pref_tag="<?php echo $tag; ?>" onclick="preference_tag_delete(this)"> [x] </a>
+									</div>
+								</a>
 							</div>
 						</div>
 					<?php } ?>

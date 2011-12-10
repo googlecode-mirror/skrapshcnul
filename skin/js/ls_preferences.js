@@ -32,9 +32,11 @@ function preference_tag_add_html(preference_id, preference_tag) {
 	var el = jQuery(
 		'<div class="preferences-data-item">'+
 			'<div class="preferences-data-item-content">'+
+				'<a href="/search/tag/'+preference_tag+'">'+
 				'<div>'+preference_tag+
 				' <a href="javascript:void(0)" class="preference-tag-btn-remove" ls:pref_id="'+preference_id+'" ls:pref_tag="'+preference_tag+'" onclick="preference_tag_delete(this)"> [x] </a>'+
 				'</div>'+
+				'</a>'+
 			'</div>'+
 		'</div>');
 	jQuery("#preferences-data-container-"+preference_id).append(el);

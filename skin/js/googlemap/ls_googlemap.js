@@ -1,6 +1,16 @@
 var center_lat = null, center_lng = null, radius = null;
 var selecting = false;
 var circle = null;
+var map;
+var geocoder;
+
+jQuery(document).ready(function() {
+	jQuery("#map_control").click(function() {
+		map_control_toggle();
+	});
+	
+    geocoder = new google.maps.Geocoder();
+});
 
 function initialize_lunchsparks_googlemap(my_center_lat, my_center_lng, my_radius) {
 	
@@ -158,4 +168,54 @@ function getGStaticMapEncoded(center_lat, center_lng, radius_meter) {
 
 function meterToDecimalDegree(value) {
 	return (value / 1.11) * 0.00001;
+}
+
+function codeAddress(address) {
+	if (undefined == address) {
+		return false;
+	}
+	geocoder.geocode({
+		'address' : address
+	}, function(results, status) {
+		if(status == google.maps.GeocoderStatus.OK) {
+			console.log(results[0].geometry.location);
+			return results[0].geometry.location;
+		} else {
+			console.log("Geocode was not successful for the following reason: " + status);
+		}
+	});
+}
+
+function codeLatLng(input) {
+	if (undefined == input) {
+		return false;
+	}
+	var latlngStr = input.split(",", 2);
+	var lat = parseFloat(latlngStr[0]);
+	var lng = parseFloat(latlngStr[1]);
+	var latlng = new google.maps.LatLng(lat, lng);
+	geocoder.geocode({
+		'latLng' : latlng
+	}, function(results, status) {
+		if(status == google.maps.GeocoderStatus.OK) {
+			if(results[1]) {
+				return results[1].formatted_address;
+			} else {
+				console.log("No results found");
+			}
+		} else {
+			console.log("Geocoder failed due to: " + status);
+		}
+	});
+}
+
+function map_control_toggle() {
+	var el = jQuery("#map_canvas");
+	if (el.height() == 300) {
+		el.animate( {height:500}, 'slow' );
+		jQuery("#map_control").removeClass("expand").addClass("expanded");
+	} else {
+		el.animate( {height:300}, 'slow' );
+		jQuery("#map_control").removeClass("expanded").addClass("expand");
+	}
 }
