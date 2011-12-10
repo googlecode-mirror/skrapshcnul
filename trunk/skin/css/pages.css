@@ -4,8 +4,7 @@
 	margin: 5px 0 15px 0px;
 	padding: 20px 50px;
 	text-align: justify;
-	border-left: 1px solid #BDBDBD;
-	border-right: 1px solid #BDBDBD;
+	border: 1px solid #BDBDBD;
 }
 
 .c-pages p {
@@ -39,4 +38,8 @@
 	margin: 5px;
 	text-align: center;
 	font-size: 90%;
+}
+
+.c-pages-content-2-col {
+	
 }

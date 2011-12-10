@@ -12,10 +12,10 @@
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'preferences') ? 'active' : '';?>">
 			<?php echo anchor('admin/dashboard/preferences', 'Preferences', 'id="a-s-mobile" class="a-s-icon-xlhdpi"'); ?>
 		</li>
-		<?php /*
-		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'privacy') ? 'active' : '';?>">
-			<?php echo anchor('settings/privacy', 'Privacy', 'id="a-s-privacy" class="a-s-icon-xlhdpi"'); ?>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'recommendations') ? 'active' : '';?>">
+			<?php echo anchor('admin/dashboard/recommendations', 'Recommendations', 'id="a-s-privacy" class="a-s-icon-xlhdpi"'); ?>
 		</li>
+		<?php /*
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'language') ? 'active' : '';?>">
 			<?php echo anchor('settings/language', 'Language', 'id="a-s-language" class="a-s-icon-xlhdpi"'); ?>
 		</li>

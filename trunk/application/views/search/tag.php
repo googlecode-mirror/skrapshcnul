@@ -1,14 +1,24 @@
 <div class="m-content">
 	<div class="c-pages shadow-rounded">
-		<h1>Search</h1>
 		
 		<div>
+		<div style="float: right;">
+			<input type="text" class="search" placeholder="Search tag..." value="<?php echo isset($query_result['keyword']) ? $query_result['keyword'] : "" ?>" />
+		</div>
+		<h1><?php echo $tpl_page_title ?></h1>
+		<div class="clearfix"></div>
+		</div>
+		
+		<div id="map_canvas" style="width:100%; height:300px; border: 1px solid #CCC;"></div>
+		<div id="map_control" class="expand"></div>
+		
+		<div id="results-container">
 		<?php if(isset($query_result)) { ?>
 			
 			<div>
-			<?php echo $query_result['count'] ?> person found for <?php echo $query_result['keyword'] ?>
-			</div>	
-			
+			<?php echo $query_result['count'] ?> person found for <?php echo isset($query_result['keyword']) ? $query_result['keyword'] : "" ?>
+			</div>
+				
 			<div>
 			<?php if(isset($query_result['similar_keywords']) && count($query_result['similar_keywords']) > 1) { ?>
 				Similar results 
@@ -20,12 +30,11 @@
 				
 			</div>
 		<?php } ?>
-		</div>
 		
 		<div>
 		<?php if (isset($users) && count($users) > 0) { ?>
 		<?php foreach ($users as $user) { ?>
-			<div class="profile-img-45">
+			<div class="profile-img-45 hover-profile-card" ls:uid="<?php echo !empty($user['user_id']) ? $user['user_id'] : '' ?>">
 				<a href="/pub/<?php echo !empty($user['alias']) ? $user['alias'] : $user['user_id'] ?>">
 					<img title="<?php echo ($user['firstname']) ?>" 
 						src="<?php echo ($user['profile_img']) ?>">
@@ -37,10 +46,21 @@
 		</div>
 		<div class="clearfix"></div>
 		
-		
-		
-		
-		
-		
+		</div>
 	</div>
 </div>
+
+<script>
+<?php $profileImg_mapPin = base_url('/media/images/profile/32/'.$user['user_id'].'.jpg') ?>
+<?php $location = $user['location'] ?>
+var persons = [
+	[1, '<?php echo $location ?>', '<?php echo $profileImg_mapPin ?>', '<?php echo ($user['firstname']) ?>']
+];
+</script>
+
+
+<script>
+	jQuery(document).ready(function() {
+		google.maps.event.addDomListener(window, 'load', initiate_geolocation);
+	});
+</script>

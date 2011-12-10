@@ -1,0 +1,29 @@
+#map_control {
+	display: block;
+	height: 20px;
+	width: 100%;
+	cursor: pointer;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	position: relative;
+	background-color: #4D4D4D;
+}
+#map_control:hover {
+	background-color: #404040;
+}
+#map_control.expand {
+	background: #4D4D4D url(/skin/images/24/map-arrow-down.png) center -20px no-repeat;
+}
+#map_control.expand:hover {
+	background-position: center 0px;
+}
+#map_control.expanded {
+	background: #4D4D4D url(/skin/images/24/map-arrow-up.png) center -20px no-repeat;
+}
+#map_control.expanded:hover {
+	background-position: center 0px;
+}
+
+#results-container {
+	margin: 15px 0;
+}

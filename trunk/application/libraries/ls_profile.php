@@ -21,6 +21,7 @@ class Ls_Profile {
 		$this -> ci -> load -> library('session');
 		$this -> ci -> load -> library('form_validation');
 		$this -> ci -> load -> library('input');
+		$this -> ci -> load -> helper('image/image_resize');
 		$this -> ci -> load -> helper('logger');
 		$this -> ci -> load -> helper('linkedin/linkedin_api');
 		$this -> ci -> load -> model('linkedin/linkedin_model');
@@ -104,6 +105,7 @@ class Ls_Profile {
 				$fields['lastname']			= $linkedin_data->{'last-name'};
 				$fields['profile_img']		= $linkedin_data->{'picture-url'};
 				$fields['mobile_number']	= $linkedin_data->{'phone-numbers'}->{'phone-number'}->{'phone-number'};
+				$fields['location']			= $linkedin_data->{'location'}->{'name'};
 				$this -> ci -> user_profile_model -> update_fromLinkedInData($user_id, $fields);
 				
 				## Update Profile Social Links
@@ -206,6 +208,20 @@ class Ls_Profile {
 		}
 		
 		return $this -> ci -> user_profile_model -> select_social_links($user_id);
+		
+	}
+	
+	function generate_profile_image_pin($user_id, $profile_img) {
+		
+		// *** 1) Initialise / load image
+		$resizeObj = new Image_resize($profile_img);
+		
+		// *** 2) Resize image (options: exact, portrait, landscape, auto, crop)
+		$resizeObj -> resizeImage(32, 32, 'auto');
+	
+		// *** 3) Save image
+		$resizeObj -> saveImage('media/images/profile/32/'.$user_id.'.jpg', 100);
+		
 		
 	}
 

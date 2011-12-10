@@ -50,11 +50,12 @@ class User_Profile_model extends CI_Model {
 		$mobile_number	= isset($fields['mobile_number']) ? $fields['mobile_number'] : $data['mobile_number'];
 		$delivery_email	= isset($fields['delivery_email']) ? $fields['delivery_email'] : $data['delivery_email'];
 		$profile_img	= isset($fields['profile_img']) ? $fields['profile_img'] : $data['profile_img'];
+		$location		= isset($fields['location']) ? $fields['location'] : $data['location'];
 		
 		// DB Query
 		$query = "INSERT INTO " . self::_TABLE_ . 
-			" (user_id, alias, firstname, lastname, mobile_number, delivery_email, profile_img, updated_on) " . 
-			" VALUES ('$user_id', '$alias', '$firstname', '$lastname', '$mobile_number', '$delivery_email', '$profile_img', NOW()) " . 
+			" (user_id, alias, firstname, lastname, mobile_number, delivery_email, profile_img, location, updated_on) " . 
+			" VALUES ('$user_id', '$alias', '$firstname', '$lastname', '$mobile_number', '$delivery_email', '$profile_img', '$location', NOW()) " . 
 			" ON DUPLICATE KEY UPDATE " .
 				" `alias` = '$alias', ".
 				" `firstname` = '$firstname', " .
@@ -62,6 +63,7 @@ class User_Profile_model extends CI_Model {
 				" `mobile_number` = '$mobile_number', " .
 				" `delivery_email` = '$delivery_email', " .
 				" `profile_img` = '$profile_img', " .
+				" `location` = '$location', " .
 				" `updated_on` = NOW();";
 				
 		// if Alias changed, update Social Link
@@ -117,17 +119,24 @@ class User_Profile_model extends CI_Model {
 		} else {
 			$profile_img = isset($fields['profile_img']) ? $fields['profile_img'] : "" ;
 		}
+		## Location
+		if (isset($data['location']) && !empty($data['location'])) {
+			$location = $data['location'];
+		} else {
+			$location = isset($fields['location']) ? $fields['location'] : "" ;
+		}
 		
 		// DB Query
 		$query = "INSERT INTO " . self::_TABLE_ . 
-			" (user_id, firstname, lastname, mobile_number, delivery_email, profile_img, updated_on) " . 
-			" VALUES ('$user_id', '$firstname', '$lastname', '$mobile_number', '$delivery_email', '$profile_img', NOW()) " . 
+			" (user_id, firstname, lastname, mobile_number, delivery_email, profile_img, location, updated_on) " . 
+			" VALUES ('$user_id', '$firstname', '$lastname', '$mobile_number', '$delivery_email', '$profile_img', '$location', NOW()) " . 
 			" ON DUPLICATE KEY UPDATE " .
 				" `firstname` = '$firstname', " .
 				" `lastname` = '$lastname', " .
 				" `mobile_number` = '$mobile_number', " .
 				" `delivery_email` = '$delivery_email', " .
 				" `profile_img` = '$profile_img', " .
+				" `location` = '$location', " .
 				" `updated_on` = NOW();";
 		return $this -> db -> query($query);
 	}

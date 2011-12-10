@@ -41,23 +41,37 @@
 			</div>
 			<div class="row-item">
 				<div class="content-table-2-col-left">
-					Username
+					Alias
 				</div>
 				<div class="content-table-2-col-right">
-					<div title="alias" class="editable">
-						http://lunchsparks.me/pub/<span class="editable-value" style="font-weight: bold;"><?php echo !empty($settings['alias']) ? ($settings['alias']) : '<i>[username]</i>' ?></span>
-					</div>
-					<div style="display: none;">
-						<input title="alias" type="text" value="<?php echo !empty($settings['alias']) ? ($settings['alias']) : '' ?>" placeholder="username" />
-					</div>
+					<?php if (empty($settings['alias'])) { ?>
+						<div title="alias" class="editable">
+							http://lunchsparks.me/pub/<span class="editable-value" style="font-weight: bold;"><?php echo !empty($settings['alias']) ? ($settings['alias']) : '<i>[username]</i>' ?></span>
+						</div>
+						<div style="display: none;">
+							<input title="alias" type="text" value="<?php echo !empty($settings['alias']) ? ($settings['alias']) : '' ?>" placeholder="username" />
+						</div>
+					<?php } else { ?>
+						<div title="alias">
+							http://lunchsparks.me/pub/<span class="editable-value" style="font-weight: bold;"><?php echo !empty($settings['alias']) ? ($settings['alias']) : '<i>[username]</i>' ?></span>
+						</div>
+					<?php } ?>
+					
 				</div>
 			</div>
 			<div class="row-item">
 				<div class="content-table-2-col-left">
-					Password
+					Public Location
 				</div>
 				<div class="content-table-2-col-right">
-					<?php echo anchor('auth/change_password', 'Change Password', array('id'=>'change_password_btn')); ?>
+					<div title="location" class="editable">
+						<span title="location" class="editable-value">
+						<?php echo (isset($settings['location']) && !empty($settings['location'])) ? ($settings['location']) : '<i>location</i>' ?></span>
+						</span>
+					</div>
+					<div style="display: none;">
+						<input title="location" type="text" value="<?php echo !empty($settings['location']) ? ($settings['location']) : '' ?>" placeholder="location" />
+					</div>
 				</div>
 			</div>
 		</div>

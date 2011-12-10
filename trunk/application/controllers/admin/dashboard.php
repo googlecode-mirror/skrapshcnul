@@ -155,5 +155,21 @@ class Dashboard extends CI_Controller {
 		$this -> load -> view('includes/tmpl_admin', $this->data);
 		
 	}
+
+	function recommendations() {
+		
+		
+		
+		
+		
+		// Render views data
+		$this -> data['head_title']		= 'Recommendations | Lunchsparks';
+		$this -> data['tpl_page_id']	= "recommendations";
+		$this -> data['tpl_page_title']	= "Recommendations Overview";
+		// Render views
+		$this->data['main_content']		= 'admin/recommendations';
+		$this -> load -> view('includes/tmpl_admin', $this->data);
+		
+	}
 }
 ?>

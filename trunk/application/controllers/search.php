@@ -11,7 +11,9 @@ class Search extends CI_Controller {
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('session');
 		$this -> load -> library('form_validation');
+		$this -> load -> library('ls_profile');
 		$this -> load -> helper('logger');
+		$this -> load -> helper('image/image_resize');
 		$this -> load -> helper('url');
 		$this -> load -> model('preferences_model');
 		// Set Global Variables
@@ -78,6 +80,13 @@ class Search extends CI_Controller {
 		}
 		$this -> data['users'] = $this -> preferences_model -> searchTag($query);
 		
+		//var_dump($this -> data['users']);
+		
+		## Generate Thumbnail
+		foreach ($this -> data['users'] as $user) {
+			$this -> ls_profile -> generate_profile_image_pin($user['user_id'], $user['profile_img']);
+		}
+		
 		// Render views data
 		$this -> data['head_title']		= 'Search | Lunchsparks';
 		$this -> data['tpl_page_id'] = "search#tag";
@@ -87,5 +96,17 @@ class Search extends CI_Controller {
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 		
 	}
+
+	function people() {
+	
+		// Render views data
+		$this -> data['head_title']		= 'Search | Lunchsparks';
+		$this -> data['tpl_page_id'] = "search#people";
+		$this -> data['tpl_page_title'] = "Search People";
+		// Render Views
+		$this -> data['main_content'] = 'search/people';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		
+	} 
 
 }
