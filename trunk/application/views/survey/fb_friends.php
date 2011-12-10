@@ -4,7 +4,7 @@
 
   $con = array(
     'appId' => $this -> config -> item('facebook_app_id'),
-    'secret' => '9e5cd97f019b85502543008e7ba8e1a6'
+    'secret' => $this -> config -> item('facebook_app_secret')
   );
 
   $facebook = new Facebook($con);

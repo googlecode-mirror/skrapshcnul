@@ -11,6 +11,7 @@
 */ ?>
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery-ui-1.8.16/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.css" type="text/css" media="screen" charset="utf-8" />
 <?php /* ## Fonts ?>
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400' rel='stylesheet' type='text/css'>
@@ -29,6 +30,7 @@
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
 <script src="<?php echo base_url();?>skin/js/angular-0.9.19.min.js" ng:autobind></script>
+<script src="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.js"></script>
 <?php echo $css_combined; ?>
 <?php echo $js_combined; ?>
 <?php ## Offline ?>
@@ -66,6 +68,7 @@
   })();
 
 </script>
+
 <!-- start Mixpanel -->
 <script type="text/javascript">var mpq=[];mpq.push(["init","5f033e0ea3da3e277ef6cdd07d582b36"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
 </script><!-- end Mixpanel -->
