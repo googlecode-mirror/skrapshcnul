@@ -146,3 +146,18 @@ CREATE TABLE IF NOT EXISTS `lss_users_states` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_0_recs_time_location`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_0_recs_time_location` (
+  `index` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `restaurant_id` int(10) unsigned NOT NULL,
+  `valid` int(10) unsigned NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
