@@ -11,98 +11,252 @@
  * Note in terminology: "a match" = "a negotiated recommendation".  
  */
 class Recs_Model extends CI_Model {
-    const _AUTO_RECS_TABLE_ = "lss_0_auto_recs";
-    const _SELECTED_RECS_TABLE_ = "lss_0_selected_recs";
-    const _NEGOTIATED_RECS_TABLE_ = "lss_0_negotiated_recs";
-    const _ACCEPTED_RECS_TABLE_ = "lss_0_accepted_recs";
-    const _SUCCESSFUL_RECS_TABLE_ = "lss_0_successful_recs";
-	
-    function clearTables() {		
-        $this -> db -> trans_start(); // it is important to start a transaction
-                                      // as this function changes > 1 tables 
-        
-        $q1 = "TRUNCATE TABLE " . self::_AUTO_RECS_TABLE_ . ";";
-        $q2 = "TRUNCATE TABLE " . self::_SELECTED_RECS_TABLE_ . ";";
-        $q3 = "TRUNCATE TABLE " . self::_NEGOTIATED_RECS_TABLE_ .";";
-        $q4 = "TRUNCATE TABLE " . self::_ACCEPTED_RECS_TABLE_ . ";";
-        $q5 = "TRUNCATE TABLE " . self::_SUCCESSFUL_RECS_TABLE_ . ";";        
-        
-        $result = $this -> db -> query($q1);
-        $result = $result && $this -> db -> query($q2);
-        $result = $result && $this -> db -> query($q3);
-        $result = $result && $this -> db -> query($q4);
-        $result = $result && $this -> db -> query($q5);
-        
-        $this -> db -> trans_complete();
-        
-        return $result;
-    }
-    
+	const _AUTO_RECS_TABLE_ = "lss_0_auto_recs";
+	const _SELECTED_RECS_TABLE_ = "lss_0_selected_recs";
+	const _NEGOTIATED_RECS_TABLE_ = "lss_0_negotiated_recs";
+	const _ACCEPTED_RECS_TABLE_ = "lss_0_accepted_recs";
+	const _SUCCESSFUL_RECS_TABLE_ = "lss_0_successful_recs";
+	const _TIME_LOCATION_TABLE_ = "lss_0_recs_time_location";
+	    
     /*
      * Helper 
      */
-    function _which($code) {
-        $code = strtoupper($code);
-        if ($code === "AUT") return self::_AUTO_RECS_TABLE_;
-        else if ($code === "SEL") return self::_SELECTED_RECS_TABLE_;
-        else if ($code === "NEG") return self::_NEGOTIATED_RECS_TABLE_;
-        else if ($code === "ACC") return self::_ACCEPTED_RECS_TABLE_;
-        else if ($code === "SUC") return self::_SUCCESSFUL_RECS_TABLE_;
-        else return NULL;
-    }
-    
+	function _which($table) {		
+		if ($table === self::_AUTO_RECS_TABLE_ || 
+			$table === self::_SELECTED_RECS_TABLE_ ||
+			$table === self::_NEGOTIATED_RECS_TABLE_ ||
+			$table === self::_ACCEPTED_RECS_TABLE_ ||
+			$table === self::_SUCCESSFUL_RECS_TABLE_ ||
+			$table === self::_TIME_LOCATION_TABLE_) return $table;
+		else return NULL;
+	}
+	
+	/*
+	 *  Delete tables
+	 *  Warning: Only for testing.
+	 */
+	function _clear($table) {
+		$table = $this -> _which($table);
+		if (!isset($table)) return FALSE;
+				
+		$query = "TRUNCATE TABLE " . $table . ";";		
+		return $this -> db -> query($query);
+	}
+	
+	function clearAutoRecs() {
+		return $this -> _clear(self::_AUTO_RECS_TABLE_);
+	}
+	
+	function clearSelectedRecs() {
+		return $this -> _clear(self::_SELECTED_RECS_TABLE_);
+	}
+	
+	function clearNegotiatedRecs() {
+		return $this -> _clear(self::_NEGOTIATED_RECS_TABLE_);
+	}
+	
+	function clearAcceptedRecs() {
+		return $this -> _clear(self::_ACCEPTED_RECS_TABLE_);
+	}
+	
+	function clearSuccessfulRecs() {
+		return $this -> _clear(self::_SUCCESSFUL_RECS_TABLE_);
+	}
+	
+
     /*
-     * Operations implementation:
-     * 
-     * Note: _AUTO_RECS_TABLE_ has different scheme in compared to other 
-     * tables. It has different insertion and two addition queries: 
-     * selectByUserId, and removeByUserId.
-     */    
-    function insertAutoRecs($table, $user_id, $rec_id, $rec_reason) {        
-        if ($rec_reason == NULL) 
-            $rec_reason = 'NULL';
-        
-        $query = "INSERT INTO " . self::_AUTO_RECS_TABLE_ . 
-                 " (user_id, rec_id, rec_reason, valid) VALUES" . 
-                 " ('$user_id', '$rec_id', '$rec_reason', '1');";
-         
-        return $this -> db -> query($query);
-    }
+     * Insertion
+     */
     
-    function insertRecs($table, $index) {
-        $query = "INSERT INTO " . ($this -> _which($table)) .
+    // auto    
+	function insertAutoRec($obj) {    		
+		$user_id = $obj['user_id'];
+		$rec_id = $obj['rec_id'];
+		$rec_reason = $obj['rec_reason'];
+		
+		if (!isset($user_id) || !isset($rec_id)) return FALSE;
+		if (!isset($rec_reason)) $rec_reason = 'NULL';
+		
+		$query = "INSERT INTO " . self::_AUTO_RECS_TABLE_ . 
+		         " (user_id, rec_id, rec_reason, valid) VALUES" . 
+		         " ('$user_id', '$rec_id', '$rec_reason', '1');";
+		 
+		return $this -> db -> query($query);
+	}    
+			
+	
+	// selected
+	function _insertRec($table, $index) {
+		$table = $this -> _which($table);
+		if (!isset($table)) return FALSE;
+		
+        $query = "INSERT INTO " . $table .
                  " (`index`, valid) VALUES ('$index', '1');";       
         return $this -> db -> query($query);
     }
     
-    // only applicable for _AUTO_RECS_TABLE_; 
-    // other tables do not contain user_id
-    function selectRecsByUserId($table, $user_id) {
-        $query = "SELECT * FROM " . ($this -> _which($table)) .
-                 " WHERE user_id = '$user_id' AND valid = '1';";
-        return $this -> db -> query($query);
-    }
+	function insertSelectedRec($index) {
+		return $this -> _insertRec(self::_SELECTED_RECS_TABLE_, $index);
+	}
+	
+	// negotiated
+	function insertNegotiatedRec($index) {
+		return $this -> _insertRec(self::_NEGOTIATED_RECS_TABLE_, $index);
+	}
+	
+	// accepted
+	function insertAcceptedRec($index) {
+		return $this -> _insertRec(self::_ACCEPTED_RECS_TABLE_, $index);
+	}
+	
+	// successful
+	function insertSuccessfulRec($index) {
+		return $this -> _insertRec(self::_SUCCESSFUL_RECS_TABLE_, $index);
+	}
     
-    function selectRecsByIndex($table, $index) {
-        $query = "SELECT * FROM " . ($this -> _which($table)) .
-                 " WHERE `index` = '$index' AND valid = '1';";
-        return $this -> db -> query($query);
+	
+	/*
+     * Selection
+     */    
+     
+    // auto   
+	function selectAutoRecsByUserId($user_id) { // can return more than one record
+		$query = "SELECT * FROM " . self::_AUTO_RECS_TABLE_ .
+		         " WHERE user_id = '$user_id' AND valid = '1';";
+		$obj = $this -> db -> query($query);
+		if ($obj  == FALSE) return FALSE;
+		else {
+			$obj  = $obj -> result();
+			return $obj;
+		}
     }
+	
+    function _selectRecByIndex($table, $index) { // return only one record
+		$table = $this -> _which($table);
+		if (!isset($table)) return FALSE;
+    	    
+		$query = "SELECT * FROM " . $table .
+		         " WHERE `index` = '$index' AND valid = '1';";
+		$obj = $this -> db -> query($query);
+		
+		if ($obj == FALSE) return FALSE;
+		else if ($obj -> num_rows() != 1) return FALSE;
+		else {
+			$obj = $obj -> result();			
+			return $obj[0];
+		}
+    }
+	
+	function selectAutoRecByIndex($index) {
+		return $this -> _selectRecByIndex(self::_AUTO_RECS_TABLE_, $index);		
+	}
+	
+	// selected
+	function selectSelectedRecByIndex($index) {
+		return $this -> _selectRecByIndex(self::_SELECTED_RECS_TABLE_, $index);
+	}
+	
+	// negotiated
+	function selectNegotiatedRecByIndex($index) {
+		return $this -> _selectRecByIndex(self::_NEGOTIATED_RECS_TABLE_, $index);
+	}
+	
+	// accepted
+	function selectAcceptedRecByIndex($index) {
+		return $this -> _selectRecByIndex(self::_ACCEPTED_RECS_TABLE_, $index);
+	}
+	
+	// successful
+	function selectSuccessfulRecByIndex($index) {
+		return $this -> _selectRecByIndex(self::_SUCCESSFUL_RECS_TABLE_, $index);
+	}
     
-    // only applicable for _AUTO_RECS_TABLE_; 
-    // other tables do not contain user_id
-    function removeRecsByUserId($table, $user_id) {                
-        $query = "UPDATE " . ($this -> _which($table)) .
+	/*
+	 * Deletion
+	 */	
+	 
+	// auto
+    function removeAutoRecsByUserId($user_id) { // can remove more than 1 record
+        $query = "UPDATE " . self::_AUTO_RECS_TABLE_ .
                  " SET valid = '0'" .
                  " WHERE user_id = '$user_id' AND valid = '1';";
         return $this -> db -> query($query);
     }
-    
-    function removeRecsByIndex($table, $index) {
-        $query = "UPDATE " . ($this -> _which($table)) .
+	
+    function _removeRecByIndex($table, $index) { // can remove only 1 record
+    	$table = $this -> _which($table);
+		if (!isset($table)) return FALSE;
+		
+        $query = "UPDATE " . $table .
                  " SET valid = '0'" .
                  " WHERE `index` = '$index' AND valid = '1';";
-        return $this -> db -> query($query);                 
+        return $this -> db -> query($query);
     }
+	
+	function removeAutoRecByIndex($index) {
+		return $this -> _removeRecByIndex(self::_AUTO_RECS_TABLE_, $index);
+	}
+	
+	// selected
+	function removeSelectedRecByIndex($index) {
+		return $this -> _removeRecByIndex(self::_SELECTED_RECS_TABLE_, $index);
+	}
+	
+	// negotiated
+	function removeNegotiatedRecByIndex($index) {
+		return $this -> _removeRecByIndex(self::_NEGOTIATED_RECS_TABLE_, $index);
+	}
+	
+	// accepted
+	function removeAcceptedRecByIndex($index) {
+		return $this -> _removeRecByIndex(self::_ACCEPTED_RECS_TABLE_, $index);
+	}
+	
+	// successful
+	function removeSuccessfulRecByIndex($index) {
+		return $this -> _removeRecByIndex(self::_SUCCESSFUL_RECS_TABLE_, $index);
+	}
+	
+	/*
+	 * Model for _TIME_LOCATION_TABLE_
+	 */
+	function clearTimeLocations() {
+		return $this -> _clear(self::_TIME_LOCATION_TABLE_);
+	}
+	
+	function insertTimeLocation($obj) {
+		$index = $obj['index'];
+		$date = $obj['date'];
+		$time = $obj['time'];
+		$restaurant_id = $obj['restaurant_id'];
+		
+		if (!isset($index) || !isset($date) || !isset($time) || 
+			!isset($restaurant_id)) return FALSE;		
+		
+		$query = "INSERT INTO " . self::_TIME_LOCATION_TABLE_ . 
+		         " (`index`, date, time, restaurant_id, valid) VALUES" . 
+		         " ('$index', '$date', '$time', '$restaurant_id', '1');";
+		 
+		return $this -> db -> query($query);
+	}
+	
+	function selectTimeLocationByIndex($index) { // return only 1 result	
+		$query = "SELECT * FROM " . self::_TIME_LOCATION_TABLE_ .
+		         " WHERE `index` = '$index' AND valid = '1';";
+		$obj = $this -> db -> query($query);
+		if ($obj  == FALSE) return FALSE;
+		else if ($obj -> num_rows() != 1) return FALSE;
+		else {
+			$obj  = $obj -> result();
+			return $obj[0];
+		}
+	}
+	
+	function removeTimeLocationByIndex($index) {
+		$query = "UPDATE " . self::_TIME_LOCATION_TABLE_ .
+                 " SET valid = '0'" .
+                 " WHERE `index` = '$index' AND valid = '1';";
+        return $this -> db -> query($query);
+	}	
 }
 ?>
