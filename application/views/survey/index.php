@@ -67,7 +67,7 @@
     }
     
     function requestCallback(response) {
-      // Handle callback here
+      console.log(response);
     }
   </script>
 </html>
