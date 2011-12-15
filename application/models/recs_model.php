@@ -37,7 +37,7 @@ class Recs_Model extends CI_Model {
 	 */
 	function _clear($table) {
 		$table = $this -> _which($table);
-		if (!isset($table)) return FALSE;
+		if (empty($table)) return NULL;
 				
 		$query = "TRUNCATE TABLE " . $table . ";";		
 		return $this -> db -> query($query);
@@ -74,8 +74,8 @@ class Recs_Model extends CI_Model {
 		$rec_id = $obj['rec_id'];
 		$rec_reason = $obj['rec_reason'];
 		
-		if (!isset($user_id) || !isset($rec_id)) return FALSE;
-		if (!isset($rec_reason)) $rec_reason = 'NULL';
+		if (empty($user_id) || empty($rec_id)) return FALSE;
+		if (empty($rec_reason)) $rec_reason = 'NULL';
 		
 		$query = "INSERT INTO " . self::_AUTO_RECS_TABLE_ . 
 		         " (user_id, rec_id, rec_reason, valid) VALUES" . 
@@ -88,7 +88,7 @@ class Recs_Model extends CI_Model {
 	// selected
 	function _insertRec($table, $index) {
 		$table = $this -> _which($table);
-		if (!isset($table)) return FALSE;
+		if (empty($table)) return FALSE;
 		
         $query = "INSERT INTO " . $table .
                  " (`index`, valid) VALUES ('$index', '1');";       
@@ -124,7 +124,7 @@ class Recs_Model extends CI_Model {
 		$query = "SELECT * FROM " . self::_AUTO_RECS_TABLE_ .
 		         " WHERE user_id = '$user_id' AND valid = '1';";
 		$obj = $this -> db -> query($query);
-		if ($obj  == FALSE) return FALSE;
+		if (empty($obj)) return NULL;
 		else {
 			$obj  = $obj -> result();
 			return $obj;
@@ -133,14 +133,14 @@ class Recs_Model extends CI_Model {
 	
     function _selectRecByIndex($table, $index) { // return only one record
 		$table = $this -> _which($table);
-		if (!isset($table)) return FALSE;
+		if (empty($table)) return NULL;
     	    
 		$query = "SELECT * FROM " . $table .
 		         " WHERE `index` = '$index' AND valid = '1';";
 		$obj = $this -> db -> query($query);
 		
-		if ($obj == FALSE) return FALSE;
-		else if ($obj -> num_rows() != 1) return FALSE;
+		if (empty($obj)) return NULL;
+		else if ($obj -> num_rows() != 1) return NULL;
 		else {
 			$obj = $obj -> result();			
 			return $obj[0];
@@ -170,6 +170,23 @@ class Recs_Model extends CI_Model {
 	function selectSuccessfulRecByIndex($index) {
 		return $this -> _selectRecByIndex(self::_SUCCESSFUL_RECS_TABLE_, $index);
 	}
+	
+	function selectSuccessfulRecByUserId($user_id) {
+		$query = "SELECT * FROM " . 
+		         " (SELECT " . self::_AUTO_RECS_TABLE_ . ".index, " . self::_AUTO_RECS_TABLE_ . ".user_id" . 
+		         " FROM " . self::_AUTO_RECS_TABLE_ . 
+		         " INNER JOIN " . self::_SUCCESSFUL_RECS_TABLE_ .
+		         " ON " . self::_AUTO_RECS_TABLE_ . ".index " . 
+		         " = " . self::_SUCCESSFUL_RECS_TABLE_ . ".index) temp ".
+				 " WHERE temp.user_id = $user_id";
+		$result = $this -> db -> query($query);
+		if (empty($result)) return NULL;
+		else if ($result -> num_rows() != 1) return NULL; 
+		else {
+			$result = $result -> result();
+			return $result[0] -> index;
+		}
+	}
     
 	/*
 	 * Deletion
@@ -185,7 +202,7 @@ class Recs_Model extends CI_Model {
 	
     function _removeRecByIndex($table, $index) { // can remove only 1 record
     	$table = $this -> _which($table);
-		if (!isset($table)) return FALSE;
+		if (empty($table)) return FALSE;
 		
         $query = "UPDATE " . $table .
                  " SET valid = '0'" .
@@ -230,8 +247,8 @@ class Recs_Model extends CI_Model {
 		$time = $obj['time'];
 		$restaurant_id = $obj['restaurant_id'];
 		
-		if (!isset($index) || !isset($date) || !isset($time) || 
-			!isset($restaurant_id)) return FALSE;		
+		if (empty($index) || empty($date) || empty($time) || 
+			empty($restaurant_id)) return FALSE;
 		
 		$query = "INSERT INTO " . self::_TIME_LOCATION_TABLE_ . 
 		         " (`index`, date, time, restaurant_id, valid) VALUES" . 
@@ -244,7 +261,7 @@ class Recs_Model extends CI_Model {
 		$query = "SELECT * FROM " . self::_TIME_LOCATION_TABLE_ .
 		         " WHERE `index` = '$index' AND valid = '1';";
 		$obj = $this -> db -> query($query);
-		if ($obj  == FALSE) return FALSE;
+		if (empty($obj)) return FALSE;
 		else if ($obj -> num_rows() != 1) return FALSE;
 		else {
 			$obj  = $obj -> result();
@@ -257,6 +274,39 @@ class Recs_Model extends CI_Model {
                  " SET valid = '0'" .
                  " WHERE `index` = '$index' AND valid = '1';";
         return $this -> db -> query($query);
-	}	
+	}
+	
+	/*
+	 * A set of operations to retrieve data for specific layouts
+	 */ 
+	 
+	// for survey, we need: lunch buddy info (name, id), restaurant info (name, id)
+	function prepareDataForSurvey() {
+		$this -> db -> trans_start();
+		
+		$result = array();
+		
+		$user_id = $this -> session -> userdata('user_id'); // current user id
+		
+		$index = $this -> selectSuccessfulRecByUserId($user_id); // get the index of the match
+		
+		// retrieve lunch partner
+		$obj = $this -> selectAutoRecByIndex($index);
+		$target_id = $obj -> rec_id; // get target id		
+		
+		$this -> load -> model('user_profile_model');
+		$result['partner'] = (object) $this -> user_profile_model -> select($target_id);		
+				
+		// retrieve restaurant info
+		$obj = $this -> selectTimeLocationByIndex($index);
+		$restaurant_id = $obj -> restaurant_id;
+		
+		$this -> load -> model('restaurant_model');
+		$result['restaurant'] = $this -> restaurant_model -> selectRestaurantById($restaurant_id);		
+		 
+		$this -> db -> trans_complete();
+		
+		return (object) $result;
+	}
 }
 ?>

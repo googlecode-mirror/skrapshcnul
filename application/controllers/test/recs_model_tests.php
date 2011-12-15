@@ -64,12 +64,15 @@ class Recs_model_tests extends Toast
 		// test remove by user id
 		for ($i = 1; $i <= $n; ++$i) {
 			$this -> _assert_equals($this -> recs_model -> removeAutoRecsByUserId($i), TRUE);
-			$this -> _assert_equals($this -> recs_model -> selectAutoRecsByUserId($i), FALSE);
+			$obj = $this -> recs_model -> selectAutoRecsByUserId($i);
+			$this -> _assert_equals(empty($obj), TRUE);
 			if ($i < $n) {
-				$this -> _assert_equals($this -> recs_model -> selectAutoRecsByUserId($i + 1), TRUE);
+				$obj = $this -> recs_model -> selectAutoRecsByUserId($i + 1);
+				$this -> _assert_equals(empty($obj), FALSE);
 			}
 			else {
-				$this -> _assert_equals($this -> recs_model -> selectAutoRecsByUserId($i + 1), FALSE);
+				$obj = $this -> recs_model -> selectAutoRecsByUserId($i + 1);
+				$this -> _assert_equals(empty($obj), TRUE);				
 			}
 		}
 		
@@ -82,8 +85,10 @@ class Recs_model_tests extends Toast
 				
 		for ($i = $n * ($n + 1) / 2 + 1; $i < $n * ($n + 1) / 2 + 3; ++$i) {
 			$this -> _assert_equals($this -> recs_model -> removeAutoRecByIndex($i), TRUE);
-			$this -> _assert_equals($this -> recs_model -> selectAutoRecByIndex($i), FALSE);
-			$this -> _assert_equals($this -> recs_model -> selectAutoRecByIndex($i + 1), TRUE);			
+			$obj = $this -> recs_model -> selectAutoRecByIndex($i);
+			$this -> _assert_equals(empty($obj), TRUE);
+			$obj = $this -> recs_model -> selectAutoRecByIndex($i + 1);
+			$this -> _assert_equals(empty($obj), FALSE);
 		}
 		
 		$this -> _assert_equals($this -> recs_model -> clearAutoRecs(), TRUE);
@@ -98,17 +103,24 @@ class Recs_model_tests extends Toast
 		$this -> _assert_equals($this -> recs_model -> insertSelectedRec(10), TRUE);		
 		
 		// test select by index
-		$this -> _assert_equals($this -> recs_model -> selectSelectedRecByIndex(1), TRUE);
-		$this -> _assert_equals($this -> recs_model -> selectSelectedRecByIndex(10), TRUE);		
-		$this -> _assert_equals($this -> recs_model -> selectSelectedRecByIndex(2), FALSE);
-		$this -> _assert_equals($this -> recs_model -> selectSelectedRecByIndex(11), FALSE);		
+		$obj = $this -> recs_model -> selectSelectedRecByIndex(1);
+		$this -> _assert_equals(empty($obj), FALSE);
+		$obj = $this -> recs_model -> selectSelectedRecByIndex(10);
+		$this -> _assert_equals(empty($obj), FALSE);
+		$obj = $this -> recs_model -> selectSelectedRecByIndex(2);
+		$this -> _assert_equals(empty($obj), TRUE);
+		$obj = $this -> recs_model -> selectSelectedRecByIndex(11);
+		$this -> _assert_equals(empty($obj), TRUE);
 		
 		// test remove by index
 		$this -> _assert_equals($this -> recs_model -> removeSelectedRecByIndex(1), TRUE);
-		$this -> _assert_equals($this -> recs_model -> selectSelectedRecByIndex(1), FALSE);
-		$this -> _assert_equals($this -> recs_model -> selectSelectedRecByIndex(10), TRUE);
-		$this -> _assert_equals($this -> recs_model -> removeSelectedRecByIndex(10), TRUE);		
-		$this -> _assert_equals($this -> recs_model -> selectSelectedRecByIndex(10), FALSE);
+		$obj = $this -> recs_model -> selectSelectedRecByIndex(1);
+		$this -> _assert_equals(empty($obj), TRUE);
+		$obj = $this -> recs_model -> selectSelectedRecByIndex(10);
+		$this -> _assert_equals(empty($obj), FALSE);		
+		$this -> _assert_equals($this -> recs_model -> removeSelectedRecByIndex(10), TRUE);
+		$obj = $this -> recs_model -> selectSelectedRecByIndex(10);
+		$this -> _assert_equals(empty($obj), TRUE);				
 		
 		$this -> _assert_equals($this -> recs_model -> clearSelectedRecs(), TRUE);
 	}
@@ -181,6 +193,8 @@ class Recs_model_tests extends Toast
 		$this -> _assert_equals($this -> recs_model -> selectSuccessfulRecByIndex(10), TRUE);
 		$this -> _assert_equals($this -> recs_model -> removeSuccessfulRecByIndex(10), TRUE);		
 		$this -> _assert_equals($this -> recs_model -> selectSuccessfulRecByIndex(10), FALSE);
+		
+		$this -> _assert_equals($this -> recs_model -> clearSuccessfulRecs(), TRUE);
 	}
 
 	function test_TimeLocations() {
