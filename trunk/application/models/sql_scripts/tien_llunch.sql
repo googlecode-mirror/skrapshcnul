@@ -161,3 +161,19 @@ CREATE TABLE IF NOT EXISTS `lss_0_recs_time_location` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_restaurants`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_restaurants` (
+  `restaurant_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `location` text NOT NULL,
+  `valid` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`restaurant_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+

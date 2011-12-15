@@ -13,7 +13,8 @@ class Survey extends CI_Controller {
 		$this -> load -> library('input');
 		$this -> load -> model('page_steps_completed_model');
 		$this -> load -> model('schedules_model');
-		$this -> load -> helper('facebook/facebook');
+		$this -> load -> model('recs_model');
+		$this -> load -> model('restaurant_model');
 		$this -> config -> load('facebook_oauth');
 
 		// Set Global Variables
@@ -42,9 +43,36 @@ class Survey extends CI_Controller {
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
-	function suggest() {
-		$this -> data['main_content'] = 'survey/fb_friends';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);	
+	function generate_test_data() {
+		$this -> recs_model -> clearAutoRecs();
+		$this -> recs_model -> clearSuccessfulRecs();
+		$this -> recs_model -> clearTimeLocations();
+		$this -> restaurant_model -> clearRestaurants();
+		
+		$obj = array('user_id' => 1, 'rec_id' => 6, 'rec_reason' => 'This guy is funny.');
+		$this -> recs_model -> insertAutoRec($obj);
+		
+		$obj = array('user_id' => 6, 'rec_id' => 1, 'rec_reason' => 'Awesome guy.');
+		$this -> recs_model -> insertAutoRec($obj);
+		
+		$obj = array('user_id' => 2, 'rec_id' => 3, 'rec_reason' => 'Awesome guy.');
+		$this -> recs_model -> insertAutoRec($obj);
+		
+		$obj = array('user_id' => 3, 'rec_id' => 2, 'rec_reason' => 'Awesome guy.');
+		$this -> recs_model -> insertAutoRec($obj);
+		
+		$this -> recs_model -> insertSuccessfulRec(1);
+		$this -> recs_model -> insertSuccessfulRec(2);
+		
+		$obj = array('index' => 1, 'date' => '2010-12-25', 'time' => '10:00:00', 'restaurant_id' => 1);
+		$this -> recs_model -> insertTimeLocation($obj);
+				
+		$obj = array('index' => 2, 'date' => '2010-12-25', 'time' => '10:00:00', 'restaurant_id' => 2);
+		$this -> recs_model -> insertTimeLocation($obj);
+		
+		$obj = array('name' => 'The White Rabbit', 'location' => '39C Harding Road');
+		$this -> restaurant_model -> insertRestaurant($obj);
+		$this -> restaurant_model -> insertRestaurant($obj);
 	}
 }
 ?>
