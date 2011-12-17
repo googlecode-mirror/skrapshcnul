@@ -286,9 +286,10 @@ class Recs_Model extends CI_Model {
 		
 		$result = array();
 		
-		$user_id = $this -> session -> userdata('user_id'); // current user id
+		$user_id = $this -> session -> userdata('user_id'); // current user id		
 		
 		$index = $this -> selectSuccessfulRecByUserId($user_id); // get the index of the match
+		$result['index'] = $index;
 		
 		// retrieve lunch partner
 		$obj = $this -> selectAutoRecByIndex($index);

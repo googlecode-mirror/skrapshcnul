@@ -177,3 +177,22 @@ CREATE TABLE IF NOT EXISTS `lss_restaurants` (
   PRIMARY KEY (`restaurant_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_survey_data`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_survey_data` (
+  `index` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `target_id` int(11) NOT NULL,
+  `target_point` double NOT NULL,
+  `target_review` text NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `restaurant_point` double NOT NULL,
+  `restaurant_review` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
