@@ -29,13 +29,13 @@
 			</div>
 			<div>
 				<?php if(!empty($profile['location'])) { ?>
-					Lives in <?php echo $profile['location']->name;?>
+					Lives in <?php echo $profile['location']['name'];?>
 				<?php } ?>
 			</div>
 			
 			<div style="font-size: 80%; font-weight: normal; margin-top: 10px;">
 				<?php if(!empty($profile['interests'])) { ?>
-				<strong>Interest:</strong> <?php echo $profile['interests'];?>
+				<strong>Interest:</strong> <?php echo ($profile['interests'][0]);?>
 				<?php } ?>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 				<ul>
 				<?php $i = 0; ?>
 				<?php foreach($profile['positions'] as $position) { ?>
-					<li><?php echo $position->title ?> at <?php echo $position->company->{'name'} ?></li>
+					<li><?php echo $position['title'] ?> at <?php echo $position['company']['name'] ?></li>
 					<?php  if (++$i > 6) { break; }  ?>
 				<?php } ?>
 				</ul>

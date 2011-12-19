@@ -6,6 +6,12 @@
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'suggestions') ? 'active' : '';?>">
 			<?php echo anchor('events/suggestions', 'Suggestions', 'id="a-s-suggestions" class="a-s-icon-xlhdpi"'); ?>
 		</li>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'upcoming') ? 'active' : '';?>">
+			<?php echo anchor('events/upcoming', 'Upcoming Events', 'id="a-s-suggestions" class="a-s-icon-xlhdpi"'); ?>
+		</li>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'past') ? 'active' : '';?>">
+			<?php echo anchor('events/past', 'Past Events', 'id="a-s-suggestions" class="a-s-icon-xlhdpi"'); ?>
+		</li>
 	</ul>
 	<div class="clearfix">
 		&nbsp;

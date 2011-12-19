@@ -17,22 +17,27 @@
 		<div>Total records: <?php echo isset($results['total_records']) ? $results['total_records'] : 0; ?></div>
 		
 		<div>
-			<?php if (!empty($results['users'])) { ?>
+			<?php if (!empty($results['recommendations'])) { ?>
 			<table class="comfortable-table" cellspacing="0">
 				<thead>
 					<tr>
 						<th>Id</th>
-						<th>Email</th>
-						<th>Alias</th>
-						<th>Name</th>
+						<th>User</th>
+						<th>Target</th>
+						<th>Reason</th>
 						<th>Created On</th>
-						<th>Last Login</th>
-						<th>Active</th>
+						<th>Valid</th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach($results['users'] as $user) { ?>
+					<?php foreach($results['recommendations'] as $user) { ?>
 					<tr>
+						<td><?php echo ($user->index); ?></td>
+						<td><?php echo ($user->user_id); ?></td>
+						<td><?php echo ($user->rec_id); ?></td>
+						<td><?php echo ($user->rec_reason); ?></td>
+						<td><?php echo ($user->timestamp); ?></td>
+						<td><?php echo ($user->valid ? "Yes" : "No"); ?></td>
 					</tr>
 					<?php } ?>
 				</tbody>

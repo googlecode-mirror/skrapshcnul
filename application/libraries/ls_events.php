@@ -32,6 +32,8 @@ class Ls_Events {
 		$this -> ci -> load -> model('user_lunch_wishlist_model');
 		$this -> ci -> load -> model('user_lunch_buddy_model');
 		$this -> ci -> load -> model('user_profile_model');
+		$this -> ci -> load -> model('events_model');
+		
 		
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
@@ -44,9 +46,16 @@ class Ls_Events {
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
 	}
 
-	function create($user_id) {
+	function getUserEventSuggestion($user_id) {
 		
+		$results  = ($this -> ci -> events_model -> getUserEventSuggestion($user_id));
 		
+		// Populate Target User Profile Info
+		foreach ($results as $key=>$item) {
+			$results[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
+		}
+		
+		return $results;
 		
 	}
 	
