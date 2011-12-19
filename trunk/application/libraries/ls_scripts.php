@@ -43,6 +43,7 @@ class Ls_Scripts {
 			'skin/css/style.css',
 			'skin/css/tables.css',
 			'skin/css/user.css',
+			'skin/css/user_profile.css',
 			'skin/css/fonts/droid_sans.css',
 			'skin/css/fonts/open_sans.css',
 		);

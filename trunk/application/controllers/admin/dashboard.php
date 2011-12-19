@@ -158,6 +158,31 @@ class Dashboard extends CI_Controller {
 
 	function recommendations() {
 		
+		$this -> data['results']['total_records'] = $this->db->count_all_results('lss_0_auto_recs');
+		
+		$config['base_url']		= site_url('admin/dashboard/users_invites')."?pagination=1";
+		$config['total_rows']	= $this -> data['results']['total_records'];
+		$config['per_page']		= 30;
+		$config['enable_query_strings']	= TRUE;
+		$config['page_query_string']	= TRUE;
+		$this->pagination->initialize($config);
+		
+		// Retrieve paginated results, using the dynamically determined offset
+		$this->db->limit($config['per_page'], $this->pagination->offset);
+		$this->db->select('*');
+		$this->db->from('lss_0_auto_recs');
+		if (!empty($this->order_by)) {
+			$this->db->order_by($this->order_by, "asc");
+		} else {
+			$this->db->order_by('index', "desc");
+		}
+		$query = $this->db->get();
+		
+		if ($query->num_rows() > 0) {
+			$this -> data['results']['recommendations'] = $query->result();
+		} else {
+			$this -> data['results']['recommendations'] = array();
+		}
 		
 		
 		

@@ -52,7 +52,27 @@ class Ls_Profile {
 		
 	}
 	
-	function _prepare_profile_data($user_id) {
+	function getPublicProfile($user_id) {
+		
+		$data2 = $this -> prepare_profile_data($user_id);
+		$data = $this -> ci -> user_profile_model -> select($user_id);
+		
+		## TODO - include "headline" in user_profile_model -> select;
+		
+		$result['kind'] = "ls#person";
+		$result['id'] = $user_id;
+		$result['display_name'] = $data['firstname'];
+		$result['fullname']['first'] = $data['firstname'];
+		$result['fullname']['last'] = $data['lastname'];
+		$result['profile_img'] = $data['profile_img'];
+		$result['headline'] = $data2['headline'];
+		$result['ls_pub_url'] = $data['ls_pub_url'];
+		
+		return $result;
+		
+	}
+	
+	function prepare_profile_data($user_id) {
 		try {
 			$this -> _init($user_id);
 			$this -> _prepare_profile_data_default();
@@ -69,35 +89,36 @@ class Ls_Profile {
 				
 				// Setup Profile Picture
 				if ($linkedin_data->{'picture-url'}) {
-					$this->data['profile']['profile_img'] = ($linkedin_data->{'picture-url'}) ;
+					$this->data['profile']['profile_img'] = ($linkedin_data->{'picture-url'}).'';
 				}
 				if(($linkedin_data->{'first-name'})) {
-					$this->data['profile']['first_name'] = ($linkedin_data->{'first-name'});
+					$this->data['profile']['first_name'] = ($linkedin_data->{'first-name'}).'';
 				}
 				if(($linkedin_data->{'last-name'})) {
-					$this->data['profile']['last_name'] = ($linkedin_data->{'last-name'});
+					$this->data['profile']['last_name'] = ($linkedin_data->{'last-name'}).'';
 				}
 				if(($linkedin_data->{'headline'})) {
-					$this->data['profile']['headline'] = ($linkedin_data->{'headline'});
+					$this->data['profile']['headline'] = ($linkedin_data->{'headline'}).'';
 				}
 				if(($linkedin_data->{'location'})) {
-					$this->data['profile']['location'] = ($linkedin_data->{'location'});
+					$this->data['profile']['location'] = json_decode(json_encode($linkedin_data->{'location'}), TRUE);
 				}
 				if(($linkedin_data->{'positions'})) {
+					//$this->data['profile']['positions'] = json_decode(json_encode($linkedin_data->{'positions'}), TRUE);
 					foreach($linkedin_data->{'positions'}->position as $position) {
-						$this->data['profile']['positions'][] = $position;
+						$this->data['profile']['positions'][] = json_decode(json_encode($position), TRUE);
 					}
 				}
 				if(($linkedin_data->{'public-profile-url'})) {
-					$this->data['profile']['social_network']['linkedin_url'] = $linkedin_data->{'public-profile-url'};
+					$this->data['profile']['social_network']['linkedin_url'] = json_decode(json_encode($linkedin_data->{'public-profile-url'}), TRUE);
 				}
 				if(($linkedin_data->{'educations'})) {
 					foreach($linkedin_data->{'educations'}->education as $education) {
-						$this->data['profile']['educations'][] = $education;
+						$this->data['profile']['educations'][] = json_decode(json_encode($education), TRUE);
 					}
 				}
 				if(($linkedin_data->{'interests'})) {
-					$this->data['profile']['interests'] = $linkedin_data->{'interests'};
+					$this->data['profile']['interests'] = json_decode(json_encode($linkedin_data->{'interests'}), TRUE);
 				}
 				
 				## Update ls_profile fields
@@ -127,16 +148,16 @@ class Ls_Profile {
 		}
 	}
 
-	function _prepare_profile_data_default() {
+	private function _prepare_profile_data_default() {
 		
 		// Setup Cover Photo
 		if(!isset($this->data['profile']['cover_background'])) {
-			$this->data['profile']['cover_background'] = base_url() . "/skin/images/960/cover_background.jpg";
+			$this->data['profile']['cover_background'] = base_url() . "skin/images/960/cover_background.jpg";
 		}
 		// Setup Profile Picture
 		if (!isset($this->data['profile']['profile_img'])) {
 			$this->data['profile']['profile_img'] = base_url().'skin/images/100/icon_no_photo_no_border_offset_100x100.png';
-			$this->data['profile']['profile_img'] = base_url() . "/skin/images/160/silhouette_male.jpg";
+			$this->data['profile']['profile_img'] = base_url() . "skin/images/160/silhouette_male.jpg";
 		}
 		// Setup first name last name
 		if(!isset($this->data['profile']['first_name'])) {
@@ -153,7 +174,7 @@ class Ls_Profile {
 		}
 	}
 	
-	function _prepare_profile_statistics($user_id) {
+	function prepare_profile_statistics($user_id) {
 		
 		// User Rating
 		$this->data['profile_stats']['rating'] = $this -> ci -> user_rating_model -> selectRating($user_id);

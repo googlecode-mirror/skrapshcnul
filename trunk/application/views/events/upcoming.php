@@ -8,15 +8,14 @@
 		</div>
 		<div>
 			<?php if(!empty($events['auto_recommendation'])) { ?>
-				
-				Hi there! We have a few suggestion here for your next meetup!
-				
 				<?php foreach($events['auto_recommendation'] as $item) { ?>
 				<div class="stream-item">
 					<div class="clearfix"></div>
+					<?php var_dump($item); ?>
+					
 					<div>
 						<a href="<?php echo $item['rec_id_profile']['ls_pub_url']; ?>"  class="ls-profile-hover" ls-data-userid="<?php echo $item['rec_id_profile']['user_id'] ?>">
-							<div class="lunch-with profile-img-80">
+							<div class="lunch-with profile-img-45">
 								<img title="<?php echo $item['rec_id_profile']['firstname']; ?>" src="<?php echo $item['rec_id_profile']['profile_img']; ?>">
 							</div>
 						</a>
@@ -26,7 +25,7 @@
 				</div>
 				<?php }?>
 			<?php } else { ?>
-				<div class="">You have no recommendation.</div>
+				<div class="">You have no upcoming event.</div>
 			<?php }?>
 		</div>
 	</div>

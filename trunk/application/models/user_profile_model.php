@@ -17,7 +17,13 @@ class User_Profile_model extends CI_Model {
 		$query = " SELECT * FROM " . self::_TABLE_ . " WHERE `user_id` = '$user_id' ;";
 		$mysql_result = $this -> db -> query($query);
 		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> row_array();
+			$result = ($mysql_result -> row_array());
+			if (trim($result['alias'])) {
+				$result['ls_pub_url'] = "/pub/".$result['alias'];
+			} else {
+				$result['ls_pub_url'] = "/pub/".$result['user_id'];
+			}
+			return $result;
 		} else {
 			$query = 
 				" INSERT INTO " . self::_TABLE_ . 
