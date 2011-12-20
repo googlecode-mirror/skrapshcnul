@@ -98,8 +98,6 @@ function setMarkers(locations) {
 		
 		function callbackfn() {
 			
-			var pos = this.
-			
 			var image = new google.maps.MarkerImage(beach[2],
 				// This marker is 20 pixels wide by 32 pixels tall.
 				new google.maps.Size(32, 32),
@@ -131,7 +129,8 @@ function setMarkers(locations) {
 		callbackfn.call(codeAddress(beach[1]), beach[1])
 		var pos_fn = function(address, callbackfn) {
 			callbackfn();
-		}; pos_fn(, callbackfn());
+		}; 
+		//pos_fn(, callbackfn());
 		
 	}
 	

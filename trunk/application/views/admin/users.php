@@ -33,7 +33,7 @@
 					<tr>
 						<td><?php echo $user->user_id ?></td>
 						<td style="text-align: left;">
-							<div class="bubbleInfo">
+							<div class="ls-profile-hover" ls-data-userid="<?php echo $user->user_id; ?>"><?php /* <div class="bubbleInfo"> */ ?>
 								<span class="trigger"><?php echo $user->email ?></span>
 								<div class="popup">
 									<a href="<?php echo $user->lunchsparks ?>">

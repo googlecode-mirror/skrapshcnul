@@ -1,0 +1,36 @@
+.ls-profile-card-holder {
+	background-color: white;
+	border: solid 1px #BCBCBC;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+	position: absolute;
+	width: 280px;
+	height: 114px;
+	overflow: hidden;
+	z-index: 999;
+	color: #666;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+}
+.ls-profile-card-holder .profile-pic {
+	float: left;
+	margin: 15px 0 15px 15px;
+	width: 80px;
+	height: 80px;
+	overflow: hidden;
+}
+.ls-profile-card-holder .profile-pic img {
+	max-width: 80px;
+}
+.ls-profile-card-holder .profile-info {
+	float: left;
+	margin: 15px;
+	width: 150px;
+	height: 80px;
+	overflow: hidden;
+}
+.ls-profile-card-holder .profile-info .name {
+	font-size: 16px;
+	margin-bottom: 5px;
+}
