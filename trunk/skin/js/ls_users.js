@@ -156,35 +156,17 @@ jQuery(document).ready(function() {
 		var userid = jQuery(this).attr('ls-data-userid');
 		if (userid) {
 			generate_profile_card_html(userid);
-			
 		}
-		
-		/*jQuery(".ls-profile-card-holder").html(jQuery(
-				'<a href="/pub/jackyyapp">'+
-					'<div class="profile-pic lunch-with profile-img-80">'+
-						'<img title="Jacky" src="http://media.linkedin.com/mpr/mprx/0_izp7YYhxvN19AkP33P0yYj_xB1cnACP3TBHrYjtTe9iQa6kT712_rg67MgBWt5tDG9Olls2Oeh6-">'+
-					'</div>'+
-				'</a>'+
-				
-				'<div class="profile-info">'+
-					'<div class="name">'+
-						'<a href="/pub/jackyyapp">Jacky</a>'+
-					'</div>'+
-					'<div class="headline">'+
-						'Contributing Writer at e27 Singapore'+
-					'</div>'+
-				'</div>'
-		));*/
 		jQuery(".ls-profile-card-holder").css('left', e.pageX);
 		jQuery(".ls-profile-card-holder").css('top', e.pageY);
-		jQuery(".ls-profile-card-holder").show();
+		jQuery(".ls-profile-card-holder").show('fade', 'slow');
 	}, function() {
 		// handlerOut
 		jQuery(".ls-profile-card-holder").hide();
 		jQuery(".ls-profile-card-holder").bind("mouseenter",function(){
 			jQuery(".ls-profile-card-holder").show();
 		}).bind("mouseleave",function(){
-			jQuery(".ls-profile-card-holder").hide();
+			jQuery(".ls-profile-card-holder").hide('fade', 'slow');
 		});
 		
 	});

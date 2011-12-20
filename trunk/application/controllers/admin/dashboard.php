@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this -> load -> library('form_validation');
+		$this -> load -> library('input');
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('session');
 		$this -> load -> library('pagination');
@@ -159,12 +160,7 @@ class Dashboard extends CI_Controller {
 	}
 
 	function recommendations() {
-
-		if ($this -> input -> post()) {
-			echo $this -> input -> post('user_id');
-			echo 'lala';
-		}
-
+		
 		$this -> data['results']['recommendations_count'] = $this -> events_model -> getUserEventSuggestion_count();
 		$this -> data['results']['recommendations'] = $this -> events_model -> getUserEventSuggestion_all_by_page();
 
