@@ -85,6 +85,10 @@
 	max-width: 100px;
 	overflow: hidden;
 }
+.profile-img-80 img {
+	max-width: 80px;
+	overflow: hidden;
+}
 .profile-img-50 img {
 	max-width: 50px;
 	overflow: hidden;
