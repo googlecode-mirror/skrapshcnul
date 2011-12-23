@@ -5,7 +5,7 @@
  * For json output
  */
 
-class Json {
+class Json_helper {
 
 	/**
 	 * Indents a flat JSON string to make it more human-readable.
@@ -64,5 +64,7 @@ class Json {
 
 		return $result;
 	}
+
+	
 
 }
