@@ -161,6 +161,16 @@ class Dashboard extends CI_Controller {
 
 	function recommendations() {
 		
+		if ($this -> input -> post()) {
+			$fields['user_name'] = $this -> input -> post('user_name');
+			$fields['user_id'] = $this -> input -> post('user_id');
+			$fields['target_user_name'] = $this -> input -> post('target_user_name');
+			$fields['target_user_id'] = $this -> input -> post('target_user_id');
+			$fields['reason'] = $this -> input -> post('reason');
+			## TODO 
+			## Save to DB
+		}
+		
 		$this -> data['results']['recommendations_count'] = $this -> events_model -> getUserEventSuggestion_count();
 		$this -> data['results']['recommendations'] = $this -> events_model -> getUserEventSuggestion_all_by_page();
 

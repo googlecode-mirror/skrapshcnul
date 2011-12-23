@@ -3,7 +3,7 @@
 /**
  * System Administrative Page
  */
-class People extends CI_Controller {
+class Recommendation extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -18,11 +18,12 @@ class People extends CI_Controller {
 		$this -> load -> helper('url');
 		$this -> load -> helper('json');
 		$this -> load -> helper('logger');
-
+		$this -> load -> model('events_model');
+		
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> user_id = $this -> session -> userdata('user_id');
-
+		
 		// Request Params: 
 		$this -> request_method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : '';
 		
@@ -31,16 +32,19 @@ class People extends CI_Controller {
 	}
 
 	public function _remap($method) {
-		if ($method == 'some_method_to_bypass') {
-			$this -> $method();
-		} else {
-			$this -> index();
+		switch ($method) {
+			case 'ongoing' : 
+			case 'past' :
+				$this -> $method();
+				break;
+			default :
+				$this -> index();
+				break;
 		}
 	}
 
 	function index() {
-		
-		$userid = ($this -> uri -> segment(3));
+		$userid = isset($_REQUEST['userId']) ? $_REQUEST['userId'] : FALSE;
 		if (!$userid || !is_numeric($userid)) {
 			$error['domain'] = "global";
 			$error['reason'] = "invalidParameter";
@@ -48,16 +52,29 @@ class People extends CI_Controller {
 			$error['locationType'] = "parameter";
 			$error['location'] = "userId";
 			$this -> data['errors'] = $error;
-			return $this -> _json_prep($this -> data);
+			return $this -> json -> json_prep($this -> data['errors']);
 		}
 		
 		## TODO - Map to functions
 		$asso_array = ($this -> uri -> uri_to_assoc(4));
 		
-		$this -> data['results'][] = $this -> ls_profile -> getPublicProfile($userid);
+		$this -> results = $this -> ls_profile -> getPublicProfile($userid);
+		
+		$this -> json -> json_prep($this -> results);
+
+	}
+	
+	function ongoing () {
+		
+		$this -> data['results'] = $this -> events_model -> getUserEventSuggestion_all_by_page();
 		
 		$this -> json -> json_prep($this -> data);
-
+		
+	}
+	
+	function create() {
+		// Prepare _REQUEST data
+		
 	}
 
 }

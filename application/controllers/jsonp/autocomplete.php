@@ -13,6 +13,7 @@ class Autocomplete extends CI_Controller {
 		$this -> load -> library('ls_profile');
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('input');
+		$this -> load -> library('json');
 		$this -> load -> database();
 		$this -> load -> helper('url');
 		$this -> load -> helper('json');
@@ -29,7 +30,8 @@ class Autocomplete extends CI_Controller {
 		$this -> callback = (isset($_REQUEST['callback'])) ? $_REQUEST['callback'] : '';
 		$this -> request_method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : '';
 
-		$this -> start_time = time();
+		// Authentication
+		$this -> json -> is_autheticated();
 
 	}
 
@@ -50,7 +52,7 @@ class Autocomplete extends CI_Controller {
 			$error['locationType'] = "parameter";
 			$error['location'] = "keywords";
 			$this -> data['errors'] = $error;
-			return $this -> _json_prep();
+			return $this -> json -> json_prep($this -> data['errors']);
 		}
 
 		## TODO - Map to functions
@@ -68,37 +70,9 @@ class Autocomplete extends CI_Controller {
 			$this -> data['results'] = ($query -> result_array());
 		}
 
-		$this -> _json_prep();
+		$this -> json -> json_prep($this -> data);
 
 	}
 
-	function _json_prep() {
-		//header('Cache-Control: no-cache, must-revalidate');
-		//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-		header('Content-type: application/json');
-
-		if (!empty($this -> data['errors'])) {
-			// Contains error
-			if ($this -> callback) {
-				print_r($this -> callback . '(' . json_encode($this -> data['errors']) . ')');
-			} else {
-				print_r(Json::indent(json_encode($this -> data['errors'])));
-			}
-		} else {
-			$this -> json_result['completed_in'] = number_format(time() - $this -> start_time, 3, '.', '');
-			if (empty($this -> data['results'])) {
-				$this -> json_result['results'] = FALSE;
-				$this -> json_result['reason'] = "No results";
-			} else {
-				$this -> json_result['results'] = $this -> data['results'];
-			}
-
-			if ($this -> callback) {
-				print_r($this -> callback . '(' . json_encode($this -> json_result) . ')');
-			} else {
-				print_r(Json::indent(json_encode($this -> json_result)));
-			}
-		}
-	}
 
 }
