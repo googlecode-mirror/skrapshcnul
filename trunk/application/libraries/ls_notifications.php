@@ -32,17 +32,48 @@ class Ls_notifications {
 		}
 
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
+
+		// Initialize Library
+		$this -> _initialize();
+	}
+
+	private function _initialize() {
+		$fields['keywords'] = 'Notification';
+		$this -> component_info = $this -> ci -> ls_notifications_model -> get_component_info($fields);
 	}
 
 	/**
 	 * Function for components to set notifications
 	 */
-	function set_notification($component_id, $identity, $message, $url = '') {
+	function set_notification($fields = FALSE) {
+		if (!$fields) {
+			return FALSE;
+		}
 
-		if (!$this -> ci -> ls_notifications_model -> set_notification($component_id, $identity, $message, $url)) {
+		if (!(isset($fields['component_id']) && is_numeric($fields['component_id']))) {
+			return FALSE;
+		}
+		if (!(isset($fields['user_id']) && is_numeric($fields['user_id']))) {
+			return FALSE;
+		}
+		if (!(isset($fields['message']))) {
+			return FALSE;
+		}
+		if (!(isset($fields['url']))) {
+			return FALSE;
+		}
+		
+		$component_id = $fields['component_id'];
+		$user_id = $fields['user_id'];
+		$message = $fields['message'];
+		$url = $fields['url'];
+
+		if (!$this -> ci -> ls_notifications_model -> set_notification($component_id, $user_id, $message, $url)) {
 			echo $this -> ci -> ls_notifications_model -> errors();
 			return FALSE;
 		}
+		
+		return TRUE;
 
 	}
 
@@ -53,10 +84,11 @@ class Ls_notifications {
 		$number_of_notifications = 30;
 
 		$results = $this -> ci -> ls_notifications_model -> get_notifications($identity, $number_of_notifications);
-		
+
 		if (isset($results) && is_array($results)) {
 			foreach ($results as $key => $value) {
-				$results[$key]['component_class'] = $this -> component_class[$value['component_id']];
+				$fields['component_id'] = $value['component_id'];
+				$results[$key]['component_class'] = $this -> ci -> ls_notifications_model -> get_component_info_by_id($fields);
 			}
 		}
 
@@ -95,13 +127,32 @@ class Ls_notifications {
 		}
 	}
 
+	function get_component_info($fields = FALSE) {
+
+		if (!$fields) {
+			return FALSE;
+		}
+		
+		if (isset($fields['keywords']) && !empty($fields['keywords'])) {
+			$keywords = isset($fields['keywords']) ? $fields['keywords'] : FALSE;
+			return $this -> ci -> ls_notifications_model -> get_component_info($keywords);			
+		}
+		
+		if (isset($fields['component_id']) && !empty($fields['component_id'])) {
+			$component_id = isset($fields['component_id']) ? $fields['component_id'] : FALSE;
+			return $this -> ci -> ls_notifications_model -> get_component_info_by_id($component_id);			
+		} 
+		
+
+	}
+
 	function set_notifications_new_as_read($identity = '', $notification_id = '') {
 		if (empty($identity)) {
 			return FALSE;
 		} elseif (empty($notification_id)) {
 			return FALSE;
 		}
-		
+
 		$results = $this -> ci -> ls_notifications_model -> set_notifications_new_as_read($identity, $notification_id);
 
 		if ($results) {

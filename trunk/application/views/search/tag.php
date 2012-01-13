@@ -55,6 +55,10 @@
 <?php $location = $user['location'] ?>
 var persons = [
 	[1, '<?php echo $location ?>', '<?php echo $profileImg_mapPin ?>', '<?php echo ($user['firstname']) ?>']
+	
+	
+	
+	
 ];
 </script>
 

@@ -44,7 +44,7 @@ class Notifications extends CI_Controller {
 
 		// Render view
 		$this -> data['main_content'] = 'notifications/index';
-		$this -> load -> view('includes/tmpl_public', $this -> data);
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
 	function minified($type = NULL) {

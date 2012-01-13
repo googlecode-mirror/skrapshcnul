@@ -278,5 +278,44 @@ class Ls_notifications_model extends CI_Model {
 
 		return $_output;
 	}
+	
+	public function get_component_info($keywords = FALSE) {
+		
+		if (!$keywords) {
+			return FALSE;
+		}
+		
+		$number_of_items = 1;
+		
+		$this -> db -> select('*'); 
+		$this -> db -> like('component_name', $keywords);
+		$this -> db -> limit($number_of_items); 
+		$query = $this -> db -> get($this -> tables['components']);
+		
+		if ($query -> num_rows() > 0) {
+			return $query -> row_array();
+		} else {
+			return FALSE;
+		}
+	}
 
+	public function get_component_info_by_id($component_id = FALSE) {
+		
+		if (!$component_id) {
+			return FALSE;
+		}
+		
+		$number_of_items = 1;
+		
+		$this -> db -> select('*'); 
+		$this -> db -> like('component_id', $component_id);
+		$this -> db -> limit($number_of_items); 
+		$query = $this -> db -> get($this -> tables['components']);
+		
+		if ($query -> num_rows() > 0) {
+			return $query -> row_array();
+		} else {
+			return FALSE;
+		}
+	}
 }
