@@ -8,7 +8,7 @@
 			<?php foreach($profile_stats['lunch_buddy_list'] as $lunch_buddy) { ?>
 			<div class="lunch-buddy-item">
 				<a href="/pub/<?php echo !empty($lunch_buddy->alias) ? $lunch_buddy->alias : $lunch_buddy->target_user_id;?>">
-					<div class="lunch-with profile-img-45">
+					<div class="lunch-with profile-img-45 ls-profile-hover" ls-data-userid="<?php echo $lunch_buddy->target_user_id; ?>">
 						<img title="<?php echo $lunch_buddy->firstname;?>" src="<?php echo ($lunch_buddy->profile_img) ? $lunch_buddy->profile_img :  '/skin/images/160/silhouette_male.jpg'; ?>">
 					</div>
 				</a>

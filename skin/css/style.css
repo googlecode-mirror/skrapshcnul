@@ -325,6 +325,7 @@ footer ul li {
 	border: none;
 }
 #notification-mini {
+	width: 340px;
 	margin: 5px;
 	background: #FFFFFF;
 	font-size: 90%;
@@ -337,7 +338,6 @@ footer ul li {
 	background: #F8F8F8;
 	color: #666;
 	border-top: 1px solid #DDDFE7;
-	cursor: pointer;
 	padding: 10px 19px 10px 9px;
 	outline: none;
 }
@@ -887,4 +887,7 @@ td {
 }
 .editable {
 	min-width: 200px;
+}
+.button.selected {
+	
 }

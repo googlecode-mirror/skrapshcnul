@@ -124,7 +124,7 @@ class Json {
 				header('Content-type: application/json');
 				break;
 			default :
-				header('Content-type: application/json');
+				//header('Content-type: application/json');
 				break;
 		}
 
@@ -150,6 +150,8 @@ class Json {
 				print_r($this -> _indent(json_encode($this -> json_result)));
 			}
 		}
+		
+		die();
 	}
 
 }

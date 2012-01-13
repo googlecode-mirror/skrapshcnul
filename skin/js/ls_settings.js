@@ -31,3 +31,9 @@ jQuery(document).ready(function(){
 	});
 	
 });
+
+jQuery(document).ready(function() {
+	jQuery('.button_yes_no').click(function(){
+		alert('in');
+	});
+});

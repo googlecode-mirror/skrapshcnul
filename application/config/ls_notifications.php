@@ -11,6 +11,7 @@
 	 * Tables.
 	 **/
 	$config['tables']['notifications']   = 'notifications';
+	$config['tables']['components']   = 'components';
 	
 	/**
 	 * Component Ids
@@ -30,6 +31,9 @@
 	$config['component_id']['review']	= 5;
 	$config['component_name']['5']		= "Review";
 	$config['component_class']['5']		= "ni-h60";
+	$config['component_id']['review']	= 6;
+	$config['component_name']['5']		= "Recommendation";
+	$config['component_class']['5']		= "ni-h75";
 	
 	
 /* End of file ls_notifications.php */
