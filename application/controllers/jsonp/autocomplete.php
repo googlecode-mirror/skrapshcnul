@@ -18,6 +18,7 @@ class Autocomplete extends CI_Controller {
 		$this -> load -> helper('url');
 		$this -> load -> helper('json');
 		$this -> load -> helper('logger');
+		$this -> load -> model('preferences_model');
 
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
@@ -74,5 +75,45 @@ class Autocomplete extends CI_Controller {
 
 	}
 
+	function network()
+	{
+		$keywords = $this -> input -> get('keywords');
+		if (!$keywords) {
+			$error['domain'] = "global";
+			$error['reason'] = "invalidParameter";
+			$error['message'] = "Invalid value 'keywords'.";
+			$error['locationType'] = "parameter";
+			$error['location'] = "keywords";
+			$this -> data['errors'] = $error;
+			return $this -> json -> json_prep($this -> data['errors']);
+		}
+		## TODO - Map to functions
+		$preferences = $this -> preferences_model -> selectForCurrentUser();
+		$pref_array = array();
+		if($preferences)
+			{
+				foreach($preferences[1]['data'] as $value)
+				{
+					array_push($pref_array,$value);
+				}
+			}
+		$asso_array = ($this -> uri -> uri_to_assoc(5));
+		//SELECT  `keywords` 
+		$this -> db -> select('*');
+		$this -> db -> from('lss_global_preferences AS lgp');
+		$this -> db -> like('keywords', $keywords);
+		$this -> db -> order_by('count','desc');
+		if($pref_array)
+		$this -> db -> where_not_in('keywords',$pref_array);
+		//$this -> db -> join('lss_users_profile_social_links AS lupsl', 'lupsl.user_id = lup.user_id', 'left');
+		$query = $this -> db -> get();
+
+		if ($query -> num_rows() > 0) {
+			$this -> data['results'] = ($query -> result_array());
+		}
+		
+		$this -> json -> json_prep($this -> data);
+		
+	}
 
 }

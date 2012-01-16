@@ -12,6 +12,7 @@
 		
 		<?php if (!empty($preferences)) { ?>
 			<?php foreach($preferences as $value) { ?>
+				<?php //print_r($value); ?>
 				<div class="preferences-container">
 					
 				<?php // var_dump($value) ?>
@@ -34,7 +35,7 @@
 						</div>
 					<?php } ?>
 				</div>
-				<input type="text" id="tag_value_<?php echo $value['preferences_ref_id']; ?>" name="tag_value_<?php echo $value['preferences_ref_id']; ?>" size="35" placeholder="New keywords here" style="display: inline-block;">
+				<input type="text" id="tag_value_<?php echo $value['preferences_ref_id']; ?>" class ="ls_user_autocomplete" name="tag_value_<?php echo $value['preferences_ref_id']; ?>" size="35" placeholder="New keywords here" style="display: inline-block;">
 	      		<input type="submit" value="add" required="required" class="preference-tag-btn-add" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" />
 			</div>
 			<?php } ?>
@@ -69,4 +70,49 @@
 	
     
 	</script>
+	<script>
+jQuery('.ls_user_autocomplete').each( function() {
+	var el = jQuery(this);
+	el.autocomplete({
+		source: function( request, response ) {
+			var keywords = el.val();
+			
+			jQuery.getJSON("/jsonp/autocomplete/network?callback=?",
+			{ 
+				keywords: keywords,
+				tag_value : this.id,
+			}, function(data) {
+				//console.log(data);
+				response( jQuery.map( data.results, function( item ) {
+					return {
+						label: item.keywords,
+						value: item.keywords,
+					}
+				}));
+			});
+		},
+		minLength: 2,
+		select: function( event, ui ) {
+			console.log( ui.item ?
+				"Selected: " + ui.item.label :
+				"Nothing selected, input was " + this.value);
+			//el.next().val(ui.item.label);			
+		},
+		open: function() {
+			jQuery( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+		},
+		close: function() {
+			jQuery( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+		}
+	});
+});
+</script>
+<script>
+jQuery("#form_new_recommendation").submit(function() {
+	alert('Handler for .submit() called.');
+	var str = jQuery("#form_new_recommendation").serialize();
+	jQuery('body').append(str);
+  	return false;
+});
+</script>
 </div>
