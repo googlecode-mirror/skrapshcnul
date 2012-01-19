@@ -44,7 +44,7 @@ class Events extends CI_Controller {
 
 	function upcoming() {
 		
-		$this -> data['events']['suggestions'] = array();
+		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEventMatched($this -> user_id));
 		
 		// Render views data
 		$this -> data['head_title'] = 'Upcoming Events | Lunchsparks';
@@ -57,6 +57,8 @@ class Events extends CI_Controller {
 
 	function past() {
 
+		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this -> user_id));
+		
 		// Render views data
 		$this -> data['head_title'] = 'Past Events | Lunchsparks';
 		$this -> data['tpl_page_id'] = "past";

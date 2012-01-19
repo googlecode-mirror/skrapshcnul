@@ -526,7 +526,11 @@ input[type=submit], .button-set a, .btn {
 input[type=submit]:hover, .button-set a:hover {
 	background: #3794bb;
 }
+
 /* Buttons */
+span.button {
+	padding: 5px 15px;
+}
 .button, .button:link, .button:visited {
 	margin: 0 1px;
 	white-space: nowrap;
@@ -555,6 +559,12 @@ input[type=submit]:hover, .button-set a:hover {
 .button:active {
 	margin-top: 1px;
 }
+.button.selected {
+	background: #0e6488;
+	border-color: #083b50;
+}
+
+
 .button-green {
 	background-color: #698C2E !important;
 	background-image: -moz-linear-gradient(top, #a7cf62, #698c2e) !important;
@@ -888,6 +898,34 @@ td {
 .editable {
 	min-width: 200px;
 }
-.button.selected {
-	
+
+.inset-image {
+	-webkit-box-shadow: 0 0 2px rgba(255,255,255,0.3) inset, 0 0 2px rgba(255,255,255,0.3) inset, 0 2px 2px rgba(0,0,0,0.4);
+	box-shadow: 0 0 2px rgba(255,255,255,0.3) inset, 0 0 2px rgba(255,255,255,0.3) inset, 0 2px 2px rgba(0,0,0,0.4);
+	-moz-box-shadow: 0 0 2px rgba(255,255,255,0.3) inset, 0 0 2px rgba(255,255,255,0.3) inset, 0 2px 2px rgba(0,0,0,0.4);
+	border: 1px solid #B1B1B1;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.inset-image img {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.line-separator {
+	background: #A29B8B;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+	height: 1px;
+}
+.label {
+	display: inline-block;
+	margin: 0 auto;
+	text-transform: uppercase;
+	color: #333;
+	text-shadow: 0 1px 0 white;
+	font-size: 12px;
+	text-decoration: none;
+	padding: 0 0 5px 0;
 }

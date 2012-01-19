@@ -201,7 +201,18 @@ function generate_profile_card_html(userid) {
 						headline+
 					'</div>'+
 				'</div>'
-			jQuery(".ls-profile-card-holder").html(jQuery(return_html)); ;
+			jQuery(".ls-profile-card-holder").html(jQuery(return_html));
+			
+			// To Handle text-overflow for headline
+			var p = jQuery('.profile-info .headline');
+			var divh = jQuery('.profile-info').height();
+			divh = 50;
+			while (jQuery(p).outerHeight()>divh) {
+			    jQuery(p).text(function (index, text) {
+			        return text.replace(/\W*\s(\S)*$/, '...');
+			    });
+			}
+			
 		}
 		
 	}); 

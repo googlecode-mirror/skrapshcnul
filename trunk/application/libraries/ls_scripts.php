@@ -21,6 +21,7 @@ class Ls_Scripts {
 			'skin/js/ls_invitations.js',
 			'skin/js/ls_notifications.js', 
 			'skin/js/ls_preferences.js',
+			'skin/js/ls_recommendations.js',
 			'skin/js/ls_schedules.js',
 			'skin/js/ls_search.js',
 			'skin/js/ls_settings.js',

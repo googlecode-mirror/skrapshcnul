@@ -14,6 +14,7 @@ class Recommendation extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> library('ls_notifications');
 		$this -> load -> library('ls_profile');
+		$this -> load -> library('ls_events');
 		$this -> load -> library('ls_user_recommendation');
 		$this -> load -> library('session');
 		$this -> load -> helper('json');
@@ -81,22 +82,23 @@ class Recommendation extends CI_Controller {
 		// Prepare _REQUEST data
 		$fields['user_id'] = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : FALSE;
 		$fields['target_user_id'] = isset($_REQUEST['target_user_id']) ? $_REQUEST['target_user_id'] : FALSE;
-		$fields['user_id'] = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : FALSE;
+		$fields['recommendation_id'] = isset($_REQUEST['recommendation_id']) ? $_REQUEST['recommendation_id'] : FALSE;
 
-		//$this -> data['results'] = $this -> ls_user_recommendation -> delete($fields);
-
-		## TODO
-
+		$this -> data['results'] = $this -> ls_user_recommendation -> confirm($fields);
+		
+		$this -> json -> json_prep($this -> data);
+		
 	}
 
 	public function reject() {
 		// Prepare _REQUEST data
 		$fields['user_id'] = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : FALSE;
 		$fields['target_user_id'] = isset($_REQUEST['target_user_id']) ? $_REQUEST['target_user_id'] : FALSE;
+		$fields['recommendation_id'] = isset($_REQUEST['recommendation_id']) ? $_REQUEST['recommendation_id'] : FALSE;
 
-		//$this -> data['results'] = $this -> ls_user_recommendation -> delete($fields);
-
-		## TODO
+		$this -> data['results'] = $this -> ls_user_recommendation -> reject($fields);
+		
+		$this -> json -> json_prep($this -> data);
 
 	}
 
