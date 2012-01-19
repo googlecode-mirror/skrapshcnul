@@ -9,17 +9,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.0.22/webfont.js"></script><?php 
 */ ?>
-<link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery-ui-1.8.16/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery-ui/jquery-ui-1.8.17/css/smoothness/jquery-ui-1.8.17.custom.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.css" type="text/css" media="screen" charset="utf-8" />
-<script src="<?php echo base_url();?>skin/js/jquery-1.6.4.min.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript">$.noConflict();</script>
-<script src="<?php echo base_url();?>skin/js/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery-ui/jquery-ui-1.8.17/js/jquery-ui-1.8.17.custom.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-flip-0.9.9/jquery.flip.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.js"></script>
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
-<script src="<?php echo base_url();?>skin/js/angular-0.9.19.min.js" ng:autobind></script>
+<script src="<?php echo base_url();?>skin/js/angularjs/angular-0.9.19.min.js" ng:autobind></script>
 <script src="<?php echo base_url();?>skin/js/yqlgeo/yqlgeo.js" ng:autobind></script>
 <script src="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.js"></script>
 <?php echo $css_combined; ?>

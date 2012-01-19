@@ -7,6 +7,18 @@ if (!defined('BASEPATH'))
  * Author: @stiucsib86
  * Created:  11.09.2011
  * Description:
+ *
+ *	Handler for user recommendations
+ *	1. user recommendations
+ * 		- auto recommendations
+ * 		- selected recommendations
+ * 	2. user matched
+ * 		- negotiated
+ *
+ *
+ *
+ *
+ *
  * Requirements: PHP5 or above
  */
 class Ls_Events {
@@ -33,8 +45,7 @@ class Ls_Events {
 		$this -> ci -> load -> model('user_lunch_buddy_model');
 		$this -> ci -> load -> model('user_profile_model');
 		$this -> ci -> load -> model('events_model');
-		
-		
+
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
 		//auto-login the user if they are remembered
@@ -47,18 +58,114 @@ class Ls_Events {
 	}
 
 	function getUserEventSuggestion($user_id) {
-		
-		$results  = ($this -> ci -> events_model -> getUserEventSuggestion($user_id));
-		
+
+		$results = ($this -> ci -> events_model -> getUserEventSuggestion($user_id));
+
 		// Populate Target User Profile Info
-		foreach ($results as $key=>$item) {
+		foreach ($results as $key => $item) {
 			$results[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
 		}
-		
+
 		return $results;
+
+	}
+
+	function getUserEventMatched($user_id) {
+		
+		$events = ($this -> ci -> events_model -> getUserEventMatched($user_id));
+		
+		if (!$events) {
+			return FALSE;
+		}
+		
+		foreach ($events as $key => $event) {
+
+			$event_id = ($event['event_id']);
+			$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
+			
+			// Populate Target User Profile Info
+			foreach ($users as $key2 => $user) {
+				$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
+				if ($user_id == $user['user_id']) {
+					$events[$key]['current_user'] = $user;
+				}
+			}
+			
+			$events[$key]['participant'] = $users;
+			
+		}
+		
+		return $events;
+
+	}
+	
+	function getUserEvent_past($fields = FALSE) {
+		
+		if (!$fields) {
+			return FALSE;
+		}
+		
+		if (!isset($fields['user_id'])) {
+			return FALSE;
+		}
+		
+		$user_id = $fields['user_id'];
+		
+		$events = ($this -> ci -> events_model -> getUserEvent_past($user_id));
+		
+		foreach ($events as $key => $event) {
+
+			$event_id = ($event['event_id']);
+			$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
+			
+			// Populate Target User Profile Info
+			foreach ($users as $key2 => $user) {
+				$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
+				if ($user_id == $user['user_id']) {
+					$events[$key]['current_user'] = $user;
+				}
+			}
+			
+			$events[$key]['participant'] = $users;
+			
+		}
+		
+		return $events;
 		
 	}
 	
+	function rsvp($fields = FALSE) {
+		
+		if (!$fields) {
+			return FALSE;
+		}
+		
+		if (!$fields['oid'] || !is_numeric($fields['oid'])) {
+			return FALSE;
+		}
+		
+		if (!$fields['action']) {
+			return FALSE;
+		} else {
+			switch($fields['action']) {
+				case 'confirm' :
+				case 1 :
+					$fields['action'] = 1;
+					break;
+				case 'reject' :
+				case 'decline' :
+				case 0 :
+					$fields['action'] = 0;
+					break;
+				default : 
+					$fields['action'] = 0;
+					break;
+			}
+		}
+		
+		return $this -> ci -> events_model -> event_RSVP($fields);
+		
+	}
 
 }
 ?>

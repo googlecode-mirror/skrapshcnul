@@ -18,4 +18,7 @@ $config['tables']['event_negotiated_recommendation'] = "lss_0_negotiated_recs";
 $config['tables']['event_accepted_recommendation'] = "lss_0_accepted_recs";
 $config['tables']['event_successful_recommendation'] = "lss_0_successful_recs";
 
+$config['tables']['events_event'] = "lss_events";
+$config['tables']['events_users'] = "lss_events_users";
+
 /* End of file /tables/events.php */

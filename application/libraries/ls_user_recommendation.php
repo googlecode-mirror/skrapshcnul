@@ -41,6 +41,21 @@ class Ls_User_Recommendation {
 		$this -> _initialize();
 	}
 
+	
+	function getUserRecommendations($user_id) {
+		
+		$results  = ($this -> ci -> events_model -> getUserEventSuggestion($user_id));
+		
+		// Populate Target User Profile Info
+		foreach ($results as $key=>$item) {
+			$results[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
+		}
+		
+		return $results;
+		
+	}
+	
+
 	private function _initialize() {
 		$fields['keywords'] = 'Recommendation';
 		$this -> component_info = $this -> ci -> ls_notifications_model -> get_component_info($fields);
@@ -107,15 +122,64 @@ class Ls_User_Recommendation {
 		
 		// Data values Validation
 
-		if (!(isset($fields['oid']) && is_numeric($fields['oid']))) {
+		if (!(isset($fields['recommendation_id']) && is_numeric($fields['recommendation_id']))) {
 			## TODO log error
 			return FALSE;
 		}
 		
+		$this -> ci -> db -> trans_off();
+		$this -> ci -> db -> trans_start();
+		{
+			$this->data[] = $this -> ci -> user_recommendation_model -> confirm($fields);
+		}
+		$this -> ci -> db -> trans_complete();
+		
+		if ($this -> ci -> db -> trans_status()) {
+			## TODO - Set Admin Notification
+			/*$notification['component_id'] = $this -> component_info['component_id'];
+			$notification['user_id'] = $fields['target_user_id'];
+			$notification['message'] = "You have new recommendations";
+			$notification['url'] = "/events/suggestions";
+			$this -> ci -> ls_notifications -> set_notification($notification);*/
+		}
+		
+		if ($this -> data) {
+			return $this -> data;
+		} else {
+			return FALSE;
+		}
 	}
 	
 	public function reject($fields) {
 		
+		// Data values Validation
+
+		if (!(isset($fields['recommendation_id']) && is_numeric($fields['recommendation_id']))) {
+			## TODO log error
+			return FALSE;
+		}
+		
+		$this -> ci -> db -> trans_off();
+		$this -> ci -> db -> trans_start();
+		{
+			$this->data[] = $this -> ci -> user_recommendation_model -> reject($fields);
+		}
+		$this -> ci -> db -> trans_complete();
+		
+		if ($this -> ci -> db -> trans_status()) {
+			## TODO - Set Admin Notification
+			/*$notification['component_id'] = $this -> component_info['component_id'];
+			$notification['user_id'] = $fields['target_user_id'];
+			$notification['message'] = "You have new recommendations";
+			$notification['url'] = "/events/suggestions";
+			$this -> ci -> ls_notifications -> set_notification($notification);*/
+		}
+		
+		if ($this -> data) {
+			return $this -> data;
+		} else {
+			return FALSE;
+		}
 	}
 }
 ?>

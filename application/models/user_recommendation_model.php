@@ -144,6 +144,10 @@ class User_Recommendation_model extends CI_Model {
 		}
 	}
 	
+	/* 
+	 * @author binghan@lunchsparks.me
+	 * @description confirmation for user recommendation 
+	 */
 	function confirm($fields = FALSE) {
 		
 		if (!$fields) {
@@ -155,16 +159,16 @@ class User_Recommendation_model extends CI_Model {
 		$target_user_id = isset($fields['target_user_id']) ? $fields['target_user_id'] : FALSE;
 		$recommendation_id = isset($fields['recommendation_id']) ? $fields['recommendation_id'] : '';
 		
-		if ($result = $this -> selectUserRecommendation($fields)) {
-			return $result;
-		}
-		
 		//lss_0_auto_recs
 		//lss_0_selected_recs
-		$query = " INSERT INTO lss_0_selected_recs ";
-		$query .= " (`index`, `valid`, `timestamp` ) ";
-		$query .= " VALUES ($recommendation_id, 1, NOW() ";
-		$query .= " ON DUPLICATE KEY UPDATE valid = !valid, updatedOn = NOW() ";
+		//$query = " INSERT INTO lss_0_selected_recs ";
+		//$query .= " (`index`, `valid`, `timestamp` ) ";
+		//$query .= " VALUES ('$recommendation_id', '1', NOW() ) ";
+		//$query .= " ON DUPLICATE KEY UPDATE valid = 1, timestamp = NOW() ";
+		
+		$query = " UPDATE lss_0_auto_recs ";
+		$query .= " SET `selected` = 1, `timestamp` = NOW()";
+		$query .= " WHERE `index` = '$recommendation_id'";
 		
 		$mysql_result = $this -> db -> query($query);
 		if ($mysql_result) {
@@ -174,4 +178,30 @@ class User_Recommendation_model extends CI_Model {
 		}	
 	}
 
+	/* 
+	 * @author binghan@lunchsparks.me
+	 * @description confirmation for user recommendation 
+	 */
+	function reject($fields = FALSE) {
+		
+		if (!$fields) {
+			return FALSE;
+		}
+		
+		// Prepare Data Value
+		$user_id = isset($fields['user_id']) ? $fields['user_id'] : FALSE;
+		$target_user_id = isset($fields['target_user_id']) ? $fields['target_user_id'] : FALSE;
+		$recommendation_id = isset($fields['recommendation_id']) ? $fields['recommendation_id'] : '';
+		
+		$query = " UPDATE lss_0_auto_recs ";
+		$query .= " SET `selected` = 0, `timestamp` = NOW()";
+		$query .= " WHERE `index` = '$recommendation_id'";
+		
+		$mysql_result = $this -> db -> query($query);
+		if ($mysql_result) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}	
+	}
 }

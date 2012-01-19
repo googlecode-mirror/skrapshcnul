@@ -16,15 +16,18 @@
 					<div class="clearfix"></div>
 					<div style="display: inline-block; vertical-align: middle;">
 						<a href="<?php echo $item['rec_id_profile']['ls_pub_url']; ?>"  class="ls-profile-hover" ls-data-userid="<?php echo $item['rec_id_profile']['user_id'] ?>">
-							<div class="lunch-with profile-img-80">
+							<div class="lunch-with inset-image profile-img-80">
 								<img title="<?php echo $item['rec_id_profile']['firstname']; ?>" src="<?php echo $item['rec_id_profile']['profile_img']; ?>">
 							</div>
 						</a>
 					</div>
 					<div style="display: inline-block;">
-						
-						<div style="padding: 20px;">YES / NO</div>
-						
+						<div style="padding: 20px;" class="radio_buttonset">
+							<input type="radio" id="radio<?php echo $item['index'] ?>_1" name="radio<?php echo $item['index'] ?>" <?php echo $item['selected'] ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_confirm(this);" />
+							<label for="radio<?php echo $item['index'] ?>_1">Yes</label>
+							<input type="radio" id="radio<?php echo $item['index'] ?>_0" name="radio<?php echo $item['index'] ?>" <?php echo !$item['selected'] ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_reject(this);" />
+							<label for="radio<?php echo $item['index'] ?>_0">No</label>
+						</div>
 					</div>
 					
 					<div class="clearfix"></div>
@@ -36,3 +39,9 @@
 		</div>
 	</div>
 </div>
+
+<script>
+jQuery(document).ready(function() {
+	jQuery( ".radio_buttonset" ).buttonset();
+});
+</script>
