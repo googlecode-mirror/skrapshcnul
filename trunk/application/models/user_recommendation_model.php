@@ -166,7 +166,7 @@ class User_Recommendation_model extends CI_Model {
 		//$query .= " VALUES ('$recommendation_id', '1', NOW() ) ";
 		//$query .= " ON DUPLICATE KEY UPDATE valid = 1, timestamp = NOW() ";
 		
-		$query = " UPDATE lss_0_auto_recs ";
+		$query = " UPDATE " . $this -> tables['event_auto_recommendation'];
 		$query .= " SET `selected` = 1, `timestamp` = NOW()";
 		$query .= " WHERE `index` = '$recommendation_id'";
 		
@@ -193,7 +193,7 @@ class User_Recommendation_model extends CI_Model {
 		$target_user_id = isset($fields['target_user_id']) ? $fields['target_user_id'] : FALSE;
 		$recommendation_id = isset($fields['recommendation_id']) ? $fields['recommendation_id'] : '';
 		
-		$query = " UPDATE lss_0_auto_recs ";
+		$query = " UPDATE " . $this -> tables['event_auto_recommendation'];
 		$query .= " SET `selected` = 0, `timestamp` = NOW()";
 		$query .= " WHERE `index` = '$recommendation_id'";
 		
