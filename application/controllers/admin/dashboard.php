@@ -182,13 +182,65 @@ class Dashboard extends CI_Controller {
 		$this -> data['tpl_page_id'] = "recommendations";
 		$this -> data['tpl_page_title'] = "Recommendations Overview";
 		// Render views
-		$this -> data['main_content'] = 'admin/recommendations';
+		$this -> data['main_content'] = 'admin/recommendations/overview';
 		$this -> load -> view('includes/tmpl_admin', $this -> data);
 
 	}
 
-	function upcoming_events() {
+	function events() {
+		
+		if ($this -> input -> post()) {
+			$fields['user_name'] = $this -> input -> post('user_name');
+			$fields['user_id'] = $this -> input -> post('user_id');
+			$fields['target_user_name'] = $this -> input -> post('target_user_name');
+			$fields['target_user_id'] = $this -> input -> post('target_user_id');
+			$fields['reason'] = $this -> input -> post('reason');
+			## TODO 
+			## Save to DB
+		}
+		
+		$this -> data['results']['recommendations_count'] = $this -> events_model -> getUserEventSuggestion_count();
+		$this -> data['results']['recommendations'] = $this -> events_model -> getUserEventSuggestion_all_by_page();
 
+		$this -> data['results']['past_recommendations_count'] = $this -> events_model -> getPastUserEventSuggestion_count();
+		$this -> data['results']['past_recommendations'] = $this -> events_model -> getPastUserEventSuggestions_all_by_page();
+
+		// Render views data
+		$this -> data['head_title'] = 'Events Overview | Lunchsparks';
+		$this -> data['tpl_page_id'] = "events";
+		$this -> data['tpl_page_title'] = "Events Overview";
+		// Render views
+		$this -> data['main_content'] = 'admin/events/overview';
+		$this -> load -> view('includes/tmpl_admin', $this -> data);
+		
+	}
+	
+	function survey() {
+		
+		if ($this -> input -> post()) {
+			$fields['user_name'] = $this -> input -> post('user_name');
+			$fields['user_id'] = $this -> input -> post('user_id');
+			$fields['target_user_name'] = $this -> input -> post('target_user_name');
+			$fields['target_user_id'] = $this -> input -> post('target_user_id');
+			$fields['reason'] = $this -> input -> post('reason');
+			## TODO 
+			## Save to DB
+		}
+		
+		$this -> data['results']['recommendations_count'] = $this -> events_model -> getUserEventSuggestion_count();
+		$this -> data['results']['recommendations'] = $this -> events_model -> getUserEventSuggestion_all_by_page();
+
+		$this -> data['results']['past_recommendations_count'] = $this -> events_model -> getPastUserEventSuggestion_count();
+		$this -> data['results']['past_recommendations'] = $this -> events_model -> getPastUserEventSuggestions_all_by_page();
+
+		// Render views data
+		$this -> data['head_title'] = 'Survey Overview | Lunchsparks';
+		$this -> data['tpl_page_id'] = "survey";
+		$this -> data['tpl_page_title'] = "Survey Overview";
+		// Render views
+		$this -> data['main_content'] = 'admin/survey/overview';
+		$this -> load -> view('includes/tmpl_admin', $this -> data);
+		
 	}
 
 }

@@ -24,10 +24,10 @@
 <script src="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.js"></script>
 <?php echo $css_combined; ?>
 <?php echo $js_combined; ?>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=geometry"></script>
 <?php ## Dynamic scripts?>
 <script language="javascript"><?php $this->load->view('includes/js/ls_notifications'); ?></script>
 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=geometry"></script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26287683-1']);

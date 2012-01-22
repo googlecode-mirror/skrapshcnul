@@ -166,6 +166,37 @@ class Ls_Events {
 		return $this -> ci -> events_model -> event_RSVP($fields);
 		
 	}
+	
+	function create($fields = FALSE) {
+		
+		if(!$fields) {
+			return FALSE;
+		}
+		
+		## TODO Create Event for both users (user & target_user)
+		$this -> ci -> db -> trans_off();
+		$this -> ci -> db -> trans_start();
+		{
+			$this -> data = $this -> ci -> events_model -> createEvent($fields);
+		}
+		$this -> ci -> db -> trans_complete();
+		
+		if ($this -> ci -> db -> trans_status()) {
+			## Set Notifications
+			/* $notification['component_id'] = $this -> component_info['component_id'];
+			$notification['user_id'] = $fields['target_user_id'];
+			$notification['message'] = "You have new recommendations";
+			$notification['url'] = "/events/suggestions";
+			$this -> ci -> ls_notifications -> set_notification($notification); */
+		}
 
+		if ($this -> data) {
+			return $this -> data;
+		} else {
+			return FALSE;
+		}
+		
+	}
+	
 }
 ?>

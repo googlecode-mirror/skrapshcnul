@@ -147,6 +147,10 @@ jQuery(document).ready(function() {
 });
 /* ## Profile Hover Card */
 jQuery(document).ready(function() {
+	profile_hover_init();
+});
+
+function profile_hover_init() {
 	jQuery(".ls-profile-hover").hover(function(e) {
 		// handlerIn 
 		if (!jQuery(".ls-profile-card-holder").length > 0) {
@@ -170,7 +174,7 @@ jQuery(document).ready(function() {
 		});
 		
 	});
-});
+}
 
 function generate_profile_card_html(userid) {
 	
