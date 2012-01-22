@@ -10,6 +10,7 @@ class Dashboard extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> library('input');
 		$this -> load -> library('ion_auth');
+		$this -> load -> library('ls_events');
 		$this -> load -> library('session');
 		$this -> load -> library('pagination');
 		$this -> load -> database();
@@ -199,12 +200,12 @@ class Dashboard extends CI_Controller {
 			## Save to DB
 		}
 		
-		$this -> data['results']['recommendations_count'] = $this -> events_model -> getUserEventSuggestion_count();
-		$this -> data['results']['recommendations'] = $this -> events_model -> getUserEventSuggestion_all_by_page();
-
-		$this -> data['results']['past_recommendations_count'] = $this -> events_model -> getPastUserEventSuggestion_count();
-		$this -> data['results']['past_recommendations'] = $this -> events_model -> getPastUserEventSuggestions_all_by_page();
-
+		$this -> data['results']['events_upcoming'] = $this -> ls_events -> getAllUpcomingEvents();
+		$this -> data['results']['events_upcoming_count'] = count($this -> data['results']['events_upcoming']);
+		
+		$this -> data['results']['events_past'] = $this -> ls_events -> getAllPastEvents();
+		$this -> data['results']['events_past_count'] = count($this -> data['results']['events_past']);
+		
 		// Render views data
 		$this -> data['head_title'] = 'Events Overview | Lunchsparks';
 		$this -> data['tpl_page_id'] = "events";
