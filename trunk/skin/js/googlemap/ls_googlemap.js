@@ -5,11 +5,16 @@ var map;
 var geocoder;
 
 jQuery(document).ready(function() {
-	jQuery("#map_control").click(function() {
-		map_control_toggle();
-	});
-	
-    geocoder = new google.maps.Geocoder();
+	try {
+		jQuery("#map_control").click(function() {
+			map_control_toggle();
+		});
+		
+	    geocoder = new google.maps.Geocoder();
+		
+	} catch(e) {
+		console.warn(e);
+	}
 });
 
 function initialize_lunchsparks_googlemap(my_center_lat, my_center_lng, my_radius) {

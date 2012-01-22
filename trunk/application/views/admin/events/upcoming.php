@@ -1,4 +1,4 @@
-<h2>On-going Recommendations</h2>
+<h2>Upcoming Events</h2>
 <div>
 	Total records: <?php echo isset($results['recommendations_count']) ? $results['recommendations_count'] : 0;?>
 </div>
@@ -43,15 +43,3 @@
 	</div>
 	<?php }?>
 </div>
-
-<script>
-jQuery("#form_new_recommendation").submit(function() {
-	alert('Handler for .submit() called.');
-	var str = jQuery("#form_new_recommendation").serialize();
-	jQuery.getJSON('/jsonp/recommendation/add/?alt=json&callback=?&'+str, {
-	}, function(data){
-		console.log(data);
-	});
-  	return false;
-});
-</script>

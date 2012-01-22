@@ -1,4 +1,4 @@
-<h2>On-going Recommendations</h2>
+<h2>Completed Survey</h2>
 <div>
 	Total records: <?php echo isset($results['recommendations_count']) ? $results['recommendations_count'] : 0;?>
 </div>

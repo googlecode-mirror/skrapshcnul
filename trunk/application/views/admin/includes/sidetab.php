@@ -15,17 +15,17 @@
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'recommendations') ? 'active' : '';?>">
 			<?php echo anchor('admin/dashboard/recommendations', 'Recommendations', 'id="a-s-privacy" class="a-s-icon-xlhdpi"'); ?>
 		</li>
-		<?php /*
-		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'language') ? 'active' : '';?>">
-			<?php echo anchor('settings/language', 'Language', 'id="a-s-language" class="a-s-icon-xlhdpi"'); ?>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'events') ? 'active' : '';?>">
+			<?php echo anchor('admin/dashboard/events', 'Events', 'id="a-s-language" class="a-s-icon-xlhdpi"'); ?>
 		</li>
-		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'mobile') ? 'active' : '';?>">
-			<?php echo anchor('settings/mobile', 'Mobile', 'id="a-s-mobile" class="a-s-icon-xlhdpi"'); ?>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'survey') ? 'active' : '';?>">
+			<?php echo anchor('admin/dashboard/survey', 'Survey', 'id="a-s-payment" class="a-s-icon-xlhdpi"'); ?>
 		</li>
-		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'payments') ? 'active' : '';?>">
-			<?php echo anchor('settings/payments', 'Payments', 'id="a-s-payment" class="a-s-icon-xlhdpi"'); ?>
+		<?php /* ?>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'past_events') ? 'active' : '';?>">
+			<?php echo anchor('admin/dashboard/past_events', 'Past Events', 'id="a-s-mobile" class="a-s-icon-xlhdpi"'); ?>
 		</li>
-		 */ ?>
+		<?php */ ?>
 	</ul>
 	<div class="clearfix">
 		&nbsp;
