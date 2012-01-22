@@ -2,7 +2,7 @@
 	<div class="title" style="background: #F1F1F1; padding: 10px; cursor: pointer;" onclick="jQuery(this).next().slideToggle('slow');">
 		Create new event.
 	</div>
-	<div style="display:block;">
+	<div style="display:none;">
 		<form method="post" id="form_new_recommendation">
 			<div>
 				<div style="display: inline-block; vertical-align: top;">
@@ -117,7 +117,7 @@ jQuery("#form_new_recommendation").submit(function() {
 	}, function(data){
 		console.log(data);
 		if (data.results) {
-			
+			// 
 		} else {
 			// Handle error
 		}

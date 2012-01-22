@@ -251,13 +251,12 @@ class Events_model extends CI_Model {
 
 	}
 
-	function admin_getAllUpcomingEvents() {
+	function getAllUpcomingEvents() {
 
 		// TODO check admin level
 
 		$query = " SELECT * FROM " . $this -> tables['events_event'] . " AS ee ";
-		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON ee.`event_id` = eu.`event_id` ";
-		$query .= " AND ee.`date` > NOW() ";
+		$query .= " WHERE ee.`date` > NOW() ";
 
 		$mysql_result = $this -> db -> query($query);
 		if ($mysql_result -> num_rows() > 0) {
@@ -274,28 +273,27 @@ class Events_model extends CI_Model {
 		}
 	}
 
-	function admin_getAllPastEvents() {
-
+	function getAllPastEvents() {
 		// TODO check admin level
 
 		$query = " SELECT * FROM " . $this -> tables['events_event'] . " AS ee ";
-		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON ee.`event_id` = eu.`event_id` ";
-		$query .= " AND ee.`date` < NOW() ";
+		$query .= " WHERE ee.`date` < NOW() ";
 
 		$mysql_result = $this -> db -> query($query);
 		if ($mysql_result -> num_rows() > 0) {
-
+			
 			$events = $mysql_result -> result_array();
-
+			
 			foreach ($events as $key => $event) {
 				$events[$key]['participants'] = $this -> getAllEventParticipants($event['event_id']);
 			}
-
+			
 			return $events;
+			
 		} else {
 			return FALSE;
 		}
-
+		
 	}
 
 	function createEvent($fields = FALSE) {

@@ -198,5 +198,32 @@ class Ls_Events {
 		
 	}
 	
+	function getAllUpcomingEvents() {
+		
+		$events = $this -> ci -> events_model -> getAllUpcomingEvents();
+		
+		foreach ($events as $key => $event) {
+			foreach ($event['participants'] as $key2 => $user){
+				$user_profile = ($this -> ci -> user_profile_model -> select($user['user_id']));
+				$events[$key]['participants'][$key2]['user_profile'] = $user_profile;
+			}
+		}
+		
+		return $events;
+	}
+	
+	function getAllPastEvents() {
+		
+		$events = $this -> ci -> events_model -> getAllPastEvents();
+		
+		foreach ($events as $key => $event) {
+			foreach ($event['participants'] as $key2 => $user){
+				$user_profile = ($this -> ci -> user_profile_model -> select($user['user_id']));
+				$events[$key]['participants'][$key2]['user_profile'] = $user_profile;
+			}
+		}
+		
+		return $events;
+	}
 }
 ?>
