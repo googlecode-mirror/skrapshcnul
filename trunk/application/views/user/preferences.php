@@ -109,7 +109,7 @@ jQuery('.ls_user_autocomplete').each( function() {
 </script>
 <script>
 jQuery("#form_new_recommendation").submit(function() {
-	alert('Handler for .submit() called.');
+	//alert('Handler for .submit() called.');
 	var str = jQuery("#form_new_recommendation").serialize();
 	jQuery('body').append(str);
   	return false;

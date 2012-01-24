@@ -111,7 +111,7 @@ jQuery(document).ready(function() {
 
 <script>
 jQuery("#form_new_recommendation").submit(function() {
-	alert('Handler for .submit() called.');
+	//alert('Handler for .submit() called.');
 	var str = jQuery("#form_new_recommendation").serialize();
 	jQuery.getJSON('/jsonp/events/add/?alt=json&callback=?&'+str, {
 	}, function(data){
