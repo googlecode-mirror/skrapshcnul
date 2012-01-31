@@ -70,7 +70,7 @@
 	/**
 	 * Minimum Required Length of Password
 	 **/
-	$config['min_password_length'] = 8;
+	$config['min_password_length'] = 3;
 	
 	/**
 	 * Maximum Allowed Length of Password
