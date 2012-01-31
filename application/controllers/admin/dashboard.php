@@ -20,7 +20,7 @@ class Dashboard extends CI_Controller {
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> data['is_logged_in_admin'] = $this -> ion_auth -> is_admin();
-
+		
 		if (!$this -> data['is_logged_in_admin']) {
 			redirect('404');
 		}

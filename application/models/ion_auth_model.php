@@ -690,7 +690,7 @@ class Ion_auth_model extends CI_Model
 			if ($result->password === $password)
 			{
 				$this->update_last_login($result->id);
-
+				
 				$session_data = array(
 							$this->identity_column => $result->{$this->identity_column},
 							'id'                   => $result->id, //kept for backwards compatibility
@@ -698,7 +698,7 @@ class Ion_auth_model extends CI_Model
 						 );
 
 				$this->session->set_userdata($session_data);
-
+				
 				if ($remember && $this->config->item('remember_users', 'ion_auth'))
 				{
 					$this->remember_user($result->id);
@@ -737,6 +737,10 @@ class Ion_auth_model extends CI_Model
 	public function where($where, $value=NULL)
 	{
 		$this->trigger_events('where');
+		
+		if (!isset($this->_where)) {
+			$this->_where = array();
+		}
 		
 		if (isset($value))
 			$this->_where[] = array($where => $value);
@@ -825,6 +829,7 @@ class Ion_auth_model extends CI_Model
 	    $this->trigger_events('extra_where');
 
 		//run each where that was passed
+		
 		if (isset($this->_where))
 	    {
 			foreach ($this->_where as $where)
@@ -1169,9 +1174,9 @@ class Ion_auth_model extends CI_Model
 	    $user = $this->user($id)->row();
 
 	    $salt = sha1($user->password);
-
+		
 	    $this->db->update($this->tables['users'], array('remember_code' => $salt), array('id' => $id));
-
+		
 	    if ($this->db->affected_rows() > -1)
 	    {
 			set_cookie(array(

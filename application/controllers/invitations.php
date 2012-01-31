@@ -96,7 +96,7 @@ class Invitations extends CI_Controller {
 		// Dummy Data
 		$this -> data['invite_logs'] = $this -> invitation_model -> selectInvitationLog($this->user_id);
 		$this -> data['invite_logs_number_signup'] = $this -> invitation_model -> selectInvitationLog_signed_up($this->user_id);
-
+		
 		// Render view
 		$this -> data['tpl_page_id'] = 'status';
 		$this -> data['main_content'] = 'invitations/status';
