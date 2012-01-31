@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 13, 2012 at 02:14 AM
+-- Generation Time: Jan 22, 2012 at 06:32 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.8
 
@@ -45,10 +45,9 @@ CREATE TABLE IF NOT EXISTS `lss_0_auto_recs` (
   `rec_id` int(11) NOT NULL,
   `rec_reason` text,
   `valid` tinyint(1) NOT NULL,
-  `selected` tinyint(1) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`index`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -58,7 +57,9 @@ CREATE TABLE IF NOT EXISTS `lss_0_auto_recs` (
 
 CREATE TABLE IF NOT EXISTS `lss_0_negotiated_recs` (
   `index` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `valid` tinyint(1) NOT NULL,
+  `accepted` tinyint(1) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -103,6 +104,37 @@ CREATE TABLE IF NOT EXISTS `lss_components` (
   `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`component_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_events`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_events` (
+  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `reason` text NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`event_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_events_users`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_events_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `event_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `rsvp` tinyint(4) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -213,6 +245,23 @@ CREATE TABLE IF NOT EXISTS `lss_page_completed_step` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lss_recommendations`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_recommendations` (
+  `index` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `rec_id` int(11) NOT NULL,
+  `rec_reason` text,
+  `valid` tinyint(1) NOT NULL,
+  `selected` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lss_schedules`
 --
 
@@ -230,21 +279,6 @@ CREATE TABLE IF NOT EXISTS `lss_schedules` (
   `updated_on` datetime NOT NULL,
   KEY `index` (`index`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_suggestion`
---
-
-CREATE TABLE IF NOT EXISTS `lss_suggestion` (
-  `userid` int(10) unsigned NOT NULL,
-  `suggested_userid` int(10) unsigned NOT NULL,
-  `reason` text NOT NULL,
-  `respond` text NOT NULL,
-  `expired` tinyint(1) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -325,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=167 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=178 ;
 
 -- --------------------------------------------------------
 

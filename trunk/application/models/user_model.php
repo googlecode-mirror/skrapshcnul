@@ -5,6 +5,21 @@
  */
 class User_model extends CI_Model {
 	
+	function select_user($user_id = NULL) {
+		
+		if (!isset($user_id)) {
+			return FALSE;
+		}
+		
+		$query = " SELECT * FROM `lss_users` WHERE `id` = $user_id";
+		$mysql_result = $this -> db -> query($query);
+		if ($mysql_result->num_rows() > 0) {
+			return $mysql_result->row();
+		} else {
+			return FALSE;
+		}
+	}
+	
 	function select_user_id_by_username($username) {
 		
 		if(!$username) {

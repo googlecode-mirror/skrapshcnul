@@ -195,7 +195,13 @@ class Auth extends Controller {
 				$this->data['message'] = $message;
 				
 				//redirect them back to the login page
-				redirect('login', 'refresh');
+				//redirect('login', 'refresh');
+				
+				if ($this->ion_auth->login($email, $password, 1))
+				{ 
+					//redirect them back to the home page
+					redirect('dashboard', 'refresh');
+				}
 			}
 			else
 			{ 

@@ -3,8 +3,8 @@
 	Total records: <?php echo isset($results['recommendations_count']) ? $results['recommendations_count'] : 0;?>
 </div>
 <div>
-	<?php if (!empty($results['recommendations'])) {
-	?>
+	<?php if (!empty($results['recommendations'])) { ?>
+	
 	<table class="comfortable-table" cellspacing="0">
 		<thead>
 			<tr>
@@ -13,12 +13,12 @@
 				<th>Target</th>
 				<th>Reason</th>
 				<th>Created On</th>
+				<th>Accepted</th>
 				<th>Valid</th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($results['recommendations'] as $user) {
-			?>
+			<?php foreach($results['recommendations'] as $user) { ?>
 			<tr>
 				<td><?php echo($user['index']);?></td>
 				<td>
@@ -31,6 +31,7 @@
 				</div></td>
 				<td><?php echo($user['rec_reason']);?></td>
 				<td><?php echo($user['timestamp']);?></td>
+				<td><?php echo($user['selected'])? 'Seleted': '-';?></td>
 				<td><?php echo($user['valid'] ? "Yes" : "No");?></td>
 			</tr>
 			<?php }?>

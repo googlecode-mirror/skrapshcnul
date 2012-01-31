@@ -117,7 +117,9 @@ jQuery("#form_new_recommendation").submit(function() {
 	}, function(data){
 		console.log(data);
 		if (data.results) {
-			// 
+			// On success
+			alert("Events entry created.");
+			location.reload(true);
 		} else {
 			// Handle error
 		}

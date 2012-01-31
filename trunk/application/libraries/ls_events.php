@@ -59,14 +59,20 @@ class Ls_Events {
 
 	function getUserEventSuggestion($user_id) {
 
-		$results = ($this -> ci -> events_model -> getUserEventSuggestion($user_id));
-
+		$events = ($this -> ci -> events_model -> getUserEventSuggestion($user_id));
+		
+		if (!$events) {
+			return array();
+		}
+		
 		// Populate Target User Profile Info
-		foreach ($results as $key => $item) {
-			$results[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
+		if (count($events) > 0) {
+			foreach ($events as $key => $item) {
+				$events[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
+			}
 		}
 
-		return $results;
+		return $events;
 
 	}
 
@@ -75,23 +81,27 @@ class Ls_Events {
 		$events = ($this -> ci -> events_model -> getUserEventMatched($user_id));
 		
 		if (!$events) {
-			return FALSE;
+			return array();
 		}
 		
-		foreach ($events as $key => $event) {
-
-			$event_id = ($event['event_id']);
-			$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
+		if (count($events) > 0) {
 			
-			// Populate Target User Profile Info
-			foreach ($users as $key2 => $user) {
-				$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
-				if ($user_id == $user['user_id']) {
-					$events[$key]['current_user'] = $user;
+			foreach ($events as $key => $event) {
+	
+				$event_id = ($event['event_id']);
+				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
+				
+				// Populate Target User Profile Info
+				foreach ($users as $key2 => $user) {
+					$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
+					if ($user_id == $user['user_id']) {
+						$events[$key]['current_user'] = $user;
+					}
 				}
+				
+				$events[$key]['participant'] = $users;
+				
 			}
-			
-			$events[$key]['participant'] = $users;
 			
 		}
 		
@@ -113,20 +123,27 @@ class Ls_Events {
 		
 		$events = ($this -> ci -> events_model -> getUserEvent_past($user_id));
 		
-		foreach ($events as $key => $event) {
-
-			$event_id = ($event['event_id']);
-			$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
-			
-			// Populate Target User Profile Info
-			foreach ($users as $key2 => $user) {
-				$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
-				if ($user_id == $user['user_id']) {
-					$events[$key]['current_user'] = $user;
+		if (!$events) {
+			return array();
+		}
+		
+		if (count($events) > 0) {	
+			foreach ($events as $key => $event) {
+	
+				$event_id = ($event['event_id']);
+				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
+				
+				// Populate Target User Profile Info
+				foreach ($users as $key2 => $user) {
+					$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
+					if ($user_id == $user['user_id']) {
+						$events[$key]['current_user'] = $user;
+					}
 				}
+				
+				$events[$key]['participant'] = $users;
+				
 			}
-			
-			$events[$key]['participant'] = $users;
 			
 		}
 		
@@ -202,6 +219,10 @@ class Ls_Events {
 		
 		$events = $this -> ci -> events_model -> getAllUpcomingEvents();
 		
+		if (!$events) {
+			return array();
+		}
+		
 		foreach ($events as $key => $event) {
 			foreach ($event['participants'] as $key2 => $user){
 				$user_profile = ($this -> ci -> user_profile_model -> select($user['user_id']));
@@ -215,6 +236,10 @@ class Ls_Events {
 	function getAllPastEvents() {
 		
 		$events = $this -> ci -> events_model -> getAllPastEvents();
+		
+		if (!$events) {
+			return array();
+		}
 		
 		foreach ($events as $key => $event) {
 			foreach ($event['participants'] as $key2 => $user){

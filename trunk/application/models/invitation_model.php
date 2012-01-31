@@ -81,7 +81,7 @@ class Invitation_Model extends CI_Model {
 			" SELECT * " . 
 			" FROM `lss_users_invitations_log` " . 
 			" WHERE `user_id` = '$userid' ".
-			" AND `joined_on` != null";
+			" AND `joined_on` IS NOT NULL";
 		$result = $this -> db -> query($query);
 		return $result->result_array();
 	}

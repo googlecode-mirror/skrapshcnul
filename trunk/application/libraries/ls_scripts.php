@@ -49,6 +49,9 @@ class Ls_Scripts {
 			'skin/css/fonts/open_sans.css',
 		);
 		
+		$this->_minify_css();
+		$this->_minify_js();
+		
 		if(isset($_REQUEST['minify']) && ($_REQUEST['minify']) == 1) {
 			$scripts['css_combined']	= $this->_minify_css(); 
 			$scripts['js_combined']		= $this->_minify_js();

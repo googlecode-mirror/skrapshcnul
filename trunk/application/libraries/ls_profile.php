@@ -75,7 +75,7 @@ class Ls_Profile {
 	function prepare_profile_data($user_id) {
 		try {
 			$this -> _init($user_id);
-			$this -> _prepare_profile_data_default();
+			$this -> _prepare_profile_data_default($user_id);
 			
 			#####################
 			##  Linked In
@@ -148,7 +148,7 @@ class Ls_Profile {
 		}
 	}
 
-	private function _prepare_profile_data_default() {
+	private function _prepare_profile_data_default($user_id) {
 		
 		// Setup Cover Photo
 		if(!isset($this->data['profile']['cover_background'])) {
@@ -159,12 +159,18 @@ class Ls_Profile {
 			$this->data['profile']['profile_img'] = base_url().'skin/images/100/icon_no_photo_no_border_offset_100x100.png';
 			$this->data['profile']['profile_img'] = base_url() . "skin/images/160/silhouette_male.jpg";
 		}
+		
+		$user_details = $this -> ci -> user_model -> select_user($user_id); 
+		$fullname = explode(' ',$user_details->username);
+		$firstname = isset($fullname[0]) ? $fullname[0] : 'John';
+		$lastname = isset($fullname[1]) ? $fullname[1] : '';
+		
 		// Setup first name last name
 		if(!isset($this->data['profile']['first_name'])) {
-			$this->data['profile']['first_name'] = '';
+			$this->data['profile']['first_name'] = $firstname;
 		}
 		if(!isset($this->data['profile']['last_name'])) {
-			$this->data['profile']['last_name'] = '';
+			$this->data['profile']['last_name'] = $lastname;
 		}
 		if(!isset($this->data['profile']['headline'])) {
 			$this->data['profile']['headline'] = '';
