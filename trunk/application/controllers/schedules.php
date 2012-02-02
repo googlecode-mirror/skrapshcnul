@@ -116,6 +116,7 @@ class Schedules extends CI_Controller {
 
 	function insert() {
 		
+		$repeat = "";
 		if($this -> input -> post("schedule_repeat")) {
 			$repeat['repeat_frequency'] = $this -> input -> post("repeat_frequency");
 			if (trim($this -> input -> post("SU"))) $repeat_day[] = "SU";
@@ -128,7 +129,11 @@ class Schedules extends CI_Controller {
 			$repeat['repeat_day'] = implode('|', $repeat_day);
 		}
 		
-		$this->repeat = implode(',', $repeat);
+		if ($repeat) {
+			$this -> repeat = implode(',', $repeat);
+		} else {
+			$this -> repeat = "";
+		}
 		
 		$result = $this -> schedules_model -> insertPickForCurrentUser(
 			$this -> input -> post("name"), 
@@ -139,7 +144,7 @@ class Schedules extends CI_Controller {
 			$this -> input -> post("center_lat"), 
 			$this -> input -> post("center_lng"), 
 			$this -> input -> post("radius"),
-			$this->repeat);
+			$this -> repeat);
 		redirect('schedules', 'refresh');
 	}
 
