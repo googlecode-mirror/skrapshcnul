@@ -1,16 +1,5 @@
 <div class="m-content">
-  
-	<div class="m-content-2-col-left">
-		<?php $this -> load -> view('schedules/includes/sidetab');?>
-	</div>
-	<div class="m-content-2-col-right">
-		<?php /* <div id="pick-history" style="background-color: #efefef; padding: 10px; -webkit-border-radius: 12px; -moz-border-radius: 12px; margin-right: 10px">
-		 Your history:
-		 <ul id ="pick-history-ul">
-		 </ul>
-		 </div> */
-		?>
-
+	<div class="c-pages shadow-rounded">
 		<div class="hr">
 			<h2 class="hr-text">Add Schedules</h2>
 		</div>

@@ -27,10 +27,10 @@
 						*/ ?>
 						<li><div style="width: 20px;">&nbsp;</div></li>
 						<li>
-							<?php echo anchor('settings/sync', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-synchronize', 'title'=>'Synchronize')); ?>
+							<?php echo anchor('synchronize', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-synchronize', 'title'=>'Synchronize')); ?>
 						</li>
 						<li>
-							<?php echo anchor('user/preferences', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-preferences', 'title'=>'Preferences')); ?>
+							<?php echo anchor('preferences', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-preferences', 'title'=>'Preferences')); ?>
 						</li>
 						<li>
 							<?php echo anchor('schedules', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-schedules', 'title'=>'Schedule')); ?>

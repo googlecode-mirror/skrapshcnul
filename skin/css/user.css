@@ -88,8 +88,10 @@
 	max-width: 100px;
 	overflow: hidden;
 }
+.profile-img-80,
 .profile-img-80 img {
 	max-width: 80px;
+	max-height: 80px;
 	overflow: hidden;
 }
 .profile-img-50 img {
@@ -126,17 +128,6 @@
 	border-top: 1px solid #E1E1E1 !important;
 	border-bottom: 1px solid #E1E1E1 !important;
 }*/
-.service-icon {
-	height: 24px;
-	line-height: 24px;
-	padding-left: 30px;
-}
-#linkedin.service-icon {
-	background: url(../images/24/social_linkedin_box_blue.png) no-repeat left center;
-}
-#twitter.service-icon {
-	background: url(../images/24/social_twitter_box_blue.png) no-repeat left center;
-}
 .stream-item {
 	margin: 5px 0;
 	padding: 5px 15px;

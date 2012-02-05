@@ -1,19 +1,18 @@
 <div class="m-content">
-	<div class="m-content-2-col-left">
-		<?php $this -> load -> view('schedules/includes/sidetab');?>
-	</div>
-	<div class="m-content-2-col-right">
-		<h2>Events</h2>
-		<div class="hr">
-			<h2 class="hr-text">Added Schedules</h2>
-		</div>
-		<div>
-			<?php //echo json_encode($fixed_schedules);?>
-		</div>
+	<div class="c-pages shadow-rounded">
+		<h2><?php echo $tpl_page_title; ?></h2>
+		<h3 class="sub-heading">Enter your schedule here, so our system can arrange the timing that suits you.</h3>
+		
 		<div ng:init='schedules = (<?php echo json_encode($fixed_schedules);?>)'></div>
 		<div>
-			<span>Search: </span>
-			<input type="text" name="searchText" placeholder="search keywords." style="display: inline-block;" />
+			<div class="button-set" style="float: left; padding: 15px;">
+				<a href="/schedules/add">Add Schedule</a>
+			</div>
+			<div style="float: right;">
+				<span class="sub-heading" style="color: #AFADAD;">Filter: </span>
+				<input type="text" name="searchText" placeholder="keywords." style="display: inline-block;" />
+			</div>
+			<div class="clearfix"></div>
 		</div>
 		<div id="schedule-containers" ng:controller="ScheduleController">
 			<div ng:repeat="schedule in schedules.results.$filter(searchText)" class="schedule-item row-item">
@@ -32,9 +31,14 @@
 					<div class="xbigger">
 						{{schedule.name}}
 					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="clearfix"></div>
 				<div class="content-left-col">
+					<div class="g-static-maps">
+						<img src="{{getGMapStaticEncodedURL(schedule.center_lat,schedule.center_lng,schedule.radius);}}" />
+					</div>
+				</div>
+				<div class="content-right-col box-details schedule">
 					<div>
 						<span class="title">Date: </span>{{schedule.startDate}}
 					</div>
@@ -46,20 +50,19 @@
 						<span>
 							{{schedule.repeat_params.repeat_frequency}}
 						</span>
-						<div>
-							<span ng:repeat="day in schedule.repeat_params.repeat_day">
-								{{day}}, 
-							</span>
-						</div>
+					</div>
+					<div>
+						<span class="title"></span>
+						<span ng:repeat="day in schedule.repeat_params.repeat_day">
+							{{day}}, 
+						</span>
 					</div>
 				</div>
-				<div class="content-right-col">
-					<div class="g-static-maps">
-						<span class="title">Location: </span>
-						<img src="{{getGMapStaticEncodedURL(schedule.center_lat,schedule.center_lng,schedule.radius);}}" />
-					</div>
-				</div>
+				<div class="clearfix">&nbsp;</div>
 			</div>
-		</div>
+		</div> <!-- #schedule-containers -->
+		
+		<div></div>
+		
 	</div>
 </div>

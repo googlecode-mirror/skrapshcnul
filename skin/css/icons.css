@@ -119,3 +119,27 @@
 	background: #025fc0;
 	color: #FFFFFF;
 }
+
+/* Social Networks */
+.service-icon {
+	height: 24px;
+	line-height: 24px;
+	padding-left: 30px;
+}
+#linkedin.service-icon {
+	background: url(../images/24/social_linkedin_box_blue.png) no-repeat left center;
+}
+#twitter.service-icon {
+	background: url(../images/24/social_twitter_box_blue.png) no-repeat left center;
+}
+.service-icon-big {
+	height: 128px;
+	line-height: 128px;
+	padding-left: 30px;
+}
+#linkedin.service-icon-big {
+	background: url(../images/128/social_linkedin_box_blue.png) no-repeat left center;
+}
+#twitter.service-icon-big {
+	background: url(../images/128/social_twitter_box_blue.png) no-repeat left center;
+}

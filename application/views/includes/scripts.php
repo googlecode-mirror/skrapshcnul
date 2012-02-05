@@ -17,6 +17,7 @@
 <script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-flip-0.9.9/jquery.flip.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery-cookie/jquery.cookie.js"></script>
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
 <script src="<?php echo base_url();?>skin/js/angularjs/angular-0.9.19.min.js" ng:autobind></script>

@@ -33,12 +33,17 @@ class Events extends CI_Controller {
 	}
 
 	function index() {
-
-		$this -> data['events']['upcoming'] = array();
-		$this -> data['events']['past'] = array();
-
-		$this -> data['tpl_page_id'] = 'index';
-		$this -> data['main_content'] = 'events/index';
+		
+		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEventMatched($this -> user_id));
+		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this -> user_id));
+		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this -> user_id));
+		
+		// Render view data
+		$this -> data['head_title']		= 'Events | Lunchsparks'; 
+		$this -> data['tpl_page_id']	= 'Events#index';
+		$this -> data['tpl_page_title'] = "Events";
+		// Render views
+		$this -> data['main_content'] = 'base/events/index';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 

@@ -9,7 +9,7 @@
 			<div class="stream-item row-item col-2">
 				<div class="clearfix"></div>
 				
-				<div class="content-table-2-col-left">
+				<div class="content-table-2-col-right" style="padding: 10px 0;">
 					
 					<div>
 						<span class="label">Date: </span> <span><?php echo $event['date'] ?></span>

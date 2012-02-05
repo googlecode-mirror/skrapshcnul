@@ -54,9 +54,15 @@ class Schedules extends CI_Controller {
 			}
 		}
 		$this -> data['fixed_schedules']['results'] = $schedule;
-
-		$this -> data['main_content'] = 'schedules/index';
-		$this -> data['tpl_page_id'] = 'index';
+		
+		
+		
+		// Render view data
+		$this -> data['head_title']		= 'Schedule | Lunchsparks'; 
+		$this -> data['tpl_page_id']	= 'schedule#index';
+		$this -> data['tpl_page_title'] = "Schedule";
+		// Render views
+		$this -> data['main_content'] = 'base/schedules/index';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -70,7 +76,7 @@ class Schedules extends CI_Controller {
 		$this -> data['googlemap'] = true;
 		// load google map js
 
-		$this -> data['main_content'] = 'schedules/add';
+		$this -> data['main_content'] = 'base/schedules/add';
 		$this -> data['tpl_page_id'] = 'add';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
@@ -216,16 +222,7 @@ class Schedules extends CI_Controller {
 		}
 		
 		$result = $this -> schedules_model -> deletePickForCurrentUser($schedule_id);
-		//redirect('schedules', 'refresh');
 		
-		/*if ($result) {
-			$data['result'] = "Successfully deleted";
-		} else {
-			$data['result'] = "Delete failed";
-		}
-		$this -> data['tpl_page_id'] = 'delete';
-		$this -> data['main_content'] = 'schedules/delete';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);*/
 	}
 	
 	function _json_prep($result) {
