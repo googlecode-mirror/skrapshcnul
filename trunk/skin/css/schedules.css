@@ -4,12 +4,12 @@
 .schedule-item {
 }
 #schedule-containers .content-left-col {
-	width: 300px;
+	width: 420px;
 	vertical-align: top;
 	display: inline-block;
 }
 #schedule-containers .content-right-col {
-	width: 400px;
+	width: 450px;
 	vertical-align: top;
 	display: inline-block;
 }
@@ -41,4 +41,7 @@
 }
 .ui-timepicker-div td {
 	font-size: 90%;
+}
+.schedule.box-details div {
+	padding: 10px 0;
 }

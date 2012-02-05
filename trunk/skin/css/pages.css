@@ -1,8 +1,9 @@
 
 .c-pages {
-	background: #FFFFFF;
+	/*background: #FFFFFF;*/
+	background: rgba(255,255,255,0.5);
 	margin: 5px 0 15px 0px;
-	padding: 20px 50px;
+	padding: 20px 20px;
 	text-align: justify;
 	border: 1px solid #BDBDBD;
 }

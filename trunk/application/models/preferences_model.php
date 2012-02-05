@@ -23,6 +23,7 @@ class Preferences_Model extends CI_Model {
 			" LEFT JOIN lss_users_preferences_ref AS lupr ON lup.preferences_ref_id = lupr.preferences_ref_id " . 
 			" WHERE user_id = '$user_id' " .
 			" AND is_deleted = 0 ".
+			" AND lupr.preferences_ref_id IS NOT NULL ".
 			" ORDER BY lup.preferences_ref_id ASC;";
 		$mysql_result = $this -> db -> query($query);
 		

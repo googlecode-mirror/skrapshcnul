@@ -1,14 +1,9 @@
 <div class="m-content">
-	<div class="m-content-2-col-left">
-		<?php $this -> load -> view('settings/includes/sidetab');?>
-	</div>
-	<div class="m-content-2-col-right">
-		<div class="hr">
-			<h2 class="hr-text dark"><?php echo $tpl_page_title; ?></h2>
-		</div>
+	<div class="c-pages shadow-rounded">
+		<h2><?php echo $tpl_page_title; ?></h2>
 		
 		<div id="settings-sync-linkedin">
-			<h3>System Notifications</h3>
+			<h3 class="sub-heading">Synchronize with other networks</h3>
 			<div class="row-item">
 				<div class="content-table-2-col-left">
 					<div id="linkedin" class="service-icon">LinkedIn</div>
@@ -17,7 +12,7 @@
 					<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
 						<form id="linkedin_sync_form" action="pullLinkedInData" method="get">
 							<input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" /> 
-							<input type="submit" value="Sync with LinkedIn" /></form>
+							<input type="submit" value="Synchronize with LinkedIn" /></form>
 					<?php } else { ?> 
 						<div class="external-data">
 							
@@ -35,12 +30,13 @@
 									<input type="hidden"
 									name="<?php echo LINKEDIN::_GET_TYPE;?>"
 									id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" />
-									<input type="submit" value="Sync with LinkedIn" />
+									<input type="submit" value="Synchronize with LinkedIn" />
 								</form>
 							</div>
 						</div>
 					<?php } ?>
-				</div>
+				</div> 
+				<div class="clearfix">&nbsp;</div>
 			</div>
 			<div class="row-item">
 				<div class="content-table-2-col-left">
@@ -54,6 +50,7 @@
 					<?php } ?>
 				</div>
 			</div>
+			<div class="clearfix">&nbsp;</div>
 		</div>
 		
 		

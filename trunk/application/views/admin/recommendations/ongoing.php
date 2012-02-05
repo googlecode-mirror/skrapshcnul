@@ -45,14 +45,3 @@
 	<?php }?>
 </div>
 
-<script>
-jQuery("#form_new_recommendation").submit(function() {
-	//alert('Handler for .submit() called.');
-	var str = jQuery("#form_new_recommendation").serialize();
-	jQuery.getJSON('/jsonp/recommendation/add/?alt=json&callback=?&'+str, {
-	}, function(data){
-		console.log(data);
-	});
-  	return false;
-});
-</script>

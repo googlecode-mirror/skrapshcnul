@@ -42,3 +42,18 @@
 		</form>
 	</div>
 </div>
+
+
+<script>
+jQuery("#form_new_recommendation").submit(function() {
+	//alert('Handler for .submit() called.');
+	var str = jQuery("#form_new_recommendation").serialize();
+	jQuery.getJSON('/jsonp/recommendation/add/?alt=json&callback=?&'+str, {
+	}, function(data){
+		console.log(data);
+		alert("Events entry created.");
+		location.reload(true);
+	});
+  	return false;
+});
+</script>

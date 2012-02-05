@@ -31,10 +31,15 @@ h1, h2 {
 	font-size: 25px;
 	font-weight: bold;
 	height: 28px;
-	letter-spacing: -1px;
 	text-shadow: 1px 1px 0 white;
 	color: #495961;
 	
+}
+h3 {
+	color: #AFADAD;
+}
+.sub-heading {
+	text-shadow: 1px 1px 0 white;
 }
 fieldset {
 	width: 300px;
@@ -143,18 +148,20 @@ header ul li {
 /* Content */
 #m-container-outer {
 	/*background: url(../images/5/body_bg.jpg) #FFFFFF;*/
-	background: #F8F8F8;
+	/*background: #F8F8F8;*/
+	background: #F5F5F5 url(../images/180/bg-grey.png);
 	padding: 36px 0 10px 0;
 }
-#m-container { /*margin:auto;padding:10px;min-height: 200px;
-	 background: #F9F9F9;
-	 border-left: 1px solid #E6E6E6;border-right: 1px solid #E6E6E6;border-bottom: 1px solid #E6E6E6;
-	 box-shadow: rgba(0,0,0,0.3) 0 1px 3px;-moz-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;-webkit-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
-	 border-radius: 5px;*/
+#m-container { 
+	/*margin:auto;padding:10px;min-height: 200px;
+	background: #F9F9F9;
+	background: white;
+	border-left: 1px solid #E6E6E6;border-right: 1px solid #E6E6E6;border-bottom: 1px solid #E6E6E6;
+	box-shadow: rgba(0,0,0,0.3) 0 1px 3px;-moz-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;-webkit-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+	border-radius: 5px;*/
 	margin: auto;
 	font-weight: normal;
 	border-radius: 3px;
-	/*background: white;*/
 	border: 0px solid #E5E5E5;
 }
 #main-content {
@@ -335,14 +342,15 @@ footer ul li {
 }
 .row-item, .notification-item {
 	/*background: #EEF0F9;*/
-	background: #F8F8F8;
+	/*background: #F8F8F8;*/
 	color: #666;
 	border-top: 1px solid #DDDFE7;
-	padding: 10px 19px 10px 9px;
+	/*padding: 10px 19px 10px 9px;*/
 	outline: none;
 }
 .row-item:hover, .notification-item:hover {
-	background: #f4f6ff;
+	/*background: #f4f6ff;*/
+	background: rgba(248,248,248,0.5);
 }
 .row-menu-item {
 	padding: 4px 10px;
@@ -493,14 +501,16 @@ input[type=text], input[type=password], input[type=email], input[type=search], t
 	margin: 0.5em 0;
 	padding: 0.6em;
 	width: 260px;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #AAAAAA;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	box-shadow: inset 0 0 3px #CCC;
 }
 input[type=search], .search {
 	background: url(/skin/images/32/search_gray.png) left center no-repeat;
 	padding-left: 34px !important;
+	box-shadow: inset 0 0 3px #CCC;
 }
 input[type=submit], .button-set a, .btn {
 	text-decoration: none;
@@ -708,6 +718,9 @@ body::-webkit-scrollbar-corner {
 }
 .xbigger {
 	font-size: 140%;
+	text-shadow: 1px 1px 2px white;
+	font-weight: bold;
+	padding: 5px;
 }
 .clearfix {
 	clear: both;
@@ -737,8 +750,10 @@ body::-webkit-scrollbar-corner {
 	-khtml-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
 	box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
 }
+.label,
 .title {
-	color: #0E385F;
+	/*color: #0E385F;*/
+	color: #7C7D7D;
 }
 .close-btn {
 	position: absolute;
@@ -766,17 +781,53 @@ body::-webkit-scrollbar-corner {
 	text-align: center;
 }
 .hr-text {
-	background: #333;
-	color: white;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	display: inline-block;
-	font-size: 10px;
-	padding: 0px 15px;
+	font-size: 15px;
+	padding: 0px 25px;
 	margin: 0 auto;
-	text-shadow: 0 1px 0 #444;
 	text-transform: uppercase;
+}
+.hr-text.light{
+	background: #f7f7f7;
+	color: #403F39;
+	text-shadow: 0 1px 0 #FFF;
+	border: 1px solid #CCC;
+	box-shadow: 0 0 3px #CCC;
+}
+.hr-text,
+.hr-text.dark {
+	background: #555;
+	color: #FFFFFF;
+	text-shadow: 0 1px 0 #444;
+	border: 1px solid #333;
+	box-shadow: 1px 1px 3px #CCC;
+}
+.hr-2 {
+	text-align:center;
+}
+.hr-2 * {
+	vertical-align: middle;
+}
+.hr-2 .line-separator {
+	background: #DDDDDD;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+	height: 1px;
+	display: inline-block;
+	width: 150px;
+}
+.hr-2-text {
+	display: inline-block;
+	font-weight: bold;
+	text-shadow: 0 1px 0 white;
+	display: inline-block;
+	color: #403F39;
+	padding: 0 25px;
+	font-size: 18px;
+	height: auto;
+	margin: auto;
 }
 .f-options-set {
 	float: right;
@@ -925,7 +976,7 @@ td {
 	text-transform: uppercase;
 	color: #333;
 	text-shadow: 0 1px 0 white;
-	font-size: 12px;
+	/*font-size: 12px;*/
 	text-decoration: none;
 	padding: 0 0 5px 0;
 }
