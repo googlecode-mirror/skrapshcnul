@@ -89,11 +89,11 @@ class Ls_User_Recommendation {
 		{
 			$result = $this -> ci -> user_recommendation_model -> createUserRecommendation($fields);
 			$this -> data[] = $result['0'];
-			$fields2 = $fields;
-			$fields2['user_id'] = $fields['target_user_id'];
-			$fields2['target_user_id'] = $fields['user_id'];
-			$result = $this -> ci -> user_recommendation_model -> createUserRecommendation($fields2);
-			$this -> data[] = $result['0'];
+			//$fields2 = $fields;
+			//$fields2['user_id'] = $fields['target_user_id'];
+			//$fields2['target_user_id'] = $fields['user_id'];
+			//$result = $this -> ci -> user_recommendation_model -> createUserRecommendation($fields2);
+			//$this -> data[] = $result['0'];
 		}
 		$this -> ci -> db -> trans_complete();
 		
