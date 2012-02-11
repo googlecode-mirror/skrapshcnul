@@ -157,31 +157,34 @@ class Ls_Events {
 			return FALSE;
 		}
 		
-		if (isset($fields['oid']) && !is_numeric($fields['oid'])) {
+		if (isset($fields['user_id']) && !is_numeric($fields['user_id'])) {
+			return FALSE;
+		}
+		
+		if (isset($fields['event_id']) && !is_numeric($fields['event_id'])) {
 			return FALSE;
 		}
 		
 		if (!$fields['action']) {
 			return FALSE;
-		} else {
-			switch($fields['action']) {
-				case 'confirm' :
-				case 1 :
-					$fields['action'] = 1;
-					break;
-				case 'reject' :
-				case 'decline' :
-				case 0 :
-					$fields['action'] = -1;
-					break;
-				default : 
-					$fields['action'] = 0;
-					break;
-			}
+		} 
+			
+		switch($fields['action']) {
+			case 'confirm' :
+			case 1 :
+				$fields['action'] = 1;
+				break;
+			case 'reject' :
+			case 'decline' :
+			case 0 :
+				$fields['action'] = -1;
+				break;
+			default : 
+				$fields['action'] = 0;
+				break;
 		}
-		
+				
 		return $this -> ci -> events_model -> event_RSVP($fields);
-		
 	}
 	
 	function create($fields = FALSE) {

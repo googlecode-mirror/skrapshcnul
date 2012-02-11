@@ -31,6 +31,26 @@ class Events_model extends CI_Model {
 		if (empty($result)) return NULL; // error
 		else return $result -> result_array();
 	}
+	
+	function updateEventStatus($event_id, $status) {
+		$query = "UPDATE " . $this -> tables['events_event'] .
+				 " SET event_status = '$status' " .
+				 " WHERE event_id = '$event_id' AND event_status = '0'; ";
+		return $this -> db -> query($query);
+	}
+
+	function hasBeenConfirmed($event_id) {
+		$query = "SELECT * FROM " . $this -> tables['events_users'] .
+				 " WHERE event_id = '$event_id' " .
+				 " AND rsvp != 1; ";
+		$result = $this -> db -> query($query);				 
+		if ($result -> num_rows() == 0) {
+			return TRUE; // confirmed
+		}
+		else {
+			return FALSE; // there is still someone with rsvp != 1
+		}
+	}
 
 	function getUserEventSuggestion($user_id) {
 
@@ -229,7 +249,11 @@ class Events_model extends CI_Model {
 			return FALSE;
 		}
 
-		if (!isset($fields['oid']) || !is_numeric($fields['oid'])) {
+		if (!isset($fields['event_id']) || !is_numeric($fields['event_id'])) {
+			return FALSE;
+		}
+		
+		if (!isset($fields['user_id']) || !is_numeric($fields['user_id'])) {
 			return FALSE;
 		}
 
@@ -240,14 +264,24 @@ class Events_model extends CI_Model {
 
 		$query = " UPDATE " . $this -> tables['events_users'];
 		$query .= " SET `rsvp` = " . $fields['action'] . ", `updated_on` = NOW() ";
-		$query .= " WHERE `id` = " . $fields['oid'];
+		$query .= " WHERE `event_id` = " . $fields['event_id'];
+		$query .= " AND `user_id` = " . $fields['user_id'];
 
 		$mysql_result = $this -> db -> query($query);
+		
 		if ($this -> db -> affected_rows()) {
-			return TRUE;
 		} else {
 			return FALSE;
 		}
+		
+		if ($fields['action'] == -1)
+			return $this -> updateEventStatus($fields['event_id'], -1);
+		else if ($fields['action'] == 1) {
+			if ($this -> hasBeenConfirmed($fields['event_id']))
+				return $this -> updateEventStatus($fields['event_id'], 1);
+		}
+		
+		return TRUE;
 	}
 
 	/* @section Admin Functions */
