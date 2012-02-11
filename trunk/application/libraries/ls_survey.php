@@ -52,5 +52,19 @@ class Ls_Survey {
 		
 		return $result;
 	}
+	
+	function getCompletedSurvey($event_id, $user_id) {
+		$result = array();
+		
+		$result['feedback_to_users'] = 
+			$this -> ci -> survey_model -> 
+			getFeedbackToUsers($event_id, $user_id);
+			
+		$result['feedback_to_restaurant'] = 
+			$this -> ci -> survey_model -> 
+			getFeedbackToRestaurant($event_id, $user_id);
+			
+		return $result;
+	}
 }
 ?>
