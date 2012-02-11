@@ -1,6 +1,6 @@
 <div class="m-content">
 	<div class="m-content-2-col-left">
-		<?php $this -> load -> view('events/includes/sidetab');?>
+		<?php $this -> load -> view('base/events/includes/sidetab');?>
 	</div>
 	<div class="m-content-2-col-right">
 		<div class="hr">

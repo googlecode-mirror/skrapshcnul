@@ -7,28 +7,31 @@
 		
 		<?php if (!empty($preferences)) { ?>
 			<?php foreach($preferences as $value) { ?>
-				<div class="preferences-container">
-					<div class="title">
+				<div class="row-item preferences-container">
+					<div class="section-top">
 						<?php echo $value['preferences_name']; ?>  
-						<div class="description"><?php echo $value['description'] ?></div>
+						<div class="caption"><?php echo $value['description'] ?></div>
 					</div>
-					<div id="preferences-data-container-<?php echo $value['preferences_ref_id']; ?>" class="preferences-data">
-						<?php foreach($value['data'] as $tag) { ?>
-							<div class="preferences-data-item">
-								<div class="preferences-data-item-content">
-									<a href="/search/tag/<?php echo $tag ?>">
-										<div>
-										<?php echo $tag ?>
-										<a href="javascript:void(0)" class="preference-tag-btn-remove" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" ls:pref_tag="<?php echo $tag; ?>" onclick="preference_tag_delete(this)"> [x] </a>
-										</div>
-									</a>
+					<div class="section-middle preferences-data">
+						<div id="preferences-data-container-<?php echo $value['preferences_ref_id']; ?>" class="preferences-data-container">
+							<?php foreach($value['data'] as $tag) { ?>
+								<div class="preferences-data-item">
+									<div class="preferences-data-item-content">
+										<a href="/search/tag/<?php echo $tag ?>">
+											<div>
+												<span></span><?php echo $tag ?>
+												<a href="javascript:void(0)" class="preference-tag-btn-remove" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" ls:pref_tag="<?php echo $tag; ?>" onclick="preference_tag_delete(this)"> [x] </a>
+											</div>
+										</a>
+									</div>
 								</div>
-							</div>
-						<?php } ?>
+							<?php } ?>
+						</div>
+						<input type="text" id="tag_value_<?php echo $value['preferences_ref_id']; ?>" class ="ls_user_autocomplete" name="tag_value_<?php echo $value['preferences_ref_id']; ?>" size="35" placeholder="New keywords here" style="display: inline-block;">
+			      		<input type="submit" value="add" required="required" class="preference-tag-btn-add" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" />
 					</div>
-					<input type="text" id="tag_value_<?php echo $value['preferences_ref_id']; ?>" class ="ls_user_autocomplete" name="tag_value_<?php echo $value['preferences_ref_id']; ?>" size="35" placeholder="New keywords here" style="display: inline-block;">
-		      		<input type="submit" value="add" required="required" class="preference-tag-btn-add" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" />
 				</div>
+				<div class="clearfix">&nbsp;</div>
 			<?php } ?>
 			
 			<?php /* ?><div class="preferences-container" ng:repeat="preference in preferences">

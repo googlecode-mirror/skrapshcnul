@@ -371,6 +371,7 @@ height: 48px;
 	right: 0;
 	z-index: 0;
 }
+/*
 .preferences-container {
 	margin: 20px 0 10px 0;
 }
@@ -387,7 +388,7 @@ height: 48px;
 }
 .preferences-data {
 	margin: 10px 0;
-}
+}*/
 .preferences-data-item {
 	display: inline-block;
 }
@@ -409,12 +410,21 @@ height: 48px;
 	float: left;
 	position: relative;
 	border-radius: 0px 4px 4px 0px;
+	height: 25px;
+}
+.preferences-data-item-content a {
+	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .preferences-data-item-content:hover {
 	background: #646464;
 }
 .preferences-data-item-content div {
 	padding: 5px 10px;
+	box-shadow: 1px 1px 3px #333;
+	border-radius: 0 5px 5px 0;
 }
 .preferences-data-item-content div::before {
 	content: "";

@@ -1,4 +1,4 @@
-<div id="steps-completed">
+<div id="steps-completed" style="display:none;">
 	<div id="steps-completed-title" class="ui-dialog" style="cursor: pointer;">
 		<strong>Guide</strong> <span>Complete these 4 simple steps to get listed for lunches!</span>
 		<a id="steps-completed-title-btn" href="javascript:void(0);" class="ui-dialog-titlebar-close ui-corner-all" role="button">
@@ -8,7 +8,7 @@
 		</a>
 	</div>
 	
-	<div id="steps-completed-body" style="<?php echo $steps_completed['is_hidden'] ? "display:none;" : ""; ?>">
+	<div id="steps-completed-body" style="display:none;">
 		<div class="steps-completed-item first-item">
 			<?php if ($steps_completed['step1']) { ?>
 				<div class="completed-overlay"></div>
@@ -68,9 +68,4 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-	
 </div>
-
-
-<script>
-</script>

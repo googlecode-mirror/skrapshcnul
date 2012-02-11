@@ -3,16 +3,6 @@
 }
 .schedule-item {
 }
-#schedule-containers .content-left-col {
-	width: 420px;
-	vertical-align: top;
-	display: inline-block;
-}
-#schedule-containers .content-right-col {
-	width: 450px;
-	vertical-align: top;
-	display: inline-block;
-}
 .g-static-maps img {
 	border: 1px solid #777777;
 	box-shadow: 1px 1px 1px #AAAAAA;

@@ -55,8 +55,6 @@ class Schedules extends CI_Controller {
 		}
 		$this -> data['fixed_schedules']['results'] = $schedule;
 		
-		
-		
 		// Render view data
 		$this -> data['head_title']		= 'Schedule | Lunchsparks'; 
 		$this -> data['tpl_page_id']	= 'schedule#index';
@@ -76,8 +74,12 @@ class Schedules extends CI_Controller {
 		$this -> data['googlemap'] = true;
 		// load google map js
 
+		// Render view data
+		$this -> data['head_title']		= 'Add Schedule | Lunchsparks'; 
+		$this -> data['tpl_page_id']	= 'schedule#add';
+		$this -> data['tpl_page_title'] = "Add Schedule";
+		// Render views
 		$this -> data['main_content'] = 'base/schedules/add';
-		$this -> data['tpl_page_id'] = 'add';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
@@ -114,8 +116,12 @@ class Schedules extends CI_Controller {
 			$this -> data['googlemap'] = true;
 			// load google map js
 
-			$this -> data['tpl_page_id'] = 'edit';
-			$this -> data['main_content'] = 'schedules/edit';
+			// Render view data
+			$this -> data['head_title']		= 'Edit Schedule | Lunchsparks'; 
+			$this -> data['tpl_page_id']	= 'schedule#edit';
+			$this -> data['tpl_page_title'] = "Edit Schedule";
+			// Render views
+			$this -> data['main_content'] = 'base/schedules/edit';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}
 	}

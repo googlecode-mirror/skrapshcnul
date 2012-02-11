@@ -1,19 +1,14 @@
 <div class="m-content">
-  
-	<div class="m-content-2-col-left">
-		<?php $this -> load -> view('schedules/includes/sidetab');?>
-	</div>
-	<div class="m-content-2-col-right">
+	<div class="c-pages shadow-rounded">
 		<?php /* <div id="pick-history" style="background-color: #efefef; padding: 10px; -webkit-border-radius: 12px; -moz-border-radius: 12px; margin-right: 10px">
 		 Your history:
 		 <ul id ="pick-history-ul">
 		 </ul>
 		 </div> */
 		?>
-
-		<div class="hr">
-			<h2 class="hr-text">Add Schedules</h2>
-		</div>
+		
+		<h2><?php echo $tpl_page_title; ?></h2>
+		<h3 class="sub-heading">Enter your preferences here. Our system will pickup the keywords from here.</h3>
 		
 		<?php echo form_open();?>
 		<div id="pick">
