@@ -81,7 +81,8 @@ class Events extends CI_Controller {
 
 	public function rsvp() {
 		// Prepare _REQUEST data
-		$fields['oid'] = isset($_REQUEST['oid']) ? $_REQUEST['oid'] : FALSE;
+		$fields['event_id'] = isset($_REQUEST['event_id']) ? $_REQUEST['event_id'] : FALSE;
+		$fields['user_id'] = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : FALSE;
 		$fields['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : FALSE;
 
 		$this -> data['results'] = $this -> ls_events -> rsvp($fields);
