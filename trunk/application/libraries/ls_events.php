@@ -45,6 +45,7 @@ class Ls_Events {
 		$this -> ci -> load -> model('user_lunch_buddy_model');
 		$this -> ci -> load -> model('user_profile_model');
 		$this -> ci -> load -> model('events_model');
+		$this -> ci -> load -> model('restaurant_model');
 
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
@@ -76,17 +77,52 @@ class Ls_Events {
 
 	}
 
-	function getUserEventMatched($user_id) {
+	function getUserEvent_request($user_id) {
+		$events = ($this -> ci -> events_model -> getUserEvent_request($user_id));
+		if (!$events) {
+			return array();
+		}
 		
-		$events = ($this -> ci -> events_model -> getUserEventMatched($user_id));
+		if (count($events) > 0) {
+			foreach ($events as $key => $event) {
+				$restaurant_id = $event['location'];				
+				$events[$key]['location'] = 
+					$this -> ci -> restaurant_model -> 
+					selectRestaurantById($restaurant_id);
+				
+				$event_id = ($event['event_id']);
+				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
+				
+				// Populate Target User Profile Info
+				foreach ($users as $key2 => $user) {
+					$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
+					if ($user_id == $user['user_id']) {
+						$events[$key]['current_user'] = $user;
+					}
+				}
+				
+				$events[$key]['participant'] = $users;
+			}
+		}
+		
+		return $events;
+	}
+
+
+	function getUserEvent_upcomming($user_id) {
+		
+		$events = ($this -> ci -> events_model -> getUserEvent_upcomming($user_id));
 		
 		if (!$events) {
 			return array();
 		}
 		
 		if (count($events) > 0) {
-			
 			foreach ($events as $key => $event) {
+				$restaurant_id = $event['location'];				
+				$events[$key]['location'] = 
+					$this -> ci -> restaurant_model -> 
+					selectRestaurantById($restaurant_id);
 	
 				$event_id = ($event['event_id']);
 				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
@@ -100,13 +136,9 @@ class Ls_Events {
 				}
 				
 				$events[$key]['participant'] = $users;
-				
 			}
-			
 		}
-		
 		return $events;
-
 	}
 	
 	function getUserEvent_past($fields = FALSE) {
@@ -129,6 +161,10 @@ class Ls_Events {
 		
 		if (count($events) > 0) {	
 			foreach ($events as $key => $event) {
+				$restaurant_id = $event['location'];				
+				$events[$key]['location'] = 
+					$this -> ci -> restaurant_model -> 
+					selectRestaurantById($restaurant_id);
 	
 				$event_id = ($event['event_id']);
 				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));

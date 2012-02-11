@@ -51,7 +51,7 @@ class Events_model extends CI_Model {
 			return FALSE; // there is still someone with rsvp != 1
 		}
 	}
-
+		
 	function getUserEventSuggestion($user_id) {
 
 		if (!$user_id) {
@@ -128,6 +128,29 @@ class Events_model extends CI_Model {
 		}
 
 	}
+	
+	/* event request */
+	function getUserEvent_request($user_id) {
+
+		if (!$user_id) {
+			return FALSE;
+		}
+
+		$query = " SELECT ee.`event_id`, ee.`event_status`, ee.`date`, `location`, ee.`created_on`, ee.`updated_on` ";
+		$query .= " FROM " . $this -> tables['events_event'] . " AS ee";
+		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON `eu`.`event_id` = `ee`.`event_id` ";
+		$query .= " WHERE `user_id` = '$user_id' ";
+		$query .= " AND ee.`event_status` <= 0; ";
+
+		$mysql_result = $this -> db -> query($query);
+
+		if ($mysql_result -> num_rows() > 0) {
+			return $mysql_result -> result_array();
+		} else {
+			return FALSE;
+		}
+	}
+	
 
 	/* Matched Event */
 
@@ -176,7 +199,7 @@ class Events_model extends CI_Model {
 		return TRUE;
 	}
 
-	function getUserEventMatched($user_id) {
+	function getUserEvent_upcomming($user_id) {
 
 		if (!$user_id) {
 			return FALSE;
@@ -186,7 +209,7 @@ class Events_model extends CI_Model {
 		$query .= " FROM " . $this -> tables['events_event'] . " AS ee";
 		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON `eu`.`event_id` = `ee`.`event_id` ";
 		$query .= " WHERE `user_id` = '$user_id' ";
-		$query .= " AND ee.`event_status` >= 0 ";
+		$query .= " AND ee.`event_status` > 0 ";
 		$query .= " AND ee.`date` > NOW() ;";
 
 		$mysql_result = $this -> db -> query($query);
@@ -215,6 +238,8 @@ class Events_model extends CI_Model {
 		}
 
 	}
+	
+	/* part events */
 
 	function getUserEvent_past($fields = FALSE) {
 
