@@ -22,7 +22,7 @@
 .ui-stars-star a,
 .ui-stars-cancel a {
   width: 16px;
-  height: 15px;
+  height: 16px;
   display: block;
   background: url(jquery.ui.stars.gif) no-repeat 0 0;
 }

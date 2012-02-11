@@ -60,13 +60,15 @@ function event_recommendation_rsvp_confirm(element) {
 				el.parent().parent().html('You have accepted this event suggestion.');
 			} else if (data.errors){
 				alert("There are error processing your request.");
-				console.warn(data.errors);
+				jQuery(element).removeAttr('checked', '');
+				jQuery('label[for='+jQuery(element).attr('id')+']').removeClass('ui-state-active');
+				if (window.console) console.warn(data.errors);
 			}
 		});
 	} else {
 		jQuery(element).removeAttr('checked', '');
 		jQuery('label[for='+jQuery(element).attr('id')+']').removeClass('ui-state-active');
-		console.log(jQuery(element).attr('checked'));
+		//console.log(jQuery(element).attr('checked'));
 		return false;
 	}
 }
@@ -91,13 +93,15 @@ function event_recommendation_rsvp_reject(element) {
 				el.parent().parent().html('You have rejected this event suggestion.');
 			} else {
 				alert("There are error processing your request.");
-				console.warn(data.errors);
+				jQuery(element).removeAttr('checked', '');
+				jQuery('label[for='+jQuery(element).attr('id')+']').removeClass('ui-state-active');
+				if (window.console) console.warn(data.errors);
 			}
 		});
 	} else {
 		jQuery(element).removeAttr('checked', '');
 		jQuery('label[for='+jQuery(element).attr('id')+']').removeClass('ui-state-active');
-		console.log(jQuery(element).attr('checked'));
+		//console.log(jQuery(element).attr('checked'));
 		return false;
 	}
 }
