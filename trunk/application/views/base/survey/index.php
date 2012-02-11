@@ -20,7 +20,7 @@
 			</div>
 		</div>
 			
-		<form class="section" method="post" action="/survey/save/">
+		<form id="event_survey_form" class="section" method="post" action="/survey/save/">
 			<div class="row-item">
 				<div class="section-top">
 					Lunch Buddy Rating
@@ -50,6 +50,7 @@
 											<option value="4">4</option>
 											<option value="5">5</option>
 										</select>
+										<input type="hidden" name="target_point_<?php echo $buddy['rec_id_profile']['user_id']; ?>" value="" disabled="disabled">
 									</div>
 								</div>
 								<div class="clearfix">&nbsp;</div>
@@ -86,6 +87,7 @@
 									<option value="5">5</option>
 								</select>
 							</div>
+							<input type="hidden" name="restaurant_point" value="" disabled="disabled">
 						</div>
 						<div class="clearfix">&nbsp;</div>
 						<div>
@@ -113,5 +115,15 @@
 	</div>
 </div>
 
-
+<script>
+jQuery(document).ready(function(){
+	
+	jQuery("#event_survey_form").submit(function(){
+		console.log(jQuery("#event_survey_form").serialize());
+		alert('Submitting form');
+		return false;
+	});
+	
+});
+</script>
 

@@ -93,7 +93,8 @@
 							
 							<?php //var_dump($event) ?>
 							<div class="column-2-right" style="text-align: center;">
-								
+							
+							<?php if($event['event_status'] != -1) { ?>
 								<?php ## If not accepted, then show radio buttons */ ?>
 								<?php if ($event['current_user']['rsvp'] == 1) { ?>
 									
@@ -112,6 +113,9 @@
 										<label for="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_0">No</label>
 									</div>
 								<?php } ?>
+							<?php } else { ?>
+								This event has been cancelled.
+							<?php } ?>
 							</div>
 						</div>
 						<div class="clearfix"></div>
