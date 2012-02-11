@@ -41,6 +41,10 @@ class Ls_Survey {
 		$result['buddies_info'] =
 			$this -> ci -> events_model -> 
 			getLunchBuddiesByEventId($event_id, $user_id);
+		// Populate Target User Profile Info
+		foreach ($result['buddies_info'] as $key => $user) {
+			$result['buddies_info'][$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
+		}
 		
 		// retrieve restaurant information
 		$restaurant_id = $result['event_info']['location'];

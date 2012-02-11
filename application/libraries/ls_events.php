@@ -157,7 +157,7 @@ class Ls_Events {
 			return FALSE;
 		}
 		
-		if (!$fields['oid'] || !is_numeric($fields['oid'])) {
+		if (isset($fields['oid']) && !is_numeric($fields['oid'])) {
 			return FALSE;
 		}
 		

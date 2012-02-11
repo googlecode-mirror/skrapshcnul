@@ -40,16 +40,19 @@ function user_recommendation_reject(element) {
 	
 }
 
-function user_recommendation_rsvp_confirm(element) {
+function event_recommendation_rsvp_confirm(element) {
 	var el = jQuery(element);
 	
-	var oid = (el.attr('ls-oid'));
+	//var oid = (el.attr('ls-oid'));
+	var event_id = (el.attr('ls-event_id'));
+	var user_id = (el.attr('ls-user_id'));
 	var url = '/jsonp/events/rsvp';
 	
 	if (confirm("You are about to accept this event suggestion. You will NOT be able to change it later. Are you sure you want to continue?")) {
 		jQuery.getJSON(url+'?alt=json&callback=?', {
 			'action': 'confirm',
-			'oid': oid,
+			'event_id': event_id,
+			'user_id': user_id
 		}, function(data) {
 			console.log(data);
 			console.log(data.results);
@@ -68,17 +71,20 @@ function user_recommendation_rsvp_confirm(element) {
 	}
 }
 
-function user_recommendation_rsvp_reject(element) {
+function event_recommendation_rsvp_reject(element) {
 	
 	var el = jQuery(element);
 	
-	var oid = (el.attr('ls-oid'));
+	//var oid = (el.attr('ls-oid'));
+	var event_id = (el.attr('ls-event_id'));
+	var user_id = (el.attr('ls-user_id'));
 	var url = '/jsonp/events/rsvp';
 	
 	if (confirm("You are about to reject this event suggestion. You will NOT be able to change it later. Are you sure you want to continue?")) {
 		jQuery.getJSON(url+'?alt=json&callback=?', {
 			'action': 'reject',
-			'oid': oid,
+			'event_id': event_id,
+			'user_id': user_id
 		}, function(data) {
 			console.log(data);
 			if (data.results) {

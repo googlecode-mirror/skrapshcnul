@@ -42,7 +42,11 @@ class Survey extends CI_Controller {
 		//e.g /survey/?event_id=7
 		
 		$event_id = $this -> input -> get('event_id');
-		$this -> data['info'] = $this -> ls_survey -> prepareDataForSurvey($this -> user_id, $event_id);
+		if (!is_numeric($event_id) && !$event_id) {
+			redirect('404');
+		}
+
+		$this -> data['event_info'] = $this -> ls_survey -> prepareDataForSurvey($this -> user_id, $event_id);
 		
 		// Render view data
 		$this -> data['head_title']		= 'Survey | Lunchsparks'; 
@@ -54,7 +58,7 @@ class Survey extends CI_Controller {
 	}
 	
 	function event() {
-		//e.g /survey/?event_id=7
+		//e.g /survey/event_id/7
 		
 		$event_id = $this -> input -> get('event_id');
 		$this -> data['info'] = $this -> ls_survey -> prepareDataForSurvey($this -> user_id, $event_id);
