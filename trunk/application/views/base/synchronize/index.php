@@ -10,9 +10,13 @@
 				</div>
 				<div class="section-middle">
 					<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
-						<form id="linkedin_sync_form" action="pullLinkedInData" method="get">
-							<input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" /> 
-							<input type="submit" value="Synchronize with LinkedIn" /></form>
+						<div class="content-unavailable">
+							<span>You have not sync your LinkedIn profile.</span>
+							<form id="linkedin_sync_form" action="pullLinkedInData" method="get">
+								<input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" /> 
+								<input type="submit" value="Synchronize with LinkedIn" />
+							</form>
+						</div>
 					<?php } else { ?> 
 						<div class="external-data">
 							
@@ -30,7 +34,7 @@
 									<input type="hidden"
 									name="<?php echo LINKEDIN::_GET_TYPE;?>"
 									id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" />
-									<input type="submit" value="Synchronize with LinkedIn" />
+									<input type="submit" value="Refresh" />
 								</form>
 							</div>
 						</div>

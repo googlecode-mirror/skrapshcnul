@@ -77,15 +77,10 @@ function refresh_notifications() {
 		if(data) {
 			jQuery('#notification-toggle-count').html(data);
 			jQuery('#notification-toggle').addClass('hasNewNotifications');
-			console.log(jQuery('#notification-toggle'));
-			//jQuery('#notification-toggle').css("background-color", "#FF0000");
-			//jQuery('#notification-toggle-count').css("color", "#FFFFFF");
 		} else {
 			jQuery('#notification-toggle-count').html('0');
 			jQuery('#notification-toggle').removeClass('hasNewNotifications');
 			console.log(jQuery('#notification-toggle'));
-			//jQuery('#notification-toggle').css("background-color", "#CCCCCC");
-			//jQuery('#notification-toggle-count').css("color", "#000000");
 		}
 	});
 	// fresh frame src.

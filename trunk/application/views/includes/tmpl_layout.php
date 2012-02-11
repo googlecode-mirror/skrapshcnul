@@ -17,7 +17,4 @@
 		</div><div class="clearfix"></div>
 		<?php $this -> load -> view('includes/footer');?><div class="clearfix"></div>
 	</body>
-	<script>
-		mpq.name_tag('<?php echo $this->session->userdata['email']?>');
-	</script>
 </html>

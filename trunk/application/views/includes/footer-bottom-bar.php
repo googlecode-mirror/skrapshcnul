@@ -35,6 +35,8 @@
 	<div class="clearfix"></div>
 </div>
 <div class="clearfix">&nbsp;</div>
+<?php /* 
 <div style="text-align: right;">
 	<a href="http://mixpanel.com/f/partner"><img src="http://mixpanel.com/site_media/images/partner/badge_blue.png" alt="Real Time Web Analytics" /></a>
 </div>
+ */ ?>

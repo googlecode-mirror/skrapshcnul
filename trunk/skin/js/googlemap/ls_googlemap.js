@@ -171,6 +171,12 @@ function getGStaticMapEncoded(center_lat, center_lng, radius_meter) {
 	return g_url + encoded_polygon;
 }
 
+function getGStaticMapAddress(address) {
+	var map_width = 400;
+	var map_height = 200;
+	return 'http://maps.googleapis.com/maps/api/staticmap?center=' + address + '&zoom=14&size=' + map_width + 'x' + map_height + '&sensor=false';
+}
+
 function meterToDecimalDegree(value) {
 	return (value / 1.11) * 0.00001;
 }

@@ -145,10 +145,11 @@ class Events_model extends CI_Model {
 			return FALSE;
 		}
 
-		$query = " SELECT ee.`event_id`, ee.`date`, `location`, ee.`created_on`, ee.`updated_on` ";
+		$query = " SELECT ee.`event_id`, ee.`event_status`, ee.`date`, `location`, ee.`created_on`, ee.`updated_on` ";
 		$query .= " FROM " . $this -> tables['events_event'] . " AS ee";
 		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON `eu`.`event_id` = `ee`.`event_id` ";
 		$query .= " WHERE `user_id` = '$user_id' ";
+		$query .= " AND ee.`event_status` >= 0 ";
 		$query .= " AND ee.`date` > NOW() ;";
 
 		$mysql_result = $this -> db -> query($query);
@@ -194,6 +195,7 @@ class Events_model extends CI_Model {
 		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON ee.`event_id` = eu.`event_id` ";
 		$query .= " WHERE `user_id` = '$user_id' ";
 		$query .= " AND ee.`date` < NOW() ";
+		$query .= " AND ee.`event_status` >= 0 ";
 
 		$mysql_result = $this -> db -> query($query);
 		if ($mysql_result -> num_rows() > 0) {
