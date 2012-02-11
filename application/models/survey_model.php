@@ -61,5 +61,22 @@ class Survey_Model extends CI_Model {
 		         " '$tar_review');";
 		return $this -> db -> query($query);
 	}
+	
+	function getFeedbackToUsers($event_id, $user_id) {
+		$query = "SELECT * FROM " . $this -> tables['feedback_to_user'] .
+				 " WHERE event_id = '$event_id' AND user_id = '$user_id'";
+		$result = $this -> db -> query($query);
+		if (empty($result)) return NULL;
+		else return $result -> result_array(); 
+	} 
+	
+	function getFeedbackToRestaurant($event_id, $user_id) {
+		$query = "SELECT * FROM " . $this -> tables['feedback_to_restaurant'] .
+				 " WHERE event_id = '$event_id' AND user_id = '$user_id'";
+		$result = $this -> db -> query($query);				 
+		if (empty($result)) return NULL;
+		else if ($result -> num_rows() != 1) return NULL;
+		else return $result -> row_array();
+	}
 }
 ?>
