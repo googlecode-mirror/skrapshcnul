@@ -55,6 +55,13 @@ class Ls_survey_tests extends Toast
     	$this -> _assert_true($result != FALSE);
 		
 		$result = $this -> ls_survey -> getCompletedSurvey(7, 1);
-		$this -> _assert_true(array_diff($obj, $result) == NULL);
+		$obj['feedback_to_restaurant']['timestamp'] =
+			$result['feedback_to_restaurant']['timestamp'];
+		$obj['feedback_to_users']['0']['timestamp'] =
+			$result['feedback_to_users']['0']['timestamp'];
+		$obj['feedback_to_users']['1']['timestamp'] =
+			$result['feedback_to_users']['1']['timestamp'];
+				
+		$this -> _assert_true($obj == $result);
     }
 }
