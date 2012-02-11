@@ -38,10 +38,7 @@ class Restaurant_Model extends CI_Model {
 		         " WHERE `restaurant_id` = '$id';";
 		$obj = $this -> db -> query($query);
 		if ($obj -> num_rows() != 1) return NULL;
-		else {
-			$obj = $obj -> result();
-			return $obj[0];
-		}
+		else return $obj -> row_array();
 	}
 }
 ?>

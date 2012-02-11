@@ -14,6 +14,23 @@ class Events_model extends CI_Model {
 		$this -> tables = $this -> config -> item('tables', 'tables/events');
 
 	}
+	
+	function getEventById($event_id) {
+		$query = "SELECT * FROM `lss_events` WHERE `event_id` = '$event_id';";
+		$result = $this -> db -> query($query);
+		if (empty($result)) return NULL; // error
+		else if ($result -> num_rows() != 1) return NULL; // error
+		else return $result -> row_array(); 
+	}
+	
+	function getLunchBuddiesByEventId($event_id, $user_id) {
+		$query = "SELECT * FROM `lss_events_users` " . 
+				 "WHERE `event_id` = '$event_id' ". 
+				 "AND `user_id` != '$user_id';";
+		$result = $this -> db -> query($query);
+		if (empty($result)) return NULL; // error
+		else return $result -> result_array();
+	}
 
 	function getUserEventSuggestion($user_id) {
 
