@@ -25,11 +25,11 @@
 						<div>
 							<span class="label">Date: </span> <span><?php echo $event['date'] ?></span>
 						</div>
-						<div>
+						<div>							
 							<span class="label">Location: </span> 
 							<span>
-								<a href="http://maps.google.com/maps/place?q=<?php echo $event['location'] ?>" target="_blank">
-									<?php echo $event['location'] ?>
+								<a href="http://maps.google.com/maps/place?q=<?php echo $event['location']['location'] ?>" target="_blank">
+									<?php echo $event['location']['location'] ?>
 								</a>
 							</span>
 						</div>

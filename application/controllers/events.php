@@ -35,8 +35,8 @@ class Events extends CI_Controller {
 	function index() {
 		
 		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this -> user_id));
-		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEventMatched($this -> user_id));
-		$this -> data['events']['upcoming'] = ($this -> ls_events -> getUserEventMatched($this -> user_id));
+		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEvent_request($this -> user_id));
+		$this -> data['events']['upcoming'] = ($this -> ls_events -> getUserEvent_upcomming($this -> user_id));
 		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this -> user_id));
 		
 		

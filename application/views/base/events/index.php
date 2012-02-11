@@ -54,7 +54,7 @@
 								<?php /* <img src="{{getGStaticMapAddress(<?php echo $event['location'] ?>);}}" /> */ ?>
 								<?php 
 								$googleMapImg = 'http://maps.googleapis.com/maps/api/staticmap?center=';
-								$googleMapImg .= urlencode($event['location']);
+								$googleMapImg .= urlencode($event['location']['name']);
 								$googleMapImg .= '&zoom=14&size=190x140&sensor=false'; ?>
 								<img src ="<?php echo $googleMapImg; ?>" />
 							</div>
@@ -68,8 +68,8 @@
 								<div>
 									<span class="label">Location: </span> 
 									<span>
-										<a href="http://maps.google.com/maps/place?q=<?php echo $event['location'] ?>" target="_blank">
-											<?php echo $event['location'] ?>
+										<a href="http://maps.google.com/maps/place?q=<?php echo  $event['location']['name'] . ", " . $event['location']['location'] ?>" target="_blank">
+											<?php echo  $event['location']['name'] . ", " . $event['location']['location'] ?>
 										</a>
 									</span>
 								</div>
@@ -145,7 +145,7 @@
 								<?php /* <img src="{{getGStaticMapAddress(<?php echo $event['location'] ?>);}}" /> */ ?>
 								<?php 
 								$googleMapImg = 'http://maps.googleapis.com/maps/api/staticmap?center=';
-								$googleMapImg .= urlencode($event['location']);
+								$googleMapImg .= urlencode( $event['location']['name'] );
 								$googleMapImg .= '&zoom=14&size=190x140&sensor=false'; ?>
 								<img src ="<?php echo $googleMapImg; ?>" />
 							</div>
@@ -159,8 +159,8 @@
 								<div>
 									<span class="label">Location: </span> 
 									<span>
-										<a href="http://maps.google.com/maps/place?q=<?php echo $event['location'] ?>" target="_blank">
-											<?php echo $event['location'] ?>
+										<a href="http://maps.google.com/maps/place?q=<?php echo  $event['location']['name'] . ", " . $event['location']['location'] ?>" target="_blank">
+											<?php echo  $event['location']['name'] . ", " . $event['location']['location'] ?>
 										</a>
 									</span>
 								</div>
@@ -233,7 +233,7 @@
 								<?php /* <img src="{{getGStaticMapAddress(<?php echo $event['location'] ?>);}}" /> */ ?>
 								<?php 
 								$googleMapImg = 'http://maps.googleapis.com/maps/api/staticmap?center=';
-								$googleMapImg .= urlencode($event['location']);
+								$googleMapImg .= urlencode( $event['location']['name'] );
 								$googleMapImg .= '&zoom=14&size=190x140&sensor=false'; ?>
 								<img src ="<?php echo $googleMapImg; ?>" />
 							</div>
@@ -246,8 +246,8 @@
 								<div>
 									<span class="title">Location: </span> 
 									<span>
-										<a href="http://maps.google.com/maps/place?q=<?php echo $event['location'] ?>" target="_blank">
-											<?php echo $event['location'] ?>
+										<a href="http://maps.google.com/maps/place?q=<?php echo  $event['location']['name'] . ", " . $event['location']['location'] ?>" target="_blank">
+											<?php echo  $event['location']['name'] . ", " . $event['location']['location'] ?>
 										</a>
 									</span>
 								</div>
