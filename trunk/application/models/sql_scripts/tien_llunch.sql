@@ -180,19 +180,29 @@ CREATE TABLE IF NOT EXISTS `lss_restaurants` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lss_survey_data`
+-- Table structure for table `lss_survey_data_2`
 --
-
-CREATE TABLE IF NOT EXISTS `lss_survey_data` (
-  `index` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `lss_survey_data_1` (
+  `event_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `target_id` int(11) NOT NULL,
   `target_point` double NOT NULL,
   `target_review` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`,`user_id`,`target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_survey_data_2`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_survey_data_2` (
+  `event_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
   `restaurant_point` double NOT NULL,
   `restaurant_review` text NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`index`)
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
