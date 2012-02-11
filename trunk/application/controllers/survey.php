@@ -39,10 +39,32 @@ class Survey extends CI_Controller {
 	}
 
 	function index() {
-		//e.g www.lunchsparks.me/survey?event_id=7		
+		//e.g /survey/?event_id=7
+		
 		$event_id = $this -> input -> get('event_id');
-		$this -> data['main_content'] = 'survey/index';
 		$this -> data['info'] = $this -> ls_survey -> prepareDataForSurvey($this -> user_id, $event_id);
+		
+		// Render view data
+		$this -> data['head_title']		= 'Survey | Lunchsparks'; 
+		$this -> data['tpl_page_id']	= 'survey#index';
+		$this -> data['tpl_page_title'] = "Survey";
+		// Render views
+		$this -> data['main_content'] = 'base/survey/index';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+	}
+	
+	function event() {
+		//e.g /survey/?event_id=7
+		
+		$event_id = $this -> input -> get('event_id');
+		$this -> data['info'] = $this -> ls_survey -> prepareDataForSurvey($this -> user_id, $event_id);
+		
+		// Render view data
+		$this -> data['head_title']		= 'Survey | Lunchsparks'; 
+		$this -> data['tpl_page_id']	= 'survey#index';
+		$this -> data['tpl_page_title'] = "Survey";
+		// Render views
+		$this -> data['main_content'] = 'base/survey/index';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 

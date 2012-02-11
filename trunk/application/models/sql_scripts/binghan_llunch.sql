@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 22, 2012 at 06:32 AM
+-- Generation Time: Feb 11, 2012 at 10:12 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.8
 
@@ -113,13 +113,14 @@ CREATE TABLE IF NOT EXISTS `lss_components` (
 
 CREATE TABLE IF NOT EXISTS `lss_events` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `event_status` int(3) NOT NULL COMMENT '0 = pending request; -1 = cancelled ; 1 = confirmed event',
   `date` datetime NOT NULL,
   `location` varchar(100) NOT NULL,
   `reason` text NOT NULL,
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `lss_events_users` (
   `rsvp` tinyint(4) NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `lss_meta` (
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
@@ -257,7 +258,22 @@ CREATE TABLE IF NOT EXISTS `lss_recommendations` (
   `selected` tinyint(1) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`index`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_restaurants`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_restaurants` (
+  `restaurant_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `location` text NOT NULL,
+  `valid` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`restaurant_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -278,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `lss_schedules` (
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   KEY `index` (`index`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 -- --------------------------------------------------------
 
@@ -301,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `lss_users` (
   `last_login` int(11) unsigned DEFAULT NULL,
   `active` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -314,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_groups` (
   `user_id` mediumint(8) NOT NULL,
   `group_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 -- --------------------------------------------------------
 
@@ -359,7 +375,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=178 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=197 ;
 
 -- --------------------------------------------------------
 
@@ -433,7 +449,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_profile` (
   `mobile_number` varchar(50) DEFAULT NULL,
   `delivery_email` varchar(250) DEFAULT NULL,
   `profile_img` varchar(250) DEFAULT NULL,
-  `location` varchar(250) DEFAULT NULL,
+  `location` text,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `alias` (`alias`)
