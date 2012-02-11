@@ -181,7 +181,7 @@ function meterToDecimalDegree(value) {
 	return (value / 1.11) * 0.00001;
 }
 
-function codeAddress(address) {
+function codeAddress(address, callback) {
 	if (undefined == address) {
 		return false;
 	}
@@ -189,8 +189,12 @@ function codeAddress(address) {
 		'address' : address
 	}, function(results, status) {
 		if(status == google.maps.GeocoderStatus.OK) {
-			console.log(results[0].geometry.location);
-			return results[0].geometry.location;
+			//console.log(results[0].geometry.location);
+			if (Object.prototype.toString.call(callback) == "[object Function]") {
+				callback(results[0].geometry.location);
+			} else {
+				return (results[0].geometry.location);
+			}
 		} else {
 			console.log("Geocode was not successful for the following reason: " + status);
 		}
