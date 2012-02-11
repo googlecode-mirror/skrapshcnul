@@ -24,7 +24,7 @@ function resizeNotificationIframeToFitContent(){var iframe=document.getElementBy
 not_area.style.height=element_height+10+"px";}}
 function set_notification_toggle(){jQuery("#notification-toggle").click(function(event){toggle_notifications();event.stopPropagation();});}
 jQuery(document).ready(function(){jQuery('.notification-new').hover(function(){var result=jQuery.post("/json/set_notifications_new_as_read",{'notification_id':this.id});jQuery(this).stop().animate({backgroundColor:'#EEF0F9'},300);},function(){jQuery(this).stop().animate({backgroundColor:'#EEF0F9'},100);});});function set_notification_as_read(notification_id){}
-function refresh_notifications(){jQuery.getJSON("/json/check_notifications_new",function(data){if(data){jQuery('#notification-toggle-count').html(data);jQuery('#notification-toggle').addClass('hasNewNotifications');console.log(jQuery('#notification-toggle'));}else{jQuery('#notification-toggle-count').html('0');jQuery('#notification-toggle').removeClass('hasNewNotifications');console.log(jQuery('#notification-toggle'));}});}
+function refresh_notifications(){jQuery.getJSON("/json/check_notifications_new",function(data){if(data){jQuery('#notification-toggle-count').html(data);jQuery('#notification-toggle').addClass('hasNewNotifications');}else{jQuery('#notification-toggle-count').html('0');jQuery('#notification-toggle').removeClass('hasNewNotifications');console.log(jQuery('#notification-toggle'));}});}
 jQuery.getJSON("/json/getTotalUsers",function(data){jQuery('#user-count').html(data);});jQuery.getJSON("/json/getTotalLunches",function(data){jQuery('#lunches-count').html(data);});
 
 // @fileRef ls_preferences.js 
@@ -92,6 +92,7 @@ function ls_draw_circle(center_lat,center_lng,radius_meter){var center_lat=1.293
 var encodeString=google.maps.geometry.encoding.encodePath(latlngs);console.log(encodeString);var polyline_data=encodeString;}
 function getGStaticMapEncoded(center_lat,center_lng,radius_meter){center_lat=parseFloat(center_lat);center_lng=parseFloat(center_lng);radius_meter=parseFloat(radius_meter);var latlngs=new google.maps.MVCArray();var radius=meterToDecimalDegree(radius_meter);var pi2=Math.PI*2;var steps=Math.round(radius_meter/100*1.5);for(var i=0;i<steps;i++){var lat=(center_lat+(radius*Math.cos(i/steps*pi2)));var lng=center_lng+radius*Math.sin(i/steps*pi2);var newLocation=new google.maps.LatLng(lat,lng);latlngs.push(newLocation);}
 var encoded_polygon=google.maps.geometry.encoding.encodePath(latlngs);var map_width=400;var map_height=200;var g_url='http://maps.google.com/maps/api/staticmap?size='+map_width+'x'+map_height+'&sensor=true&path=fillcolor:0x00FF00|weight:1|color:0xFFFFFF|enc:';return g_url+encoded_polygon;}
+function getGStaticMapAddress(address){var map_width=400;var map_height=200;return'http://maps.googleapis.com/maps/api/staticmap?center='+address+'&zoom=14&size='+map_width+'x'+map_height+'&sensor=false';}
 function meterToDecimalDegree(value){return(value/1.11)*0.00001;}
 function codeAddress(address){if(undefined==address){return false;}
 geocoder.geocode({'address':address},function(results,status){if(status==google.maps.GeocoderStatus.OK){console.log(results[0].geometry.location);return results[0].geometry.location;}else{console.log("Geocode was not successful for the following reason: "+status);}});}

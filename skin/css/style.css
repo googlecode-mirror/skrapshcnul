@@ -178,7 +178,7 @@ header ul li {
 /* Footer */
 footer {
 	margin: auto;
-	padding: 0 0 20px 0;
+	padding: 0;
 	font-size: 1em;
 	color: #FFFFFF;
 	background: #232323 url(../images/footer_bg.png) repeat-x 0 0;
