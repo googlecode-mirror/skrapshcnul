@@ -48,7 +48,7 @@ class Search extends CI_Controller {
 		$this -> data['tpl_page_id'] = "search#overview";
 		$this -> data['tpl_page_title'] = "Search";
 		// Render Views
-		$this -> data['main_content'] = 'search/index';
+		$this -> data['main_content'] = 'base/search/index';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
@@ -92,7 +92,7 @@ class Search extends CI_Controller {
 		$this -> data['tpl_page_id'] = "search#tag";
 		$this -> data['tpl_page_title'] = "Search Tag";
 		// Render Views
-		$this -> data['main_content'] = 'search/tag';
+		$this -> data['main_content'] = 'base/search/tag';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 		
 	}
@@ -104,7 +104,7 @@ class Search extends CI_Controller {
 		$this -> data['tpl_page_id'] = "search#people";
 		$this -> data['tpl_page_title'] = "Search People";
 		// Render Views
-		$this -> data['main_content'] = 'search/people';
+		$this -> data['main_content'] = 'base/search/people';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 		
 	} 

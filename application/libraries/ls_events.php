@@ -172,7 +172,7 @@ class Ls_Events {
 				case 'reject' :
 				case 'decline' :
 				case 0 :
-					$fields['action'] = 0;
+					$fields['action'] = -1;
 					break;
 				default : 
 					$fields['action'] = 0;

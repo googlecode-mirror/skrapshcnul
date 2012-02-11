@@ -25,11 +25,15 @@ function codeLatLng() {
 	});
 }
 
-function codeAddress() {
-	var address = document.getElementById("address").value;
+function codeAddress(address) {
+	if (address = 'undefined') {
+		var address = document.getElementById("address").value;
+	}
+	
 	geocoder.geocode({
 		'address' : address
 	}, function(results, status) {
+		console.log('codeAddress(): '+ results );
 		if(status == google.maps.GeocoderStatus.OK) {
 			map.setCenter(results[0].geometry.location);
 			var marker = new google.maps.Marker({

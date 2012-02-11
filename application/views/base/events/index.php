@@ -50,7 +50,14 @@
 					<?php foreach($events['suggestions'] as $event) { ?>
 					<div class="stream-item row-item col-2">
 						<div class="content-table-2-col-left">
-							
+							<div class="g-static-maps">
+								<?php /* <img src="{{getGStaticMapAddress(<?php echo $event['location'] ?>);}}" /> */ ?>
+								<?php 
+								$googleMapImg = 'http://maps.googleapis.com/maps/api/staticmap?center=';
+								$googleMapImg .= urlencode($event['location']);
+								$googleMapImg .= '&zoom=14&size=190x140&sensor=false'; ?>
+								<img src ="<?php echo $googleMapImg; ?>" />
+							</div>
 						</div>
 						
 						<div class="content-table-2-col-right">
@@ -86,22 +93,22 @@
 							
 							<?php //var_dump($event) ?>
 							<div class="column-2-right" style="text-align: center;">
-								<div>RSVP?</div>
 								
 								<?php ## If not accepted, then show radio buttons */ ?>
-								<?php if ($event['current_user']['rsvp'] === 1) { ?>
+								<?php if ($event['current_user']['rsvp'] == 1) { ?>
 									
-									You have accepted this meetup.
+									You have accepted this event suggestion.
 									
-								<?php } elseif ($event['current_user']['rsvp'] === -1) { ?>
+								<?php } elseif ($event['current_user']['rsvp'] == -1) { ?>
 									
-									You have rejected this meetup. 
+									You have rejected this event suggestion. 
 									
 								<?php } else { ?>
+									<div>RSVP?</div>
 									<div style="padding: 20px;" class="radio_buttonset">
-										<input type="radio" id="radio<?php echo $event['current_user']['id'] ?>_1" name="radio<?php echo $event['current_user']['id'] ?>" <?php echo $event['current_user']['rsvp'] ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $event['current_user']['id'] ?>" onclick="user_recommendation_rsvp_confirm(this);" />
+										<input type="radio" id="radio<?php echo $event['current_user']['id'] ?>_1" name="radio<?php echo $event['current_user']['id'] ?>" ls-oid="<?php echo $event['current_user']['id'] ?>" onclick="user_recommendation_rsvp_confirm(this);" />
 										<label for="radio<?php echo $event['current_user']['id'] ?>_1">Yes</label>
-										<input type="radio" id="radio<?php echo $event['current_user']['id'] ?>_0" name="radio<?php echo $event['current_user']['id'] ?>" <?php echo !$event['current_user']['rsvp'] ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $event['current_user']['id'] ?>" onclick="user_recommendation_rsvp_reject(this);" />
+										<input type="radio" id="radio<?php echo $event['current_user']['id'] ?>_0" name="radio<?php echo $event['current_user']['id'] ?>" ls-oid="<?php echo $event['current_user']['id'] ?>" onclick="user_recommendation_rsvp_reject(this);" />
 										<label for="radio<?php echo $event['current_user']['id'] ?>_0">No</label>
 									</div>
 								<?php } ?>
@@ -132,7 +139,12 @@
 						
 						<div class="content-table-2-col-left">
 							<div class="g-static-maps">
-								<img src="{{getGStaticMapAddress(<?php echo $event['location'] ?>);}}" />
+								<?php /* <img src="{{getGStaticMapAddress(<?php echo $event['location'] ?>);}}" /> */ ?>
+								<?php 
+								$googleMapImg = 'http://maps.googleapis.com/maps/api/staticmap?center=';
+								$googleMapImg .= urlencode($event['location']);
+								$googleMapImg .= '&zoom=14&size=190x140&sensor=false'; ?>
+								<img src ="<?php echo $googleMapImg; ?>" />
 							</div>
 						</div>
 						<div class="content-table-2-col-right" style="padding: 10px 0;">
