@@ -5,10 +5,10 @@
 		<div id="settings-sync-linkedin">
 			<h3 class="sub-heading">Synchronize with other networks</h3>
 			<div class="row-item">
-				<div class="content-table-2-col-left">
+				<div class="section-top">
 					<div id="linkedin" class="service-icon">LinkedIn</div>
 				</div>
-				<div class="content-table-2-col-right">
+				<div class="section-middle">
 					<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
 						<form id="linkedin_sync_form" action="pullLinkedInData" method="get">
 							<input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" /> 
@@ -36,23 +36,30 @@
 						</div>
 					<?php } ?>
 				</div> 
-				<div class="clearfix">&nbsp;</div>
+				<div class="clearfix"></div>
 			</div>
+			<div class="clearfix">&nbsp;</div>
 			<div class="row-item">
-				<div class="content-table-2-col-left">
+				<div class="section-top">
 					<div id="twitter" class="service-icon">Twitter</div>
 				</div>
-				<div class="content-table-2-col-right">
+				<div class="section-middle">
 					<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
-						Coming soon.
+						<div class="content-unavailable">Coming soon.</div>
 					<?php } else { ?> 
-						Coming soon.
+						<div class="content-unavailable">Coming soon.</div>
 					<?php } ?>
 				</div>
 			</div>
 			<div class="clearfix">&nbsp;</div>
 		</div>
 		
+		<?php /*
+		<div class="content-table-2-col-left">
+		</div>
+		<div class="content-table-2-col-right">
+		</div>
+		 */ ?>
 		
 		<?php /* <table class="table-connections">
 		<tr class="row-item">

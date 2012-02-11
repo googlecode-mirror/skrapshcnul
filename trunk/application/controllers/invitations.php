@@ -42,9 +42,15 @@ class Invitations extends CI_Controller {
 	function all($value = '') {
 		$this -> _prep_all_data();
 		
-		// Render view
-		$this -> data['tpl_page_id'] = 'all';
-		$this -> data['main_content'] = 'invitations/all';
+		$this -> data['invite_logs'] = $this -> invitation_model -> selectInvitationLog($this->user_id);
+		$this -> data['invite_logs_number_signup'] = $this -> invitation_model -> selectInvitationLog_signed_up($this->user_id);
+		
+		// Render view data
+		$this -> data['head_title']		= 'Invitations | Lunchsparks'; 
+		$this -> data['tpl_page_id']	= 'invitations#all';
+		$this -> data['tpl_page_title'] = "Invitations";
+		// Render views
+		$this -> data['main_content'] = 'base/invitations/all';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -92,8 +98,7 @@ class Invitations extends CI_Controller {
 
 	function status() {
 		$this -> _prep_all_data();
-
-		// Dummy Data
+		
 		$this -> data['invite_logs'] = $this -> invitation_model -> selectInvitationLog($this->user_id);
 		$this -> data['invite_logs_number_signup'] = $this -> invitation_model -> selectInvitationLog_signed_up($this->user_id);
 		

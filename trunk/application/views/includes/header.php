@@ -57,12 +57,9 @@
 				<?php if ($is_logged_in) {
 				?>
 				<ul>         
-					<li>
-						<?php //echo anchor('notifications', 'Notifications', array('from' => 'main', 'id' => 'notification_toggle'));?>
-						<div class="notification-toggle-container">
-							<div id="notification-toggle" title="Notifications">
-								<span id="notification-toggle-count">0</span>
-							</div>
+					<li class="notification-toggle-container">
+						<div id="notification-toggle" class="notification" title="Notifications">
+							<span id="notification-toggle-count">0</span>
 						</div>
 					</li>
 					<li>

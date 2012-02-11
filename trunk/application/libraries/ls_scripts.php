@@ -18,6 +18,7 @@ class Ls_Scripts {
 		
 		$this -> js_files = array(
 			'skin/js/ls_bubble_info.js',
+			'skin/js/ls_guide.js',
 			'skin/js/ls_invitations.js',
 			'skin/js/ls_notifications.js', 
 			'skin/js/ls_preferences.js',
@@ -39,7 +40,9 @@ class Ls_Scripts {
 			'skin/css/invitation.css',
 			'skin/css/layout.css',
 			'skin/css/notification_icons.css',
+			'skin/css/notifications.css',
 			'skin/css/pages.css',
+			'skin/css/preferences.css',
 			'skin/css/search.css',
 			'skin/css/schedules.css',
 			'skin/css/style.css',

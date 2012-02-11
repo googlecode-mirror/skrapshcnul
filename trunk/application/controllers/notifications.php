@@ -41,9 +41,13 @@ class Notifications extends CI_Controller {
 		$this -> data['notifications'] = $this -> ls_notifications -> get_notifications($this -> session -> userdata['id']);
 		if (!$this -> data['notifications'])
 			$this -> data['notifications'] = array();
-
-		// Render view
-		$this -> data['main_content'] = 'notifications/index';
+		
+		// Render view data
+		$this -> data['head_title']		= 'Notifications'; 
+		$this -> data['tpl_page_id']	= 'Notifications#index';
+		$this -> data['tpl_page_title'] = "Notifications";
+		// Render views
+		$this -> data['main_content'] = 'base/notifications/index';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -58,7 +62,7 @@ class Notifications extends CI_Controller {
 		if ($type == "ajax") {
 
 		} else {
-			$this -> data['main_content'] = 'notifications/notification_mini';
+			$this -> data['main_content'] = 'base/notifications/notification_mini';
 			$this -> load -> view('includes/tmpl_nolayout', $this -> data);
 		}
 

@@ -1,8 +1,8 @@
 <div class="m-content">
 	<div class="c-pages shadow-rounded">
-		<div class="hr">
-			<h2 class="hr-text">Add Schedules</h2>
-		</div>
+		
+		<h2><?php echo $tpl_page_title; ?></h2>
+		<h3 class="sub-heading">Enter your preferences here. Our system will pickup the keywords from here.</h3>
 		
 		<?php echo form_open("schedules/add");?>
 		<div id="pick">

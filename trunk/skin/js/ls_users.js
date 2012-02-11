@@ -63,15 +63,16 @@ jQuery(document).ready(function() {
 		jQuery(this).children(".arrow").css('background-position', '0px 0px');
 	});
 
-	jQuery(".ls-h-m-icon").hover(function() {
+	/*jQuery(".ls-h-m-icon").hover(function() {
+		console.log(this);
+		console.log(jQuery(this).css('background-position'));
 		var bg_pos = (jQuery(this).css('background-position'));
 		var bg_pos_y = bg_pos.split(" ",2)[1];
+		console.log(bg_pos_y);
 		jQuery(this).css('background-position', '-30px ' + bg_pos_y);
 	}, function() {
-		var bg_pos = (jQuery(this).css('background-position'));
-		var bg_pos_y = bg_pos.split(" ",2)[1];
-		jQuery(this).css('background-position', '0px ' + bg_pos_y);
-	});
+		jQuery(this).css('background-position', '');
+	});*/
 	var profile_card_index = 0;
 	var profile_card_total = jQuery(".ls_profile_card_container").size();
 	//console.log('profile_card_total: '+profile_card_total);

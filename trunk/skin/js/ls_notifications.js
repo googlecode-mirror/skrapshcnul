@@ -5,7 +5,7 @@ function bodyLoad() {
 	// Refresh notification bar every 3 seconds
 	refresh_notifications();
 	// Schedule Refresh Interval
-	setInterval("refresh_notifications()", 5000);
+	setInterval("refresh_notifications()", 10000);
 }
 
 
@@ -52,7 +52,7 @@ function set_notification_toggle() {
 
 jQuery(document).ready(function() {
 	jQuery('.notification-new').hover(function() {
-		var result = $.post("/json/set_notifications_new_as_read", {
+		var result = jQuery.post("/json/set_notifications_new_as_read", {
 			'notification_id' : this.id
 		});
 		jQuery(this).stop().animate({
@@ -76,12 +76,16 @@ function refresh_notifications() {
 	jQuery.getJSON("/json/check_notifications_new", function(data) {
 		if(data) {
 			jQuery('#notification-toggle-count').html(data);
-			jQuery('#notification-toggle').css("background-color", "#FF0000");
-			jQuery('#notification-toggle-count').css("color", "#FFFFFF");
+			jQuery('#notification-toggle').addClass('hasNewNotifications');
+			console.log(jQuery('#notification-toggle'));
+			//jQuery('#notification-toggle').css("background-color", "#FF0000");
+			//jQuery('#notification-toggle-count').css("color", "#FFFFFF");
 		} else {
 			jQuery('#notification-toggle-count').html('0');
-			jQuery('#notification-toggle').css("background-color", "#CCCCCC");
-			jQuery('#notification-toggle-count').css("color", "#000000");
+			jQuery('#notification-toggle').removeClass('hasNewNotifications');
+			console.log(jQuery('#notification-toggle'));
+			//jQuery('#notification-toggle').css("background-color", "#CCCCCC");
+			//jQuery('#notification-toggle-count').css("color", "#000000");
 		}
 	});
 	// fresh frame src.

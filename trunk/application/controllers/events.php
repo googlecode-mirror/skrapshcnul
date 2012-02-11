@@ -39,7 +39,7 @@ class Events extends CI_Controller {
 		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this -> user_id));
 		
 		// Render view data
-		$this -> data['head_title']		= 'Events | Lunchsparks'; 
+		$this -> data['head_title']		= 'Events'; 
 		$this -> data['tpl_page_id']	= 'Events#index';
 		$this -> data['tpl_page_title'] = "Events";
 		// Render views
@@ -82,7 +82,7 @@ class Events extends CI_Controller {
 		$this -> data['tpl_page_id'] = 'suggestions';
 		$this -> data['tpl_page_title'] = "Suggestion";
 
-		$this -> data['main_content'] = 'events/suggestions';
+		$this -> data['main_content'] = 'base/events/suggestions';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 

@@ -9,7 +9,7 @@
  */
 (function($) {
     $.cookie = function(key, value, options) {
-
+		
         // key and at least value given, set cookie...
         if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value === null || value === undefined)) {
             options = $.extend({}, options);
@@ -24,7 +24,7 @@
             }
 
             value = String(value);
-
+			
             return (document.cookie = [
                 encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
                 options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
