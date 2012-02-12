@@ -12,11 +12,12 @@ class Pub extends CI_Controller {
 		$this -> load -> database();
 		$this -> load -> config('linkedin_oauth', TRUE);
 		$this -> load -> config('users', TRUE);
-		$this -> load -> library('ion_auth');
-		$this -> load -> library('session');
 		$this -> load -> library('form_validation');
 		$this -> load -> library('input');
+		$this -> load -> library('ion_auth');
+		$this -> load -> library('ls_events');
 		$this -> load -> library('ls_profile');
+		$this -> load -> library('session');
 		$this -> load -> helper('logger');
 		$this -> load -> helper('linkedin/linkedin_api');
 		$this -> load -> model('linkedin/linkedin_model');
@@ -60,13 +61,20 @@ class Pub extends CI_Controller {
 		}
 		
 		$this -> data['profile']		= $this -> ls_profile -> prepare_profile_data($this->data['target_user_id']);
-		$this -> data['profile_stats']	= $this -> ls_profile -> prepare_profile_statistics($this->data['target_user_id']);
 		$this -> data['profile']['social_links'] = $this -> ls_profile -> prepare_profile_social_links($this->data['target_user_id']);
+		$this -> data['profile_stats']	= $this -> ls_profile -> prepare_profile_statistics($this->data['target_user_id']);
+		$this -> data['profile_stats']['similar_user'] = array();
+		
 		$this -> data['preferences'] = $this -> preferences_model -> selectPreferences($this->data['target_user_id']);
+		
+		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this->data['target_user_id']));
+		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEvent_request($this->data['target_user_id']));
+		$this -> data['events']['upcoming'] = ($this -> ls_events -> getUserEvent_upcomming($this->data['target_user_id']));
+		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this->data['target_user_id']));
 		
 		// Render views
 		$this -> data['tpl_page_id'] = 'profile';
-		$this -> data['main_content'] = 'pub/user_profile';
+		$this -> data['main_content'] = 'base/pub/user_profile';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 		
 	}

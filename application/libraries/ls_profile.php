@@ -54,8 +54,8 @@ class Ls_Profile {
 	
 	function getPublicProfile($user_id) {
 		
-		$data2 = $this -> prepare_profile_data($user_id);
 		$data = $this -> ci -> user_profile_model -> select($user_id);
+		$data2 = $this -> prepare_profile_data($user_id);
 		
 		## TODO - include "headline" in user_profile_model -> select;
 		
@@ -67,6 +67,7 @@ class Ls_Profile {
 		$result['profile_img'] = $data['profile_img'];
 		$result['headline'] = $data2['headline'];
 		$result['ls_pub_url'] = $data['ls_pub_url'];
+		$result['verification'] = $data2['verification'];
 		
 		return $result;
 		
@@ -140,6 +141,9 @@ class Ls_Profile {
 			
 			## TODO Twitter
 			
+			## Verification Status
+			$this->data['profile']['verification'] = $this -> ci -> user_profile_model -> get_verification_status($user_id);
+			
 			## Finally
 			return $this->data['profile'];
 			
@@ -191,6 +195,7 @@ class Ls_Profile {
 		}
 		
 		// Verfified Name
+		// TODO
 		$this->data['profile_stats']['verified_name'] = '';
 		
 		// Add To Lunch state
@@ -198,8 +203,9 @@ class Ls_Profile {
 		
 		// Lunch buddy list
 		if(!isset($this->data['profile_stats']['lunch_buddy_list'])) {
-			$this->data['profile_stats']['lunch_buddy_list'] =$this -> ci -> user_lunch_buddy_model->select_list($user_id);
+			$this->data['profile_stats']['lunch_buddy_list'] = $this -> ci -> user_lunch_buddy_model->select_list($user_id);
 		}
+		
 		/*
 		$lunch_buddy_list[] = array('name' => 'Mike Shinoda', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/275478_100002977900608_1522924766_q.jpg');
 		$lunch_buddy_list[] = array('name' => 'Chris Kalani', 'profile_img' => 'http://profile.ak.fbcdn.net/hprofile-ak-ash2/276072_506749663_2438631_q.jpg');
@@ -208,17 +214,13 @@ class Ls_Profile {
 		$this->data['profile_stats']['lunch_buddy_list'] = $lunch_buddy_list;
 		*/
 		
+		// TODO
+		$this->data['profile_stats']['similar_user'] = array();
+		
 		if(!isset($this->data['profile_stats']['activity_list'])) {
 			$this->data['profile_stats']['activity_list'] = array();
 		}
-		/*
-		$activity_list[] = array('message' => "&lt;User&gt; had lunch with &lt;User2&gt;. ", 'created_on' => time());
-		$activity_list[] = array('message' => "&lt;User&gt; had lunch with &lt;User2&gt;. ", 'created_on' => time());
-		$this -> data['activity_list'] = $activity_list;
-		*/
-		if(!isset($this->data['profile_stats']['upcoming_lunches'])) {
-			$this->data['profile_stats']['upcoming_lunches'] = array();
-		}
+		
 		/*
 		$activity_list[] = array('message' => "&lt;User&gt; had lunch with &lt;User2&gt;. ", 'created_on' => time());
 		$activity_list[] = array('message' => "&lt;User&gt; had lunch with &lt;User2&gt;. ", 'created_on' => time());
@@ -226,6 +228,10 @@ class Ls_Profile {
 		*/
 		
 		return $this->data['profile_stats'];
+		
+	}
+
+	private function _sample_data_for_prepare_profile_statistics() {
 		
 	}
 

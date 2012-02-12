@@ -30,9 +30,10 @@ class Ls_Events {
 		$this -> ci -> load -> config('linkedin_oauth', TRUE);
 		$this -> ci -> load -> config('users', TRUE);
 		$this -> ci -> load -> library('ion_auth');
-		$this -> ci -> load -> library('session');
-		$this -> ci -> load -> library('form_validation');
 		$this -> ci -> load -> library('input');
+		$this -> ci -> load -> library('ls_profile');
+		$this -> ci -> load -> library('form_validation');
+		$this -> ci -> load -> library('session');
 		$this -> ci -> load -> helper('image/image_resize');
 		$this -> ci -> load -> helper('logger');
 		$this -> ci -> load -> helper('linkedin/linkedin_api');
@@ -125,17 +126,21 @@ class Ls_Events {
 					selectRestaurantById($restaurant_id);
 	
 				$event_id = ($event['event_id']);
-				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
+				$all_users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
+				$target_users = array();
 				
 				// Populate Target User Profile Info
-				foreach ($users as $key2 => $user) {
-					$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
+				foreach ($all_users as $key2 => $user) {
+					## Exclude own self in the participant list.
 					if ($user_id == $user['user_id']) {
 						$events[$key]['current_user'] = $user;
+					} else {
+						$target_users[$key2] = $user;
+						$target_users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
 					}
 				}
 				
-				$events[$key]['participant'] = $users;
+				$events[$key]['participant'] = $target_users;
 			}
 		}
 		return $events;
