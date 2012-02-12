@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 15, 2011 at 11:45 AM
+-- Generation Time: Feb 12, 2012 at 12:53 PM
 -- Server version: 5.5.13
 -- PHP Version: 5.2.17
 
@@ -19,6 +19,52 @@ SET time_zone = "+00:00";
 --
 -- Database: `binghan_lsparks`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_components`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_components` (
+  `component_id` int(11) NOT NULL AUTO_INCREMENT,
+  `component_name` varchar(250) NOT NULL,
+  `component_desc` varchar(250) NOT NULL,
+  `component_class_tag` varchar(100) NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`component_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_events`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_events` (
+  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `event_status` int(3) NOT NULL COMMENT '0 = pending request; -1 = cancelled ; 1 = confirmed event',
+  `date` datetime NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `reason` text NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`event_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_events_users`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_events_users` (
+  `event_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `rsvp` tinyint(4) NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`event_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -88,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `lss_meta` (
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
 
 -- --------------------------------------------------------
 
@@ -129,6 +175,38 @@ CREATE TABLE IF NOT EXISTS `lss_page_completed_step` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lss_recommendations`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_recommendations` (
+  `index` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `rec_id` int(11) NOT NULL,
+  `rec_reason` text,
+  `valid` tinyint(1) NOT NULL,
+  `selected` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_restaurants`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_restaurants` (
+  `restaurant_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `location` text NOT NULL,
+  `valid` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`restaurant_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lss_schedules`
 --
 
@@ -142,8 +220,42 @@ CREATE TABLE IF NOT EXISTS `lss_schedules` (
   `center_lat` double NOT NULL,
   `center_lng` double NOT NULL,
   `radius` double NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` datetime NOT NULL,
   KEY `index` (`index`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_survey_data_1`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_survey_data_1` (
+  `event_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `target_id` int(11) NOT NULL,
+  `target_point` double NOT NULL,
+  `target_review` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`,`user_id`,`target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_survey_data_2`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_survey_data_2` (
+  `event_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `restaurant_point` double NOT NULL,
+  `restaurant_review` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -166,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `lss_users` (
   `last_login` int(11) unsigned DEFAULT NULL,
   `active` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 -- --------------------------------------------------------
 
@@ -179,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_groups` (
   `user_id` mediumint(8) NOT NULL,
   `group_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
 
 -- --------------------------------------------------------
 
@@ -224,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=134 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=233 ;
 
 -- --------------------------------------------------------
 
@@ -298,6 +410,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_profile` (
   `mobile_number` varchar(50) DEFAULT NULL,
   `delivery_email` varchar(250) DEFAULT NULL,
   `profile_img` varchar(250) DEFAULT NULL,
+  `location` text NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `alias` (`alias`)

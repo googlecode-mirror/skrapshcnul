@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 11, 2012 at 10:12 AM
+-- Generation Time: Feb 12, 2012 at 04:50 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.8
 
@@ -19,76 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `binghan_llunch`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_0_accepted_recs`
---
-
-CREATE TABLE IF NOT EXISTS `lss_0_accepted_recs` (
-  `index` int(11) NOT NULL,
-  `valid` tinyint(1) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`index`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_0_auto_recs`
---
-
-CREATE TABLE IF NOT EXISTS `lss_0_auto_recs` (
-  `index` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `rec_id` int(11) NOT NULL,
-  `rec_reason` text,
-  `valid` tinyint(1) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`index`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_0_negotiated_recs`
---
-
-CREATE TABLE IF NOT EXISTS `lss_0_negotiated_recs` (
-  `index` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `valid` tinyint(1) NOT NULL,
-  `accepted` tinyint(1) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`index`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_0_selected_recs`
---
-
-CREATE TABLE IF NOT EXISTS `lss_0_selected_recs` (
-  `index` int(11) NOT NULL,
-  `valid` tinyint(1) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`index`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_0_successful_recs`
---
-
-CREATE TABLE IF NOT EXISTS `lss_0_successful_recs` (
-  `index` int(11) NOT NULL,
-  `valid` tinyint(1) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`index`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -129,13 +59,12 @@ CREATE TABLE IF NOT EXISTS `lss_events` (
 --
 
 CREATE TABLE IF NOT EXISTS `lss_events_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `rsvp` tinyint(4) NOT NULL,
   `updated_on` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  PRIMARY KEY (`event_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -299,6 +228,38 @@ CREATE TABLE IF NOT EXISTS `lss_schedules` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lss_survey_data_1`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_survey_data_1` (
+  `event_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `target_id` int(11) NOT NULL,
+  `target_point` double NOT NULL,
+  `target_review` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`,`user_id`,`target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_survey_data_2`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_survey_data_2` (
+  `event_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `restaurant_point` double NOT NULL,
+  `restaurant_review` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lss_users`
 --
 
@@ -375,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=197 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=198 ;
 
 -- --------------------------------------------------------
 
@@ -449,7 +410,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_profile` (
   `mobile_number` varchar(50) DEFAULT NULL,
   `delivery_email` varchar(250) DEFAULT NULL,
   `profile_img` varchar(250) DEFAULT NULL,
-  `location` text,
+  `location` text NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `alias` (`alias`)

@@ -152,7 +152,8 @@ $.widget('ui.stars', {
 			o.checked = i;
 			o.value = o.id2val[i];
 			o.title = o.id2title[i];
-			self.$value.attr({disabled: o.disabled ? 'disabled' : '', value: o.value});
+			//self.$value.attr({disabled: o.disabled ? 'disabled' : '', value: o.value}); // [@bh]
+			self.$value.attr({value: o.value}); // [@bh]
 
 			fillTo(i, false);
 			self._disableCancel();
@@ -181,7 +182,7 @@ $.widget('ui.stars', {
 			o.title = '';
 			
 			self.$value.val(o.value);
-			o.disableValue && self.$value.attr({disabled: 'disabled'});
+			// o.disableValue && self.$value.attr({disabled: 'disabled'}); // [@bh]
 
 			fillNone();
 			self._disableCancel();
