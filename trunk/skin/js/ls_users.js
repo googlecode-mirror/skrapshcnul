@@ -73,6 +73,8 @@ jQuery(document).ready(function() {
 	}, function() {
 		jQuery(this).css('background-position', '');
 	});*/
+	
+	/*
 	var profile_card_index = 0;
 	var profile_card_total = jQuery(".ls_profile_card_container").size();
 	//console.log('profile_card_total: '+profile_card_total);
@@ -97,10 +99,12 @@ jQuery(document).ready(function() {
 		profile_card_flip();
 		return false;
 	});
-	/* Initialize Profile Card */
-	profile_card_flip();
+	
+	
+	// -- Initialize Profile Card 
+	//profile_card_flip();
 
-	/* Initialize Add to Cart Button */
+	// -- Initialize Add to Cart Button */
 
 });
 function updateLuncWishlistBtn(el, data) {

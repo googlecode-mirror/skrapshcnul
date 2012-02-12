@@ -4,7 +4,6 @@
 		<h2><?php echo $tpl_page_title; ?></h2>
 		<h3 class="sub-heading">Enter your schedule here, so our system can arrange the timing that suits you.</h3>
 		
-		<div ng:init='schedules = (<?php echo json_encode($fixed_schedules);?>)'></div>
 		<div>
 			<div class="button-set" style="float: left; padding: 15px;">
 				<a href="/schedules/add">Add Schedule</a>
@@ -15,6 +14,9 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
+		
+		<div ng:init='schedules = (<?php echo json_encode($fixed_schedules);?>)'></div>
+		
 		<div id="schedule-containers" ng:controller="ScheduleController">
 			<div ng:repeat="schedule in schedules.results.$filter(searchText)">
 				<div class="schedule-item row-item">

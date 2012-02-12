@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 12, 2012 at 04:50 AM
+-- Generation Time: Feb 12, 2012 at 05:02 PM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.8
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `lss_events` (
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -336,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=198 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=200 ;
 
 -- --------------------------------------------------------
 
@@ -428,6 +428,22 @@ CREATE TABLE IF NOT EXISTS `lss_users_profile_social_links` (
   `linkedin` varchar(250) DEFAULT NULL,
   `twitter` varchar(250) DEFAULT NULL,
   `facebook` varchar(250) DEFAULT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_profile_verification_status`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_profile_verification_status` (
+  `user_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `remarks` text NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -548,21 +564,6 @@ CREATE TABLE IF NOT EXISTS `lss_users_settings_notification_phone` (
 CREATE TABLE IF NOT EXISTS `lss_users_settings_security` (
   `user_id` int(11) NOT NULL,
   `secure_browsing` tinyint(1) NOT NULL,
-  `updated_on` datetime NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_users_verification_status`
---
-
-CREATE TABLE IF NOT EXISTS `lss_users_verification_status` (
-  `user_id` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `remarks` text NOT NULL,
-  `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

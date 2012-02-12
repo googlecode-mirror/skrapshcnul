@@ -7,6 +7,7 @@ class User_Profile_model extends CI_Model {
 
 	const _TABLE_ = "lss_users_profile";
 	const _TABLE_SOCIAL_LINKS = "lss_users_profile_social_links";
+	const _TABLE_VERIFICATION_STATUS = "lss_users_profile_verification_status";
 	
 	function select($user_id) {
 
@@ -219,6 +220,52 @@ class User_Profile_model extends CI_Model {
 				" `linkedin` = '$linkedin', " .
 				" `twitter` = '$twitter', " .
 				" `facebook` = '$facebook', " .
+				" `updated_on` = NOW();";
+		return $this -> db -> query($query);
+		
+	}
+
+	## User Verification
+	function get_verification_status($user_id = FALSE) {
+		
+		if (!$user_id) {
+			return FALSE;
+		}
+		
+		$query = " SELECT * FROM " . self::_TABLE_VERIFICATION_STATUS;
+		$query .= " WHERE `user_id` = '" . $user_id . "' ";
+		$mysql_result = $this -> db -> query($query);
+		if ($mysql_result -> num_rows() > 0) {
+			$result = ($mysql_result -> row_array());
+			return $result;
+		} else {
+			return FALSE;
+		}
+	}
+	
+	function update_verification_status($fields = FALSE) {
+		
+		if (!$fields) {
+			return FALSE;
+		}
+		
+		// Get existing records
+		$data = $this -> get_verification_status($user_id);
+		
+		// Prepare Data to Write to DB
+		$user_id	= isset($fields['user_id']) ? $fields['user_id'] : $data['user_id'];
+		$status		= isset($fields['status']) ? $fields['status'] : $data['status'];
+		$remarks	= isset($fields['remarks']) ? $fields['remarks'] : $data['remarks'];
+		$updated_by		= isset($fields['updated_by']) ? $fields['updated_by'] : $data['updated_by'];
+		
+		// DB Query
+		$query = "INSERT INTO " . self::_TABLE_VERIFICATION_STATUS . 
+			" (user_id, status, remarks, updated_by, created_on, updated_on) " . 
+			" VALUES ('$user_id', '$status', '$remarks', '$updated_by', NOW(), NOW()) " . 
+			" ON DUPLICATE KEY UPDATE " .
+				" `status` = '$status', " .
+				" `remarks` = '$remarks', " .
+				" `updated_by` = '$updated_by', " .
 				" `updated_on` = NOW();";
 		return $this -> db -> query($query);
 		

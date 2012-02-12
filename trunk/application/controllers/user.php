@@ -15,11 +15,12 @@ class User extends CI_Controller {
 		$this -> load -> driver('minify');
 		$this -> load -> helper('logger');
 		$this -> load -> helper('linkedin/linkedin_api');
-		$this -> load -> library('ion_auth');
-		$this -> load -> library('session');
-		$this -> load -> library('form_validation');
 		$this -> load -> library('input');
+		$this -> load -> library('ion_auth');
+		$this -> load -> library('form_validation');
+		$this -> load -> library('ls_events');
 		$this -> load -> library('ls_profile');
+		$this -> load -> library('session');
 		$this -> load -> model('linkedin/linkedin_model');
 		$this -> load -> model('page_steps_completed_model');
 		$this -> load -> model('preferences_model');
@@ -73,9 +74,16 @@ class User extends CI_Controller {
 		$this -> data['target_user_id'] = $this -> session -> userdata('user_id');
 		
 		$this -> data['profile']		= $this -> ls_profile -> prepare_profile_data($this->user_id);
-		$this -> data['profile_stats']	= $this -> ls_profile -> prepare_profile_statistics($this->user_id);
 		$this -> data['profile']['social_links'] = $this -> ls_profile -> prepare_profile_social_links($this->user_id);
+		$this -> data['profile_stats']	= $this -> ls_profile -> prepare_profile_statistics($this->user_id);
+		$this -> data['profile_stats']['similar_user'] = array();
+		
 		$this -> data['preferences'] 	= $this -> preferences_model -> selectForCurrentUser();
+		
+		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this -> user_id));
+		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEvent_request($this -> user_id));
+		$this -> data['events']['upcoming'] = ($this -> ls_events -> getUserEvent_upcomming($this -> user_id));
+		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this -> user_id));
 		
 		// Initialize
 		if ($this -> session -> userdata('linkedin_pulled') == NULL) {
@@ -90,7 +98,7 @@ class User extends CI_Controller {
 		$this -> data['tpl_page_id']	= 'user#profile';
 		$this -> data['tpl_page_title'] = "Profile Overview";
 		// Render view layout
-		$this -> data['main_content']	= 'user/user_profile';
+		$this -> data['main_content']	= 'base/user/user_profile';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -115,7 +123,7 @@ class User extends CI_Controller {
 			$this -> data['tpl_page_id']	= 'user#preferences';
 			$this -> data['tpl_page_title'] = "Profile Overview";
 			// Render views
-			$this -> data['main_content'] = 'user/preferences';
+			$this -> data['main_content'] = 'base/user/preferences';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}
 		
@@ -128,7 +136,7 @@ class User extends CI_Controller {
 		$this -> data['tpl_page_id'] = "user#location";
 		$this -> data['tpl_page_title'] = "Location";
 		// Render Views
-		$this -> data['main_content'] = 'user/location';
+		$this -> data['main_content'] = 'base/user/location';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 

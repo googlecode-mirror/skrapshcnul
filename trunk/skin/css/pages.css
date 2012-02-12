@@ -6,6 +6,7 @@
 	padding: 20px 20px;
 	text-align: justify;
 	border: 1px solid #BDBDBD;
+	position: relative;
 }
 
 .c-pages p {

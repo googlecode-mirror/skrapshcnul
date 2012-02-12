@@ -32,16 +32,18 @@
 	min-height: 300px;
 }
 .m-content-2-col-left-xl {
-	width: 715px;
+	width: 690px;
 	min-height: 300px;
-	padding: 0 15px 50px 15px;
+	/*box-sizing: border-box;*/
+	padding: 15px 15px 50px 15px;
 	border-left: 1px solid #DDDDDD;
 	display: inline-block;
 }
 .m-content-2-col-right-xs {
-	width: 210px;
+	width: 220px;
 	height: 100%;
-	padding: 0;
+	/*box-sizing: border-box;*/
+	padding: 15px 15px 50px 0px;
 	word-wrap: break-word;
 	display: inline-block;
 	float: right;

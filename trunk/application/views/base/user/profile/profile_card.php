@@ -1,4 +1,5 @@
-<div style="display:none">
+<div id="ls_profile_card_container">
+<div style="display:none;">
 	
 	<div class="ls_profile_card_container ls_profile_card_0">
 		
@@ -7,7 +8,7 @@
 				<img src="<?php echo $profile['profile_img'];?>" />
 			</div>
 		<?php } ?>
-		<div class="profile-featured-data">
+		<div class="profile-card-featured-data">
 			<div class="profile-name">
 				<span><?php echo $profile['first_name'];?>,<?php echo $profile['last_name'];?></span>
 				<div id="profile-stats">
@@ -68,6 +69,7 @@
 			<?php } */ ?>
 		</div>
 	</div>
+</div>
 </div>
 
 <?php //var_dump($profile['educations']); ?>
