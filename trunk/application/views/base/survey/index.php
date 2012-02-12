@@ -43,22 +43,21 @@
 								<div>
 									<span id="stars-cap"></span>
 									<div id="stars-wrapper3" class="abc">
-										<select name="target_point_<?php echo $buddy['rec_id_profile']['user_id']; ?>">
+										<select name="target_point[]">
 											<option value="1" selected="selected">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
 											<option value="4">4</option>
 											<option value="5">5</option>
 										</select>
-										<input type="hidden" name="target_point_<?php echo $buddy['rec_id_profile']['user_id']; ?>" value="" disabled="disabled">
 									</div>
 								</div>
 								<div class="clearfix">&nbsp;</div>
 								<div>
 									<label>Testimonial</label>
-									<textarea name="target_review_<?php echo $buddy['rec_id_profile']['user_id']; ?>" style="width: 300px;height: 60px;"></textarea>
+									<textarea name="target_review[]" style="width: 300px;height: 60px;"></textarea>
 								</div>
-								<input type="hidden" name="target_id_<?php echo $buddy['rec_id_profile']['user_id']; ?>" value="<?php echo $buddy['rec_id_profile']['user_id']; ?>" />
+								<input type="hidden" name="target_id[]" value="<?php echo $buddy['rec_id_profile']['user_id']; ?>" />
 							</div>
 						</div>
 					
@@ -87,7 +86,6 @@
 									<option value="5">5</option>
 								</select>
 							</div>
-							<input type="hidden" name="restaurant_point" value="" disabled="disabled">
 						</div>
 						<div class="clearfix">&nbsp;</div>
 						<div>
@@ -120,8 +118,6 @@ jQuery(document).ready(function(){
 	
 	jQuery("#event_survey_form").submit(function(){
 		console.log(jQuery("#event_survey_form").serialize());
-		alert('Submitting form');
-		return false;
 	});
 	
 });

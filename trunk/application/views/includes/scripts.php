@@ -20,8 +20,8 @@
 <script src="<?php echo base_url();?>skin/js/jquery-cookie/jquery.cookie.js"></script>
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
-<script src="<?php echo base_url();?>skin/js/angularjs/angular-0.9.19.min.js" ng:autobind></script>
-<script src="<?php echo base_url();?>skin/js/yqlgeo/yqlgeo.js" ng:autobind></script>
+<?php /*<script src="<?php echo base_url();?>skin/js/angularjs/angular-0.9.19.min.js" ng:autobind></script>*/ ?>
+<script src="<?php echo base_url();?>skin/js/yqlgeo/yqlgeo.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.js"></script>
 <?php echo $css_combined; ?>
 <?php echo $js_combined; ?>

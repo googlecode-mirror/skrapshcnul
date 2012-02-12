@@ -161,6 +161,16 @@ class Ls_notifications {
 			return FALSE;
 		}
 	}
-
+	
+	function header_states() {
+		
+		/*
+		## TODO for @Tien / @kusum
+		$result['events']['count'] = [num];
+		$result['events'][hasNotification] = true/false;
+		*/
+		
+		
+	}
 }
 ?>

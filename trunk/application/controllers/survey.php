@@ -73,14 +73,49 @@ class Survey extends CI_Controller {
 	}
 
 	function save() {
-		var_dump($_POST);
-
-		$event_id;
-		$user_id;
-
-		die();
-
-		$this -> ls_survey -> insertFeedback($_POST);
+		//var_dump($_POST);
+		
+		$event_id = $this->input->post('event_id');
+		$user_id = $this->input->post('user_id');
+		
+		$restaurant_id = $this->input->post('restaurant_id');
+		$restaurant_point = $this->input->post('restaurant_point');
+		$restaurant_review = $this->input->post('restaurant_review');
+		
+		$target_ids = $this->input->post('target_id');
+		$target_reviews = $this->input->post('target_review');
+		$target_points = $this->input->post('target_points');
+		
+		## ---------------
+		## TODO data check
+		## ---------------
+		
+		## Prepare Data To Store
+		$this -> data['event_id'] = $event_id;
+		$this -> data['user_id'] = $user_id;
+		
+		$feedback_to_restaurant = array();
+		$feedback_to_restaurant['event_id'] = $event_id;
+		$feedback_to_restaurant['user_id'] = $user_id;
+		$feedback_to_restaurant['restaurant_id'] = $restaurant_id;
+		$feedback_to_restaurant['restaurant_point'] = $restaurant_point;
+		$feedback_to_restaurant['restaurant_review'] = $restaurant_review;
+		$this -> data['feedback_to_restaurant'] = $feedback_to_restaurant;
+		
+		$this -> data['feedback_to_users'] = array();
+		foreach ($target_ids as $key => $target_id) {
+			$array = array();
+			$array['event_id'] = $event_id;
+			$array['user_id'] = $user_id;
+			$array['target_id'] = $target_id;
+			$array['target_review'] = $target_reviews[$key];
+			$array['target_point'] = $target_points[$key];
+			$this -> data['feedback_to_users'][] = $array;
+		}
+		
+		var_dump($this -> data);
+		
+		$this -> ls_survey -> insertFeedback($this -> data);
 		$result = $this -> ls_survey -> getCompletedSurvey($event_id, $user_id);
 
 	}
