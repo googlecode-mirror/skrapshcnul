@@ -34,9 +34,9 @@
 .m-content-2-col-left-xl {
 	width: 690px;
 	min-height: 300px;
-	/*box-sizing: border-box;*/
+	/*box-sizing: border-box;
+	border-left: 1px solid #DDDDDD;*/
 	padding: 15px 15px 50px 15px;
-	border-left: 1px solid #DDDDDD;
 	display: inline-block;
 }
 .m-content-2-col-right-xs {

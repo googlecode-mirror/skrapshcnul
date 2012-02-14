@@ -1,0 +1,63 @@
+.places-summary-large {
+	border-bottom: 1px solid #EFEFEF;
+	margin: 10px 20px;
+	padding-bottom: 20px;
+}
+.places-logo {
+	width: 128px;
+	height: 128px;
+	overflow: hidden;
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: middle;
+}
+.places-summary-large .places-logo img {
+	max-width: 128px;
+	max-height: 128px;
+}
+.places-summary-large .places-featured-data {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 10px;
+	width: 530px;
+}
+.places-summary-large .places-name {
+	font-weight: bold;
+	font-size: 32px;
+	text-shadow: 1px 1px 1px #CCC;
+}
+.places-summary-large .others {
+	padding: 0;
+	color: #555;
+	font-size: 13px;
+}
+#places_map {
+    height: 200px;
+	width: 690px;
+    border: 1px solid #CCCCCC;
+}
+.place-featured-statistics {
+	display: inline-block;
+	vertical-align:middle;
+}
+.places-ratings {
+	display: inline-block;
+	margin: 10px;
+}
+
+.rating-points {
+	text-align: center;
+	color: #222;
+}
+.rating-points .points {
+	font-size: 250%;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px #CCC;
+}
+.rating-points .fields {
+	color: #999;
+	margin-top:5px; 
+	font-weight:bold;
+	font-size: small
+}
+

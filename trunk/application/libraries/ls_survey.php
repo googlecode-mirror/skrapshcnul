@@ -3,7 +3,7 @@ class Ls_Survey {
 	function __construct() {
 		$this -> ci = &get_instance();
 		$this -> ci -> load -> model('user_profile_model');
-		$this -> ci -> load -> model('restaurant_model');
+		$this -> ci -> load -> model('places_model');
 		$this -> ci -> load -> model('events_model');
 		$this -> ci -> load -> model('survey_model');		
 	}	
@@ -49,8 +49,8 @@ class Ls_Survey {
 		// retrieve restaurant information
 		$restaurant_id = $result['event_info']['location'];
 		$result['restaurant_info'] = 
-			$this -> ci -> restaurant_model -> 
-			selectRestaurantById($restaurant_id);
+			$this -> ci -> places_model -> 
+			selectPlaceById($restaurant_id);
 						
 		$this -> ci -> db -> trans_complete();
 		

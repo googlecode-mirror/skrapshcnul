@@ -302,8 +302,8 @@ class Recs_Model extends CI_Model {
 		$obj = $this -> selectTimeLocationByIndex($index);
 		$restaurant_id = $obj -> restaurant_id;
 		
-		$this -> load -> model('restaurant_model');
-		$result['restaurant'] = $this -> restaurant_model -> selectRestaurantById($restaurant_id);		
+		$this -> load -> model('places_model');
+		$result['restaurant'] = $this -> places_model -> selectPlaceById($restaurant_id);		
 		 
 		$this -> db -> trans_complete();
 		

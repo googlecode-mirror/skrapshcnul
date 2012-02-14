@@ -46,7 +46,7 @@ class Ls_Events {
 		$this -> ci -> load -> model('user_lunch_buddy_model');
 		$this -> ci -> load -> model('user_profile_model');
 		$this -> ci -> load -> model('events_model');
-		$this -> ci -> load -> model('restaurant_model');
+		$this -> ci -> load -> model('places_model');
 
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
@@ -88,8 +88,8 @@ class Ls_Events {
 			foreach ($events as $key => $event) {
 				$restaurant_id = $event['location'];				
 				$events[$key]['location'] = 
-					$this -> ci -> restaurant_model -> 
-					selectRestaurantById($restaurant_id);
+					$this -> ci -> places_model -> 
+					selectPlaceById($restaurant_id);
 				
 				$event_id = ($event['event_id']);
 				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
@@ -122,8 +122,8 @@ class Ls_Events {
 			foreach ($events as $key => $event) {
 				$restaurant_id = $event['location'];				
 				$events[$key]['location'] = 
-					$this -> ci -> restaurant_model -> 
-					selectRestaurantById($restaurant_id);
+					$this -> ci -> places_model -> 
+					selectPlaceById($restaurant_id);
 	
 				$event_id = ($event['event_id']);
 				$all_users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
@@ -168,8 +168,8 @@ class Ls_Events {
 			foreach ($events as $key => $event) {
 				$restaurant_id = $event['location'];				
 				$events[$key]['location'] = 
-					$this -> ci -> restaurant_model -> 
-					selectRestaurantById($restaurant_id);
+					$this -> ci -> places_model -> 
+					selectPlaceById($restaurant_id);
 	
 				$event_id = ($event['event_id']);
 				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
