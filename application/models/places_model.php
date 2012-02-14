@@ -3,14 +3,15 @@
 /*
  * restaurant model 
  */
-class Restaurant_Model extends CI_Model {	
-	const _RESTAURANT_TABLE_ = "lss_restaurants";
+class Places_Model extends CI_Model {
+	const _RESTAURANT_TABLE_ = "lss_places";
+	const _RESTAURANT_VERIFIED_TABLE_ = "lss_places_verification_status";
 	
 	/*
 	 *  Delete tables
 	 *  Warning: Only for testing.
 	 */
-	function clearRestaurants() {
+	function clearPlaces() {
 		$query = "TRUNCATE TABLE " . self::_RESTAURANT_TABLE_;
 		return $this -> db -> query($query);
 	}
@@ -18,7 +19,7 @@ class Restaurant_Model extends CI_Model {
 	/*
 	 * Insert
 	 */
-	function insertRestaurant($obj) {
+	function insertPlace($obj) {
 		$name = $obj['name'];
 		$location = $obj['location'];
 		
@@ -33,9 +34,9 @@ class Restaurant_Model extends CI_Model {
 	/*
 	 * Select
 	 */
-	function selectRestaurantById($id) {
+	function selectPlaceById($id) {
 		$query = "SELECT * FROM " . self::_RESTAURANT_TABLE_ .
-		         " WHERE `restaurant_id` = '$id';";
+		         " WHERE `place_id` = '$id';";
 		$obj = $this -> db -> query($query);
 		if ($obj -> num_rows() != 1) return NULL;
 		else return $obj -> row_array();

@@ -25,7 +25,7 @@
 						<div class="stream-content-header"></div>
 						<div class="stream-content-middle">
 							<span>Scheduled meetup at </span>
-							<strong><a href="/restaurant/<?php echo $item['location']['restaurant_id'];?>">
+							<strong><a href="/places/<?php echo $item['location']['place_id'];?>">
 								<?php echo $item['location']['name'];?>
 							</a></strong>
 							<span class=""> with

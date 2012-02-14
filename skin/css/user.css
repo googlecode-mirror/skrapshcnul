@@ -495,12 +495,6 @@ height: 48px;
 .preferences-data-item-content div:hover::after {
 	border-color: transparent #646464 transparent transparent;
 }
-.rating-points {
-	text-align: center;
-	color: #808185;
-	font-size: 250%;
-	font-weight: bold;
-}
 /* [SECTION] profile-summary-large */
 #profile-summary-large {
 	padding-bottom: 15px;

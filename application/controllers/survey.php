@@ -122,11 +122,11 @@ class Survey extends CI_Controller {
 
 	// for testing
 	function generate_test_data() {
-		$this -> restaurant_model -> clearRestaurants();
+		$this -> places_model -> clearPlaces();
 		$obj = array('name' => 'The White Rabbit', 'location' => '39C Harding Road');
-		$this -> restaurant_model -> insertRestaurant($obj);
+		$this -> places_model -> insertPlace($obj);
 		$obj = array('name' => 'The Brown Rabbit', 'location' => '1 Orchard Road');
-		$this -> restaurant_model -> insertRestaurant($obj);
+		$this -> places_model -> insertPlace($obj);
 	}
 
 }
