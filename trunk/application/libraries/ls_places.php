@@ -86,10 +86,27 @@ class Ls_Places{
 		if (!$fields['places_id']) { return FALSE; }
 		
 		## TODO - @dataTeam, populate these data.
-		$verified_status = array();
+		/*$verified_status = array();
 		$verified_status['status'] = 1;
+		$verified_status['remarks'] = "Coffee partner, discount 10%;";*/
 		
-		return $verified_status;
+		$results = $this -> ci -> places_model -> selectPlaceVerification($fields['place_id']);
+		
+		return $results;
+	}
+	
+	function updatePlace($fields = FALSE) {
+		
+		if (!isset($fields['place_id'])) { return FALSE; }
+		
+		if (isset($obj['name']) || isset($obj['logo']) || isset($obj['location']) || isset($obj['geo_lat']) || isset($obj['geo_long']) || isset($obj['valid'])) {
+			$result = $this -> ci -> places_model -> updatePlace($fields);
+		}
+		if (isset($fields['status']) || isset($fields['remarks']) || $fields['updated_by']) {
+			$result = $this -> ci -> places_model -> updatePlace_verification($fields);
+		}
+		
+		return $result;
 	}
 
 }
