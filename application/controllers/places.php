@@ -35,6 +35,9 @@ class Places extends CI_Controller {
 	 */
 	function _remap($method) {
 		switch($method) {
+			case 'edit' :
+				$this -> edit();
+				break;
 			case 'restaurant' :
 				$this -> restaurant();
 				break;
@@ -65,6 +68,24 @@ class Places extends CI_Controller {
 	function restaurant($value = FALSE) {
 		
 	}
+	
+	function edit($value = FALSE) {
+		
+		$places_id = $this -> uri -> segment(3);
+		
+		if (!is_numeric($places_id)) {
+			return FALSE;
+		}
 
+		$this -> data['places'] = $this -> ls_places -> selectPlaceById($places_id);
+
+		// Render view data
+		$this -> data['head_title'] = 'Places | Lunchsparks';
+		$this -> data['tpl_page_id'] = 'places#edit';
+		$this -> data['tpl_page_title'] = "Edit Places";
+		// Render views
+		$this -> data['main_content'] = 'base/places/edit';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+	}
 }
 ?>
