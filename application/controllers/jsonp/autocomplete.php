@@ -7,13 +7,13 @@ class Autocomplete extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		$this -> load -> library('ion_auth');
-		$this -> load -> library('session');
 		$this -> load -> library('form_validation');
-		$this -> load -> library('ls_profile');
-		$this -> load -> library('ion_auth');
 		$this -> load -> library('input');
+		$this -> load -> library('ion_auth');
 		$this -> load -> library('json');
+		$this -> load -> library('ls_places');
+		$this -> load -> library('ls_profile');
+		$this -> load -> library('session');
 		$this -> load -> database();
 		$this -> load -> helper('url');
 		$this -> load -> helper('json');
@@ -114,6 +114,33 @@ class Autocomplete extends CI_Controller {
 		
 		$this -> json -> json_prep($this -> data);
 		
+	}
+
+	function places() {
+
+		//$keywords = ($this -> uri -> segment(4));
+		$keywords = $this -> input -> get('keywords');
+		if (!$keywords) {
+			$error['domain'] = "global";
+			$error['reason'] = "invalidParameter";
+			$error['message'] = "Invalid value 'keywords'.";
+			$error['locationType'] = "parameter";
+			$error['location'] = "keywords";
+			$this -> data['errors'] = $error;
+			return $this -> json -> json_prep($this -> data['errors']);
+		}
+
+		## TODO - Map to functions
+		$asso_array = ($this -> uri -> uri_to_assoc(5));
+		
+		$results = $this -> ls_places -> searchPlace($keywords);
+		
+		if (sizeof($results) > 0 ) {
+			$this -> data['results'] = $results;
+		}
+		
+		$this -> json -> json_prep($this -> data);
+
 	}
 
 }

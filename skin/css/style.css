@@ -647,6 +647,10 @@ body::-webkit-scrollbar-corner {
 	font-weight: bold;
 	padding: 5px;
 }
+.xsmaller {
+	font-size: 90%;
+	padding: 5px;
+}
 .clearfix {
 	clear: both;
 }
@@ -889,6 +893,7 @@ td {
 }
 .editable {
 	min-width: 200px;
+	text-align: left;
 }
 
 .inset-image {

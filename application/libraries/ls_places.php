@@ -140,5 +140,12 @@ class Ls_Places{
 		return $result;
 	}
 
+	function searchPlace($keywords = FALSE) {
+		
+		if (!$keywords) {return FALSE;}
+		
+		return $this -> ci -> places_model -> searchPlace($keywords);
+		
+	}
 }
 ?>

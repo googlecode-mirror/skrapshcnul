@@ -31,7 +31,7 @@
 
 		<div id="schedule-containers" ng:controller="PlacesController">
 			<div ng:repeat="place in places.$filter(searchText)">
-				<div class="row-item">
+				<div class="row-item-simple">
 					<div class="content-top-row">
 						<div class="f-options-set">
 							<ul>
@@ -46,7 +46,7 @@
 						<div class="xbigger">
 							{{place.name}}
 						</div>
-						<div class="">
+						<div class="xsmaller">
 							{{place.location}}
 						</div>
 						<div class="clearfix"></div>
