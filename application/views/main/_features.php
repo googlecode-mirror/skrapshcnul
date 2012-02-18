@@ -1,6 +1,6 @@
 <div id="lunchsparks-features">
 	<div class="hr">
-		<h2 class="hr-text"><a href="" onclick="jQuery('#features-list').slideToggle('slow')" style="cursor: pointer; color: #FFFFFF;">Learn more</a></h2>
+		<h2 class="hr-text"><a href="#" onclick="jQuery('#features-list').slideToggle('slow'); return false;" style="cursor: pointer; color: #FFFFFF;">Learn more</a></h2>
 	</div>
 	<div id="features-list" style="display: none;">
 		<div class="feature-item">

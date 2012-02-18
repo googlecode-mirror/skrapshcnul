@@ -1,4 +1,7 @@
 <div class="m-content">
+	
+	<?php $this -> load -> view('includes/_steps_completed');?>
+	
 	<div class="c-pages shadow-rounded">
 		<h2><?php echo $tpl_page_title; ?></h2>
 		

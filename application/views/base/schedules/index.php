@@ -45,22 +45,22 @@
 						</div>
 						<div class="column-2-right box-details schedule">
 							<div>
-								<span class="title">Date: </span>{{schedule.startDate}}
+								<span class="title">Selected Timeslots </span>
 							</div>
-							<div>
-								<span class="title">Time: </span>{{schedule.startTime}} to {{schedule.endTime}}
-							</div>
-							<div>
-								<span class="title">Repeat: </span>
-								<span>
-									{{schedule.repeat_params.repeat_frequency}}
-								</span>
-							</div>
-							<div>
-								<span class="title"></span>
-								<span ng:repeat="day in schedule.repeat_params.repeat_day">
-									{{day}}, 
-								</span>
+							<div ng:repeat="repeat_param in schedule.repeat_params" class="row-item-faded">
+								<div class="column-2-left-xs">
+									{{repeat_param.DAY}}
+								</div>
+								<div class="column-2-right-xl">
+									<input type="hidden" name="repeat_param.LUNCH">
+									<div ng:show="repeat_param.LUNCH">
+										Lunch
+									</div>
+									<input type="hidden" name="repeat_param.DINNER">
+									<div ng:show="repeat_param.DINNER">
+										Dinner
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

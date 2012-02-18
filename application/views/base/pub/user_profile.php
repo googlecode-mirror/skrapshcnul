@@ -9,7 +9,7 @@
 			
 			<div class="clearfix">&nbsp;</div>
 			
-			<div id="tabs" class="dashboard-activity">
+			<div id="tabs" class="activity-stream">
 				<?php $this -> load -> view("base/user/profile/upcoming_lunches.php");?>
 				<?php $this -> load -> view("base/user/profile/activities.php");?>
 			</div>

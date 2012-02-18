@@ -18,48 +18,24 @@
 					Pick a date: 
 					<div class="description"></div> 
 				</div>
-				<input required="required" type="text" name="start_date" id="start_date" class="datepicker" value="<?php echo isset($_REQUEST['start_date']) ? $_REQUEST['start_date'] : '';?>" placeholder="mm/dd/yyyy">
 				<div>
-					<div style="200px;display: inline-block;float:left;width:100px;">
-						<input type="checkbox" name="schedule_repeat" value="Repeat" onchange="schedule_repeat_toggle()" /><span>Repeat</span>
-					</div>
+					<?php $days_in_week = array('SU' => 'Sunday', 'MO' => 'Monday', 'TU' => 'Tuesday', 'WE' => 'Wednesday', 'TH' => 'Thursday', 'FR' => 'Friday', 'SA' => 'Saturday', );?>
+					<?php $slots_in_day = array('LUNCH' => 'Lunch', 'DINNER' => 'Dinner' );?>
+					<?php foreach ($days_in_week as $key => $value) { ?>
 					<div style="display: inline-block;">
-						<div id="day_checkbox_container" style="display: none;">
-							<div>
-								<select id="repeat_frequency" name="repeat_frequency">
-									<option value="weekly">Weekly</option>
-									<option value="monthly">Monthly</option>
-									<option value="yearly">Yearly</option>
-								</select>
-							</div>
-							
-							<?php $days_in_week = array(
-								'SU' => 'Sunday',
-								'MO' => 'Monday',
-								'TU' => 'Tuesday',
-								'WE' => 'Wednesday',
-								'TH' => 'Thursday',
-								'FR' => 'Friday',
-								'SA' => 'Saturday',
-							); ?>
-							<?php foreach ($days_in_week as $key => $value) { ?>
-							<span class="">
-								<input id="repeat_<?php echo $key; ?>" name="<?php echo $key; ?>" type="checkbox">
-								<label for="repeat_<?php echo $key; ?>"><?php echo $value; ?></label>
-							</span>
-							<?php } ?>
+						<div style="display: inline-block;">
+							<input id="repeat_day_<?php echo $key;?>" name="DAY[]" value="<?php echo $value; ?>" type="hidden" <?php echo isset($schedule['repeat_params']['DAY']) && in_array($value, $schedule['repeat_params']['DAY']) ? 'checked' : '';?>>
+							<label for="repeat_day_<?php echo $key;?>"><?php echo $value;?></label> 
 						</div>
+						<?php foreach ($slots_in_day as $key2 => $value2) { ?>
+							<div>
+								<input id="<?php echo $value;?>_<?php echo $key2;?>" name="<?php echo $value;?>_<?php echo $key2;?>" type="checkbox" <?php echo isset($schedule['repeat_params'][$value][$key2]) && $schedule['repeat_params'][$value][$key2] ? 'checked' : '';?>>
+								<label for="<?php echo $value;?>_<?php echo $key2;?>"><?php echo $value2;?></label> 
+							</div>
+						<?php }?>
 					</div>
+					<?php }?>
 				</div>
-			</div>
-			<div id="pick-a-time" class="box-container">
-				 <div class="title">Pick a time</div>
-				<div>
-					<input onchange="schedule_add_time_validation()" type="text" name="start_time" id="start_time" class="timepicker" value="<?php echo isset($_REQUEST['start_time']) ? $_REQUEST['start_time'] : '';?>" style="display:inline-block;" placeholder="08:00">
-					<span> to </span>
-					<input onchange="schedule_add_time_validation()" type="text" name="end_time" id="end_time" class="timepicker" value="<?php echo isset($_REQUEST['end_time']) ? $_REQUEST['end_time'] : '';?>" style="display:inline-block;" placeholder="23:00">
-				</div>
-				<div id="timepicker_message"></div>
 			</div>
 			<div id="pick-a-location" class="box-container">
 				<div class="title">Pick a location: </div>

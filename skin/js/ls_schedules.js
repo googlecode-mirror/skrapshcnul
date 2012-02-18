@@ -77,6 +77,7 @@ ScheduleController.prototype = {
 		this.schedules = this.Schedules.get();
 	},
 	deleteSchedules : function(data, schedule) {
+		alert(data.index);
 		if(confirm('Are you sure you want to delete?')) {
 			this.schedules = this.Schedules.del({index: data.index});
 		}
@@ -134,7 +135,4 @@ function schedule_repeat_toggle() {
 }
 
 function schedule_validate() {
-	if(!schedule_add_time_validation()) {
-		return false;
-	};
 }
