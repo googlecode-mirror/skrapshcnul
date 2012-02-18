@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 12, 2012 at 12:53 PM
+-- Generation Time: Feb 18, 2012 at 10:45 AM
 -- Server version: 5.5.13
 -- PHP Version: 5.2.17
 
@@ -175,6 +175,60 @@ CREATE TABLE IF NOT EXISTS `lss_page_completed_step` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lss_places`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_places` (
+  `place_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  `primary_phone` varchar(250) NOT NULL,
+  `url` varchar(250) NOT NULL,
+  `location` text NOT NULL,
+  `geo_lat` varchar(11) NOT NULL,
+  `geo_long` varchar(11) NOT NULL,
+  `valid` int(11) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`place_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_places_verification_status`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_places_verification_status` (
+  `place_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `remarks` text NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`place_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_places_xtra_restaurant`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_places_xtra_restaurant` (
+  `place_id` int(11) NOT NULL,
+  `cuisine` varchar(250) NOT NULL,
+  `opening_hours` varchar(250) NOT NULL,
+  `special_features` text NOT NULL,
+  `extras` text NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`place_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lss_recommendations`
 --
 
@@ -188,21 +242,6 @@ CREATE TABLE IF NOT EXISTS `lss_recommendations` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`index`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_restaurants`
---
-
-CREATE TABLE IF NOT EXISTS `lss_restaurants` (
-  `restaurant_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text NOT NULL,
-  `location` text NOT NULL,
-  `valid` int(11) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`restaurant_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -336,7 +375,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=233 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=243 ;
 
 -- --------------------------------------------------------
 
@@ -428,6 +467,22 @@ CREATE TABLE IF NOT EXISTS `lss_users_profile_social_links` (
   `linkedin` varchar(250) DEFAULT NULL,
   `twitter` varchar(250) DEFAULT NULL,
   `facebook` varchar(250) DEFAULT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_users_profile_verification_status`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_users_profile_verification_status` (
+  `user_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `remarks` text NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -548,21 +603,6 @@ CREATE TABLE IF NOT EXISTS `lss_users_settings_notification_phone` (
 CREATE TABLE IF NOT EXISTS `lss_users_settings_security` (
   `user_id` int(11) NOT NULL,
   `secure_browsing` tinyint(1) NOT NULL,
-  `updated_on` datetime NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lss_users_verification_status`
---
-
-CREATE TABLE IF NOT EXISTS `lss_users_verification_status` (
-  `user_id` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `remarks` text NOT NULL,
-  `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
