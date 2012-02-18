@@ -318,4 +318,16 @@ class Ls_notifications_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	
+	function get_notifications_cronjob($last_time)
+	{
+		$query = $this->db->query("SELECT email,message FROM lss_notifications left join lss_users on lss_notifications.user_id = lss_users.id where 1;");
+		
+		if ($query -> num_rows() > 0) {
+			return $query -> result_array();
+		} else {
+			return FALSE;
+		}
+	}
+	
 }

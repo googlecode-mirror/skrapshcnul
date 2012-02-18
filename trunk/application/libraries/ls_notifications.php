@@ -26,10 +26,10 @@ class Ls_notifications {
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
 		//auto-login the user if they are remembered
-		if (!$this -> ci -> ion_auth -> logged_in() && get_cookie('identity') && get_cookie('remember_code')) {
+		/*if (!$this -> ci -> ion_auth -> logged_in() && get_cookie('identity') && get_cookie('remember_code')) {
 			$this -> ci -> ion_auth = $this;
 			$this -> ci -> ion_auth_model -> login_remembered_user();
-		}
+		}*/
 
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
 
@@ -172,5 +172,12 @@ class Ls_notifications {
 		
 		
 	}
+	
+	
+	function send_email_notifications()
+	{
+		return "ok";
+	}
+	
 }
 ?>
