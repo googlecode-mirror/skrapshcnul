@@ -11,7 +11,7 @@
 			
 			<div id="tabs" class="activity-stream">
 				<?php $this -> load -> view("base/user/profile/upcoming_lunches.php");?>
-				<?php $this -> load -> view("base/user/profile/activities.php");?>
+				<?php //$this -> load -> view("base/user/profile/activities.php");?>
 			</div>
 			<div class="clearfix">&nbsp;</div>
 			

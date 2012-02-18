@@ -10,23 +10,23 @@
 	<?php } ?>
 </div>
 <div class="others">
-<label>Location:</label> <?php echo $places['location']; ?>
+<label>Location:</label> <?php echo isset($places['location']) ? $places['location'] : ""; ?>
 </div>
 <div class="others">
-<label>Phone:</label> <?php echo $places['primary_phone']; ?>
+<label>Phone:</label> <?php echo isset($places['primary_phone']) ? $places['primary_phone'] : ""; ?>
 </div>
 <div class="others">
-<label>Homepage:</label> <?php echo $places['url']; ?>
+<label>Homepage:</label> <?php echo isset($places['url']) ? $places['url'] : ""; ?>
 </div>
 <div class="others">
-<label>Cuisine:</label> <?php echo $places['restaurant_info']['cuisine']; ?>
+<label>Cuisine:</label> <?php echo isset($places['restaurant_info']['cuisine']) ? $places['restaurant_info']['cuisine'] : ""; ?>
 </div>
 <div class="others">
-<label>Opening Hours:</label> <?php echo $places['restaurant_info']['opening_hours']; ?>
+<label>Opening Hours:</label> <?php echo isset($places['restaurant_info']['opening_hours']) ? $places['restaurant_info']['opening_hours'] : ""; ?>
 </div>
 <div class="others">
-<label>Special Features:</label> <?php echo $places['restaurant_info']['special_features']; ?>
+<label>Special Features:</label> <?php echo isset($places['restaurant_info']['special_features']) ? $places['restaurant_info']['special_features'] : ""; ?>
 </div>
 <div class="others">
-<?php echo $places['restaurant_info']['extras']; ?>
+<?php echo isset($places['restaurant_info']['extras']) ? $places['restaurant_info']['extras'] : ""; ?>
 </div>
