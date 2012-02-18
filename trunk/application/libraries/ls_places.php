@@ -41,15 +41,16 @@ class Ls_Places{
 		
 		$results = array();
 		$results = $this -> ci -> places_model -> selectPlaceById($fields['places_id']);
-		$results['statistics'] = $this -> selectPlaceStatistic($fields['places_id']);
-		$results['recent_lunches'] = $this -> selectPlaceRecentLunch($fields['places_id']);
-		$results['verified_status'] = $this -> selectPlaceVerification($fields['places_id']);
+		$results['statistics'] = $this -> selectPlace_statistic($fields['places_id']);
+		$results['recent_lunches'] = $this -> selectPlace_recent_lunches($fields['places_id']);
+		$results['verified_status'] = $this -> selectPlace_verification($fields['places_id']);
+		$results['restaurant_info'] = $this -> selectPlace_xtra_restaurant($fields['places_id']);
 		
 		return $results; 
 
 	}
 	
-	function selectPlaceStatistic($fields = FALSE) {
+	function selectPlace_statistic($fields = FALSE) {
 		
 		if (!$fields) { return FALSE;}
 		
@@ -67,7 +68,7 @@ class Ls_Places{
 		
 	}
 	
-	function selectPlaceRecentLunch($fields = FALSE) {
+	function selectPlace_recent_lunches($fields = FALSE) {
 		
 		if (!$fields) { return FALSE;}
 		
@@ -79,7 +80,7 @@ class Ls_Places{
 		
 	}
 	
-	function selectPlaceVerification($fields = FALSE) {
+	function selectPlace_verification($fields = FALSE) {
 		
 		if (!$fields) { return FALSE;}
 		
@@ -90,20 +91,43 @@ class Ls_Places{
 		$verified_status['status'] = 1;
 		$verified_status['remarks'] = "Coffee partner, discount 10%;";*/
 		
-		$results = $this -> ci -> places_model -> selectPlaceVerification($fields['place_id']);
+		$results = $this -> ci -> places_model -> selectPlace_verification($fields['place_id']);
 		
 		return $results;
+	}
+	
+	function selectPlace_xtra_restaurant($fields = FALSE) {
+		
+		if (!$fields) { return FALSE;}
+		
+		if (!$fields['places_id']) { return FALSE; }
+		
+		## TODO - @dataTeam, populate these data.
+		/*$verified_status = array();
+		$verified_status['status'] = 1;
+		$verified_status['remarks'] = "Coffee partner, discount 10%;";*/
+		
+		$results = $this -> ci -> places_model -> selectPlace_xtra_restaurant($fields['place_id']);
+		
+		return $results;
+	}
+	
+	function insertPlace($fields = FALSE) {
+		return $result = $this -> ci -> places_model -> insertPlace($fields);;
 	}
 	
 	function updatePlace($fields = FALSE) {
 		
 		if (!isset($fields['place_id'])) { return FALSE; }
 		
-		if (isset($obj['name']) || isset($obj['logo']) || isset($obj['location']) || isset($obj['geo_lat']) || isset($obj['geo_long']) || isset($obj['valid'])) {
+		if (isset($fields['name']) || isset($fields['logo']) || isset($fields['primary_phone']) || isset($fields['url']) || isset($fields['location']) || isset($fields['geo_lat']) || isset($fields['geo_long']) || isset($fields['valid'])) {
 			$result = $this -> ci -> places_model -> updatePlace($fields);
 		}
-		if (isset($fields['status']) || isset($fields['remarks']) || $fields['updated_by']) {
+		if (isset($fields['status']) || isset($fields['remarks'])) {
 			$result = $this -> ci -> places_model -> updatePlace_verification($fields);
+		}
+		if (isset($fields['cuisine']) || isset($fields['opening_hours']) || isset($fields['special_features']) || isset($fields['extras'])) {
+			$result = $this -> ci -> places_model -> updatePlace_xtra_restaurants($fields);
 		}
 		
 		return $result;

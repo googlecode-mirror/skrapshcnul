@@ -9,6 +9,7 @@ class Places extends CI_Controller {
 		parent::__construct();
 		$this -> load -> library('email');
 		$this -> load -> library('form_validation');
+		$this -> load -> library('input');
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('ls_places');
 		$this -> load -> library('session');
@@ -38,6 +39,9 @@ class Places extends CI_Controller {
 			case 'edit' :
 				$this -> edit();
 				break;
+			case 'add' :
+				$this -> add();
+				break;
 			case 'restaurant' :
 				$this -> restaurant();
 				break;
@@ -51,7 +55,7 @@ class Places extends CI_Controller {
 		$places_id = $this -> uri -> segment(2);
 		
 		if (!is_numeric($places_id)) {
-			return FALSE;
+			redirect('404');
 		}
 
 		$this -> data['places'] = $this -> ls_places -> selectPlaceById($places_id);
@@ -65,8 +69,23 @@ class Places extends CI_Controller {
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
-	function restaurant($value = FALSE) {
+	function add() {
 		
+		$fields = ($this -> input -> post());
+		if (sizeof($fields) > 0) {
+			$place_id = $this -> ls_places -> insertPlace($fields);
+			if ($place_id) {
+				redirect('/places/'.$place_id);
+			};
+		}
+		
+		// Render view data
+		$this -> data['head_title'] = 'Places | Lunchsparks';
+		$this -> data['tpl_page_id'] = 'places#add';
+		$this -> data['tpl_page_title'] = "Places";
+		// Render views
+		$this -> data['main_content'] = 'base/places/add';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
 	function edit($value = FALSE) {
@@ -87,5 +106,10 @@ class Places extends CI_Controller {
 		$this -> data['main_content'] = 'base/places/edit';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
+	
+	function restaurant($value = FALSE) {
+		
+	}
+	
 }
 ?>

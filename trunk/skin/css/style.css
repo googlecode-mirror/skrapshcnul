@@ -423,7 +423,7 @@ span.button {
 	white-space: nowrap;
 	position: relative;
 	/*float: left;*/
-	padding: 0 9px;
+	padding: 8px 20px;
 	width: auto !important;
 	font-weight: bold;
 	font-size: .916em;

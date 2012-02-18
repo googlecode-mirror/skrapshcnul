@@ -53,14 +53,15 @@ class Places extends CI_Controller {
 
 	public function add() {
 		
-		// Prepare _REQUEST data
-		$fields['event_date'] = isset($_REQUEST['event_date']) ? $_REQUEST['event_date'] : FALSE;
-		$fields['event_location'] = isset($_REQUEST['event_location']) ? $_REQUEST['event_location'] : FALSE;
-		$fields['user_ids'] = isset($_REQUEST['user_ids']) ? $_REQUEST['user_ids'] : FALSE;
-		$fields['reason'] = isset($_REQUEST['reason']) ? $_REQUEST['reason'] : FALSE;
-
-		$this -> data['results'] = $this -> ls_events -> create($fields);
-
+		$fields = ($this -> input -> get());
+		
+		if ($fields) {
+			$place_id = $this -> ls_places -> updatePlace();
+			if ($place_id) {
+				$this -> data['results']['place_id'] = $place_id;
+			};
+		}
+		
 		$this -> json -> json_prep($this -> data);
 	}
 
@@ -77,11 +78,14 @@ class Places extends CI_Controller {
 
 	public function update_field() {
 		// Prepare _REQUEST data
+		
 		if (isset($_REQUEST['datafld']) && isset($_REQUEST['value']) && isset($_REQUEST['oid'])) {
 			
 			$fields = array();
 			$fields['place_id'] = isset($_REQUEST['oid']) ? $_REQUEST['oid'] : FALSE;
 			$fields[$_REQUEST['datafld']] = $_REQUEST['value'];
+			
+			if (isset($this -> user_id)) $fields['updated_by'] = $this -> user_id;
 			
 			$this -> data['results'] = $this -> ls_places -> updatePlace($fields);
 		} else {

@@ -1,7 +1,5 @@
 .places-summary-large {
-	border-bottom: 1px solid #EFEFEF;
 	margin: 10px 20px;
-	padding-bottom: 20px;
 }
 .places-logo {
 	width: 128px;
@@ -31,6 +29,11 @@
 	color: #555;
 	font-size: 13px;
 }
+.places-summary-large .others label {
+	line-height: 20px;
+	color: #555;
+	font-size: 13px;
+}
 #places_map {
     height: 200px;
 	width: 690px;
@@ -38,11 +41,13 @@
 }
 .place-featured-statistics {
 	display: inline-block;
-	vertical-align:middle;
+	vertical-align: middle;
+	border-bottom: 1px solid #EFEFEF;
 }
 .places-ratings {
 	display: inline-block;
 	margin: 10px;
+	min-width: 90px;
 }
 
 .rating-points {
