@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<div class="section-middle notification-stream ">
-				<?php if (0 && $notifications) { ?>
+				<?php if ($notifications) { ?>
 					<?php foreach($notifications as $item) { ?>
 					<div class="notification-item">
 						<span><?php echo $item['message'];?></span>

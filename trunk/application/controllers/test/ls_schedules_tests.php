@@ -28,7 +28,7 @@ class Ls_schedules_tests extends Toast
     	$obj = array();
 		
 		$obj[0] = array();
-		$obj[0]['user_id'] = 10;
+		$obj[0]['user_id'] = 1;
 		$obj[0]['name'] = 'Daily Schedule'; 
 		$obj[0]['repeat_params'] = '01110110111000';
 		$obj[0]['center_lat'] = '100.00';
@@ -37,7 +37,7 @@ class Ls_schedules_tests extends Toast
 		$obj[0]['disabled'] = '1';
 		
 		$obj[1] = array();
-		$obj[1]['user_id'] = 10;
+		$obj[1]['user_id'] = 1;
 		$obj[1]['name'] = 'Holiday Schedule';
 		$obj[1]['repeat_params'] = '00000000000000';
 		$obj[1]['center_lat'] = '100.00';
