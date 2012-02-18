@@ -152,6 +152,10 @@ class Events_model extends CI_Model {
 		}
 	}
 	
+	function getUserEventRequests_count($user_id) {
+		//if (!)
+	}
+	
 
 	/* Matched Event */
 

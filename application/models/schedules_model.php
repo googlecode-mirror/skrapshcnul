@@ -56,6 +56,15 @@ class Schedules_Model extends CI_Model {
 		return $this -> db -> insert($this -> tables['schedules'], $data);
 	}
 
+	function doneScheduled($user_id) {
+		$this -> db -> set('index');
+	  	$this -> db -> where('user_id', $user_id);
+	  	$result = $this -> db -> get($this -> tables['schedules']);
+	  	$result = $result -> result();
+		if (empty($result)) return FALSE;
+		else return TRUE; 
+	}
+	
 	function getSchedulesByUserId($user_id) {
 		$result = $this -> db -> get_where($this -> tables['schedules'], array('user_id' => $user_id));
 		return $result -> result_array();

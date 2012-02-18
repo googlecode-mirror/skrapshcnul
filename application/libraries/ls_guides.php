@@ -32,6 +32,9 @@ class Ls_Guides {
 		$this -> ci -> load -> model('user_lunch_wishlist_model');
 		$this -> ci -> load -> model('user_lunch_buddy_model');
 		$this -> ci -> load -> model('user_profile_model');
+		$this -> ci -> load -> library('session');		
+		$this -> ci -> load -> model('schedules_model');
+		$this -> ci -> load -> model('events_model');
 		
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
@@ -44,7 +47,7 @@ class Ls_Guides {
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
 	}
 	
-	function getWelcomeGuide_States() {
+	function getWelcomeGuide_States($user_id) {
 		
 		## TODO for @Tien
 		## Expected result: array of states for each steps 
@@ -54,7 +57,34 @@ class Ls_Guides {
 		## 		array['step2'][state] = "Incomplete";
 		## 		array['step1'][reason] = "No preference specified.";
 		
-		return FALSE;
+		## has user synchronized linkedin?
+		if ($this -> ci -> linkedin_model -> doneSynchronized($user_id)) {
+			$result['step1']['state'] = "Completed";
+		}
+		else {
+			$result['step1']['state'] = "Incomplete";
+		}
+		
+		## has user indicate preferences ?
+		if ($this -> ci -> preferences_model -> donePreferenced($user_id)) {
+			$result['step2']['state'] = "Completed";
+		}
+		else {
+			$result['step2']['state'] = "Incomplete";
+		}
+		
+		## has user scheduled ?
+		if ($this -> ci -> schedules_model -> doneScheduled($user_id)) {
+			$result['step3']['state'] = "Completed";
+		}
+		else {
+			$result['step3']['state'] = "Incomplete";
+		}
+		
+		## is there new event request?
+		//if ()
+		
+		return $result;
 		
 	}
 
