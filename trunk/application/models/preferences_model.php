@@ -15,6 +15,14 @@ class Preferences_Model extends CI_Model {
 		
 	}
 	
+	function donePreferenced($user_id) {
+	  	$this -> db -> where('user_id', $user_id);
+	  	$result = $this -> db -> get($this -> tables['users_preferences']);
+	  	$result = $result -> result();
+		if (empty($result)) return FALSE;
+		else return TRUE; 
+	}
+	
 	function selectPreferences($user_id) {
 			
 		$query = 
