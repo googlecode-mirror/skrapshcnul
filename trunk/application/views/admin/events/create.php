@@ -183,7 +183,7 @@ jQuery("#form_new_recommendation").submit(function() {
 			location.reload(true);
 		} else {
 			// Handle error
-			alert("Error!");
+			alert("Error! The reason could be: (1) Some information hasn't been filled yet; (2) Some user hasn't confirmed his recommendation yet; (3) Database error.");
 		}
 	});
   	return false;
