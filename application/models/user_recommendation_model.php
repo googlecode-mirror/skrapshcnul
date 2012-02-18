@@ -14,6 +14,11 @@ class User_Recommendation_model extends CI_Model {
 		$this -> tables = $this -> config -> item('tables', 'tables/events');
 
 	}
+	
+	function clearTables() { // WARNING: only for testing
+		return $this -> db -> truncate(
+			$this -> tables['event_auto_recommendation']);
+	}
 
 	function getUserEventSuggestion($user_id) {
 
@@ -203,5 +208,21 @@ class User_Recommendation_model extends CI_Model {
 		} else {
 			return FALSE;
 		}	
+	}
+	
+	/*
+	 * 
+	 */
+	function isConfirmed($user, $target) {
+		$result = $this -> db -> get_where(
+			$this -> tables['event_auto_recommendation'], 
+		    array('user_id' => $user, 'rec_id' => $target, 'selected' => '1'));
+		$result = $result -> result();
+		if (empty($result)) {
+			return FALSE;
+		}
+		else {
+			return TRUE;
+		}
 	}
 }

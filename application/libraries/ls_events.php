@@ -47,6 +47,7 @@ class Ls_Events {
 		$this -> ci -> load -> model('user_profile_model');
 		$this -> ci -> load -> model('events_model');
 		$this -> ci -> load -> model('places_model');
+		$this -> ci -> load -> model('user_recommendation_model');
 
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
@@ -228,16 +229,35 @@ class Ls_Events {
 		return $this -> ci -> events_model -> event_RSVP($fields);
 	}
 	
+	function _verify($users) {
+		$cnt = count($users);
+		for ($i = 0; $i < $cnt; ++$i) {
+			for ($j = 0; $j < $cnt; ++$j) if ($i != $j &&
+				!$this -> ci -> user_recommendation_model -> 
+				isConfirmed($users[$i], $users[$j])) {
+			
+				return FALSE;
+			}
+		}
+		return TRUE;
+	}
+	
 	function create($fields = FALSE) {
 		
 		if(!$fields) {
 			return FALSE;
 		}
 		
-		## TODO Create Event for both users (user & target_user)
+		## Create Event for users (user & target_user)		
+		## all users must have accepted their recommedations beforehand
+		
+		if (!$this -> _verify($fields['user_ids'])) {
+			return FALSE;
+		}
+		
 		$this -> ci -> db -> trans_off();
 		$this -> ci -> db -> trans_start();
-		{
+		{	
 			$this -> data = $this -> ci -> events_model -> createEvent($fields);
 		}
 		$this -> ci -> db -> trans_complete();
