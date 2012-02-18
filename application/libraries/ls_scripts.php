@@ -33,6 +33,7 @@ class Ls_Scripts {
 		);
 			
 		$this -> css_files = array(
+			'skin/css/animation.css',
 			'skin/css/bubble_info.css',
 			'skin/css/carousel.css',
 			'skin/css/header.css',

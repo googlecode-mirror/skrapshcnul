@@ -157,18 +157,27 @@ jQuery(document).ready(function() {
 
 function profile_hover_init() {
 	jQuery(".ls-profile-hover").hover(function(e) {
-		// handlerIn 
-		if (!jQuery(".ls-profile-card-holder").length > 0) {
-			jQuery("body").append(jQuery('<div class="ls-profile-card-holder"></div>'));
-		}
 		
 		var userid = jQuery(this).attr('ls-data-userid');
 		if (userid) {
-			generate_profile_card_html(userid);
+			// handlerIn 
+			if (!jQuery(".ls-profile-card-holder").length > 0) {
+				jQuery("body").append(jQuery(
+					'<div id="ls-profile-card-container">'+
+						'<div class="ls-profile-card-loader loading-icon rotate2">&nbsp;</div>'+
+						'<div class="ls-profile-card-holder"></div>'+
+					'</div>'));
+			}
+			
+			generate_profile_card_html(userid, function() {
+			jQuery(".ls-profile-card-holder").css('left', e.pageX);
+			jQuery(".ls-profile-card-holder").css('top', e.pageY);
+			jQuery(".ls-profile-card-loader").hide('fade', 'slow');
+			jQuery(".ls-profile-card-holder").show('fade', 'slow');
+			});
+			
 		}
-		jQuery(".ls-profile-card-holder").css('left', e.pageX);
-		jQuery(".ls-profile-card-holder").css('top', e.pageY);
-		jQuery(".ls-profile-card-holder").show('fade', 'slow');
+		
 	}, function() {
 		// handlerOut
 		jQuery(".ls-profile-card-holder").hide();
@@ -181,7 +190,12 @@ function profile_hover_init() {
 	});
 }
 
-function generate_profile_card_html(userid) {
+function generate_profile_card_html(userid, callback) {
+	
+	jQuery(".ls-profile-card-holder").hide();
+	jQuery(".ls-profile-card-loader").show();
+	
+	jQuery(".ls-profile-card-loader").show();
 	
 	// TODO: If element not exist
 	// Get and Generate HTML
@@ -226,5 +240,9 @@ function generate_profile_card_html(userid) {
 		
 	}); 
 	
+	// If callback exist, run it.
+	if (Object.prototype.toString.call(callback) == "[object Function]") {
+		callback();
+	}
 	
 }
