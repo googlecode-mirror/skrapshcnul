@@ -1,108 +1,111 @@
 <?php
 
 /*
- * Tien: I haven't tested updatePick because it is not easy to test it without the layout.
- */
+ * Hello! This is new version of schedule model (updated on 2/18/2012)
+ */ 
+ 
+/*
+CREATE TABLE IF NOT EXISTS `lss_schedules` (
+  `user_id` int(10) unsigned NOT NULL,
+  `index` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `repeat_params` varchar(14) NOT NULL DEFAULT '00000000000000',
+  `center_lat` double NOT NULL,
+  `center_lng` double NOT NULL,
+  `radius` double NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY `index` (`index`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+
+INSERT INTO `lss_schedules` (`user_id`, `index`, `name`, `repeat_params`, 
+	`center_lat`, `center_lng`, `radius`, `created_on`, `updated_on`) VALUES
+	(1, 32, 'Daily Schedule', '11011000110000', 
+	1.35145008855939, 103.87279988916, 1911.92212649337, 
+ 	'0000-00-00 00:00:00', '2011-11-20 22:40:52'); 
+*/
 
 class Schedules_Model extends CI_Model {
+	
+	function __construct() {
+		$this -> load -> config('tables/schedules', TRUE);
 
-	function _insertPick($userid, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius, $repeat) {
-		$datetime_start = trim($date) . " " . trim($time);
-		$datetime_end = trim($date_end) . " " . trim($time_end);
-		$query = "INSERT INTO lss_schedules (user_id, name, start_date, end_date, repeat_params, center_lat, center_lng, radius) " . " VALUES ('$userid', '$name', " . " STR_TO_DATE('$datetime_start','%m/%d/%Y %T'), " . " STR_TO_DATE('$datetime_end','%m/%d/%Y %T'), " . " '$repeat', " . " '$center_lat', '$center_lng', '$radius')";
-		$success = $this -> db -> query($query);
-		return $success;
+		## Initialize DB
+		$this -> tables = 
+			$this -> config -> item('tables', 'tables/schedules');
+	}	
+
+	function clearTables() { // WARNING: only for testing
+		return $this -> db -> truncate($this -> tables['schedules']);
+	}
+	
+	function addSchedule($obj) {
+		// obj must has: user_id, repeat_params, 
+		// center_lat, center_lng, radius.
+		// 'name' is optional.
+		if (empty($obj)) return FALSE;
+		if (empty($obj['user_id']) || 
+			empty($obj['repeat_params']) ||
+			empty($obj['center_lat']) ||
+			empty($obj['center_lng']) ||
+			empty($obj['radius'])) return FALSE;
+		
+		$data = $obj;
+		
+		// created_on
+		$data['created_on'] = date('Y-m-d H:i:s');
+		
+		// insert
+		return $this -> db -> insert($this -> tables['schedules'], $data);
+	}
+	
+	function getSchedulesByUserId($user_id) {
+		$result = $this -> db -> get_where($this -> tables['schedules'],
+		                                   array('user_id' => $user_id));
+		return $result -> result_array();										   
+	}
+	
+	function getScheduleByIndex($index) {
+		$result = $this -> db -> get_where($this -> tables['schedules'], 
+		                                   array('index' => $index));
+		return $result -> row_array();
 	}
 
-	function insertPickForCurrentUser($name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius, $repeat) {
-		$userid = $this -> session -> userdata('user_id');
-		return $this -> _insertPick($userid, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius, $repeat);
+	function deleteScheduleByIndex($index) {
+		return $this -> db -> delete($this -> tables['schedules'], 
+		                             array('index' => $index));
 	}
-
-	function _selectPick($userid) {
-		$query = " SELECT " . " user_id, `index`, " . " DATE(start_date) as startDate, TIME(start_date) as startTime, " . " DATE(end_date) as endDate, TIME(end_date) as endTime, " . " name, center_lat, center_lng, radius, repeat_params " . " FROM lss_schedules " . " WHERE user_id = '$userid';";
-		$result = $this -> db -> query($query);
-		return $result;
-	}
-
-	function selectPickForCurrentUser() {
-		$userid = $this -> session -> userdata('user_id');
-		return $this -> _selectPick($userid);
-	}
-
-	function _deletePick($userid, $index) {
-		$query = "DELETE FROM lss_schedules " . "WHERE user_id = '$userid' AND `index` = '$index';";
-		$result = $this -> db -> query($query);
-		return $result;
-	}
-
-	function deletePickForCurrentUser($index) {
-		$userid = $this -> session -> userdata('user_id');
-		return $this -> _deletePick($userid, $index);
-	}
-
-	function updateScheduleForCurrentUser($fields) {
+	
+	function updateSchedule($obj) {
+	
+		if (empty($obj)) return FALSE; // error
+		
+		## must have either 'index' or 'schedule_id' field	
+		if (isset($obj['schedule_id'])) $index = $obj['schedule_id'];
+		else if (isset($obj['index'])) $index = $obj['index'];
+		else return FALSE;
 		
 		## Prepare data
-		$schedule_id	= isset($fields['schedule_id']) ? $fields['schedule_id'] : '';
-		$user_id		= isset($fields['user_id']) ? $fields['user_id'] : '';
-		$name			= isset($fields['name']) ? $fields['name'] : '';
-		$start_date		= isset($fields['start_date']) ? $fields['start_date'] : '';
-		$start_time		= isset($fields['start_time']) ? $fields['start_time'] : '';
-		$end_date		= isset($fields['end_date']) ? $fields['end_date'] : '';
-		$end_time		= isset($fields['end_time']) ? $fields['end_time'] : '';
-		$repeat_params	= isset($fields['repeat_params']) ? $fields['repeat_params'] : '';
-		$center_lat		= isset($fields['center_lat']) ? $fields['center_lat'] : '';
-		$center_lng		= isset($fields['center_lng']) ? $fields['center_lng'] : '';
-		$radius			= isset($fields['radius']) ? $fields['radius'] : '';
+		$data = array();
 		
-		$datetime_start	= trim($start_date) . " " . trim($start_time);
-		$datetime_end	= trim($end_date) . " " . trim($end_time);
 		
-		## Data Validation
-		if (empty($schedule_id) || !is_numeric($schedule_id) ) return FALSE;
-		if (empty($user_id) || !is_numeric($user_id)) return FALSE;
-		
-		//$userid, $index, $name, $date, $time, $date_end, $time_end, $center_lat, $center_lng, $radius
-		$query = 
-			" UPDATE lss_schedules SET 
-				name = '$name', 
-				start_date = '$datetime_start', 
-				end_date = '$datetime_end', 
-				repeat_params = '$repeat_params', 
-				center_lat = '$center_lat', 
-				center_lng = '$center_lng', 
-				radius = '$radius', 
-				updated_on = NOW() " . 
-			" WHERE `index` = '$schedule_id' AND `user_id` = '$user_id' ";
-		$mysql_result = $this -> db -> query($query);
+		$columns = array('name', 'repeat_params', 
+		                 'center_lat', 'center_lng', 'radius', 
+						 'disabled');		
+
+		foreach ($columns as $key => $value) {
+			if (isset($value)) $data[$value] = $obj[$value];
+		}
+
+		## execute query
+		$this -> db -> where('index', $index);
+		$this -> db -> update($this -> tables['schedules'], $data);
 		
 		if ($this->db->affected_rows() > 0) {
 			return TRUE;
 		} else {
 			return FALSE;
 		}
-	}
-
-	## Schdeles
-	function selectSchedule($schedule_id) {
-		$userid = $this -> session -> userdata('user_id');
-		if (!$userid) {
-			return FALSE;
-		}
-		$query	= 
-			" SELECT user_id, `index`, DATE(start_date) as start_date, TIME_FORMAT(start_date, '%H:%i') as start_time, DATE(end_date) as end_date, TIME_FORMAT(end_date, '%H:%i') as end_time, name, center_lat, center_lng, radius, repeat_params " . 
-			" FROM lss_schedules " . 
-			" WHERE user_id = '$userid' ";
-			" AND index = '$schedule_id' ";
-		$mysql_result = $this -> db -> query($query);
-		
-		if ($mysql_result->num_rows() > 0) {
-			return $mysql_result->row_array();
-		} else {
-			return FALSE;
-		}
-		
 	}
 }
 ?>
