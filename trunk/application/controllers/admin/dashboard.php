@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller {
 		$this -> load -> library('input');
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('ls_events');
+		$this -> load -> library('ls_places');
 		$this -> load -> library('session');
 		$this -> load -> library('pagination');
 		$this -> load -> database();
@@ -242,6 +243,19 @@ class Dashboard extends CI_Controller {
 		$this -> data['main_content'] = 'admin/survey/overview';
 		$this -> load -> view('includes/tmpl_admin', $this -> data);
 		
+	}
+
+	function places() {
+		
+		$this -> data['places'] = $this -> ls_places -> selectPlace_all();
+		
+		// Render views data
+		$this -> data['head_title'] = 'Places Overview | Lunchsparks';
+		$this -> data['tpl_page_id'] = "places";
+		$this -> data['tpl_page_title'] = "Places Overview";
+		// Render views
+		$this -> data['main_content'] = 'admin/places/index';
+		$this -> load -> view('includes/tmpl_admin', $this -> data);
 	}
 
 }

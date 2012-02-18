@@ -73,14 +73,21 @@
 .section-middle-xs {
 	padding: 2px 5px;
 }
-
 .row-item {
 	color: #666;
 	border: 1px solid #DDDFE7;
 	outline: none;
 }
 .row-item:hover {
-	background: rgba(248,248,248,0.5);
+	background: rgba(248,248,248,0.8);
+}
+.row-item-simple {
+	color: #666;
+	border-top: 1px solid #DDDFE7;
+	outline: none;
+}
+.row-item-simple:hover {
+	background: rgba(248,248,248,0.8);
 }
 .row-menu-item {
 	padding: 4px 10px;

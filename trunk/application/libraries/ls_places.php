@@ -96,6 +96,13 @@ class Ls_Places{
 		return $results;
 	}
 	
+	function selectPlace_all() {
+		
+		$results = $this -> ci -> places_model -> selectPlace_all();
+		
+		return $results;
+	}
+	
 	function selectPlace_xtra_restaurant($fields = FALSE) {
 		
 		if (!$fields) { return FALSE;}

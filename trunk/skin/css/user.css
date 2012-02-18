@@ -238,7 +238,7 @@ a.a-s-icon-xlhdpi {
 	background: url(../images/16/user_icons_set.png) no-repeat;
 }
 .user-verification-icon.user-verfied {
-	background-position: -17px 0;
+	background-position: -16px 0;
 }
 .user-verification-icon.user-verfied:hover {
 	background-position: 0px 0px;

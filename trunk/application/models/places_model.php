@@ -181,5 +181,15 @@ class Places_Model extends CI_Model {
 		
 		return $mysql_result -> row_array();
 	}
+	
+	function selectPlace_all() {
+		$this->db->select('*');
+		$this->db->from(self::_PLACES_TABLE_ . ' AS pt');
+		$this->db->join(self::_PLACES_VERIFIED_TABLE . ' AS pvt', 'pt.place_id = pvt.place_id', 'left');
+		$mysql_result = $this->db->get();
+		
+		return $mysql_result -> result();
+		
+	}
 }
 ?>
