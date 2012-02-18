@@ -10,7 +10,7 @@
 class Logger {
 
 	const _ENABLE = TRUE;
-	const _LOGFILE = '/tmp/log.txt';
+	const _LOGFILE = 'D://log.txt';
 
 	function log($data) {
 		$LOGFILE = dirname($_SERVER['SCRIPT_FILENAME']) . self::_LOGFILE;    

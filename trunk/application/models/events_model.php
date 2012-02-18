@@ -9,6 +9,7 @@ class Events_model extends CI_Model {
 
 	public function __construct() {
 		$this -> load -> config('tables/events', TRUE);
+		$this -> load -> helper('logger');
 
 		## Initialize DB
 		$this -> tables = $this -> config -> item('tables', 'tables/events');
@@ -375,7 +376,7 @@ class Events_model extends CI_Model {
 	}
 
 	function createEvent($fields = FALSE) {
-
+		
 		/* Data Validation */
 		if (!$fields) {
 			return FALSE;
@@ -394,7 +395,7 @@ class Events_model extends CI_Model {
 		if (!isset($fields['reason'])) {
 			return FALSE;
 		}
-
+		
 		/* Prepare Data Values */
 		$date = $fields['event_date'];
 		$location = $fields['event_location'];
@@ -430,5 +431,4 @@ class Events_model extends CI_Model {
 		return $results;
 
 	}
-
 }

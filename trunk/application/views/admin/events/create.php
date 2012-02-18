@@ -183,6 +183,7 @@ jQuery("#form_new_recommendation").submit(function() {
 			location.reload(true);
 		} else {
 			// Handle error
+			alert("Error!");
 		}
 	});
   	return false;
