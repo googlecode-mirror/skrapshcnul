@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2012 at 02:39 AM
+-- Generation Time: Feb 18, 2012 at 06:25 PM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.8
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `lss_events` (
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -250,19 +250,17 @@ CREATE TABLE IF NOT EXISTS `lss_recommendations` (
 --
 
 CREATE TABLE IF NOT EXISTS `lss_schedules` (
-  `user_id` int(10) unsigned NOT NULL,
-  `index` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `start_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
-  `repeat_params` text,
+  `index` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `repeat_params` text NOT NULL,
   `center_lat` double NOT NULL,
   `center_lng` double NOT NULL,
   `radius` double NOT NULL,
   `created_on` datetime NOT NULL,
-  `updated_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY `index` (`index`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -375,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=206 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=208 ;
 
 -- --------------------------------------------------------
 
