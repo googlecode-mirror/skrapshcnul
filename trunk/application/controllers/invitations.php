@@ -9,10 +9,11 @@ class Invitations extends CI_Controller {
 		parent::__construct();
 		$this -> load -> library('session');
 		$this -> load -> library('ion_auth');
-		$this -> load->library('email');
+		$this -> load -> library('email');
 		$this -> load -> library('form_validation');
 		$this -> load -> database();
 		$this -> load -> helper('url');
+		$this -> load -> helper('email');
 		$this -> load -> model('invitation_model');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
@@ -64,16 +65,15 @@ class Invitations extends CI_Controller {
 					$this->_sendInvitationEmail($_REQUEST['invitee_email']);
 					$this -> _json_prep('Invitation Sent to '.$_REQUEST['invitee_email'].'!');
 				} else {
-					$this -> _json_prep('', 'Invitation has been sent to this email.');
+					$this->_sendInvitationEmail($_REQUEST['invitee_email']);
+					$this -> _json_prep('', 'Invitation has already bee sent to this email.');
 				}
 				
 			} elseif ($this -> call == 'checkInvitationLeft' ) {
-				
 				$invitation = $this -> invitation_model -> selectInvitation($this->user_id);
 				print($invitation->invitation_left);
 				
 			} elseif ($this -> call == 'resendInvitation' && isset($_REQUEST['invitee_email'])) {
-				
 				if ($this->_sendInvitationEmail($_REQUEST['invitee_email'])) {
 					$this -> _json_prep('Invitation Sent to '.$_REQUEST['invitee_email'].'!');
 				} else {
@@ -87,13 +87,12 @@ class Invitations extends CI_Controller {
 			}
 		} else {
 			$this -> _prep_all_data();
-	
 			// Render view
 			$this -> data['tpl_page_id'] = 'invite';
 			$this -> data['main_content'] = 'invitations/all';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}
-		
+				
 	}
 
 	function status() {
@@ -114,16 +113,13 @@ class Invitations extends CI_Controller {
 		$this->data['invitation_code'] = $results->invitation_code;
 		$this->data['invitee_email'] = $results->invitee_email;
 		$this->data['sender_email'] = $results->email;
-		
 		$message = $this -> load -> view('/invitations/email/sendInvitation', $this->data, true);
-		
 		$this -> email->clear();
 		$this -> email->set_newline("\r\n");
 		$this -> email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
 		$this -> email->to($results->invitee_email);
 		$this -> email->subject($this->config->item('site_title', 'ion_auth') . ' - Invitation');
 		$this -> email->message($message);
-		
 		if ($this->email->send())
 		{
 			return TRUE;
@@ -132,6 +128,8 @@ class Invitations extends CI_Controller {
 		{
 			return FALSE;
 		}
+		
+		
 	}
 	
 	function _prep_all_data() {
