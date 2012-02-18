@@ -482,8 +482,50 @@ span.button {
 }
 /* Other Design Styles */
 .loading-icon {
-	
+	background: url(../images/loading/process.png) no-repeat;
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: 40px auto;
 }
+.rotate {
+	-webkit-animation-name:rotate;
+	-moz-animation-name:rotate;
+	-webkit-animation-duration:8s;
+	-moz-animation-duration:8s;
+	-webkit-animation-iteration-count:infinite;
+	-moz-animation-iteration-count:infinite;
+	-webkit-transition-timing-function:ease-out;
+	-moz-transition-timing-function:ease-out;
+	-o-transition-timing-function:ease-out;
+	transition-timing-function:ease-out;
+}
+.rotate2 {
+	-webkit-animation-name:rotate2;
+	-moz-animation-name:rotate2;
+	-webkit-animation-duration:12s;
+	-moz-animation-duration:12s;
+	-webkit-animation-iteration-count:infinite;
+	-moz-animation-iteration-count:infinite;
+	-webkit-transition-timing-function:ease-in-out;
+	-moz-transition-timing-function:ease-in-out;
+	-o-transition-timing-function:ease-in-out;
+	transition-timing-function:ease-in-out
+}
+.rotate3 {
+	-webkit-animation-name:rotate;
+	-moz-animation-name:rotate;
+	-webkit-animation-duration:7s;
+	-moz-animation-duration:7s;
+	-webkit-animation-iteration-count:infinite;
+	-moz-animation-iteration-count:infinite;
+	-webkit-transition-timing-function:linear;
+	-moz-transition-timing-function:linear;
+	-o-transition-timing-function:linear;
+	transition-timing-function:linear
+}
+
 ::-webkit-scrollbar {
 	height: 16px;
 	overflow: visible;
