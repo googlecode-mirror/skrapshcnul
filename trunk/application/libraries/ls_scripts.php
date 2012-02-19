@@ -36,6 +36,7 @@ class Ls_Scripts {
 			'skin/css/animation.css',
 			'skin/css/bubble_info.css',
 			'skin/css/carousel.css',
+			'skin/css/guides.css',
 			'skin/css/header.css',
 			'skin/css/icons.css',
 			'skin/css/invitation.css',

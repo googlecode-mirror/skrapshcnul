@@ -1,0 +1,16 @@
+.completed-overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	border-radius: 5px 5px 5px 5px;
+	background: url(../images/64/success.png) no-repeat;
+	/*background-color: rgba(255, 255, 255, 0.8);
+	border-bottom: 1px solid #EFEFEF;*/
+}
+.completed-overlay.incomplete {
+	background: rgba(0,0,0,0.3);
+}
+.completed-overlay.incomplete:hover {
+	background: none;
+}

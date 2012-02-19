@@ -9,12 +9,9 @@
 	</div>
 	
 	<div id="steps-completed-body" style="display:none;">
-		<div class="steps-completed-item first-item">
-			<?php if ($steps_completed['step1']) { ?>
-				<div class="completed-overlay"></div>
-			<?php } ?>
-			
+		<div class="steps-completed-item step1 first-item">
 			<?php echo anchor('settings/sync', 
+			'<div class="completed-overlay incomplete"></div>'.
 			'<div><img src="/skin/images/p/steps_completed/completed_step_1.png"></div>'.
 			'<div class="desc">
 				<strong>Synchronize LinkedIn</strong>
@@ -24,12 +21,9 @@
 			', 
 			array('from' => 'main')); ?>
 		</div>
-		<div class="steps-completed-item">
-			<?php if ($steps_completed['step2']) { ?>
-				<div class="completed-overlay"></div>
-			<?php } ?>
-			
+		<div class="steps-completed-item step2">
 			<?php echo anchor('user/preferences', 
+			'<div class="completed-overlay incomplete"></div>'.
 			'<div><img src="/skin/images/p/steps_completed/completed_step_2.png"></div>'.
 			'<div class="desc">
 				<strong>Indicate Preferences</strong>
@@ -38,12 +32,9 @@
 			<span class="steps-completed-number two"></span>
 			', array('from' => 'main')); ?>
 		</div>
-		<div class="steps-completed-item">
-			<?php if ($steps_completed['step3']) { ?>
-				<div class="completed-overlay"></div>
-			<?php } ?>
-			
+		<div class="steps-completed-item step3">
 			<?php echo anchor('schedules', 
+			'<div class="completed-overlay incomplete"></div>'.
 			'<div><img src="/skin/images/p/steps_completed/completed_step_3.png"></div>'.
 			'<div class="desc">
 				<strong>Indicate Schedules</strong>
@@ -52,12 +43,9 @@
 			<span class="steps-completed-number three"></span>
 			', array('from' => 'main')); ?>
 		</div>
-		<div class="steps-completed-item">
-			<?php if ($steps_completed['step4']) { ?>
-				<div class="completed-overlay"></div>
-			<?php } ?>
-			
+		<div class="steps-completed-item step4">
 			<?php echo anchor('events', 
+			'<div class="completed-overlay incomplete"></div>'.
 			'<div><img src="/skin/images/p/steps_completed/completed_step_4.png"></div>'.
 			'<div class="desc">
 				<strong>Accept Event Invitation</strong>
