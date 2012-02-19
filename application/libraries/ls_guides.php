@@ -47,7 +47,7 @@ class Ls_Guides {
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
 	}
 	
-	function getWelcomeGuide_States($user_id) {
+	function getWelcomeGuide_States($user_id = FALSE) {
 		
 		## TODO for @Tien
 		## Expected result: array of states for each steps 
@@ -57,12 +57,15 @@ class Ls_Guides {
 		## 		array['step2'][state] = "Incomplete";
 		## 		array['step1'][reason] = "No preference specified.";
 		
+		if (!$user_id || !is_numeric($user_id)) { return FALSE;}
+		
 		## has user synchronized linkedin?
 		if ($this -> ci -> linkedin_model -> doneSynchronized($user_id)) {
 			$result['step1']['state'] = "Completed";
 		}
 		else {
 			$result['step1']['state'] = "Incomplete";
+			$result['step1']['reason'] = "No data synced.";
 		}
 		
 		## has user indicate preferences ?
@@ -71,6 +74,7 @@ class Ls_Guides {
 		}
 		else {
 			$result['step2']['state'] = "Incomplete";
+			$result['step2']['reason'] = "No preferences set.";
 		}
 		
 		## has user scheduled ?
@@ -79,10 +83,20 @@ class Ls_Guides {
 		}
 		else {
 			$result['step3']['state'] = "Incomplete";
+			$result['step3']['reason'] = "No schedule set.";
 		}
 		
 		## is there new event request?
 		//if ()
+		
+		## has user scheduled ?
+		if (FALSE) {
+			$result['step4']['state'] = "Completed";
+		}
+		else {
+			$result['step4']['state'] = "Incomplete";
+			$result['step4']['reason'] = "No events suggestion yet.";
+		}
 		
 		return $result;
 		
