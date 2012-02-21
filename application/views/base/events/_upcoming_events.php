@@ -10,11 +10,7 @@
 				<div class="content-table-2-col-left">
 					<div class="g-static-maps">
 						<?php /* <img src="{{getGStaticMapAddress(<?php echo $event['location'] ?>);}}" /> */ ?>
-						<?php 
-						$googleMapImg = 'http://maps.googleapis.com/maps/api/staticmap?center=';
-						$googleMapImg .= urlencode( $event['location']['name'] );
-						$googleMapImg .= '&zoom=14&size=190x140&sensor=false'; ?>
-						<img src ="<?php echo $googleMapImg; ?>" />
+						<img src ="" ls-location="<?php echo urlencode($event['location']['location']); ?>" ls-latlong="<?php echo $event['location']['geo_lat'].','.$event['location']['geo_long'] ?>" />
 					</div>
 				</div>
 				
@@ -26,8 +22,8 @@
 						<div>
 							<span class="label">Location: </span> 
 							<span>
-								<a href="http://maps.google.com/maps/place?q=<?php echo  $event['location']['name'] . ", " . $event['location']['location'] ?>" target="_blank">
-									<?php echo  $event['location']['name'] . ", " . $event['location']['location'] ?>
+								<a href="/places/<?php echo  $event['location']['place_id']; ?>" target="_blank">
+									<?php echo  $event['location']['name']; ?>
 								</a>
 							</span>
 						</div>

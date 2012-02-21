@@ -28,7 +28,7 @@
 <?php ## Dynamic scripts?>
 <script language="javascript"><?php $this->load->view('includes/js/ls_notifications'); ?></script>
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=geometry,places"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDNZh2NM04KwYoWEs_H9hGIF-mj9MOZvu4&sensor=true&libraries=geometry,places"></script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26287683-1']);

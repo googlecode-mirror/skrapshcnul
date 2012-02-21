@@ -6,7 +6,7 @@ var infowindow;
 
 jQuery(document).ready(function(){
 	function initialize() {
-		var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
+		var pyrmont = new google.maps.LatLng(<?php echo $places['geo_lat'] ?>,<?php echo $places['geo_long'] ?>);
 		map = new google.maps.Map(document.getElementById('places_map'), {
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			center: pyrmont,
@@ -16,7 +16,7 @@ jQuery(document).ready(function(){
 		var request = {
 			location: pyrmont,
 			radius: '500',
-			types: ['store']
+			types: ['cafe']
 		};
 		infowindow = new google.maps.InfoWindow();
 		service = new google.maps.places.PlacesService(map);

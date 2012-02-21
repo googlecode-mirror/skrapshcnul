@@ -11,11 +11,46 @@ jQuery(document).ready(function() {
 		});
 		
 	    geocoder = new google.maps.Geocoder();
+	    
+	    jQuery('.g-static-maps img').each(function() {
+	    	Ls_gMaps.initialize_static_maps(this)
+	    });
 		
 	} catch(e) {
 		console.warn(e);
 	}
 });
+
+var Ls_gMaps = function() {
+	
+}
+
+Ls_gMaps.initialize_static_maps = function(el) {
+	var location = jQuery(el).attr('ls-location');
+	var latlong = jQuery(el).attr('ls-latlong');
+	
+	if (window.console) console.log(location);
+	if (window.console) console.log(latlong);
+	
+	var centerpoint = '';
+	if (latlong) {
+		centerpoint = latlong;
+	} else if(location) {
+		centerpoint = location;
+	} else {
+		centerpoint = undefined;
+	}
+	
+	if (centerpoint != undefined) {
+		var img_src = 'http://maps.googleapis.com/maps/api/staticmap?center='+centerpoint+'&zoom=14&size=190x140&markers=color:red%7Ccolor:red%7Clabel:C%7C'+centerpoint+'&sensor=false';
+	} else {
+		return false;
+	}
+	
+	if(window.console) console.log(img_src);
+	jQuery(el).attr('src', img_src);
+	
+}
 
 function initialize_lunchsparks_googlemap(my_center_lat, my_center_lng, my_radius) {
 	
