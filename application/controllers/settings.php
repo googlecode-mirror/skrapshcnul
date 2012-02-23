@@ -66,7 +66,7 @@ class Settings extends CI_Controller {
 			$this -> data['tpl_page_id'] = "overview";
 			$this -> data['tpl_page_title'] = "Account Overview";
 			// Render Views
-			$this -> data['main_content'] = 'settings/overview';
+			$this -> data['main_content'] = 'base/settings/overview';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}
 	}
@@ -85,7 +85,7 @@ class Settings extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Sync";
 
 		// Render view
-		$this -> data['main_content'] = 'settings/sync';
+		$this -> data['main_content'] = 'base/settings/sync';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -112,7 +112,7 @@ class Settings extends CI_Controller {
 			$this -> data['tpl_page_title'] = "Security";
 	
 			// Render view
-			$this -> data['main_content'] = 'settings/security';
+			$this -> data['main_content'] = 'base/settings/security';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}
 	}
@@ -124,7 +124,7 @@ class Settings extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Privacy";
 
 		// Render view
-		$this -> data['main_content'] = 'settings/privacy';
+		$this -> data['main_content'] = 'base/settings/privacy';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -135,7 +135,7 @@ class Settings extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Language";
 
 		// Render view
-		$this -> data['main_content'] = 'settings/language';
+		$this -> data['main_content'] = 'base/settings/language';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -162,7 +162,7 @@ class Settings extends CI_Controller {
 			$this -> data['tpl_page_title'] = "Notifications";
 	
 			// Render view
-			$this -> data['main_content'] = 'settings/notifications';
+			$this -> data['main_content'] = 'base/settings/notifications';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
 		}
 	}
@@ -174,7 +174,7 @@ class Settings extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Applications";
 
 		// Render view
-		$this -> data['main_content'] = 'settings/applications';
+		$this -> data['main_content'] = 'base/settings/applications';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -185,7 +185,7 @@ class Settings extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Mobile";
 
 		// Render view
-		$this -> data['main_content'] = 'settings/mobile';
+		$this -> data['main_content'] = 'base/settings/mobile';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 
@@ -196,7 +196,7 @@ class Settings extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Payments";
 
 		// Render view
-		$this -> data['main_content'] = 'settings/Payments';
+		$this -> data['main_content'] = 'base/settings/Payments';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	

@@ -1,3 +1,3 @@
-<?php $this -> load -> view('settings/includes/sidetab');?>
+<?php $this -> load -> view('base/settings/includes/sidetab');?>
 
 <div>Applications</div>

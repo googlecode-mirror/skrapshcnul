@@ -41,6 +41,9 @@ h3 {
 .sub-heading {
 	text-shadow: 1px 1px 0 white;
 }
+img {
+	border: none;
+}
 fieldset {
 	width: 300px;
 	margin-bottom: 2em;
@@ -85,7 +88,6 @@ fieldset {
 	font-size: 15px;
 }
 #login_form {
-	width: 450px;
 }
 /* Header */
 header {
@@ -391,6 +393,8 @@ input[type=search], .search {
 	box-shadow: inset 0 0 3px #CCC;
 }
 input[type=submit], .button-set a, .btn {
+	display: inline-block;
+	vertical-align: middle;
 	text-decoration: none;
 	white-space: nowrap;
 	position: relative;
@@ -420,6 +424,8 @@ span.button {
 	padding: 5px 15px;
 }
 .button, .button:link, .button:visited {
+	display: inline-block;
+	vertical-align: middle;
 	margin: 0 1px;
 	white-space: nowrap;
 	position: relative;
@@ -451,7 +457,10 @@ span.button {
 	background: #0e6488;
 	border-color: #083b50;
 }
-
+.button.xl {
+	padding: 10px 20px;
+	font-size: 20px;
+}
 
 .button-green {
 	background-color: #698C2E !important;
@@ -820,7 +829,7 @@ body::-webkit-scrollbar-corner {
 #f-widgets .block {
 	text-align: justify;
 	float: left;
-	width: 190px;
+	width: 200px;
 }
 #f-widgets .block p {
 	color: #BBBBBB;
@@ -832,7 +841,7 @@ body::-webkit-scrollbar-corner {
 }
 #f-widgets .block,
 .f-copyright {
-	padding: 0 20px;
+	padding: 0 25px 0 0;
 }
 .f-sitemap li {
 	float:left;
@@ -982,4 +991,7 @@ td {
 	border-style: solid;
 	border-width: 20px;
 	border-color: #CCCCCC transparent transparent transparent;
+}
+.box-padding {
+	padding: 10px 0;
 }
