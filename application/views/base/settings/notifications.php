@@ -9,7 +9,7 @@
 
 		<div id="settings-system-notification">
 			<h3>System Notifications</h3>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					When I receive system announcement
 				</div>
@@ -20,7 +20,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					When I receive system notifications
 				</div>
@@ -35,7 +35,7 @@
 		
 		<div id="settings-system-notification">
 			<h3>Profile Notifications</h3>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					When I receive event notifications.
 				</div>
@@ -46,7 +46,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					When people add me to their lunch wishlist.
 				</div>
@@ -61,7 +61,7 @@
 		
 		<div id="settings-system-notification">
 			<h3>Desktop Notifications</h3>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					Chrome Notification
 				</div>

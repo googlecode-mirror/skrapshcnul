@@ -9,7 +9,7 @@
 		
 		<div id="settings-profile">
 			<h3>Profile</h3>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					First Name
 				</div>
@@ -24,7 +24,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					Last Name
 				</div>
@@ -39,7 +39,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					Alias
 				</div>
@@ -59,7 +59,7 @@
 					
 				</div>
 			</div>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					Public Location
 				</div>
@@ -79,7 +79,7 @@
 		<div class="divider"></div>
 		<div id="settings-delivery-preferences">
 			<h3>Delivery</h3>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					Email
 				</div>
@@ -92,7 +92,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					Phone
 				</div>

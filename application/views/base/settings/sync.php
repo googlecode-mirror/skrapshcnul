@@ -9,7 +9,7 @@
 		
 		<div id="settings-sync-linkedin">
 			<h3>System Notifications</h3>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					<div id="linkedin" class="service-icon">LinkedIn</div>
 				</div>
@@ -42,7 +42,7 @@
 					<?php } ?>
 				</div>
 			</div>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					<div id="twitter" class="service-icon">Twitter</div>
 				</div>
@@ -58,7 +58,7 @@
 		
 		
 		<?php /* <table class="table-connections">
-		<tr class="row-item">
+		<tr class="row-item xl">
 			<td width="20%"><div id="linkedin" class="service-icon">LinkedIn</div></td>
 			<td width="80%">
 				<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
@@ -89,7 +89,7 @@
 				<?php } ?>
 			</td>
 		</tr>
-		<tr class="row-item">
+		<tr class="row-item xl">
 			<td width="20%"><div id="twitter" class="service-icon">Twitter</div></td>
 			<td width="80%">
 				<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>

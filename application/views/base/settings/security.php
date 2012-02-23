@@ -9,7 +9,7 @@
 		
 		<div id="settings-system-security">
 			<h3>Security Settings</h3>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					Password
 				</div>
@@ -18,7 +18,7 @@
 					<script>jQuery('#change_password_btn').button();</script>
 				</div>
 			</div>
-			<div class="row-item">
+			<div class="row-item xl">
 				<div class="content-table-2-col-left">
 					Secure Browsing
 				</div>
