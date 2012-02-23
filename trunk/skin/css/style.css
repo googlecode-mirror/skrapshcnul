@@ -110,6 +110,7 @@ header ul li {
 }
 #h-container {
 	height: 35px;
+	overflow: hidden;
 	line-height: 32px;block;
 	box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;

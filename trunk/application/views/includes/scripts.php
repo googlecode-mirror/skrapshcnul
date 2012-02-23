@@ -20,15 +20,15 @@
 <script src="<?php echo base_url();?>skin/js/jquery-cookie/jquery.cookie.js"></script>
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
-<?php /*<script src="<?php echo base_url();?>skin/js/angularjs/angular-0.9.19.min.js" ng:autobind></script>*/ ?>
+<script src="<?php echo base_url();?>skin/js/highcharts/highcharts.js"></script>
 <script src="<?php echo base_url();?>skin/js/yqlgeo/yqlgeo.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDNZh2NM04KwYoWEs_H9hGIF-mj9MOZvu4&sensor=true&libraries=geometry,places"></script>
 <?php echo $css_combined; ?>
 <?php echo $js_combined; ?>
 <?php ## Dynamic scripts?>
 <script language="javascript"><?php $this->load->view('includes/js/ls_notifications'); ?></script>
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDNZh2NM04KwYoWEs_H9hGIF-mj9MOZvu4&sensor=true&libraries=geometry,places"></script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26287683-1']);
@@ -41,6 +41,8 @@
   })();
 </script>
 
+<?php # ------------- Removed -------------------- ?>
+<?php /*<script src="<?php echo base_url();?>skin/js/angularjs/angular-0.9.19.min.js" ng:autobind></script>*/ ?>
 <?php /*
 <!-- start Mixpanel -->
 <script type="text/javascript">var mpq=[];mpq.push(["init","5f033e0ea3da3e277ef6cdd07d582b36"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();

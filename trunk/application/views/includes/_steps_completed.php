@@ -10,7 +10,7 @@
 	
 	<div id="steps-completed-body" style="display:none;">
 		<div class="steps-completed-item step1 first-item">
-			<?php echo anchor('settings/sync', 
+			<?php echo anchor('/synchronize', 
 			'<div class="completed-overlay incomplete"></div>'.
 			'<div><img src="/skin/images/p/steps_completed/completed_step_1.png"></div>'.
 			'<div class="desc">
