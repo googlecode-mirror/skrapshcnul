@@ -15,7 +15,6 @@ class Settings extends CI_Controller {
 		$this -> load -> helper('url');
 		$this -> load -> helper('linkedin/linkedin_api');
 		$this -> load -> model('linkedin/linkedin_model');
-		$this -> load -> model('page_steps_completed_model');
 		$this -> load -> model('user_profile_model');
 		$this -> load -> model('user_settings_model');
 		// Set Global Variables
@@ -29,8 +28,6 @@ class Settings extends CI_Controller {
 		}
 		
 		$this->user_id = $this -> session -> userdata('user_id');
-		
-		$this->data['steps_completed'] = $this -> page_steps_completed_model -> select($this->user_id);
 		
 		// Request Params: alt = json | , 
 		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
