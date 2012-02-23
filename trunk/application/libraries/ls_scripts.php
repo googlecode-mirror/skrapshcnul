@@ -41,6 +41,7 @@ class Ls_Scripts {
 			'skin/css/icons.css',
 			'skin/css/invitation.css',
 			'skin/css/layout.css',
+			'skin/css/layout_singlebox.css',
 			'skin/css/notification_icons.css',
 			'skin/css/notifications.css',
 			'skin/css/pages.css',

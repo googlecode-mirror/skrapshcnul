@@ -1,0 +1,41 @@
+body.singlebox {
+	background: rgb(30,87,153); /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 29%, rgba(6,49,84,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(29%,rgba(30,87,153,1)), color-stop(100%,rgba(6,49,84,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 29%,rgba(6,49,84,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 29%,rgba(6,49,84,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 29%,rgba(6,49,84,1) 100%); /* IE10+ */
+	background: radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 29%,rgba(6,49,84,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#063154',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	text-shadow: 1px 1px 1px #CCC;
+}
+.singlebox .m-content,
+.singlebox .forms,
+.singlebox #m-container-outer {
+	border: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	-khtml-box-shadow: none;
+	box-shadow: none;
+	background: none;
+}
+.singlebox .m-wrapper {
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(245,245,245,0.7) 0%, rgba(245,245,245,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(245,245,245,0.7)), color-stop(100%,rgba(245,245,245,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(245,245,245,0.7) 0%,rgba(245,245,245,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(245,245,245,0.7) 0%,rgba(245,245,245,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(245,245,245,0.7) 0%,rgba(245,245,245,1) 100%); /* IE10+ */
+	background: radial-gradient(center, ellipse cover,  rgba(245,245,245,0.7) 0%,rgba(245,245,245,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3f5f5f5', endColorstr='#f5f5f5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.singlebox .logo-home {
+	width: 400px;
+	margin: auto;
+}
+.singlebox .logo-home img {
+	max-width: 400px;
+}
+

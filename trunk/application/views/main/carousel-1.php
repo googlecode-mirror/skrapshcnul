@@ -1,5 +1,13 @@
 <div id="carousel-1" class="carousel-item">
-	<div style="float: right; width: 400px;">
+	<div style="display: inline-block; vertical-align: middle; width: 510px; padding-right: 20px;">
+		<div style="font-size: 250%">
+			Reinventing Networking for Entrepreneurs and Professionals
+		</div>
+		<div style="font-size: 120%">
+			Make your lunch valuable. Connect with relevant professionals and fellow entrepreneurs. Expand your network effectively and get great contacts for your career.
+		</div>
+	</div>
+	<div style="display: inline-block; vertical-align: middle; width: 420px;">
 		<div class="invitation-box-green">
 			<!-- Begin MailChimp Signup Form -->
 			<style type="text/css">
@@ -22,14 +30,6 @@
 			<div style="margin: 15px 0 0 0;"> Have an Invitation key? Register <?php echo anchor('auth/signup', 'here', 'style="color: #FFFFFF;"');?>. </div>
 			
 			<div class="clearfix"></div>
-		</div>
-	</div>
-	<div style="width: 550px;">
-		<div style="font-size: 250%">
-			Reinventing Networking for Entrepreneurs and Professionals
-		</div>
-		<div style="font-size: 120%">
-			Make your lunch valuable. Connect with relevant professionals and fellow entrepreneurs. Expand your network effectively and get great contacts for your career.
 		</div>
 	</div>
 </div>

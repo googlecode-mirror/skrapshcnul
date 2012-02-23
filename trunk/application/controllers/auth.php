@@ -109,7 +109,7 @@ class Auth extends Controller {
 				
 				//Render
 				//$this->data['main_content'] = '/auth/login';
-				//$this -> load -> view('includes/tmpl_box_center', $this->data);
+				//$this -> load -> view('includes/tmpl_singlebox', $this->data);
 				redirect('auth/login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
 				
 			}
@@ -135,7 +135,7 @@ class Auth extends Controller {
 			// Render View
 			//$this->load->view('auth/login', $this->data);
 			$this->data['main_content'] = '/auth/login';
-			$this -> load -> view('includes/tmpl_box_center', $this->data);
+			$this -> load -> view('includes/tmpl_singlebox', $this->data);
 		}
 	}
 
@@ -158,7 +158,7 @@ class Auth extends Controller {
 			// Render View
 			//$this->load->view('auth/create_user', $this->data);
 			$this->data['main_content'] = '/auth/signup_invalid_invitation_code';
-			$this -> load -> view('includes/tmpl_box_center', $this->data);
+			$this -> load -> view('includes/tmpl_singlebox', $this->data);
 			
 		} else {
 						
@@ -257,7 +257,7 @@ class Auth extends Controller {
 				// Render View
 				//$this->load->view('auth/create_user', $this->data);
 				$this->data['main_content'] = '/auth/signup';
-				$this -> load -> view('includes/tmpl_box_center', $this->data);
+				$this -> load -> view('includes/tmpl_singlebox', $this->data);
 			}
 		}
 	}
@@ -313,7 +313,7 @@ class Auth extends Controller {
 			//render
 			//$this->load->view('auth/change_password', $this->data);
 			$this->data['main_content'] = '/auth/change_password';
-			$this -> load -> view('includes/tmpl_box_center', $this->data);
+			$this -> load -> view('includes/tmpl_singlebox', $this->data);
 		}
 		else
 		{
@@ -351,7 +351,7 @@ class Auth extends Controller {
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 			//$this->load->view('auth/forgot_password', $this->data);
 			$this->data['main_content'] = '/auth/forgot_password';
-			$this -> load -> view('includes/tmpl_box_center', $this->data);
+			$this -> load -> view('includes/tmpl_singlebox', $this->data);
 		}
 		else
 		{
@@ -433,7 +433,7 @@ class Auth extends Controller {
 
 			//$this->load->view('auth/deactivate_user', $this->data);
 			$this->data['main_content'] = '/auth/deactivate_user';
-			$this -> load -> view('includes/tmpl_box_center', $this->data);
+			$this -> load -> view('includes/tmpl_singlebox', $this->data);
 			
 		}
 		else
@@ -552,7 +552,7 @@ class Auth extends Controller {
 			// Render View
 			//$this->load->view('auth/create_user', $this->data);
 			$this->data['main_content'] = '/auth/create_user';
-			$this -> load -> view('includes/tmpl_box_center', $this->data);
+			$this -> load -> view('includes/tmpl_singlebox', $this->data);
 			
 		}
 	}
@@ -608,7 +608,7 @@ class Auth extends Controller {
 		
 		// Render View
 		$this->data['main_content'] = '/auth/twitter_authed';
-		$this -> load -> view('includes/tmpl_box_center', $this->data);
+		$this -> load -> view('includes/tmpl_singlebox', $this->data);
 	}
 	
 	
@@ -653,6 +653,6 @@ class Auth extends Controller {
 		//$this->data['main_content'] = '/auth/email/new_password.tpl.php';
 		//$this->data['main_content'] = '/auth/email/forgot_password.tpl.php';
 		$this->data['main_content'] = '/auth/email/activate.tpl.php';
-		$this -> load -> view('includes/tmpl_box_center', $this->data);
+		$this -> load -> view('includes/tmpl_singlebox', $this->data);
 	}
 }
