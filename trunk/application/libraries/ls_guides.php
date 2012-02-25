@@ -34,7 +34,8 @@ class Ls_Guides {
 		$this -> ci -> load -> model('user_profile_model');
 		$this -> ci -> load -> library('session');		
 		$this -> ci -> load -> model('schedules_model');
-		$this -> ci -> load -> model('events_model');
+		$this -> ci -> load -> library('ls_events');
+		$this -> ci -> load -> library('ls_user_recommendation');
 		
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
@@ -86,16 +87,22 @@ class Ls_Guides {
 			$result['step3']['reason'] = "No schedule set.";
 		}
 		
-		## is there new event request?
-		//if ()
+		## pending requests ?
+		## pending recommendations ?
+		$count = array();
+		$count['pending_requests'] = $this -> ci -> ls_events -> 
+			countPendingEventRequests($user_id);
+		$count['pending_recommendations'] = $this -> ci -> 
+			ls_user_recommendation -> countPendingUserRecommendations($user_id);
 		
-		## has user scheduled ?
-		if (FALSE) {
+		if ($count['pending_requests'] == 0 && 
+			$count['pending_recommendations'] == 0) {
+				
 			$result['step4']['state'] = "Completed";
 		}
 		else {
-			$result['step4']['state'] = "Incomplete";
-			$result['step4']['reason'] = "No events suggestion yet.";
+			$result['step4']['state'] = "Incomplete";			
+			$result['step4']['reason'] = json_encode($count);
 		}
 		
 		return $result;

@@ -234,6 +234,13 @@ class Ls_User_Recommendation {
 		return $this -> ci -> user_recommendation_model -> 
 			isConfirmed_($user, $target);
 	}
+	
+	/*
+	 */
+	function countPendingUserRecommendations($user_id) {
+		return $this -> ci -> user_recommendation_model ->
+			countPendingUserRecommendation($user_id);
+	}
 }
 
 ?>
