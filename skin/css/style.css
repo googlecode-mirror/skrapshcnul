@@ -935,3 +935,6 @@ td {
 .box-padding {
 	padding: 10px 0;
 }
+.event_page .ui-button-text-only .ui-button-text {
+	padding: 5px 10px;
+}

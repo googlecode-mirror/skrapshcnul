@@ -1,5 +1,5 @@
 <div class="m-content">
-	<div class="c-pages shadow-rounded">
+	<div class="c-pages shadow-rounded event_page">
 		<h2><?php echo $tpl_page_title; ?></h2>
 		<h3 class="sub-heading">Events listed below requires your attention.</h3>
 		
@@ -22,9 +22,9 @@
 						</div>
 						<div style="display: inline-block;">
 							<div style="padding: 20px;" class="radio_buttonset">
-								<input type="radio" id="radio<?php echo $item['index'] ?>_1" name="user_recommendation_radio<?php echo $item['index'] ?>" <?php echo $item['selected'] ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_confirm(this);" />
+								<input type="radio" id="radio<?php echo $item['index'] ?>_1" name="user_recommendation_radio<?php echo $item['index'] ?>" <?php echo $item['selected'] == 1 ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_confirm(this);" />
 								<label for="radio<?php echo $item['index'] ?>_1">Yes</label>
-								<input type="radio" id="radio<?php echo $item['index'] ?>_0" name="user_recommendation_radio<?php echo $item['index'] ?>" <?php echo !$item['selected'] ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_reject(this);" />
+								<input type="radio" id="radio<?php echo $item['index'] ?>_0" name="user_recommendation_radio<?php echo $item['index'] ?>" <?php echo $item['selected'] == -1 ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_reject(this);" />
 								<label for="radio<?php echo $item['index'] ?>_0">No</label>
 							</div>
 						</div>

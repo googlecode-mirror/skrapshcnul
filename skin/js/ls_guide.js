@@ -57,7 +57,6 @@ Ls_steps_completed.update_view = function() {
 	// Create local copy of settings
 	var states = Ls_steps_completed.states;
 	
-	console.log(states);
 	if (states.step1.state == 'Completed') { jQuery('.steps-completed-item.step1 .completed-overlay').removeClass('incomplete'); } 
 	else { jQuery('.steps-completed-item.step1 .completed-overlay').addClass('incomplete'); }
 	
@@ -70,7 +69,8 @@ Ls_steps_completed.update_view = function() {
 	if (states.step4.state == 'Completed') { jQuery('.steps-completed-item.step4 .completed-overlay').removeClass('incomplete'); } 
 	else { jQuery('.steps-completed-item.step4 .completed-overlay').addClass('incomplete'); }
 	
-	if (window.console) console.log('Steps Completed updated.')
+	if (window.console) console.log(states);
+	if (window.console) console.log('Steps Completed updated.');
 }
 
 jQuery(document).ready(function() {

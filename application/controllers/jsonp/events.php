@@ -58,11 +58,12 @@ class Events extends CI_Controller {
 	public function add() {
 		
 		// Prepare _REQUEST data
+		$fields['deadline'] = isset($_REQUEST['deadline']) ? $_REQUEST['deadline'] : FALSE;
 		$fields['event_date'] = isset($_REQUEST['event_date']) ? $_REQUEST['event_date'] : FALSE;
 		$fields['event_location'] = isset($_REQUEST['event_location']) ? $_REQUEST['event_location'] : FALSE;
 		$fields['user_ids'] = isset($_REQUEST['user_ids']) ? $_REQUEST['user_ids'] : FALSE;
 		$fields['reason'] = isset($_REQUEST['reason']) ? $_REQUEST['reason'] : FALSE;
-
+		
 		$this -> data['results'] = $this -> ls_events -> create($fields);
 
 		$this -> json -> json_prep($this -> data);

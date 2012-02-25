@@ -266,7 +266,7 @@ class Events_model extends CI_Model {
 		}
 		$options .= ")";
 
-		$query = " SELECT ee.`event_id`, ee.`event_status`, ee.`date`, `location`, ee.`created_on`, ee.`updated_on` ";
+		$query = " SELECT ee.`event_id`, ee.`event_status`, ee.`date`, `location`, ee.`deadline`, ee.`created_on`, ee.`updated_on` ";
 		$query .= " FROM " . $this -> tables['events_event'] . " AS ee";
 		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON `eu`.`event_id` = `ee`.`event_id` ";
 		$query .= " WHERE `user_id` = '$user_id' ";
@@ -326,5 +326,28 @@ class Events_model extends CI_Model {
 		} else {
 			return FALSE;
 		}
+	}
+	
+	function countPendingEventRequests($user_id = FALSE) {
+		
+		if (!$user_id) {
+			return NULL;
+		}
+		
+		$query = " SELECT COUNT(*) AS count";
+		$query .= " FROM " . $this -> tables['events_event'] . " AS ee";
+		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON `eu`.`event_id` = `ee`.`event_id` ";
+		$query .= " WHERE `user_id` = '$user_id' AND `event_status` = 0 AND `rsvp` = 0";
+		
+		$mysql_result = $this -> db -> query($query);
+
+		if ($mysql_result -> num_rows() > 0) {
+			$row = $mysql_result -> row_array();
+			return $row['count'];
+		} else {
+			return FALSE;
+		}
+		
+		
 	}
 }

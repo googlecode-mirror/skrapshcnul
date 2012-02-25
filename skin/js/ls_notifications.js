@@ -116,7 +116,6 @@ function refresh_notifications() {
 		} else {
 			jQuery('#notification-toggle-count').html('0');
 			jQuery('#notification-toggle').removeClass('hasNewNotifications');
-			console.log(jQuery('#notification-toggle'));
 		}
 	});
 	// fresh frame src.
