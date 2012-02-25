@@ -113,7 +113,7 @@ class Invitations extends CI_Controller {
 		$this->data['invitation_code'] = $results->invitation_code;
 		$this->data['invitee_email'] = $results->invitee_email;
 		$this->data['sender_email'] = $results->email;
-		$message = $this -> load -> view('/invitations/email/sendInvitation', $this->data, true);
+		$message = $this -> load -> view('/base/invitations/email/sendInvitation', $this->data, true);
 		$this -> email->clear();
 		$this -> email->set_newline("\r\n");
 		$this -> email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
