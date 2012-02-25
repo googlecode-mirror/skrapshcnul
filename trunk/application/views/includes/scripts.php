@@ -41,6 +41,14 @@
   })();
 </script>
 
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
 <?php # ------------- Removed -------------------- ?>
 <?php /*<script src="<?php echo base_url();?>skin/js/angularjs/angular-0.9.19.min.js" ng:autobind></script>*/ ?>
 <?php /*
