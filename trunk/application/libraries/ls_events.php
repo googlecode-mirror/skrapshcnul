@@ -195,9 +195,17 @@ class Ls_Events {
         return $events;
     }
 	
-	function getAllPastEvents() {
+	/*
+	 * Function: get events with status options
+	 * 
+	 * @param	status_list		which kind of events you want to retrieve
+	 *                          e.g. {-1, 0, 2}, {0, 1}
+	 * 
+	 * return 					an array of events with information
+	 */
+	function getAllEvents($status_list) {
 		
-		$events = $this -> ci -> events_model -> getAllPastEvents();
+		$events = $this -> ci -> events_model -> getAllEvents($status_list);
 		
 		if (!$events) {
 			return array();

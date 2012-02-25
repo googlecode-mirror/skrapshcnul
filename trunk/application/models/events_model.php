@@ -295,7 +295,7 @@ class Events_model extends CI_Model {
 	function getAllEvents($status_list) {
 
 		// TODO check admin level
-		if (!status_list) {
+		if (!$status_list) {
 			return NULL;
 		}
 		
@@ -311,7 +311,7 @@ class Events_model extends CI_Model {
 		$options .= ")";
 
 		$query = " SELECT * FROM " . $this -> tables['events_event'] . " AS ee ";
-		$query .= " WHERE " . $option;
+		$query .= " WHERE " . $options;
 
 		$mysql_result = $this -> db -> query($query);
 		if ($mysql_result -> num_rows() > 0) {
