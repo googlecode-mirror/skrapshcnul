@@ -66,7 +66,7 @@ class Invitations extends CI_Controller {
 					$this -> _json_prep('Invitation Sent to '.$_REQUEST['invitee_email'].'!');
 				} else {
 					$this->_sendInvitationEmail($_REQUEST['invitee_email']);
-					$this -> _json_prep('', 'Invitation has already bee sent to this email.');
+					$this -> _json_prep('', 'Invitation has already been sent to this email.');
 				}
 				
 			} elseif ($this -> call == 'checkInvitationLeft' ) {
