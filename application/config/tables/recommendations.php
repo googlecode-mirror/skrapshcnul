@@ -12,7 +12,6 @@ if (!defined('BASEPATH'))
  * Tables.
  **/
 
-$config['tables']['events_event'] = "lss_events";
-$config['tables']['events_users'] = "lss_events_users";
+$config['tables']['user_recommendations'] = "lss_recommendations";
 
 /* End of file /tables/events.php */

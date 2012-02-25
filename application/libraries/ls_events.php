@@ -2,25 +2,22 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-/**
- * Name:  Notification
- * Author: @stiucsib86
- * Created:  11.09.2011
- * Description:
- *
- *	Handler for user recommendations
- *	1. user recommendations
- * 		- auto recommendations
- * 		- selected recommendations
- * 	2. user matched
- * 		- negotiated
- *
- *
- *
- *
- *
- * Requirements: PHP5 or above
- */
+/*
+CREATE TABLE IF NOT EXISTS `lss_events` (
+  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `event_status` int(3) NOT NULL COMMENT '0 = pending request; -1 = cancelled ; 1 = confirmed upcomming event; 2 = past event',
+  `date` datetime NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `reason` text NOT NULL,
+  `deadline` datetime NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` datetime NOT NULL,
+  PRIMARY KEY (`event_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+Check test/ls_events_tests.php for examples.
+*/
+
 class Ls_Events {
 
 	function __construct() {
@@ -34,6 +31,8 @@ class Ls_Events {
 		$this -> ci -> load -> library('ls_profile');
 		$this -> ci -> load -> library('form_validation');
 		$this -> ci -> load -> library('session');
+		$this -> ci -> load -> library('ls_user_recommendation');
+		
 		$this -> ci -> load -> helper('image/image_resize');
 		$this -> ci -> load -> helper('logger');
 		$this -> ci -> load -> helper('linkedin/linkedin_api');
@@ -47,7 +46,6 @@ class Ls_Events {
 		$this -> ci -> load -> model('user_profile_model');
 		$this -> ci -> load -> model('events_model');
 		$this -> ci -> load -> model('places_model');
-		$this -> ci -> load -> model('user_recommendation_model');
 
 		// Set Config
 		$this -> component_class = $this -> ci -> config -> item('component_class', 'ls_notifications');
@@ -60,139 +58,10 @@ class Ls_Events {
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
 	}
 
-	function getUserEventSuggestion($user_id) {
-
-		$events = ($this -> ci -> events_model -> getUserEventSuggestion($user_id));
-		
-		if (!$events) {
-			return array();
-		}
-		
-		// Populate Target User Profile Info
-		if (count($events) > 0) {
-			foreach ($events as $key => $item) {
-				$events[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
-			}
-		}
-
-		return $events;
-
+	function clearTables() { // WARNING: only for testing
+		return $this -> ci -> events_model -> clearTables();
 	}
-
-	function getUserEvent_request($user_id) {
-		$events = ($this -> ci -> events_model -> getUserEvent_request($user_id));
-		if (!$events) {
-			return array();
-		}
 		
-		if (count($events) > 0) {
-			foreach ($events as $key => $event) {
-				$restaurant_id = $event['location'];				
-				$events[$key]['location'] = 
-					$this -> ci -> places_model -> 
-					selectPlaceById($restaurant_id);
-				
-				$event_id = ($event['event_id']);
-				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
-				
-				// Populate Target User Profile Info
-				foreach ($users as $key2 => $user) {
-					$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
-					if ($user_id == $user['user_id']) {
-						$events[$key]['current_user'] = $user;
-					}
-				}
-				
-				$events[$key]['participant'] = $users;
-			}
-		}
-		
-		return $events;
-	}
-
-
-	function getUserEvent_upcomming($user_id) {
-		
-		$events = ($this -> ci -> events_model -> getUserEvent_upcomming($user_id));
-		
-		if (!$events) {
-			return array();
-		}
-		
-		if (count($events) > 0) {
-			foreach ($events as $key => $event) {
-				$restaurant_id = $event['location'];				
-				$events[$key]['location'] = 
-					$this -> ci -> places_model -> 
-					selectPlaceById($restaurant_id);
-	
-				$event_id = ($event['event_id']);
-				$all_users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
-				$target_users = array();
-				
-				// Populate Target User Profile Info
-				foreach ($all_users as $key2 => $user) {
-					## Exclude own self in the participant list.
-					if ($user_id == $user['user_id']) {
-						$events[$key]['current_user'] = $user;
-					} else {
-						$target_users[$key2] = $user;
-						$target_users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
-					}
-				}
-				
-				$events[$key]['participant'] = $target_users;
-			}
-		}
-		return $events;
-	}
-	
-	function getUserEvent_past($fields = FALSE) {
-		
-		if (!$fields) {
-			return FALSE;
-		}
-		
-		if (!isset($fields['user_id'])) {
-			return FALSE;
-		}
-		
-		$user_id = $fields['user_id'];
-		
-		$events = ($this -> ci -> events_model -> getUserEvent_past($user_id));
-		
-		if (!$events) {
-			return array();
-		}
-		
-		if (count($events) > 0) {	
-			foreach ($events as $key => $event) {
-				$restaurant_id = $event['location'];				
-				$events[$key]['location'] = 
-					$this -> ci -> places_model -> 
-					selectPlaceById($restaurant_id);
-	
-				$event_id = ($event['event_id']);
-				$users = ($this -> ci -> events_model -> getEventAllUsers($event_id));
-				
-				// Populate Target User Profile Info
-				foreach ($users as $key2 => $user) {
-					$users[$key2]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($user['user_id']));
-					if ($user_id == $user['user_id']) {
-						$events[$key]['current_user'] = $user;
-					}
-				}
-				
-				$events[$key]['participant'] = $users;
-				
-			}
-			
-		}
-		
-		return $events;
-		
-	}
-	
 	function rsvp($fields = FALSE) {
 		
 		if (!$fields) {
@@ -233,7 +102,7 @@ class Ls_Events {
 		$cnt = count($users);
 		for ($i = 0; $i < $cnt; ++$i) {
 			for ($j = 0; $j < $cnt; ++$j) if ($i != $j &&
-				!$this -> ci -> user_recommendation_model -> 
+				!$this -> ci -> ls_user_recommendation -> 
 				isConfirmed($users[$i], $users[$j])) {
 			
 				return FALSE;
@@ -242,6 +111,8 @@ class Ls_Events {
 		return TRUE;
 	}
 	
+	/*
+	 */
 	function create($fields = FALSE) {
 		
 		if(!$fields) {
@@ -279,23 +150,50 @@ class Ls_Events {
 		
 	}
 	
-	function getAllUpcomingEvents() {
-		
-		$events = $this -> ci -> events_model -> getAllUpcomingEvents();
-		
-		if (!$events) {
-			return array();
-		}
-		
-		foreach ($events as $key => $event) {
-			foreach ($event['participants'] as $key2 => $user){
-				$user_profile = ($this -> ci -> user_profile_model -> select($user['user_id']));
-				$events[$key]['participants'][$key2]['user_profile'] = $user_profile;
-			}
-		}
-		
-		return $events;
-	}
+	/*
+	 * Function: get events of user <code>user</code> with status options
+	 * 
+	 * @param	user_id			id of user
+	 * @param	status_list		which kind of events you want to retrieve
+	 *                          e.g. {-1, 0, 2}, {0, 1}
+	 * 
+	 * return 					an array of events with information
+	 */
+	function getEvents($user_id, $status_list) {
+        $events = ($this -> ci -> events_model -> 
+        	getEventsByUserId($user_id, $status_list));
+			
+        if (!$events) {
+            return array();
+        }
+        
+        if (count($events) > 0) {
+            foreach ($events as $key => $event) {
+                $restaurant_id = $event['location'];                            
+                $events[$key]['location'] = 
+                    $this -> ci -> places_model -> 
+                    selectPlaceById($restaurant_id);
+                
+                $event_id = ($event['event_id']);
+                $users = ($this -> ci -> events_model -> 
+                	getAllUsersByEventId($event_id));
+                
+                // Populate Target User Profile Info
+                foreach ($users as $key2 => $user) {
+                    $users[$key2]['rec_id_profile'] = ($this -> ci -> 
+                    	user_profile_model -> select($user['user_id']));
+						
+                    if ($user_id == $user['user_id']) {
+                            $events[$key]['current_user'] = $user;
+                    }
+                }
+                
+                $events[$key]['participant'] = $users;
+            }
+        }
+        
+        return $events;
+    }
 	
 	function getAllPastEvents() {
 		
