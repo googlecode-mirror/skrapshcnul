@@ -220,5 +220,10 @@ class Ls_Events {
 		
 		return $events;
 	}
+	
+	function countPendingEventRequests($user_id) {
+		$result = $this -> getEvents($user_id, array(0 => true));
+		return count($result);
+	}
 }
 ?>

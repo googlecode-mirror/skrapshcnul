@@ -18,9 +18,11 @@ class Ls_events_tests extends Toast
     }
 
     /**
-     * Do nothing after each individual test    
+     * Clear tables after each individual test    
      */
     function _post() {
+    	//$this -> ls_events -> clearTables();
+		//$this -> ls_user_recommendation -> clearTables();
     }
     
     /* TESTS BELOW */
@@ -79,6 +81,16 @@ class Ls_events_tests extends Toast
 		$this -> _assert_true($this -> ls_events -> create($obj1));
 		$this -> _assert_true($this -> ls_events -> create($obj2));
 		
+		##countPendingEventRequest
+		$result = $this -> ls_events -> countPendingEventRequests(1);
+		$this -> _assert_true($result == 2);
+		
+		$result = $this -> ls_events -> countPendingEventRequests(2);
+		$this -> _assert_true($result == 1);
+		
+		$result = $this -> ls_events -> countPendingEventRequests(4);
+		$this -> _assert_true($result == 1);
+		
 		## reject event
 		$f['user_id'] = 1;
 		$f['event_id'] = 1;
@@ -117,5 +129,28 @@ class Ls_events_tests extends Toast
 		
 		$result = $this -> ls_events -> getAllEvents(array(-1 => true, 1 => true));
 		$this -> _assert_true(count($result) == 2);
+
+		##countPendingEventRequest
+		$result = $this -> ls_events -> countPendingEventRequests(1);
+		$this -> _assert_true($result == 0);
+		
+		$result = $this -> ls_events -> countPendingEventRequests(2);
+		$this -> _assert_true($result == 0);
+		
+		##countPendingUserRecommendations
+		$result = $this -> ls_user_recommendation -> 
+			countPendingUserRecommendations(1);
+		$this -> _assert_true($result == 0);
+		
+		## create more recommendations
+		for ($i = 10; $i < 15; ++$i) {
+			$o['user_id'] = 1;
+			$o['target_user_id'] = $i;
+			$o['reason'] = "He is nice!";
+			$this -> _assert_true($this -> ls_user_recommendation -> create($o));			
+			$result = $this -> ls_user_recommendation -> 
+				countPendingUserRecommendations(1);
+			$this -> _assert_true($result == $i - 9);
+		}
     }
 }
