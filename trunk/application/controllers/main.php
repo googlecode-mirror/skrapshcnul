@@ -20,6 +20,11 @@ class Main extends CI_Controller {
 	}
 
 	function index($value = '') {
+		
+		if ($this -> data['is_logged_in']) {
+			redirect('user/profile', 'refresh');
+		}
+		
 		$this->data['ls_testimonial_list'] = $this->_getTestimonial();
 		
 		// Render view

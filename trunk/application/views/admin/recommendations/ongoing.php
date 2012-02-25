@@ -32,7 +32,7 @@
 				<td><?php echo($user['rec_reason']);?></td>
 				<td><?php echo($user['timestamp']);?></td>
 				<td><?php echo($user['selected'])? 'Seleted': '-';?></td>
-				<td><?php echo($user['valid'] ? "Yes" : "No");?></td>
+				<td><?php echo($user['approved'] ? "Yes" : "No");?></td>
 			</tr>
 			<?php }?>
 		</tbody>

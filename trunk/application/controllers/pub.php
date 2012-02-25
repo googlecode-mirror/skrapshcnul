@@ -67,10 +67,10 @@ class Pub extends CI_Controller {
 		
 		$this -> data['preferences'] = $this -> preferences_model -> selectPreferences($this->data['target_user_id']);
 		
-		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this->data['target_user_id']));
-		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEvent_request($this->data['target_user_id']));
-		$this -> data['events']['upcoming'] = ($this -> ls_events -> getUserEvent_upcomming($this->data['target_user_id']));
-		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this->data['target_user_id']));
+		$this -> data['events']['auto_recommendation'] = ($this -> ls_user_recommendation -> getUserRecommendationsByUserId($this->data['target_user_id']));
+		$this -> data['events']['suggestions'] = ($this -> ls_events -> getEvents($this->data['target_user_id'], array(0 => true)));
+		$this -> data['events']['upcoming'] = ($this -> ls_events -> getEvents($this->data['target_user_id'], array(1 => true)));
+		$this -> data['events']['past_events'] = ($this -> ls_events -> getEvents($this->data['target_user_id'], array(2 => true)));
 		
 		// Render views
 		$this -> data['tpl_page_id'] = 'profile';
