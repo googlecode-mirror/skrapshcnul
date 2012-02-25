@@ -1,8 +1,8 @@
 /* Notification */
 #notifications-mini-area {
 	position: fixed;
-	visibility: hidden;
-	top: 35px;
+	display: none;
+	top: 53px;
 	right: 10px;
 }
 #notifications-mini-area iframe {
@@ -18,6 +18,12 @@
 	border: 1px solid #AAAAAA;
 	border-radius: 2px;
 }
+#notification-mini a {
+	cursor: pointer;
+}
+#notification-mini a:hover {
+	text-decoration: none;
+}
 .notification-item-xs {
 	color: #666;
 	border: 1px solid #DDDFE7;
@@ -26,6 +32,13 @@
 }
 .notification-item:hover {
 	background: rgba(248,248,248,0.5);
+}
+.notification-new, .unread-notification .row-item {
+	cursor: pointer;
+	background: #FBFBAD;
+}
+.notification-new, .unread-notification .row-item:hover {
+	background: #F9F995;
 }
 .notification-stream {
 	min-height: 250px;

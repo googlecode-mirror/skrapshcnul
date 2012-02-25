@@ -70,40 +70,6 @@ class Json extends CI_Controller {
 		}
 	}
 
-	function set_notifications_new_as_read($type = 'json') {
-
-		$asso_array = ($this -> uri -> uri_to_assoc(3));
-
-		if (isset($asso_array['notification_id'])) {
-			$notification_id = $asso_array['notification_id'];
-		} else {
-			$notification_id = $this -> input -> post('notification_id');
-		}
-
-		$string = 'notification_123';
-		if (strstr($string, 'notification_')) {
-			$array = str_ireplace('notification_', '', $string);
-		}
-		print_r($array);
-
-		if (!isset($this -> session -> userdata['id'])) {
-			echo json_encode(FALSE);
-			return FALSE;
-		} else if (empty($notification_id)) {
-			echo json_encode(FALSE);
-			echo 'no notification';
-			return FALSE;
-		}
-
-		$result = (bool)$this -> ls_notifications -> set_notifications_new_as_read($this -> session -> userdata['id'], $notification_id);
-
-		if ($type == "ajax") {
-
-		} else {
-			echo json_encode($result ? 'success' : FALSE);
-		}
-	}
-
 	function getTotalUsers() {
 		echo json_encode($this -> ion_auth -> getTotalUsers() + 31);
 	}

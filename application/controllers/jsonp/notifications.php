@@ -10,6 +10,7 @@ class Notifications extends CI_Controller {
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('session');
 		$this -> load -> library('form_validation');
+		$this -> load -> library('ls_notifications');
 		$this -> load -> library('ls_profile');
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('input');
@@ -29,19 +30,25 @@ class Notifications extends CI_Controller {
 		// Authentication
 		$this -> json -> is_autheticated();
 	}
-
-	public function _remap($method) {
-		if ($method == 'some_method_to_bypass') {
-			$this -> $method();
-		} else {
-			$this -> index();
-		}
-	}
-
+	
 	function index() {
 		
 		$this -> json -> json_prep($this -> data);
 
+	}
+
+	function set_notifications_as_read($type = 'json') {
+		
+		$notification_id = ($this -> input -> get('notification_id'));
+		
+		if (!isset($notification_id) || !is_numeric($notification_id)) {
+			$this -> json -> json_prep($this -> data);
+			return FALSE;
+		}
+
+		$this -> data['results'] = (bool)$this -> ls_notifications -> set_notifications_new_as_read($this -> session -> userdata['id'], $notification_id);
+		
+		$this -> json -> json_prep($this -> data);
 	}
 
 }

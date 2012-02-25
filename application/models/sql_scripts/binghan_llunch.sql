@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2012 at 06:25 PM
+-- Generation Time: Feb 25, 2012 at 01:36 PM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.8
 
@@ -265,6 +265,21 @@ CREATE TABLE IF NOT EXISTS `lss_schedules` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lss_statistics_total_users`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_statistics_total_users` (
+  `year_month` date NOT NULL,
+  `total_users` int(11) NOT NULL,
+  `details` text NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`year_month`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lss_survey_data_1`
 --
 
@@ -373,7 +388,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=208 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=218 ;
 
 -- --------------------------------------------------------
 
