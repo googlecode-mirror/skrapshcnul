@@ -24,6 +24,9 @@
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'places') ? 'active' : '';?>">
 			<?php echo anchor('admin/dashboard/places', 'Places', 'id="a-s-payment" class="a-s-icon-xlhdpi"'); ?>
 		</li>
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'places') ? 'active' : '';?>">
+			<?php echo anchor('statistics/users', 'User Statistics', 'id="a-s-payment" class="a-s-icon-xlhdpi"'); ?>
+		</li>
 		<?php /* ?>
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'past_events') ? 'active' : '';?>">
 			<?php echo anchor('admin/dashboard/past_events', 'Past Events', 'id="a-s-mobile" class="a-s-icon-xlhdpi"'); ?>

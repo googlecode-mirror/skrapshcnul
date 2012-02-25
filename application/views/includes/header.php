@@ -11,11 +11,11 @@
 <header>
 	<div id="header">
 		<div id="h-container">
-			<div id="h-menu">
+			<div id="lunchsparks-header-logo" class="header-menu-items">
+				<?php echo anchor('', '<img src="'.base_url().'/skin/images/ls_logo_white.png" height="40px" style="display: block;">', array('from' => 'main'));?>
+			</div>
+			<div id="h-menu" class="header-menu-items">
 				<ul>
-					<li id="lunchsparks-header-logo">
-						<?php echo anchor('', '<img src="'.base_url().'/skin/images/ls_logo_white.png" height="32px">', array('from' => 'main'));?>
-					</li>
 					<?php if (isset($is_logged_in) && $is_logged_in ) { ?>
 						<?php /*
 						<li>
@@ -52,6 +52,13 @@
 						</li>
 					<?php } ?>
 				</ul>
+			</div>
+			
+			<div id="lunchsparks-header-logo" class="header-menu-items">
+				<form method="get" action="/search/">
+					<input name="q" type="search" class="search" placeholder="Search tag..." value="">
+					<input type="button" class="button" value="Go" />
+				</form>
 			</div>
 			<div id="h-uacc">
 				<?php if ($is_logged_in) {
