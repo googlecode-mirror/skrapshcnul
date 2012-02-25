@@ -46,7 +46,7 @@ class Events extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Events";
 		// Render views
 		$this -> data['main_content'] = 'base/events/index';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 	}
 
 	function upcoming() {
@@ -59,7 +59,7 @@ class Events extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Upcoming Events";
 
 		$this -> data['main_content'] = 'events/upcoming';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 	}
 
 	function past() {
@@ -72,7 +72,7 @@ class Events extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Past Events";
 
 		$this -> data['main_content'] = 'events/past';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 	}
 
 	function suggestions() {
@@ -85,7 +85,7 @@ class Events extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Suggestion";
 
 		$this -> data['main_content'] = 'base/events/suggestions';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 	}
 
 	function insert() {

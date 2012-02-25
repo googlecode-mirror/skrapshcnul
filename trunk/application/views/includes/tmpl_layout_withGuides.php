@@ -9,6 +9,7 @@
 		<div id="m-container-outer">
 			<div id="m-container">
 				<div class="m-wrapper">
+					<?php $this -> load -> view('includes/_steps_completed');?>
 					<?php $this -> load -> view($main_content);?>
 				</div>
 			</div>

@@ -50,7 +50,7 @@ class Synchronize extends CI_Controller {
 
 		// Render view
 		$this -> data['main_content'] = 'base/synchronize/index';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 	}
 	
 	function linkedIn($value = FALSE) {
@@ -68,7 +68,7 @@ class Synchronize extends CI_Controller {
 
 		// Render view
 		$this -> data['main_content'] = 'base/synchronize/index';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 		
 	}
 	
