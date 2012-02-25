@@ -54,12 +54,15 @@
 				</ul>
 			</div>
 			
+			<?php if (isset($is_logged_in) && $is_logged_in ) { ?>
 			<div id="lunchsparks-header-logo" class="header-menu-items">
 				<form method="get" action="/search/">
 					<input name="q" type="search" class="search" placeholder="Search tag..." value="">
 					<input type="button" class="button" value="Go" />
 				</form>
 			</div>
+			<?php } ?>
+			
 			<div id="h-uacc">
 				<?php if ($is_logged_in) {
 				?>

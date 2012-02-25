@@ -56,16 +56,6 @@ jQuery(document).ready(function() {
 				stacking: 'normal'
 			}
 		},
-
-		/*series: [{
-			name: 'John',
-			data: [5, 3, 4, 7, 2],
-			stack: 'male'
-		}, {
-			name: 'Joe',
-			data: [3, 4, 4, 2, 5],
-			stack: 'male'
-		}]*/
 		series: [{
 			name: user_stats.series.name,
 			data: user_stats.series.data,
