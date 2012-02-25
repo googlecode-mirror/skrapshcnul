@@ -6,6 +6,15 @@
 		<form method="post" id="form_new_recommendation">
 			<div>
 				<div style="display: inline-block; vertical-align: top;">
+					<label>Deadline: </label>
+					<div class="caption">
+						Enter the deadline for user to accept the event. (YYYY-MM-DD HH:MM:SS)
+					</div>
+					<input type="text" id="deadline" name="deadline" placeholder="YYYY-MM-DD HH:MM:SS" />
+				</div>
+			</div>
+			<div>
+				<div style="display: inline-block; vertical-align: top;">
 					<label>Datetime: </label>
 					<div class="caption">
 						Enter the date for the event. (YYYY-MM-DD HH:MM:SS)

@@ -60,10 +60,10 @@
 						<?php } else { ?>
 							<div>RSVP?</div>
 							<div style="padding: 20px 5px;" class="radio_buttonset">
-								<input type="radio" id="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_1" name="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_1" ls-user_id="<?php echo $event['current_user']['user_id'] ?>" ls-event_id="<?php echo $event['event_id'] ?>" onclick="event_recommendation_rsvp_confirm(this);" />
-								<label for="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_1">Yes</label>
-								<input type="radio" id="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_0" name="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_0" ls-user_id="<?php echo $event['current_user']['user_id'] ?>" ls-event_id="<?php echo $event['event_id'] ?>" onclick="event_recommendation_rsvp_reject(this);" />
-								<label for="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_0">No</label>
+								<input type="radio" id="event_recommendation_radio_<?php echo $event['event_id'] ?>_1" name="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_1" ls-user_id="<?php echo $event['current_user']['user_id'] ?>" ls-event_id="<?php echo $event['event_id'] ?>" onclick="event_recommendation_rsvp_confirm(this);" />
+								<label for="event_recommendation_radio_<?php echo $event['event_id'] ?>_1">Yes</label>
+								<input type="radio" id="event_recommendation_radio_<?php echo $event['event_id'] ?>_0" name="event_recommendation_radio<?php echo $event['current_user']['user_id'] ?>_0" ls-user_id="<?php echo $event['current_user']['user_id'] ?>" ls-event_id="<?php echo $event['event_id'] ?>" onclick="event_recommendation_rsvp_reject(this);" />
+								<label for="event_recommendation_radio_<?php echo $event['event_id'] ?>_0">No</label>
 							</div>
 						<?php } ?>
 					</div>

@@ -263,7 +263,7 @@ class User_Recommendation_model extends CI_Model {
 	function countPendingUserRecommendation($user_id) {
 
 		$query = " SELECT count(*) as count FROM " . $this -> tables['user_recommendations'];
-		$query .= " WHERE `approved` = 1 AND `selected` = 0; ";
+		$query .= " WHERE `approved` = 1 AND `selected` = 0 AND `user_id` = $user_id; ";
 		$mysql_result = $this -> db -> query($query);
 		if ($mysql_result -> num_rows() > 0) {
 			return $mysql_result -> row() -> count;

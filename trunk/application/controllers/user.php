@@ -20,6 +20,7 @@ class User extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> library('ls_events');
 		$this -> load -> library('ls_profile');
+		$this -> load -> library('ls_user_recommendation');
 		$this -> load -> library('session');
 		$this -> load -> model('linkedin/linkedin_model');
 		$this -> load -> model('page_steps_completed_model');
@@ -80,10 +81,10 @@ class User extends CI_Controller {
 		
 		$this -> data['preferences'] 	= $this -> preferences_model -> selectForCurrentUser();
 		
-		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this -> user_id));
-		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEvent_request($this -> user_id));
-		$this -> data['events']['upcoming'] = ($this -> ls_events -> getUserEvent_upcomming($this -> user_id));
-		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this -> user_id));
+		$this -> data['events']['auto_recommendation'] = ($this -> ls_user_recommendation -> getUserRecommendationsByUserId($this -> user_id));
+		$this -> data['events']['suggestions'] = ($this -> ls_events -> getEvents($this -> user_id, array(0 => true)));
+		$this -> data['events']['upcoming'] = ($this -> ls_events -> getEvents($this -> user_id, array(1 => true)));
+		$this -> data['events']['past_events'] = ($this -> ls_events -> getEvents($this -> user_id, array(2 => true)));
 		
 		// Initialize
 		if ($this -> session -> userdata('linkedin_pulled') == NULL) {

@@ -33,16 +33,15 @@ class Events extends CI_Controller {
 	}
 
 	function index() {
-		
-		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this -> user_id));
-		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEvent_request($this -> user_id));
-		$this -> data['events']['upcoming'] = ($this -> ls_events -> getUserEvent_upcomming($this -> user_id));
-		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this -> user_id));
-		
-		
+
+		$this -> data['events']['auto_recommendation'] = ($this -> ls_user_recommendation -> getUserRecommendationsByUserId($this -> user_id));
+		$this -> data['events']['suggestions'] = ($this -> ls_events -> getEvents($this -> user_id, array(0 => true)));
+		$this -> data['events']['upcoming'] = ($this -> ls_events -> getEvents($this -> user_id, array(1 => true)));
+		$this -> data['events']['past_events'] = ($this -> ls_events -> getEvents($this -> user_id, array(2 => true)));
+
 		// Render view data
-		$this -> data['head_title']		= 'Events'; 
-		$this -> data['tpl_page_id']	= 'Events#index';
+		$this -> data['head_title'] = 'Events';
+		$this -> data['tpl_page_id'] = 'Events#index';
 		$this -> data['tpl_page_title'] = "Events";
 		// Render views
 		$this -> data['main_content'] = 'base/events/index';
@@ -50,9 +49,9 @@ class Events extends CI_Controller {
 	}
 
 	function upcoming() {
-		
+
 		$this -> data['events']['suggestions'] = ($this -> ls_events -> getUserEventMatched($this -> user_id));
-		
+
 		// Render views data
 		$this -> data['head_title'] = 'Upcoming Events | Lunchsparks';
 		$this -> data['tpl_page_id'] = "upcoming";
@@ -65,7 +64,7 @@ class Events extends CI_Controller {
 	function past() {
 
 		$this -> data['events']['past_events'] = ($this -> ls_events -> getUserEvent_past($this -> user_id));
-		
+
 		// Render views data
 		$this -> data['head_title'] = 'Past Events | Lunchsparks';
 		$this -> data['tpl_page_id'] = "past";
@@ -76,9 +75,9 @@ class Events extends CI_Controller {
 	}
 
 	function suggestions() {
-		
-		$this -> data['events']['auto_recommendation'] = ($this -> ls_events -> getUserEventSuggestion($this -> user_id));
-		
+
+		$this -> data['events']['auto_recommendation'] = ($this -> ls_user_recommendation -> getUserRecommendationsByUserId($this -> user_id));
+
 		// Render views data
 		$this -> data['head_title'] = 'Suggestion | Lunchsparks';
 		$this -> data['tpl_page_id'] = 'suggestions';

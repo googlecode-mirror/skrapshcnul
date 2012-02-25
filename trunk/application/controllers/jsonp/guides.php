@@ -60,6 +60,7 @@ class Guides extends CI_Controller {
 		if (!isset($this -> user_id)) {return FALSE;}
 		
 		$this -> data['results'] = $this -> ls_guides -> getWelcomeGuide_States($this -> user_id);
+		
 		$this -> json -> json_prep($this -> data);
 	}
 

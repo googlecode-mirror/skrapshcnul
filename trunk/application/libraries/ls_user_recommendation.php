@@ -180,8 +180,16 @@ class Ls_User_Recommendation {
 	 * old name: getUserEventSuggestion
 	 */
 	function getUserRecommendationsByUserId($user_id) {
-		return $this -> ci -> user_recommendation_model -> 
+		$results = $this -> ci -> user_recommendation_model -> 
 			getUserRecommendationsByUserId($user_id);
+		
+		if (sizeof($results) > 0) {
+			foreach($results as $key => $item) {
+				$results[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
+			}
+		}
+		
+		return $results;
 	}
 	
 	/*

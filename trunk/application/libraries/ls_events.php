@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `lss_events` (
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 Check test/ls_events_tests.php for examples.
 */
@@ -155,7 +155,11 @@ class Ls_Events {
 	 * 
 	 * @param	user_id			id of user
 	 * @param	status_list		which kind of events you want to retrieve
-	 *                          e.g. {-1, 0, 2}, {0, 1}
+	 *                          e.g. {
+	 * 								-1: cancel, 
+	 * 								0: event requests,
+	 * 								1: upcoming events
+	 * 								2: past events}, {0, 1}
 	 * 
 	 * return 					an array of events with information
 	 */
@@ -222,8 +226,10 @@ class Ls_Events {
 	}
 	
 	function countPendingEventRequests($user_id) {
-		$result = $this -> getEvents($user_id, array(0 => true));
-		return count($result);
+			
+		$result = $this -> ci -> events_model -> countPendingEventRequests($user_id);
+		
+		return ($result);
 	}
 }
 ?>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 25, 2012 at 01:36 PM
+-- Generation Time: Feb 25, 2012 at 02:53 PM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.8
 
@@ -43,10 +43,11 @@ CREATE TABLE IF NOT EXISTS `lss_components` (
 
 CREATE TABLE IF NOT EXISTS `lss_events` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT,
-  `event_status` int(3) NOT NULL COMMENT '0 = pending request; -1 = cancelled ; 1 = confirmed event',
+  `event_status` int(3) NOT NULL COMMENT '0 = pending request; -1 = cancelled ; 1 = confirmed upcomming event; 2 = past event',
   `date` datetime NOT NULL,
   `location` varchar(100) NOT NULL,
   `reason` text NOT NULL,
+  `deadline` datetime NOT NULL,
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`event_id`)
@@ -237,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `lss_recommendations` (
   `user_id` int(11) NOT NULL,
   `rec_id` int(11) NOT NULL,
   `rec_reason` text,
-  `valid` tinyint(1) NOT NULL,
+  `approved` tinyint(1) NOT NULL,
   `selected` tinyint(1) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`index`)

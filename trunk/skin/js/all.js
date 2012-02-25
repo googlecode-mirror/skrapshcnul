@@ -13,7 +13,7 @@ console.log(Ls_steps_completed.settings);console.log(Ls_steps_completed.settings
 else{jQuery('#steps-completed-body').show();}
 Ls_steps_completed.update();setInterval('Ls_steps_completed.update()',10000);}
 Ls_steps_completed.update=function(){jQuery.getJSON('/jsonp/guides/steps_completed?alt=json&callback=?',{},function(data){if(data.results){Ls_steps_completed.states=data.results;Ls_steps_completed.update_view();}});}
-Ls_steps_completed.update_view=function(){var states=Ls_steps_completed.states;console.log(states);if(states.step1.state=='Completed'){jQuery('.steps-completed-item.step1 .completed-overlay').removeClass('incomplete');}
+Ls_steps_completed.update_view=function(){var states=Ls_steps_completed.states;if(states.step1.state=='Completed'){jQuery('.steps-completed-item.step1 .completed-overlay').removeClass('incomplete');}
 else{jQuery('.steps-completed-item.step1 .completed-overlay').addClass('incomplete');}
 if(states.step2.state=='Completed'){jQuery('.steps-completed-item.step2 .completed-overlay').removeClass('incomplete');}
 else{jQuery('.steps-completed-item.step2 .completed-overlay').addClass('incomplete');}
@@ -21,7 +21,7 @@ if(states.step3.state=='Completed'){jQuery('.steps-completed-item.step3 .complet
 else{jQuery('.steps-completed-item.step3 .completed-overlay').addClass('incomplete');}
 if(states.step4.state=='Completed'){jQuery('.steps-completed-item.step4 .completed-overlay').removeClass('incomplete');}
 else{jQuery('.steps-completed-item.step4 .completed-overlay').addClass('incomplete');}
-if(window.console)console.log('Steps Completed updated.')}
+if(window.console)console.log(states);if(window.console)console.log('Steps Completed updated.');}
 jQuery(document).ready(function(){jQuery('#steps-completed-title-btn').click(function(){if(confirm("This will disable this guide permanently. Continue?")){Ls_steps_completed.settings.isDismissed=true;jQuery.cookie(cookie_name_steps_completed,JSON.stringify(Ls_steps_completed.settings));}else{return false;}
 return false;});jQuery('#steps-completed-title').click(function(){if(jQuery('#steps-completed-body').css('display')=='none'){Ls_steps_completed.settings.isHidden=false;jQuery('#steps-completed-body').slideDown('slow');jQuery.cookie(cookie_name_steps_completed,JSON.stringify(Ls_steps_completed.settings));}else{Ls_steps_completed.settings.isHidden=true;jQuery('#steps-completed-body').slideUp('slow');jQuery.cookie(cookie_name_steps_completed,JSON.stringify(Ls_steps_completed.settings));}
 return true;});});
@@ -43,7 +43,7 @@ jQuery(document).ready(function(){new LS_notifications();jQuery.getJSON("/json/g
 LS_notifications.init=function(){resizeNotificationIframeToFitContent();set_notification_toggle();refresh_notifications();setInterval("refresh_notifications()",10000);jQuery('.unread-notification').click(function(){LS_notifications.mark_as_read(this);});}
 LS_notifications.mark_as_read=function(notification_el){var el=jQuery(notification_el);var notification_id=el.attr('ls-oid');var notification_url=el.attr('ls-url');jQuery.getJSON("/jsonp/notifications/set_notifications_as_read?alt=json&callback=?",{'notification_id':notification_id},function(data){if(window.log)console.log(data);jQuery(this).removeClass('unread-notification');window.parent.location.href=notification_url;});}
 function refresh_notifications(){jQuery.getJSON("/json/check_notifications_new",function(data){if(data){jQuery('#notification-toggle-count').html(data);jQuery('#notification-toggle').addClass('hasNewNotifications');if(document.getElementById('notifications-mini-iframe'))
-document.getElementById('notifications-mini-iframe').contentDocument.location.reload(true);}else{jQuery('#notification-toggle-count').html('0');jQuery('#notification-toggle').removeClass('hasNewNotifications');console.log(jQuery('#notification-toggle'));}});}
+document.getElementById('notifications-mini-iframe').contentDocument.location.reload(true);}else{jQuery('#notification-toggle-count').html('0');jQuery('#notification-toggle').removeClass('hasNewNotifications');}});}
 
 // @fileRef ls_preferences.js 
 jQuery(document).ready(function(){jQuery('.preference-tag-btn-add').click(function(){var el=jQuery(this);var preference_id=escape(el.attr('ls:pref_id'));var preference_tag=escape(el.prev().val());jQuery.getJSON('/user/preferences',{alt:'json',call:'save',preference_id:preference_id,preference_tag:preference_tag},function(data){console.log(data);if(data.results){el.prev().val('');preference_tag=unescape(preference_tag);preference_tag_add_html(preference_id,preference_tag);}});});});function preference_tag_add_html(preference_id,preference_tag){var el=jQuery('<div class="preferences-data-item">'+'<div class="preferences-data-item-content">'+'<a href="/search/tag/'+preference_tag+'">'+'<div>'+preference_tag+' <a href="javascript:void(0)" class="preference-tag-btn-remove" ls:pref_id="'+preference_id+'" ls:pref_tag="'+preference_tag+'" onclick="preference_tag_delete(this)"> [x] </a>'+'</div>'+'</a>'+'</div>'+'</div>');jQuery("#preferences-data-container-"+preference_id).append(el);}

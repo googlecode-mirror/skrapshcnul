@@ -201,10 +201,10 @@ class Dashboard extends CI_Controller {
 			## Save to DB
 		}
 		
-		$this -> data['results']['events_upcoming'] = $this -> ls_events -> getAllUpcomingEvents();
+		$this -> data['results']['events_upcoming'] = $this -> ls_events -> getAllEvents(array(1=>TRUE));
 		$this -> data['results']['events_upcoming_count'] = count($this -> data['results']['events_upcoming']);
 		
-		$this -> data['results']['events_past'] = $this -> ls_events -> getAllPastEvents();
+		$this -> data['results']['events_past'] = $this -> ls_events -> getAllEvents(array(2=>TRUE));
 		$this -> data['results']['events_past_count'] = count($this -> data['results']['events_past']);
 		
 		// Render views data
