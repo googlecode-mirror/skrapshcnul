@@ -173,12 +173,12 @@ class Dashboard extends CI_Controller {
 			## Save to DB
 		}
 		
-		$this -> data['results']['recommendations_count'] = $this -> events_model -> getUserEventSuggestion_count();
-		$this -> data['results']['recommendations'] = $this -> events_model -> getUserEventSuggestion_all_by_page();
+		$this -> data['results']['recommendations_count'] = $this -> ls_user_recommendation -> countApprovedUserRecommendations();
+		$this -> data['results']['recommendations'] = $this -> ls_user_recommendation -> getApprovedUserRecommendations();
 
-		$this -> data['results']['past_recommendations_count'] = $this -> events_model -> getPastUserEventSuggestion_count();
-		$this -> data['results']['past_recommendations'] = $this -> events_model -> getPastUserEventSuggestions_all_by_page();
-
+		$this -> data['results']['past_recommendations_count'] = $this -> ls_user_recommendation -> countUnapprovedUserRecommendations();
+		$this -> data['results']['past_recommendations'] = $this -> ls_user_recommendation -> getUnapprovedUserRecommendations();
+		
 		// Render views data
 		$this -> data['head_title'] = 'Recommendations | Lunchsparks';
 		$this -> data['tpl_page_id'] = "recommendations";

@@ -22,7 +22,7 @@
 			array('from' => 'main')); ?>
 		</div>
 		<div class="steps-completed-item step2">
-			<?php echo anchor('user/preferences', 
+			<?php echo anchor('/preferences', 
 			'<div class="completed-overlay incomplete"></div>'.
 			'<div><img src="/skin/images/p/steps_completed/completed_step_2.png"></div>'.
 			'<div class="desc">
