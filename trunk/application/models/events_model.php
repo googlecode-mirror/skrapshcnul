@@ -7,7 +7,7 @@ class Events_model extends CI_Model {
 
 	public $tables = array();
 
-	public function __construct() {
+	function __construct() {
 		$this -> load -> config('tables/events', TRUE);
 		$this -> load -> helper('logger');
 
@@ -16,7 +16,24 @@ class Events_model extends CI_Model {
 
 	}
 	
-	function getEventById($event_id) {
+	function clearTables() { // WARNING: only for testing
+		$result = TRUE;
+		foreach ($this -> tables as $key => $value) {
+			$result = $result && ($this -> db -> truncate($value));
+		}
+		return $result;
+	}
+
+
+	/*-----------------------------------------------------------------------
+	 * Section 1: Manipulate an event using its id 
+	 *-----------------------------------------------------------------------*/
+		
+	/*
+	 * Function: Get information about an event given its id.
+	 * @param 	event_id	the event id
+	 */
+	function getEventByEventId($event_id) {
 		$query = "SELECT * FROM `lss_events` WHERE `event_id` = '$event_id';";
 		$result = $this -> db -> query($query);
 		if (empty($result)) return NULL; // error
@@ -24,6 +41,13 @@ class Events_model extends CI_Model {
 		else return $result -> row_array(); 
 	}
 	
+	/*
+	 * Function: Get information about lunch buddies that participate 
+	 * in an event <code>event_id</code> with user <code>user_id</code>.
+	 * 
+	 * @param	event_id	the event id
+	 * @param 	user_id		the user id 
+	 */
 	function getLunchBuddiesByEventId($event_id, $user_id) {
 		$query = "SELECT * FROM `lss_events_users` " . 
 				 "WHERE `event_id` = '$event_id' ". 
@@ -33,200 +57,14 @@ class Events_model extends CI_Model {
 		else return $result -> result_array();
 	}
 	
-	function updateEventStatus($event_id, $status) {
-		$query = "UPDATE " . $this -> tables['events_event'] .
-				 " SET event_status = '$status' " .
-				 " WHERE event_id = '$event_id' AND event_status = '0'; ";
-		return $this -> db -> query($query);
-	}
-
-	function hasBeenConfirmed($event_id) {
-		$query = "SELECT * FROM " . $this -> tables['events_users'] .
-				 " WHERE event_id = '$event_id' " .
-				 " AND rsvp != 1; ";
-		$result = $this -> db -> query($query);				 
-		if ($result -> num_rows() == 0) {
-			return TRUE; // confirmed
-		}
-		else {
-			return FALSE; // there is still someone with rsvp != 1
-		}
-	}
-		
-	function getUserEventSuggestion($user_id) {
-
-		if (!$user_id) {
-			return FALSE;
-		}
-
-		$query = " SELECT * FROM " . $this -> tables['event_auto_recommendation'];
-		$query .= " WHERE `user_id` = '$user_id' ;";
-
-		$mysql_result = $this -> db -> query($query);
-		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> result_array();
-		} else {
-			return FALSE;
-		}
-	}
-
-	function getUserEventSuggestion_count() {
-
-		$query = " SELECT count(*) as count FROM " . $this -> tables['event_auto_recommendation'];
-		$query .= " WHERE `valid` = 1 ";
-		$mysql_result = $this -> db -> query($query);
-		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> row() -> count;
-		} else {
-			return FALSE;
-		}
-	}
-
-	function getUserEventSuggestion_all_by_page($fields = FALSE) {
-
-		$page = isset($field['page']) ? $field['page'] : 0;
-		$per_page = isset($field['per_page']) ? $field['per_page'] : 30;
-
-		$query = " SELECT * FROM " . $this -> tables['event_auto_recommendation'];
-		$query .= " WHERE `valid` = 1 ";
-		$query .= " LIMIT $page , $per_page ";
-
-		$mysql_result = $this -> db -> query($query);
-		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> result_array();
-		} else {
-			return FALSE;
-		}
-
-	}
-
-	function getPastUserEventSuggestion_count() {
-
-		$query = " SELECT count(*) as count FROM " . $this -> tables['event_auto_recommendation'];
-		$query .= " WHERE `valid` = 0 ";
-		$mysql_result = $this -> db -> query($query);
-		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> row() -> count;
-		} else {
-			return FALSE;
-		}
-	}
-
-	function getPastUserEventSuggestions_all_by_page($fields = FALSE) {
-
-		$page = isset($field['page']) ? $field['page'] : 0;
-		$per_page = isset($field['per_page']) ? $field['per_page'] : 30;
-
-		$query = " SELECT * FROM " . $this -> tables['event_auto_recommendation'];
-		$query .= " WHERE `valid` = 0 ";
-		$query .= " LIMIT $page , $per_page ";
-
-		$mysql_result = $this -> db -> query($query);
-		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> result_array();
-		} else {
-			return FALSE;
-		}
-
-	}
-	
-	/* event request */
-	function getUserEvent_request($user_id) {
-
-		if (!$user_id) {
-			return FALSE;
-		}
-
-		$query = " SELECT ee.`event_id`, ee.`event_status`, ee.`date`, `location`, ee.`created_on`, ee.`updated_on` ";
-		$query .= " FROM " . $this -> tables['events_event'] . " AS ee";
-		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON `eu`.`event_id` = `ee`.`event_id` ";
-		$query .= " WHERE `user_id` = '$user_id' ";
-		$query .= " AND ee.`event_status` <= 0; ";
-
-		$mysql_result = $this -> db -> query($query);
-
-		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> result_array();
-		} else {
-			return FALSE;
-		}
-	}
-	
-	function getUserEventRequests_count($user_id) {
-		//if (!)
-	}
-	
-
-	/* Matched Event */
-
-	function createUserEventMatched($fields = FALSE) {
-
-		if (!$fields['date']) {
-			return FALSE;
-		}
-		if (!$field['location']) {
-			return FALSE;
-		}
-		if (!$fields['users']) {
-			return FALSE;
-		}
-
-		$date = $fields['date'];
-		$location = $fields['location'];
-
-		$query = " INSERT INTO " . $this -> tables['events_event'];
-		$query .= " (`date`, `location`)  ";
-		$query .= " VALUES ('$date', '$location') ";
-
-		$mysql_result = $this -> db -> query($query);
-
-		$event_id = $this -> db -> insert_id();
-
-		if ($mysql_result) {
-			$users = explode(',', $fields['users']);
-			foreach ($users as $user) {
-
-				$query = " INSERT INTO " . $this -> tables['events_users'];
-				$query .= " (`event_id`, `user_id`)";
-				$query .= " VALUES ('$event_id', '$user')";
-
-				$mysql_result = $this -> db -> query($query);
-
-				if (!$mysql_result) {
-					return FALSE;
-				}
-
-			}
-		} else {
-			return FALSE;
-		}
-
-		return TRUE;
-	}
-
-	function getUserEvent_upcomming($user_id) {
-
-		if (!$user_id) {
-			return FALSE;
-		}
-
-		$query = " SELECT ee.`event_id`, ee.`event_status`, ee.`date`, `location`, ee.`created_on`, ee.`updated_on` ";
-		$query .= " FROM " . $this -> tables['events_event'] . " AS ee";
-		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON `eu`.`event_id` = `ee`.`event_id` ";
-		$query .= " WHERE `user_id` = '$user_id' ";
-		$query .= " AND ee.`event_status` > 0 ";
-		$query .= " AND ee.`date` > NOW() ;";
-
-		$mysql_result = $this -> db -> query($query);
-
-		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> result_array();
-		} else {
-			return FALSE;
-		}
-	}
-
-	function getEventAllUsers($event_id) {
+	/*
+	 * Function: Get all users of an event
+	 * 
+	 * @param	event_id	id of the event;
+	 * @return				an array of user information that participate in 
+	 *                      this event;
+	 */
+	function getAllUsersByEventId($event_id) {
 
 		if (!$event_id) {
 			return FALSE;
@@ -241,38 +79,117 @@ class Events_model extends CI_Model {
 		} else {
 			return FALSE;
 		}
-
 	}
 	
-	/* part events */
+	/*
+	 * Function: Change status of an event.
+	 *  (+) status = -1 ==> this event request has been cancelled;
+	 * 	(+) status = 0 ==> this is still an event request, waiting for confirm;
+	 * 	(+) status = 1 ==> this event request has been confirmed, and 
+	 *                     it now is an upconming event;
+	 *  (+) status = 2 ==> this event request was confirmed, and 
+	 *                     the corresponding event was already over (past event).
+	 * 
+	 * @param 	event_id	the event id
+	 * @param	status 		the new status
+	 */
+	function updateEventStatus($event_id, $status) {
+		$query = "UPDATE " . $this -> tables['events_event'] .
+				 " SET event_status = '$status' " .
+				 " WHERE event_id = '$event_id'; ";
+		return $this -> db -> query($query);
+	}
 
-	function getUserEvent_past($fields = FALSE) {
-
+	/*
+	 * Function: Check if this event has been confirmed by everyone
+	 * 
+	 * @param	event_id	the id of the event
+	 * @return	TRUE/FALSE	the event has/has not been confirmed
+	 */
+	private function hasBeenConfirmedByEveryone($event_id) {
+		$query = "SELECT * FROM " . $this -> tables['events_users'] .
+				 " WHERE event_id = '$event_id' " .
+				 " AND rsvp != 1; ";
+		$result = $this -> db -> query($query);				 
+		if ($result -> num_rows() == 0) {
+			return TRUE; // confirmed
+		}
+		else {
+			return FALSE; // there is still someone with rsvp != 1
+		}
+	}
+	
+	/* 
+	 * Function: Create lunch event for a list of users
+	 * 
+	 * @param	fields		{date, location, list of users} 
+	 */
+	function createEvent($fields = FALSE) {
+		
+		/* Data Validation */
 		if (!$fields) {
 			return FALSE;
 		}
-
-		if (!isset($fields['user_id'])) {
+		if (!isset($fields['event_date'])) {
 			return FALSE;
 		}
+		if (!isset($fields['event_location'])) {
+			return FALSE;
+		}
+		if (!isset($fields['user_ids'])) {
+			return FALSE;
+		} elseif (count($fields['user_ids']) < 2) {
+			return FALSE;
+		}
+		if (!isset($fields['reason'])) {
+			return FALSE;
+		}
+		if (!isset($fields['deadline'])) {
+			return FALSE;
+		}
+		
+		/* Prepare Data Values */
+		$date = $fields['event_date'];
+		$location = $fields['event_location'];
+		$reason = $fields['reason'];
+		$due = $fields['deadline'];
+		$user_ids = $fields['user_ids'];
 
-		$user_id = $fields['user_id'];
+		/* SQL Queries */
 
-		$query = " SELECT * FROM " . $this -> tables['events_event'] . " AS ee ";
-		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON ee.`event_id` = eu.`event_id` ";
-		$query .= " WHERE `user_id` = '$user_id' ";
-		$query .= " AND ee.`date` < NOW() ";
-		$query .= " AND ee.`event_status` >= 0 ";
+		$query = " INSERT INTO " . $this -> tables['events_event'];
+		$query .= " ( `date`, `location`, `reason`, `created_on`, `deadline`) ";
+		$query .= " VALUES ( '$date', '$location', '$reason', NOW(), '$due' ) ";
 
 		$mysql_result = $this -> db -> query($query);
-		if ($mysql_result -> num_rows() > 0) {
-			return $mysql_result -> result_array();
+		if ($this -> db -> affected_rows()) {
+
+			$results['last_insert_id'] = $this -> db -> insert_id();
+
+			foreach ($user_ids as $user_id) {
+				$query = " INSERT INTO " . $this -> tables['events_users'];
+				$query .= " ( `event_id`, `user_id`, `rsvp`, `updated_on`) ";
+				$query .= " VALUES ( '" . $results['last_insert_id'] . "', '$user_id', '0', NOW() ) ";
+
+				$mysql_result = $this -> db -> query($query);
+				if (!$this -> db -> affected_rows()) {
+					return FALSE;
+				}
+			}
+
 		} else {
 			return FALSE;
 		}
 
-	}
+		return $results;
 
+	}	
+	
+	/*
+	 * Function: Update event respond
+	 * 
+	 * @param 	fields 		{event_id, user_id, action(-1, 0, 1)} 
+	 */
 	function event_RSVP($fields = FALSE) {
 
 		if (!$fields) {
@@ -304,42 +221,97 @@ class Events_model extends CI_Model {
 			return FALSE;
 		}
 		
-		if ($fields['action'] == -1)
+		if ($fields['action'] == -1) 
+			// this guy rejects the event -> cancel the event
 			return $this -> updateEventStatus($fields['event_id'], -1);
+		
 		else if ($fields['action'] == 1) {
-			if ($this -> hasBeenConfirmed($fields['event_id']))
+			if ($this -> hasBeenConfirmedByEveryone($fields['event_id']))
+				// if everyone confirmed this event -> mark it as upcoming event
 				return $this -> updateEventStatus($fields['event_id'], 1);
 		}
 		
 		return TRUE;
 	}
+	
+	
+	/*-----------------------------------------------------------------------
+	 * Section 3: Manipulation events of an user  
+	 *-----------------------------------------------------------------------*/
+	
+	/* 
+	 * Function: get events of user <code>user_id</code> with status options
+	 * 
+	 * @param	user_id			id of the user;
+	 * @param	status_list		an array that indicates which events should be 
+	 *                          returned e.g. {-1, 0} or {-1, 1, 2};
+	 * @return					an array of events with information;
+	 * 
+	 * old name: getUserEvent_request 
+	 */
+	function getEventsByUserId($user_id, $status_list) {
 
-	/* @section Admin Functions */
-
-	private function getAllEventParticipants($event_id = FALSE) {
-
-		if (!$event_id) {
+		if (!$user_id || !$status_list) {
 			return FALSE;
 		}
+		
+		$options = "(";
+		$added = FALSE;
+		for ($i = -1; $i <= 2; ++$i) {
+			if (!empty($status_list[$i])) {
+				if ($added) $options .= " OR ";
+				$options .=  "ee.`event_status` = " . $i;
+				$added = TRUE;
+			}
+		}
+		$options .= ")";
 
-		$query = " SELECT * FROM " . $this -> tables['events_users'];
-		$query .= " WHERE event_id = '$event_id'";
+		$query = " SELECT ee.`event_id`, ee.`event_status`, ee.`date`, `location`, ee.`created_on`, ee.`updated_on` ";
+		$query .= " FROM " . $this -> tables['events_event'] . " AS ee";
+		$query .= " LEFT JOIN " . $this -> tables['events_users'] . " AS eu ON `eu`.`event_id` = `ee`.`event_id` ";
+		$query .= " WHERE `user_id` = '$user_id' ";
+		$query .= " AND " . $options;
 
 		$mysql_result = $this -> db -> query($query);
+
 		if ($mysql_result -> num_rows() > 0) {
 			return $mysql_result -> result_array();
 		} else {
 			return FALSE;
 		}
-
 	}
+	
+	/* @section Admin Functions */
 
-	function getAllUpcomingEvents() {
+	/* 
+	 * Function: get events with status options
+	 * 
+	 * @param	status_list		an array that indicates which events should be 
+	 *                          returned e.g. {-1, 0} or {-1, 1, 2};
+	 * @return					an array of events with information;
+	 * 
+	 * old name: getUserEvent_request 
+	 */
+	function getAllEvents($status_list) {
 
 		// TODO check admin level
+		if (!status_list) {
+			return NULL;
+		}
+		
+		$options = "(";
+		$added = FALSE;
+		for ($i = -1; $i <= 2; ++$i) {
+			if (!empty($status_list[$i])) {
+				if ($added) $options .= " OR ";
+				$options .=  "ee.`event_status` = " . $i;
+				$added = TRUE;
+			}
+		}
+		$options .= ")";
 
 		$query = " SELECT * FROM " . $this -> tables['events_event'] . " AS ee ";
-		$query .= " WHERE ee.`date` > NOW() ";
+		$query .= " WHERE " . $option;
 
 		$mysql_result = $this -> db -> query($query);
 		if ($mysql_result -> num_rows() > 0) {
@@ -347,92 +319,12 @@ class Events_model extends CI_Model {
 			$events = $mysql_result -> result_array();
 
 			foreach ($events as $key => $event) {
-				$events[$key]['participants'] = $this -> getAllEventParticipants($event['event_id']);
+				$events[$key]['participants'] = $this -> getAllUsersByEventId($event['event_id']);
 			}
 
 			return $events;
 		} else {
 			return FALSE;
 		}
-	}
-
-	function getAllPastEvents() {
-		// TODO check admin level
-
-		$query = " SELECT * FROM " . $this -> tables['events_event'] . " AS ee ";
-		$query .= " WHERE ee.`date` < NOW() ";
-
-		$mysql_result = $this -> db -> query($query);
-		if ($mysql_result -> num_rows() > 0) {
-			
-			$events = $mysql_result -> result_array();
-			
-			foreach ($events as $key => $event) {
-				$events[$key]['participants'] = $this -> getAllEventParticipants($event['event_id']);
-			}
-			
-			return $events;
-			
-		} else {
-			return FALSE;
-		}
-		
-	}
-
-	function createEvent($fields = FALSE) {
-		
-		/* Data Validation */
-		if (!$fields) {
-			return FALSE;
-		}
-		if (!isset($fields['event_date'])) {
-			return FALSE;
-		}
-		if (!isset($fields['event_location'])) {
-			return FALSE;
-		}
-		if (!isset($fields['user_ids'])) {
-			return FALSE;
-		} elseif (count($fields['user_ids']) < 2) {
-			return FALSE;
-		}
-		if (!isset($fields['reason'])) {
-			return FALSE;
-		}
-		
-		/* Prepare Data Values */
-		$date = $fields['event_date'];
-		$location = $fields['event_location'];
-		$reason = $fields['reason'];
-		$user_ids = $fields['user_ids'];
-
-		/* SQL Queries */
-
-		$query = " INSERT INTO " . $this -> tables['events_event'];
-		$query .= " ( `date`, `location`, `reason`, `created_on`) ";
-		$query .= " VALUES ( '$date', '$location', '$reason', NOW() ) ";
-
-		$mysql_result = $this -> db -> query($query);
-		if ($this -> db -> affected_rows()) {
-
-			$results['last_insert_id'] = $this -> db -> insert_id();
-
-			foreach ($user_ids as $user_id) {
-				$query = " INSERT INTO " . $this -> tables['events_users'];
-				$query .= " ( `event_id`, `user_id`, `rsvp`, `updated_on`) ";
-				$query .= " VALUES ( '" . $results['last_insert_id'] . "', '$user_id', '0', NOW() ) ";
-
-				$mysql_result = $this -> db -> query($query);
-				if (!$this -> db -> affected_rows()) {
-					return FALSE;
-				}
-			}
-
-		} else {
-			return FALSE;
-		}
-
-		return $results;
-
 	}
 }

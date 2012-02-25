@@ -2,6 +2,11 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
+
+/*
+ *  Check test/ls_user_recommendation_tests.php for examples.
+ */
+
 /**
  * Name:  Notification
  * Author: @stiucsib86
@@ -40,25 +45,14 @@ class Ls_User_Recommendation {
 		// Initialize Library
 		$this -> _initialize();
 	}
-
 	
-	function getUserRecommendations($user_id) {
-		
-		$results  = ($this -> ci -> events_model -> getUserEventSuggestion($user_id));
-		
-		// Populate Target User Profile Info
-		foreach ($results as $key=>$item) {
-			$results[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
-		}
-		
-		return $results;
-		
-	}
-	
-
 	private function _initialize() {
 		$fields['keywords'] = 'Recommendation';
 		$this -> component_info = $this -> ci -> ls_notifications_model -> get_component_info($fields);
+	}
+	
+	function clearTables() {
+		return $this -> ci -> user_recommendation_model -> clearTables();
 	}
 
 	public function create($fields) {
@@ -87,8 +81,8 @@ class Ls_User_Recommendation {
 		$this -> ci -> db -> trans_off();
 		$this -> ci -> db -> trans_start();
 		{
-			$result = $this -> ci -> user_recommendation_model -> createUserRecommendation($fields);
-			$this -> data[] = $result['0'];
+			$result = $this -> ci -> user_recommendation_model -> createUserRecommendation($fields);			
+			//$this -> data[] = $result['0'];
 			//$fields2 = $fields;
 			//$fields2['user_id'] = $fields['target_user_id'];
 			//$fields2['target_user_id'] = $fields['user_id'];
@@ -106,12 +100,7 @@ class Ls_User_Recommendation {
 			$this -> ci -> ls_notifications -> set_notification($notification);
 		}
 
-		if ($this -> data) {
-			return $this -> data;
-		} else {
-			return FALSE;
-		}
-
+		return $result;
 	}
 
 	public function delete($fields) {
@@ -181,5 +170,70 @@ class Ls_User_Recommendation {
 			return FALSE;
 		}
 	}
+	
+	/*
+	 * Function: get user recommendation for user <code>user_id</code>
+	 * 
+	 * @param	user_id		the id of the user
+	 * @return	all user recommendations by the system for this user
+	 * 
+	 * old name: getUserEventSuggestion
+	 */
+	function getUserRecommendationsByUserId($user_id) {
+		return $this -> ci -> user_recommendation_model -> 
+			getUserRecommendationsByUserId($user_id);
+	}
+	
+	/*
+	 * Function: return the number of total approved recommendations
+	 * 
+	 * old name: getUserEventSuggestion_count
+	 */
+	function countApprovedUserRecommendations() {
+		return $this -> ci -> user_recommendation_model -> 
+			countApprovedUserRecommendations();
+	}
+	/*
+	 * Function: get approved user recommendations with page options
+	 * 
+	 * @param	fields	{page, per_page}
+	 * 
+	 * old name: getUserEventSuggestion_all_by_page
+	 */
+	function getApprovedUserRecommendations($fields = FALSE) {
+		return $this -> ci -> user_recommendation_model -> 
+			getApprovedUserRecommendations($fields);
+	}
+
+	/* 
+	 * Function: count number of inapproved user recommendations
+	 * 
+	 * old name: getPastUserEventSuggestion_count 
+	 */
+	function countUnapprovedUserRecommendations() {
+		return $this -> ci -> user_recommendation_model -> 
+			countUnapprovedUserRecommendations();
+	}
+
+	/*
+	 * Function: get unapproved user recommendations with page options
+	 * 
+	 * @params	fields	{page, per_page}
+	 * 
+	 * old name: getPastUserEventSuggestions_all_by_page
+	 */
+	function getUnapprovedUserRecommendations($fields = FALSE) {
+		return $this -> ci -> user_recommendation_model -> 
+			getUnapprovedUserRecommendations($fields);
+	}
+	
+	/*
+	 * Function: is the recommendation {user, target} confirmed?
+	 */
+	function isConfirmed($user, $target) {
+		return $this -> ci -> user_recommendation_model -> 
+			isConfirmed_($user, $target);
+	}
 }
+
 ?>
