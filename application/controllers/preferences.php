@@ -68,7 +68,7 @@ class Preferences extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Preference Settings";
 		// Render views
 		$this -> data['main_content'] = 'base/preferences/index';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 		
 	}
 	

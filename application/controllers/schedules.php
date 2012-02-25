@@ -54,7 +54,7 @@ class Schedules extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Schedule";
 		// Render views
 		$this -> data['main_content'] = 'base/schedules/index';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 	}
 
 	function add() {
@@ -73,7 +73,7 @@ class Schedules extends CI_Controller {
 		$this -> data['tpl_page_title'] = "Add Schedule";
 		// Render views
 		$this -> data['main_content'] = 'base/schedules/add';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 	}
 	
 	function edit() {
@@ -110,7 +110,7 @@ class Schedules extends CI_Controller {
 			$this -> data['tpl_page_title'] = "Edit Schedule";
 			// Render views
 			$this -> data['main_content'] = 'base/schedules/edit';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
+			$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 		}
 	}
 
