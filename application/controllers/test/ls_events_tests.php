@@ -110,5 +110,12 @@ class Ls_events_tests extends Toast
 		
 		$result = $this -> ls_events -> getEvents(1, array(-1 => true, 1 => true));
 		$this -> _assert_true(count($result) == 2);
+		
+		## getAllEvents
+		$result = $this -> ls_events -> getAllEvents(array(-1 => true));
+		$this -> _assert_true(count($result) == 1);
+		
+		$result = $this -> ls_events -> getAllEvents(array(-1 => true, 1 => true));
+		$this -> _assert_true(count($result) == 2);
     }
 }
