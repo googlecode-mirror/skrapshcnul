@@ -56,10 +56,8 @@ class Invitations extends CI_Controller {
 	}
 
 	function invite() {
-		
 		if ($this -> alt == 'json') {
 			if ($this -> call == 'sendInvitation' && isset($_REQUEST['invitee_email'])) {
-				
 				if ($this -> invitation_model -> insertInvitationLog($this->user_id, $_REQUEST['invitee_email'])) {
 					// Send Email to User
 					$this->_sendInvitationEmail($_REQUEST['invitee_email']);

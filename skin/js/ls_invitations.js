@@ -53,7 +53,7 @@ function resendInvitation(invitee_email) {
 	jQuery.getJSON('/invitations/invite', 
 		{ alt: "json", call: 'resendInvitation', 'invitee_email': invitee_email}, 
 		function(data) {
-			console.log(data.results);
+			console.log(data);
 			if(data.results) {
 				jQuery('#invitee_email_results').html(data.results);
 				jQuery('#invitee_email_results').parent().show().fadeOut(7000);
@@ -63,6 +63,8 @@ function resendInvitation(invitee_email) {
 				jQuery('#invitee_email_results').parent().show().fadeOut(7000);
 			}
 	});
+	
+	return false;
 }
 
 function addInvitation(user_id) {

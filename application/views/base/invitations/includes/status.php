@@ -21,7 +21,7 @@
 							<td><?php echo $invite['invitee_email']; ?></td>
 							<td><?php echo $invite['invitation_code']; ?></td>
 							<td><?php echo ($invite['joined_on']) ? "Joined" : 'Invited'; ?></td>
-							<td><a href="" id="resendInvitation" onclick="resendInvitation(<?php echo $invite['invitee_email']; ?>)">Resend</a></td>
+							<td><a href="#" id="resendInvitation" onclick="resendInvitation('<?php echo $invite['invitee_email']; ?>')">Resend</a></td>
 						</tr>
 					</tbody>
 					<?php } ?>
