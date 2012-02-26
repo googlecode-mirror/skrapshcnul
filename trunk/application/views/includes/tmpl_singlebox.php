@@ -4,7 +4,10 @@
 		<?php $this -> load -> view('includes/scripts');?>
 	</head>
 	<body onload="bodyLoad();" class="singlebox">
-		<?php $this -> load -> view('includes/system_notifications');?><div class="clearfix"></div>
+		<?php $this -> load -> view('includes/_background_effects');?>
+		<?php $this -> load -> view('includes/system_notifications');?>
+		<div class="clearfix"></div>
+		
 		<div id="m-container-outer">
 			<div class="logo-home">
 				<a href="/"><img src="/skin/images/ls_logo_white.png" /></a>
@@ -14,6 +17,7 @@
 					<?php $this -> load -> view($main_content);?>
 				</div>
 			</div>
-		</div><div class="clearfix"></div>
+			<div class="clearfix">&nbsp;</div>
+		</div>
 	</body>
 </html>

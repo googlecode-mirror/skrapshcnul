@@ -1,4 +1,13 @@
-
+html {
+	background: #494949 url(../images/bg/denim.png);
+}
+body {
+	height: 100%;
+}
+.content-1-liner {
+	margin: 40px auto;
+	padding: 40px 0;
+}
 .column-2-left,
 .column-2-right,
 .column-2-left-xl,

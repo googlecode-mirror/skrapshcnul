@@ -43,11 +43,12 @@ class Users_Statistics_model extends CI_Model {
 		while($month < $end) {
 			
 			$value_year_month = date('Y-m-01', $month);
+			$value_year_month_end = date('Y-m-01', strtotime("+1 month", $month));
 			$month = strtotime("+1 month", $month);
 			
 			$query = " SELECT COUNT(*) AS count ";
 			$query .= " FROM lss_users ";
-			$query .= " WHERE FROM_UNIXTIME(`created_on`) < '$value_year_month'";
+			$query .= " WHERE FROM_UNIXTIME(`created_on`) < '$value_year_month_end'";
 			$mysql_result = $this -> db -> query($query);
 			$results = $mysql_result -> row_array();
 			
