@@ -1,12 +1,4 @@
 body.singlebox {
-	background: rgb(30,87,153); /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(30,87,153,0.5) 29%, rgba(6,49,84,0.8) 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(29%,rgba(30,87,153,0.5)), color-stop(100%,rgba(6,49,84,0.8))); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(30,87,153,0.5) 29%,rgba(6,49,84,0.8) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  rgba(30,87,153,0.5) 29%,rgba(6,49,84,0.8) 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(30,87,153,0.5) 29%,rgba(6,49,84,0.8) 100%); /* IE10+ */
-	background: radial-gradient(center, ellipse cover,  rgba(30,87,153,0.5) 29%,rgba(6,49,84,0.8) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#063154',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	text-shadow: 1px 1px 1px #CCC;
 }
 .singlebox .m-content,
