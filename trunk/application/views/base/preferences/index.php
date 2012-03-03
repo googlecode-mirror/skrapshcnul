@@ -27,7 +27,7 @@
 								</div>
 							<?php } ?>
 						</div>
-						<input type="text" id="tag_value_<?php echo $value['preferences_ref_id']; ?>" class ="ls_user_autocomplete" name="tag_value_<?php echo $value['preferences_ref_id']; ?>" size="35" placeholder="New keywords here" style="display: inline-block;">
+						<input type="text" id="tag_value_<?php echo $value['preferences_ref_id']; ?>" class ="ls_user_autocomplete" name="tag_value_<?php echo $value['preferences_ref_id']; ?>" size="35" placeholder="Entrepreneur, Technical, Anyone" style="display: inline-block;">
 			      		<input type="submit" value="add" required="required" class="preference-tag-btn-add" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" />
 					</div>
 				</div>
