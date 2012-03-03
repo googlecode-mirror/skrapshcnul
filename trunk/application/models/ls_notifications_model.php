@@ -330,4 +330,33 @@ class Ls_notifications_model extends CI_Model {
 		}
 	}
 	
+	function get_event_id_list_deadline_expiry()
+	{
+		try
+		{
+			$query = $this->db->query("SELECT event_id FROM  `lss_events` where event_status = 0 and  deadline < now();");
+			
+			if ($query -> num_rows() > 0) {
+				return $query -> result_array();
+			} else {
+				return FALSE;
+			}
+		}catch(exception $e)
+		{
+			//echo "Exception caught $e"; // sql related issues
+		}
+	}
+	
+	function set_event_id_deadline_expire_status($event_id_list)
+	{
+		try
+		{
+			$sql_query = "update `lss_events` set event_status = -1 where event_id in (".$event_id_list.");";
+			$query = $this->db->query($sql_query);
+		}catch(exception $e)
+		{
+			//echo "Exception caught $e"; // sql related issues
+		}
+	}
+	
 }
