@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 25, 2012 at 02:53 PM
+-- Generation Time: Mar 04, 2012 at 04:06 PM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.8
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `lss_events` (
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -230,6 +230,153 @@ CREATE TABLE IF NOT EXISTS `lss_places_xtra_restaurant` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lss_projects`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects` (
+  `project_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_type_id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `description` text NOT NULL,
+  `logo` varchar(250) NOT NULL,
+  `cover_img` varchar(250) NOT NULL,
+  `video_src` varchar(250) NOT NULL,
+  `is_private` tinyint(1) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`project_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_projects_apps`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects_apps` (
+  `project_id` int(11) NOT NULL,
+  `ios_app_store_url` varchar(250) NOT NULL,
+  `android_market_url` varchar(250) NOT NULL,
+  `wp_market_url` varchar(250) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`project_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_projects_external_urls`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects_external_urls` (
+  `project_id` int(11) NOT NULL,
+  `homepage` varchar(250) NOT NULL,
+  `github_url` varchar(250) NOT NULL,
+  `facebook_url` varchar(250) NOT NULL,
+  `twitter_url` varchar(250) NOT NULL,
+  `gplus_url` varchar(250) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`project_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_projects_screenshots`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects_screenshots` (
+  `project_screenshot_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
+  `src` text NOT NULL,
+  `is_external` tinyint(1) NOT NULL,
+  `screenshot_details` text NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`project_screenshot_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_projects_tags`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects_tags` (
+  `project_id` int(11) NOT NULL,
+  `tags_type_id` int(11) NOT NULL,
+  `tags_data` text NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`project_id`,`tags_type_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_projects_tags_xref`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects_tags_xref` (
+  `tags_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `is_private` tinyint(1) NOT NULL DEFAULT '0',
+  `tags_type_name` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`tags_type_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_projects_team`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects_team` (
+  `project_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date_joined` datetime NOT NULL,
+  `date_leaved` datetime NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`project_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_projects_type_xref`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects_type_xref` (
+  `project_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_type_name` varchar(250) NOT NULL,
+  `details` text NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`project_type_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_projects_verification_status`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_projects_verification_status` (
+  `project_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `remarks` text NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`project_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lss_recommendations`
 --
 
@@ -389,7 +536,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_agent` varchar(100) NOT NULL,
   `createdOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=218 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=230 ;
 
 -- --------------------------------------------------------
 
@@ -444,10 +591,12 @@ CREATE TABLE IF NOT EXISTS `lss_users_preferences` (
 CREATE TABLE IF NOT EXISTS `lss_users_preferences_ref` (
   `preferences_ref_id` int(11) NOT NULL AUTO_INCREMENT,
   `preferences_name` varchar(100) NOT NULL,
-  `description` text,
+  `description` text NOT NULL,
+  `is_private` tinyint(1) NOT NULL,
   `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`preferences_ref_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
