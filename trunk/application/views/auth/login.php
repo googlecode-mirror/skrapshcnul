@@ -1,4 +1,4 @@
-<div class="c-pages shadow-rounded">
+<div class="c-pages radial-grey shadow-rounded">
 	<div class="forms">
 		<div class="column-2-left">
 			<div id="login_form">
@@ -33,7 +33,7 @@
 				</p>
 				<p class="button-set">
 					<?php echo form_submit('submit', 'Login');?>
-					<?php echo anchor('auth/signup', 'Create Account');?>
+					<a href="/auth/signup" class="button box-shadow">Create Account</a>
 				</p>
 				<p>
 					<small><?php echo anchor('auth/forgot_password', 'Forgot Password?');?></small>
@@ -47,7 +47,7 @@
 				Apply for membership today. We're letting people into our alpha on a rolling basis.
 			</div>
 			<div style="text-align: center;margin: 10px auto;">
-				<a href="/auth/signup" class="button xl">Sign Up!</a>
+				<a href="/auth/signup" class="button box-shadow xl">Sign Up!</a>
 			</div>
 			
 		</div>

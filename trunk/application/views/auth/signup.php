@@ -1,4 +1,4 @@
-<div class='mainInfo'>
+<div class="c-pages radial-grey shadow-rounded">
 	<div class="forms">
 		<h1>Create User</h1>
 		<p>

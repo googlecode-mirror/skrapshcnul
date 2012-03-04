@@ -15,7 +15,7 @@
 				</div>
 			<?php }?>
 			<?php } else { ?>
-				<div style="text-align: center;">You have 0 lunch wishlist.</div>
+				<div style="text-align: center;">0 similar people.</div>
 			<?php }?>
 			<div class="clearfix"></div>
 		</div>

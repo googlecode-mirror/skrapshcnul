@@ -10,7 +10,7 @@
 		<?php } */?>
 	</div>
 	
-	<div class="c-pages shadow-rounded" style="padding:0px;">
+	<div class="c-pages" style="padding:0px;">
 		<div id="user-profile" class="m-content-2-col-left-xl dashboard">
 			
 			<?php /*<div id="ls_cover">

@@ -161,22 +161,27 @@ function profile_hover_init() {
 		var userid = jQuery(this).attr('ls-data-userid');
 		if (userid) {
 			// handlerIn 
-			if (!jQuery(".ls-profile-card-holder").length > 0) {
+			if (!jQuery("#ls-profile-card-holder-"+userid+".ls-profile-card-holder").length > 0) {
 				jQuery("body").append(jQuery(
-					'<div class="ls-profile-card-holder">'+
+					'<div id="ls-profile-card-holder-'+userid+'" class="ls-profile-card-holder">'+
 						'<div class="ls-profile-card-loader-overlay"><div class="ls-profile-card-loader loading-icon rotate2">&nbsp;</div></div>'+
 						'<div class="ls-profile-card-content"></div>'+
 					'</div>'));
 			}
 			
+			var deferred = new jQuery.Deferred();
+			var promise = deferred.promise();
+			
 			generate_profile_card_html(userid, function() {
+				deferred.resolve();
+			});
+			promise.done(function() {
+				console.log("This will run if this Promise is resolved.");
 				jQuery(".ls-profile-card-holder").css('left', e.pageX);
 				jQuery(".ls-profile-card-holder").css('top', e.pageY);
 				jQuery(".ls-profile-card-holder").show('fade', 'slow');
-				jQuery(".ls-profile-card-content").show();
-				setTimeout( function() {
-					jQuery(".ls-profile-card-loader-overlay").hide();
-				}, 500);
+				jQuery(".ls-profile-card-content").show('slow');
+				jQuery(".ls-profile-card-loader-overlay").hide();
 			});
 			
 		}

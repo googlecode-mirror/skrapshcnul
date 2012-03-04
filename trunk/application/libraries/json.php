@@ -130,7 +130,7 @@ class Json {
 
 		if (!empty($data['errors'])) {
 			// Contains error
-			if ($this -> callback) {
+			if (!empry($this -> callback)) {
 				print_r($this -> callback . '(' . json_encode($data['errors']) . ')');
 			} else {
 				print_r($this -> _indent(json_encode($data['errors'])));
@@ -144,14 +144,14 @@ class Json {
 				$this -> json_result['results'] = $data['results'];
 			}
 
-			if ($this -> callback) {
+			if (!empty($this -> callback)) {
 				print_r($this -> callback . '(' . json_encode($this -> json_result) . ')');
 			} else {
 				print_r($this -> _indent(json_encode($this -> json_result)));
 			}
 		}
 		
-		die();
+		exit();
 	}
 
 }

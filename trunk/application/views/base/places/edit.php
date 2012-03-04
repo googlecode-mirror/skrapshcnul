@@ -9,7 +9,7 @@
 				
 				<?php //var_dump($places) ?>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Logo
 					</div>
@@ -23,7 +23,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Name
 					</div>
@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Primary Phone
 					</div>
@@ -51,7 +51,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						URL
 					</div>
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Full Address
 					</div>
@@ -79,7 +79,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Geo Latitude
 					</div>
@@ -93,7 +93,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Geo Longitute
 					</div>
@@ -107,7 +107,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Valid
 					</div>
@@ -130,7 +130,7 @@
 					<div class="caption"></div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Cuisine
 					</div>
@@ -144,7 +144,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Opening Hours
 					</div>
@@ -158,7 +158,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Special Features
 					</div>
@@ -172,7 +172,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Extras
 					</div>
@@ -195,7 +195,7 @@
 					<div class="caption"></div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Status
 					</div>
@@ -209,7 +209,7 @@
 					</div>
 				</div>
 				
-				<div class="row-item">
+				<div class="row-item xl">
 					<div class="content-table-2-col-left">
 						Remarks
 					</div>

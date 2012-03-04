@@ -3,14 +3,6 @@
 	height: 10px;
 	position: relative;
 }
-.cover_background {
-	height: 228px;
-	overflow: hidden;
-	z-index: -1;
-	-webkit-transition-duration: .29s;
-	-webkit-transition-timing-function: ease-in-out;
-	-webkit-transition-property: height, left, margin, padding, width;
-}
 #ls_social_share_container {
 	position:relative;
 	margin: 5px 0;
@@ -302,7 +294,7 @@ a.a-s-icon-xlhdpi {
 }
 #steps-completed {
 	width: 962px;
-	margin: 10px 0;
+	margin: 10px auto;
 	overflow: hidden;
 }
 #steps-completed-body {
@@ -558,6 +550,7 @@ height: 48px;
 }
 /* dashboard-stream-box */
 .dashboard-stream-box-top {
+	margin: 5px 0;
 	padding: 10px 0;
 	border-bottom: 1px solid #EFEFEF;
 }

@@ -18,6 +18,7 @@ class Ls_Scripts {
 		
 		$this -> js_files = array(
 			'skin/js/ls_bubble_info.js',
+			'skin/js/ls_cover_img.js',
 			'skin/js/ls_guide.js',
 			'skin/js/ls_invitations.js',
 			'skin/js/ls_notifications.js', 
@@ -34,6 +35,7 @@ class Ls_Scripts {
 			
 		$this -> css_files = array(
 			'skin/css/animation.css',
+			'skin/css/buttons.css',
 			'skin/css/bubble_info.css',
 			'skin/css/carousel.css',
 			'skin/css/errors.css',
@@ -54,6 +56,7 @@ class Ls_Scripts {
 			'skin/css/sidebars.css',
 			'skin/css/style.css',
 			'skin/css/tables.css',
+			'skin/css/tags.css',
 			'skin/css/user.css',
 			'skin/css/user_profile.css',
 			'skin/css/fonts/droid_sans.css',

@@ -21,9 +21,9 @@ class Errors extends CI_Controller {
         $data['content'] = 'error_404'; // View name
         
 		// Render views data
-		$this -> data['head_title'] = 'Upcoming Events | Lunchsparks';
-		$this -> data['tpl_page_id'] = "upcoming";
-		$this -> data['tpl_page_title'] = "Upcoming Events";
+		$this -> data['head_title'] = '404 | Lunchsparks';
+		$this -> data['tpl_page_id'] = "404";
+		$this -> data['tpl_page_title'] = "404 Not Found";
 
 		$this -> data['main_content'] = 'base/errors/error_404';
 		$this -> load -> view('includes/tmpl_singlebox', $this -> data);

@@ -52,7 +52,11 @@ class Ls_Profile {
 		
 	}
 	
-	function getPublicProfile($user_id) {
+	function getPublicProfile($user_id = FALSE) {
+		
+		if(!$user_id || !is_numeric($user_id)) {
+			return FALSE;
+		}
 		
 		$data = $this -> ci -> user_profile_model -> select($user_id);
 		$data2 = $this -> prepare_profile_data($user_id);
@@ -73,7 +77,12 @@ class Ls_Profile {
 		
 	}
 	
-	function prepare_profile_data($user_id) {
+	function prepare_profile_data($user_id = FALSE) {
+		
+		if(!$user_id || !is_numeric($user_id)) {
+			return FALSE;
+		}
+		
 		try {
 			$this -> _init($user_id);
 			$this -> _prepare_profile_data_default($user_id);
@@ -152,7 +161,11 @@ class Ls_Profile {
 		}
 	}
 
-	private function _prepare_profile_data_default($user_id) {
+	private function _prepare_profile_data_default($user_id = FALSE) {
+		
+		if (!$user_id || !is_numeric($user_id)) {
+			return FALSE;
+		}
 		
 		// Setup Cover Photo
 		if(!isset($this->data['profile']['cover_background'])) {
