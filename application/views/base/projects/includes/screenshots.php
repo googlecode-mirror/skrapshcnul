@@ -1,0 +1,36 @@
+<div id="ProjectScreenshotsModel" class="screenshots">
+	<div class="dashboard-stream-box-top">
+		<div class="title"> Screenshots </div>
+	</div>
+	
+	<div class="dashboard-stream-box-middle dashboard-stream-box-container">
+		<div class="activity-stream">
+			<div data-bind="foreach: screenshots">
+				<div data-bind="if: src"><img data-bind='attr: { src: src }' style="max-width: 150px;" /></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+// TODO 
+// Update data via JSON call.
+var initialData = <?php echo (json_encode($project['screenshots']));?>;
+
+var ProjectScreenshotsModel = function(screenshots) {
+    var self = this;
+    self.screenshots = ko.observableArray(ko.utils.arrayMap(screenshots, function(screenshot) {
+        return { 
+        	project_screenshot_id: screenshot.project_screenshot_id, 
+        	updated_on: screenshot.updated_on,
+        	src: screenshot.src,
+        	is_external: screenshot.is_external,
+        	screenshot_details: screenshot.screenshot_details,
+        	updated_on: screenshot.updated_on
+        };
+    }));
+    self.lastSavedJson = ko.observable("");
+};
+ 
+ko.applyBindings(new ProjectScreenshotsModel(initialData), document.getElementById("ProjectScreenshotsModel"));
+</script>

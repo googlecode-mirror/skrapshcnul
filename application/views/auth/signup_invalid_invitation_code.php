@@ -1,5 +1,5 @@
 <div class="m-content">
-	<div class="mainInfo">
+	<div class="c-pages radial-grey shadow-rounded">
 		<div class="forms">
 			<div class="column-2-left">
 				<div id="login_form">

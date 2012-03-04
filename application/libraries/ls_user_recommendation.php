@@ -183,7 +183,7 @@ class Ls_User_Recommendation {
 		$results = $this -> ci -> user_recommendation_model -> 
 			getUserRecommendationsByUserId($user_id);
 		
-		if (sizeof($results) > 0) {
+		if ($results && sizeof($results) > 0) {
 			foreach($results as $key => $item) {
 				$results[$key]['rec_id_profile'] = ($this -> ci -> user_profile_model -> select($item['rec_id']));
 			}

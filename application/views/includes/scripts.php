@@ -14,15 +14,17 @@
 <script src="<?php echo base_url();?>skin/js/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript">$.noConflict();</script>
 <script src="<?php echo base_url();?>skin/js/jquery-ui/jquery-ui-1.8.17/js/jquery-ui-1.8.17.custom.min.js"></script>
-<script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
-<script src="<?php echo base_url();?>skin/js/jquery-flip-0.9.9/jquery.flip.min.js"></script>
-<script src="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-cookie/jquery.cookie.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery-flip-0.9.9/jquery.flip.min.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery-tipsy/javascripts/jquery.tipsy.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.js"></script>
+<script src="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.js"></script>
+<script src="<?php echo base_url();?>skin/js/knockout/knockout-2.0.0.js"></script>
 <script src="<?php echo base_url();?>skin/js/modernizr.custom.90595.js"></script>
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
 <script src="<?php echo base_url();?>skin/js/highcharts/highcharts.js"></script>
 <script src="<?php echo base_url();?>skin/js/yqlgeo/yqlgeo.js"></script>
-<script src="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDNZh2NM04KwYoWEs_H9hGIF-mj9MOZvu4&sensor=true&libraries=geometry,places"></script>
 <?php echo $css_combined; ?>
 <?php echo $js_combined; ?>

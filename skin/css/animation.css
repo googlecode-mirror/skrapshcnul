@@ -56,3 +56,13 @@
     50%  {opacity:0.2}
     100% {opacity:1}
 }
+@-webkit-keyframes cup-smoke-fadeInOut{
+	0%   {opacity:0;-webkit-transform:translatey(50px);} 
+	50%  {opacity:1;-webkit-transform:translatey(25px);} 
+	100% {opacity:0;-webkit-transform:translatey(0);}
+}
+@-moz-keyframes cup-smoke-fadeInOut{
+	0%   {opacity:0;-moz-transform:translatey(50px);} 
+	50%  {opacity:1;-moz-transform:translatey(25px);} 
+	100% {opacity:0;-moz-transform:translatey(0);}
+}

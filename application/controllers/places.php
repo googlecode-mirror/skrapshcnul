@@ -72,9 +72,9 @@ class Places extends CI_Controller {
 	function add() {
 		
 		$fields = ($this -> input -> post());
-		if (sizeof($fields) > 0) {
+		if ($fields && sizeof($fields) > 1) {
 			$place_id = $this -> ls_places -> insertPlace($fields);
-			if ($place_id) {
+			if (is_numeric($place_id)) {
 				redirect('/places/'.$place_id);
 			};
 		}
