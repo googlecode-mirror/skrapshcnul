@@ -177,8 +177,8 @@ class Ls_Profile {
 			$this->data['profile']['profile_img'] = base_url() . "skin/images/160/silhouette_male.jpg";
 		}
 		
-		$user_details = $this -> ci -> user_model -> select_user($user_id); 
-		$fullname = explode(' ',$user_details->username);
+		$user_details = $this -> ci -> user_model -> select_user($user_id);
+		$fullname = $user_details?explode(' ',$user_details->username):FALSE;
 		$firstname = isset($fullname[0]) ? $fullname[0] : 'John';
 		$lastname = isset($fullname[1]) ? $fullname[1] : '';
 		
