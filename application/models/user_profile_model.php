@@ -36,6 +36,29 @@ class User_Profile_model extends CI_Model {
 		}
 	}
 
+	function select_all() {
+	
+			$query = " SELECT * FROM " . self::_TABLE_ . " WHERE 1;";
+			$mysql_result = $this -> db -> query($query);
+			if ($mysql_result -> num_rows() > 0) {
+				$final  = array();
+				//var_dump($mysql_result->result_array());
+				foreach($mysql_result->result_array() as $row=>$result)
+				{
+					if (trim($result['alias'])) {
+						$result['ls_pub_url'] = "/pub/".$result['alias'];
+					} else {
+						$result['ls_pub_url'] = "/pub/".$result['user_id'];
+					}
+					array_push($final,$result);
+				}
+				return $final;
+			} else {
+								
+				return FALSE;
+			}
+		}
+	
 	function update($user_id, $fields) {
 
 		if (!$user_id) {

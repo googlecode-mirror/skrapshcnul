@@ -16,6 +16,7 @@ class Search extends CI_Controller {
 		$this -> load -> helper('image/image_resize');
 		$this -> load -> helper('url');
 		$this -> load -> model('preferences_model');
+		$this -> load -> library('ls_search');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
@@ -100,12 +101,19 @@ class Search extends CI_Controller {
 	function people() {
 	
 		// Render views data
-		$this -> data['head_title']		= 'Search | Lunchsparks';
-		$this -> data['tpl_page_id'] = "search#people";
-		$this -> data['tpl_page_title'] = "Search People";
-		// Render Views
-		$this -> data['main_content'] = 'base/search/people';
-		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		try{
+			$this -> data['head_title']		= 'Search | Lunchsparks';
+			$this -> data['tpl_page_id'] = "search#people";
+			$this -> data['tpl_page_title'] = "Search People";
+			$this->data['users']=$this -> ls_search -> people();	
+			// Render Views
+			$this -> data['main_content'] = 'base/search/people';
+			$this -> load -> view('includes/tmpl_layout', $this -> data);
+		   			
+		}catch(exception $e)
+		{
+			//echo "Exception Caught $e";
+		}
 		
 	} 
 
