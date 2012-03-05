@@ -2,17 +2,10 @@
 	<div class="c-pages shadow-rounded" style="padding:0px;">
 		<div id="user-profile" class="m-content-2-col-left-xl dashboard">
 			
-			<?php //$this -> load -> view("base/user/profile/profile_card.php");?>
 			<?php $this -> load -> view("base/user/profile/profile_summary_large.php");?>
-			
 			<?php $this -> load -> view("base/user/profile/preferences.php");?>
-			
-			<div class="clearfix">&nbsp;</div>
-			
-			<div id="tabs" class="activity-stream">
-				<?php $this -> load -> view("base/user/profile/upcoming_lunches.php");?>
-				<?php //$this -> load -> view("base/user/profile/activities.php");?>
-			</div>
+			<?php $this -> load -> view("base/user/profile/projects.php");?>
+			<?php $this -> load -> view("base/user/profile/upcoming_lunches.php");?>
 			<div class="clearfix">&nbsp;</div>
 			
 		</div>

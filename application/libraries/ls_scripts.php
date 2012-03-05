@@ -61,6 +61,7 @@ class Ls_Scripts {
 			'skin/css/user_profile.css',
 			'skin/css/fonts/droid_sans.css',
 			'skin/css/fonts/open_sans.css',
+			'skin/js/jquery-tipsy/stylesheets/tipsy.css'
 		);
 		
 		$this->_minify_css();

@@ -1,10 +1,7 @@
 <div class="dashboard-stream-box">
 	
 	<div class="dashboard-stream-box-top">
-		<span class="title">
-			<span class="user-icon-set u-i-s-dashboard-widget-icon"></span>
-			Upcoming Lunches
-		</span>
+		<div class="title"> Upcoming Lunches </div>
 	</div>
 	
 	<div class="dashboard-stream-box-middle dashboard-stream-box-container">

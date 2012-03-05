@@ -24,13 +24,15 @@
 				<?php } ?>
 			</div>
 			<div class="others">
-				<?php if (isset($project['tags']['tags_data']) && sizeof($project['tags']['tags_data']) > 0) { ?>
-					<?php foreach ($project['tags']['tags_data'] as $tags) { ?>
-						<div class="tag"> 
-							<a href="/search/tag/<?php echo $tags ?>">
-								<?php echo $tags ?>
-							</a>
-						</div>
+				<?php if (isset($project['tags']) && sizeof($project['tags']) > 0) { ?>
+					<?php foreach ($project['tags'] as $tags) { ?>
+						<?php foreach ($tags['tags_data'] as $tag_value) { ?>
+							<div class="tag"> 
+								<a href="/search/tag/<?php echo $tag_value['name'] ?>">
+									<?php echo $tag_value['name'] ?>
+								</a>
+							</div>
+						<?php } ?>
 					<?php } ?>
 				<?php } ?>
 			</div>

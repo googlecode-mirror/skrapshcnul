@@ -1,5 +1,7 @@
 jQuery(document).ready(function() {	
 	
+	jQuery('.has_tipsy').tipsy();
+	
 	jQuery(".abc").stars({
 		inputType: "select",
 		cancelShow: "false"

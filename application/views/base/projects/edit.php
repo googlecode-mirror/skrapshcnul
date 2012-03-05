@@ -255,7 +255,7 @@
 		</form>
 		
 		<div class="clearfix">&nbsp;</div>
-		<div><a href="/places/<?php echo $project['project_id'] ?>" class="button">Back</a></div>
+		<div><a href="/projects/<?php echo $project['project_id'] ?>" class="button">Back</a></div>
 		<div class="clearfix">&nbsp;</div>
 		
 	</div>

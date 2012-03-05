@@ -17,6 +17,7 @@ class Pub extends CI_Controller {
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('ls_events');
 		$this -> load -> library('ls_profile');
+		$this -> load -> library('ls_projects');
 		$this -> load -> library('session');
 		$this -> load -> helper('logger');
 		$this -> load -> helper('linkedin/linkedin_api');
@@ -71,6 +72,11 @@ class Pub extends CI_Controller {
 		$this -> data['events']['suggestions'] = ($this -> ls_events -> getEvents($this->data['target_user_id'], array(0 => true)));
 		$this -> data['events']['upcoming'] = ($this -> ls_events -> getEvents($this->data['target_user_id'], array(1 => true)));
 		$this -> data['events']['past_events'] = ($this -> ls_events -> getEvents($this->data['target_user_id'], array(2 => true)));
+		
+		## Select Users Projects 
+		$keywords['user_id'] = $this -> data['target_user_id'];
+		$options['simple'] = TRUE;
+		$this -> data['projects'] = $this -> ls_projects -> search_projects($keywords, $options);
 		
 		// Render views
 		$this -> data['tpl_page_id'] = 'profile';

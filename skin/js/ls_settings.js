@@ -11,6 +11,7 @@ jQuery(document).ready(function(){
 	jQuery('.editable').click(function(){
 		var el = jQuery(this);
 		
+		
 		var action_url_id = (window.location.pathname).split('/')[1];
 		
 		el.hide();
@@ -19,7 +20,7 @@ jQuery(document).ready(function(){
 		el.next().children('input').change(function() {
 			var oid = el.next().children('input').attr('ls-oid');
 			var datafld = el.next().children('input').attr('title');
-			if (datafld = '') {
+			if (datafld == '') {
 				datafld = el.next().children('input').attr('name');
 			}
 			var value = el.next().children('input').val();
