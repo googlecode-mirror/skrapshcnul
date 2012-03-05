@@ -20,6 +20,7 @@ class User extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> library('ls_events');
 		$this -> load -> library('ls_profile');
+		$this -> load -> library('ls_projects');
 		$this -> load -> library('ls_user_recommendation');
 		$this -> load -> library('session');
 		$this -> load -> model('linkedin/linkedin_model');
@@ -85,6 +86,11 @@ class User extends CI_Controller {
 		$this -> data['events']['suggestions'] = ($this -> ls_events -> getEvents($this -> user_id, array(0 => true)));
 		$this -> data['events']['upcoming'] = ($this -> ls_events -> getEvents($this -> user_id, array(1 => true)));
 		$this -> data['events']['past_events'] = ($this -> ls_events -> getEvents($this -> user_id, array(2 => true)));
+		
+		## Select Users Projects 
+		$keywords['user_id'] = $this -> data['target_user_id'];
+		$options['simple'] = TRUE;
+		$this -> data['projects'] = $this -> ls_projects -> search_projects($keywords, $options);
 		
 		// Initialize
 		if ($this -> session -> userdata('linkedin_pulled') == NULL) {

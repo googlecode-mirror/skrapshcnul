@@ -37,7 +37,7 @@ class Ls_Projects {
 		$this -> user_id = $this -> ci -> session -> userdata('user_id');
 	}
 
-	function select_project($fields = FALSE) {
+	function select_project($fields = FALSE, $options = FALSE) {
 
 		if (!$fields) {
 			return FALSE;
@@ -48,13 +48,20 @@ class Ls_Projects {
 		}
 
 		$results = array();
-		$results = $this -> ci -> projects_model -> select_project($fields['projects_id']);
-		$results['apps'] = $this -> ci -> projects_model -> select_project_apps($fields['projects_id']);
-		$results['external_urls'] = $this -> ci -> projects_model -> select_project_external_url($fields['projects_id']);
-		$results['screenshots'] = $this -> ci -> projects_model -> select_project_screenshots($fields['projects_id']);
-		$results['tags'] = $this -> ci -> projects_model -> select_project_tags($fields['projects_id']);
-		$results['team_members'] = $this -> ci -> projects_model -> select_project_team_member($fields['projects_id']);
-		$results['verified_status'] = $this -> ci -> projects_model -> select_project_verification($fields['projects_id']);
+		if (isset($options['simple']) && $options['simple']) {
+			$results = $this -> ci -> projects_model -> select_project($fields['projects_id']);
+			$results['external_urls'] = $this -> ci -> projects_model -> select_project_external_url($fields['projects_id']);
+		} else {
+			$results = $this -> ci -> projects_model -> select_project($fields['projects_id']);
+			$results['apps'] = $this -> ci -> projects_model -> select_project_apps($fields['projects_id']);
+			$results['external_urls'] = $this -> ci -> projects_model -> select_project_external_url($fields['projects_id']);
+			$results['screenshots'] = $this -> ci -> projects_model -> select_project_screenshots($fields['projects_id']);
+			$results['tags'] = $this -> ci -> projects_model -> select_project_tags($fields['projects_id']);
+			$results['team_members'] = $this -> ci -> projects_model -> select_project_team_member($fields['projects_id']);
+			$results['verified_status'] = $this -> ci -> projects_model -> select_project_verification($fields['projects_id']);
+			
+			
+		}
 
 		## TODO
 		## Dummy Data - statistics
@@ -64,21 +71,23 @@ class Ls_Projects {
 		if (isset($results['created_by']) && is_numeric($results['created_by'])) {
 			$results['created_by'] = $this -> ci -> ls_profile -> getPublicProfile($results['created_by']);
 		}
-		foreach ($results['team_members'] as $key => $value) {
-			if ($user_id = $value['user_id'] && is_numeric($value['user_id'])) {
-				$results['team_members'][$key]['pub_profile'] = $this -> ci -> ls_profile -> getPublicProfile($value['user_id']);
+		
+		if (isset($results['team_members']) && is_array($results['team_members'])) {
+			foreach ($results['team_members'] as $key => $value) {
+				if ($user_id = $value['user_id'] && is_numeric($value['user_id'])) {
+					$results['team_members'][$key]['pub_profile'] = $this -> ci -> ls_profile -> getPublicProfile($value['user_id']);
+				}
 			}
 		}
-
 		//$results['statistics'] = $this -> ci -> projects_model -> select_project_statistic($fields['projects_id']);
 
 		return $results;
 
 	}
 
-	function selectProjects_all() {
+	function select_projects_all() {
 
-		$results = $this -> ci -> projects_model -> selectProjects_all();
+		$results = $this -> ci -> projects_model -> select_projects_all();
 
 		return $results;
 	}
@@ -90,6 +99,7 @@ class Ls_Projects {
 		}
 
 		$fields['created_by'] = $this -> user_id;
+		$fields['user_id'] = $this -> user_id;
 
 		return $result = $this -> ci -> projects_model -> insertProject($fields);
 	}
@@ -100,22 +110,52 @@ class Ls_Projects {
 			return FALSE;
 		}
 
+		if (isset($fields['ios_app_store_url']) || isset($fields['android_market_url']) || isset($fields['wp_market_url'])) {
+			$result = $this -> ci -> projects_model -> update_project_apps($fields);
+		}
+		if (isset($fields['homepage']) || isset($fields['github_url']) || isset($fields['facebook_url']) || isset($fields['twitter_url']) || isset($fields['gplus_url'])) {
+			$result = $this -> ci -> projects_model -> update_project_xurl($fields);
+		}
+		if (isset($fields['src']) || isset($fields['is_external']) || isset($fields['screenshot_details'])) {
+			$result = $this -> ci -> projects_model -> update_project_screenshots($fields);
+		}
 		if (isset($fields['tags_type_id']) && isset($fields['tags_data'])) {
 			$result = $this -> ci -> projects_model -> update_project_tags($fields);
 		}
-		## TODO Update function for other fields.
-
+		if (isset($fields['date_joined']) || isset($fields['date_leaved'])) {
+			$result = $this -> ci -> projects_model -> update_project_team_member($fields);
+		}
+		if (isset($fields['status']) || isset($fields['remarks']) || isset($fields['updated_by'])) {
+			$result = $this -> ci -> projects_model -> update_project_verification($fields);
+		}
+		
 		return $result;
 	}
 
-	function search_projects($keywords = FALSE) {
+	function search_projects($fields = FALSE, $options = FALSE) {
 
-		if (!$keywords) {
+		## Possible $fields keywords
+		## $fields['user_id']
+		## $fields['team_member']
+		## $fields['keywords']
+
+		if (!$fields) {
 			return FALSE;
 		}
-
-		return $this -> ci -> places_model -> searchPlace($keywords);
-
+		
+		if ($fields['user_id']) {
+			$project_ids = $this -> ci -> projects_model -> search_projects_by_members($fields);
+		}
+		
+		
+		## Prepare Project Datas
+		$projects = array();
+		if (is_array($project_ids) && sizeof($project_ids) > 0) {
+			foreach ($project_ids as $key => $values) {
+				$projects[] = $this -> select_project($values['project_id'], $options);
+			}
+		}
+		return ($projects);
 	}
 
 	function insertProjects_test_data() {

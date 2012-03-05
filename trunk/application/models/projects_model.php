@@ -26,19 +26,26 @@ class Projects_Model extends CI_Model {
 			return FALSE;
 
 		$data = array();
-		if (isset($obj['project_type_id'])) { $data['project_type_id'] = ($obj['project_type_id']);
+		if (isset($obj['project_type_id'])) {
+			$data['project_type_id'] = ($obj['project_type_id']);
 		}
-		if (isset($obj['name'])) { $data['name'] = ($obj['name']);
+		if (isset($obj['name'])) {
+			$data['name'] = ($obj['name']);
 		}
-		if (isset($obj['description'])) { $data['description'] = ($obj['description']);
+		if (isset($obj['description'])) {
+			$data['description'] = ($obj['description']);
 		}
-		if (isset($obj['logo'])) { $data['logo'] = ($obj['logo']);
+		if (isset($obj['logo'])) {
+			$data['logo'] = ($obj['logo']);
 		}
-		if (isset($obj['cover_img'])) { $data['cover_img'] = ($obj['cover_img']);
+		if (isset($obj['cover_img'])) {
+			$data['cover_img'] = ($obj['cover_img']);
 		}
-		if (isset($obj['video_src'])) { $data['video_src'] = ($obj['video_src']);
+		if (isset($obj['video_src'])) {
+			$data['video_src'] = ($obj['video_src']);
 		}
-		if (isset($obj['created_by'])) { $data['created_by'] = ($obj['created_by']);
+		if (isset($obj['created_by'])) {
+			$data['created_by'] = ($obj['created_by']);
 		}
 		$this -> db -> set('created_on', 'NOW()', FALSE);
 
@@ -164,8 +171,6 @@ class Projects_Model extends CI_Model {
 		}
 		if (isset($obj['date_leaved'])) { $data['date_leaved'] = ($obj['date_leaved']);
 		}
-		if (isset($obj['date_joined'])) { $data['date_joined'] = ($obj['date_joined']);
-		}
 		$this -> db -> set('created_on', 'NOW()', FALSE);
 
 		return $this -> db -> insert($this -> tables['projects_team'], $data);
@@ -192,7 +197,7 @@ class Projects_Model extends CI_Model {
 		return $this -> db -> insert($this -> tables['projects_verification'], $data);
 	}
 
-	function update_roject($obj = FALSE) {
+	function update_project($obj = FALSE) {
 
 		if (!isset($obj['project_id'])) {
 			return FALSE;
@@ -221,10 +226,101 @@ class Projects_Model extends CI_Model {
 
 	}
 
+	function update_project_apps($obj = FALSE) {
+
+		if (!isset($obj['project_id'])) {
+			return FALSE;
+		}
+
+		$data = array();
+		if (isset($obj['ios_app_store_url'])) {
+			$data['ios_app_store_url'] = ($obj['ios_app_store_url']);
+		}
+		if (isset($obj['android_market_url'])) {
+			$data['android_market_url'] = ($obj['android_market_url']);
+		}
+		if (isset($obj['wp_market_url'])) {
+			$data['wp_market_url'] = ($obj['wp_market_url']);
+		}
+		$where = array('project_id' => isset($obj['project_id']) ? trim($obj['project_id']) : FALSE);
+
+		if (sizeof($data) > 0) {
+			return $this -> db -> update($this -> tables['projects_apps'], $data, $where);
+		} else {
+			return FALSE;
+		}
+	}
+
+	function update_project_xurl($obj = FALSE) {
+
+		if (!isset($obj['project_id'])) {
+			return FALSE;
+		}
+
+		$data = array();
+		if (isset($obj['homepage'])) {
+			$data['homepage'] = ($obj['homepage']);
+		}
+		if (isset($obj['github_url'])) {
+			$data['github_url'] = ($obj['github_url']);
+		}
+		if (isset($obj['facebook_url'])) {
+			$data['facebook_url'] = ($obj['facebook_url']);
+		}
+		if (isset($obj['twitter_url'])) {
+			$data['twitter_url'] = ($obj['twitter_url']);
+		}
+		if (isset($obj['gplus_url'])) {
+			$data['gplus_url'] = ($obj['gplus_url']);
+		}
+
+		$where = array('project_id' => isset($obj['project_id']) ? trim($obj['project_id']) : FALSE);
+
+		if (sizeof($data) > 0) {
+			return $this -> db -> update($this -> tables['projects_xurl'], $data, $where);
+		} else {
+			return FALSE;
+		}
+	}
+
+	function update_project_screenshots($obj = FALSE) {
+
+		if (!isset($obj['project_id'])) {
+			return FALSE;
+		}
+		if (!isset($obj['project_screenshot_id'])) {
+			return FALSE;
+		}
+
+		$data = array();
+		if (isset($obj['src'])) {
+			$data['src'] = ($obj['src']);
+		}
+		if (isset($obj['is_external'])) {
+			$data['is_external'] = ($obj['is_external']);
+		}
+		if (isset($obj['screenshot_details'])) {
+			$data['screenshot_details'] = ($obj['screenshot_details']);
+		}
+
+		$where = array('project_id' => isset($obj['project_id']) ? trim($obj['project_id']) : FALSE);
+		$where = array('project_screenshot_id' => isset($obj['project_screenshot_id']) ? trim($obj['project_screenshot_id']) : FALSE);
+
+		if (sizeof($data) > 0) {
+			return $this -> db -> update($this -> tables['projects_screenshots'], $data, $where);
+		} else {
+			return FALSE;
+		}
+	}
+
 	function update_project_tags($obj = FALSE) {
-		
-		if (!isset($obj['project_id'])) { return FALSE; }
-		if (!isset($obj['tags_type_id'])) { return FALSE; }
+
+		if (!isset($obj['project_id'])) {
+			return FALSE;
+		}
+		if (!isset($obj['tags_type_id'])) {
+			return FALSE;
+		}
 
 		$data = array();
 		if (isset($obj['tags_data'])) { $data['tags_data'] = ($obj['tags_data']);
@@ -234,6 +330,59 @@ class Projects_Model extends CI_Model {
 
 		if (sizeof($data) > 0) {
 			return $this -> db -> update($this -> tables['projects_tags'], $data, $where);
+		} else {
+			return FALSE;
+		}
+	}
+
+	function update_project_team_member($obj = FALSE) {
+
+		if (!isset($obj['project_id'])) {
+			return FALSE;
+		}
+		if (!isset($obj['user_id'])) {
+			return FALSE;
+		}
+
+		$data = array();
+		if (isset($obj['date_joined'])) {
+			$data['date_joined'] = ($obj['date_joined']);
+		}
+		if (isset($obj['date_leaved'])) {
+			$data['date_leaved'] = ($obj['date_leaved']);
+		}
+
+		$where = array('project_id' => isset($obj['project_id']) ? trim($obj['project_id']) : FALSE);
+		$where = array('user_id' => isset($obj['user_id']) ? trim($obj['user_id']) : FALSE);
+
+		if (sizeof($data) > 0) {
+			return $this -> db -> update($this -> tables['projects_team'], $data, $where);
+		} else {
+			return FALSE;
+		}
+	}
+
+	function update_project_verification($obj = FALSE) {
+
+		if (!isset($obj['project_id'])) {
+			return FALSE;
+		}
+
+		$data = array();
+		if (isset($obj['status'])) {
+			$data['status'] = ($obj['status']);
+		}
+		if (isset($obj['remarks'])) {
+			$data['remarks'] = ($obj['remarks']);
+		}
+		if (isset($obj['updated_by'])) {
+			$data['updated_by'] = ($obj['updated_by']);
+		}
+
+		$where = array('project_id' => isset($obj['project_id']) ? trim($obj['project_id']) : FALSE);
+
+		if (sizeof($data) > 0) {
+			return $this -> db -> update($this -> tables['projects_verification'], $data, $where);
 		} else {
 			return FALSE;
 		}
@@ -258,18 +407,22 @@ class Projects_Model extends CI_Model {
 
 	function select_project_apps($project_id = FALSE) {
 
-		if (!isset($project_id)) { return FALSE; }
+		if (!isset($project_id)) {
+			return FALSE;
+		}
 
 		$where = array();
 		$where['project_id'] = $project_id;
 
 		return $this -> db -> get_where($this -> tables['projects_apps'], $where) -> row_array();
-		
+
 	}
 
 	function select_project_external_url($project_id = FALSE) {
 
-		if (!isset($project_id)) { return FALSE; }
+		if (!isset($project_id)) {
+			return FALSE;
+		}
 
 		$where = array();
 		$where['project_id'] = $project_id;
@@ -279,26 +432,30 @@ class Projects_Model extends CI_Model {
 
 	function select_project_screenshots($project_id = FALSE) {
 
-		if (!isset($project_id)) { return FALSE; }
+		if (!isset($project_id)) {
+			return FALSE;
+		}
 
 		$where = array();
 		$where['project_id'] = $project_id;
 
 		return $this -> db -> get_where($this -> tables['projects_screenshots'], $where) -> result_array();
 	}
-	
+
 	function select_project_tags($project_id = FALSE) {
 
-		if (!isset($project_id)) { return FALSE; }
+		if (!isset($project_id)) {
+			return FALSE;
+		}
 
 		$where = array();
 		$where['project_id'] = $project_id;
-		
-		$this->db->select('*');
-		$this->db->from($this -> tables['projects_tags'] . ' AS pt');
-		$this->db->join($this -> tables['projects_tags_xref'] . ' AS ptxf', 'ptxf.tags_type_id = pt.tags_type_id');
-		$this->db->where($where);
-		
+
+		$this -> db -> select('*');
+		$this -> db -> from($this -> tables['projects_tags'] . ' AS pt');
+		$this -> db -> join($this -> tables['projects_tags_xref'] . ' AS ptxf', 'ptxf.tags_type_id = pt.tags_type_id');
+		$this -> db -> where($where);
+
 		$mysql_result = $this -> db -> get();
 		//$mysql_result = $this -> db -> get_where($this -> tables['projects_tags'], $where);
 		if ($mysql_result -> num_rows() > 0) {
@@ -311,30 +468,34 @@ class Projects_Model extends CI_Model {
 			return NULL;
 		}
 	}
-	
+
 	function select_project_team_member($project_id = FALSE) {
 
-		if (!isset($project_id)) { return FALSE; }
+		if (!isset($project_id)) {
+			return FALSE;
+		}
 
 		$where = array();
 		$where['project_id'] = $project_id;
-		
+
 		return $this -> db -> get_where($this -> tables['projects_team'], $where) -> result_array();
-		
+
 	}
-	
+
 	function select_project_verification($project_id = FALSE) {
 
-		if (!isset($project_id)) { return FALSE; }
+		if (!isset($project_id)) {
+			return FALSE;
+		}
 
 		$where = array();
 		$where['project_id'] = $project_id;
 
 		return $this -> db -> get_where($this -> tables['projects_verification'], $where) -> row_array();
-		
+
 	}
 
-	function selectProjects_all() {
+	function select_projects_all() {
 		$this -> db -> select('*');
 		$this -> db -> from($this -> tables['projects'] . ' AS pj');
 		$this -> db -> join($this -> tables['projects_verification'] . ' AS pvt', 'pj.project_id = pvt.project_id', 'left');
@@ -344,7 +505,7 @@ class Projects_Model extends CI_Model {
 
 	}
 
-	function searchProject($keywords = FALSE) {
+	function search_projects($keywords = FALSE) {
 
 		if (!$keywords) {
 			return FALSE;
@@ -354,6 +515,29 @@ class Projects_Model extends CI_Model {
 		$this -> db -> from($this -> tables['projects'] . ' AS pj');
 		$this -> db -> like('name', $keywords);
 		$this -> db -> or_like('description', $keywords);
+		$query = $this -> db -> get();
+
+		if ($query -> num_rows() > 0) {
+			return ($query -> result_array());
+		} else {
+			return FALSE;
+		}
+
+	}
+
+	function search_projects_by_members($fields = FALSE) {
+
+		if (!$fields) {
+			return FALSE;
+		}
+
+		if (isset($fields['user_id'])) {
+			$this -> db -> like('user_id', $fields['user_id']);
+		}
+
+		$this -> db -> select('pt.project_id');
+		$this -> db -> from($this -> tables['projects'] . ' AS pj');
+		$this -> db -> join($this -> tables['projects_team'] . ' AS pt', 'pj.project_id = pt.project_id');
 		$query = $this -> db -> get();
 
 		if ($query -> num_rows() > 0) {
@@ -391,11 +575,11 @@ class Projects_Model extends CI_Model {
 		$obj['is_external'] = '';
 		$obj['screenshot_details'] = '';
 		## Tags
-		$arr = array();
-		$arr[] = "Networking";
-		$arr[] = "Professional";
-		$obj['tags_data'] = $arr;
-		$obj['tags_type_id'] = '1';
+		/*$arr = array();
+		 $arr[] = "Networking";
+		 $arr[] = "Professional";
+		 $obj['tags_data'] = $arr;
+		 $obj['tags_type_id'] = '1';*/
 		## Team Members
 		$obj['user_id'] = $this -> user_id;
 		$obj['date_joined'] = 'NOW()';

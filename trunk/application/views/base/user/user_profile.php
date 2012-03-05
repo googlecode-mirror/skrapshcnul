@@ -19,21 +19,14 @@
 				</div>
 			</div> */ ?>
 			
-			<div id="ls_social_share_container">
-				<?php //$this -> load -> view("base/user/profile/social_share.php");?>
-			</div>
-			
+			<?php //$this -> load -> view("base/user/profile/social_share.php");?>
 			<?php //$this -> load -> view("base/user/profile/profile_card.php");?>
 			<?php $this -> load -> view("base/user/profile/profile_summary_large.php");?>
-			
 			<?php $this -> load -> view("base/user/profile/preferences.php");?>
+			<?php $this -> load -> view("base/user/profile/projects.php");?>
+			<?php $this -> load -> view("base/user/profile/upcoming_lunches.php");?>
+			<?php //$this -> load -> view("base/user/profile/activities.php");?>
 			
-			<div class="clearfix">&nbsp;</div>
-			
-			<div id="tabs" class="activity-stream">
-				<?php $this -> load -> view("base/user/profile/upcoming_lunches.php");?>
-				<?php //$this -> load -> view("base/user/profile/activities.php");?>
-			</div>
 			<div class="clearfix">&nbsp;</div>
 			
 		</div>

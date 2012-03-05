@@ -75,10 +75,8 @@ class Projects extends CI_Controller {
 	}
 	
 	public function update_all_tags() {
-		$_REQUEST['alt'] = '';
-		$_REQUEST['callback'] = '';
 		
-		$input = json_decode($_REQUEST['value'], TRUE);
+		$input = json_decode(stripcslashes($_REQUEST['value']), TRUE);
 		
 		try {
 			foreach($input as $key => $row) {
@@ -101,12 +99,12 @@ class Projects extends CI_Controller {
 		if (isset($_REQUEST['datafld']) && isset($_REQUEST['value']) && isset($_REQUEST['oid'])) {
 			
 			$fields = array();
-			$fields['place_id'] = isset($_REQUEST['oid']) ? $_REQUEST['oid'] : FALSE;
+			$fields['project_id'] = isset($_REQUEST['oid']) ? $_REQUEST['oid'] : FALSE;
 			$fields[$_REQUEST['datafld']] = $_REQUEST['value'];
 			
 			if (isset($this -> user_id)) $fields['updated_by'] = $this -> user_id;
 			
-			$this -> data['results'] = $this -> ls_places -> updatePlace($fields);
+			$this -> data['results'] = $this -> ls_projects -> update_project($fields);
 		} else {
 			$result = FALSE;
 		}
