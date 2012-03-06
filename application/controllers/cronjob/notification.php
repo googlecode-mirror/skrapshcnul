@@ -15,8 +15,8 @@ class Notification extends CI_Controller {
 	}
 
 	function index() {
-		email_lunchsparks_notifications();
-		update_event_status_on_deadline_expire();
+		$this->email_lunchsparks_notifications();
+		$this->update_event_status_on_deadline_expire();
 	}
 	
 	function email_lunchsparks_notifications()
