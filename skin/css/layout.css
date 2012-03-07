@@ -1,3 +1,6 @@
+.no-layout {
+	background: none;
+}
 html {
 	background-image: url(../images/bg/bg.png);
 }
@@ -50,18 +53,10 @@ body {
 }
 /* Content */
 #m-container-outer {
-	/*background: url(../images/5/body_bg.jpg) #FFFFFF;*/
-	/*background: #F8F8F8;*/
 	background: #F5F5F5 url(../images/180/bg-grey.png);
-	padding: 56px 0 10px 0;
+	padding: 40px 0 10px 0;
 }
 #m-container { 
-	/*margin:auto;padding:10px;min-height: 200px;
-	background: #F9F9F9;
-	background: white;
-	border-left: 1px solid #E6E6E6;border-right: 1px solid #E6E6E6;border-bottom: 1px solid #E6E6E6;
-	box-shadow: rgba(0,0,0,0.3) 0 1px 3px;-moz-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;-webkit-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
-	border-radius: 5px;*/
 	margin: auto;
 	font-weight: normal;
 	border-radius: 3px;

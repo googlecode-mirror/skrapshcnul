@@ -2,6 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo base_url();?>skin/js/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8" />
+
 <?php /* ## Fonts ?>
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400' rel='stylesheet' type='text/css'>
@@ -25,6 +27,7 @@
 <script src="<?php echo base_url();?>skin/js/webfont.js"></script>
 <script src="<?php echo base_url();?>skin/js/highcharts/highcharts.js"></script>
 <script src="<?php echo base_url();?>skin/js/yqlgeo/yqlgeo.js"></script>
+<script src="<?php echo base_url();?>skin/js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDNZh2NM04KwYoWEs_H9hGIF-mj9MOZvu4&sensor=true&libraries=geometry,places"></script>
 <?php echo $css_combined; ?>
 <?php echo $js_combined; ?>

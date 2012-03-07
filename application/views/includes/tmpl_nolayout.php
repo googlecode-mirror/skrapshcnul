@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:ng="http://angularjs.org">
+<html class="no-layout">
 	<head http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<?php $this -> load -> view('includes/scripts');?>
 	</head>
