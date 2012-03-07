@@ -1,6 +1,5 @@
 <div id="notifications-mini-area" class="floating-dialog">
-	<iframe id="notifications-mini-iframe" src="<?php echo site_url("notifications/minified");?>"
-	scrolling="no" frameborder="0" allowtransparency="true"
+	<iframe id="notifications-mini-iframe" src="<?php echo site_url("notifications/minified");?>" scrolling="no" frameborder="0" allowtransparency="true"
 	hspace="0" tabindex="-1" vspace="0"
 	style="height: 100%">
 		<p>
@@ -9,90 +8,124 @@
 	</iframe>
 </div>
 <header>
-	<div id="header">
-		<div id="h-container">
-			<div id="lunchsparks-header-logo" class="header-menu-items">
-				<?php echo anchor('', '<img src="'.base_url().'/skin/images/ls_logo_white.png" height="40px" style="display: block;">', array('from' => 'main'));?>
-			</div>
-			<div id="h-menu" class="header-menu-items">
-				<ul>
+	<div id="header" class="navbar navbar-static">
+		<div id="h-container" class="navbar-inner">
+			<div class=" row-fluid">
+				<div class="span8">
+					<div id="lunchsparks-header-logo" class="brand header-items">
+						<?php echo anchor('', '<img src="'.base_url().'skin/images/140/ls_logo_wide_white.png" height="40px" style="display: block;">', array('from' => 'main'));?>
+					</div>
 					<?php if (isset($is_logged_in) && $is_logged_in ) { ?>
-						<?php /*
-						<li>
-							<?php echo anchor('user/friends', 'Friends', array('from' => 'main'));?>
-						</li>
-						<li>
-							<?php echo anchor('user/messages', 'Messages', array('from' => 'main'));?>
-						</li>
-						*/ ?>
-						<li><div style="width: 20px;">&nbsp;</div></li>
-						<li>
-							<?php echo anchor('synchronize', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-synchronize', 'title'=>'Synchronize')); ?>
-						</li>
-						<li>
-							<?php echo anchor('preferences', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-preferences', 'title'=>'Preferences')); ?>
-						</li>
-						<li>
-							<?php echo anchor('schedules', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-schedules', 'title'=>'Schedule')); ?>
-						</li>
-						<li>
-							<?php echo anchor('events', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-events', 'title'=>'Events')); ?>
-						</li>
-						<li>
-							<?php echo anchor('invitations', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-invitations', 'title'=>'Invitations'));?>
-						</li>
-	          			<?php /* <li>
-							<?php echo anchor('suggestion', 'Suggestions', array('from' => 'main'));?>
-						</li> */ ?>
-					<?php } ?>
-					
-					<?php if (isset($this->data['is_logged_in_admin']) && $this->data['is_logged_in_admin']) { ?>
-						<li>
-							<?php echo anchor('admin/dashboard', ' ', array('from' => 'main', 'class' => 'ls-h-m-icon', 'id' => 'ls-h-m-admin', 'title'=>'Admin Dashboard'));?>
-						</li>
-					<?php } ?>
-				</ul>
-			</div>
-			
-			<?php if (isset($is_logged_in) && $is_logged_in ) { ?>
-			<div id="lunchsparks-header-logo" class="header-menu-items">
-				<form method="get" action="/search/">
-					<input name="q" type="search" class="search" placeholder="Search tag..." value="">
-					<input type="button" class="button" value="Go" />
-				</form>
-			</div>
-			<?php } ?>
-			
-			<div id="h-uacc">
-				<?php if ($is_logged_in) {
-				?>
-				<ul>         
-					<li class="notification-toggle-container">
-						<div id="notification-toggle" class="notification" title="Notifications">
-							<span id="notification-toggle-count">0</span>
+						<div id="h-menu" class="header-items">
+							<ul class="nav pills">
+								<li class="dropdown" id="menu1">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+										Personal
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="/preferences"><i class="icon-tags"></i> Preferences</a></li>
+										<li><a href="/schedules"><i class="icon-time"></i> Schedules</a></li>
+										<li><a href="/events"><i class="icon-calendar"></i> Events</a></li>
+										<li class="divider"></li>
+										<li><a href="/invitations"><i class="icon-comment"></i> Invitation</a></li>
+									</ul>
+								</li>
+								<li class="dropdown" id="menu2">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#menu2">
+										Projects
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="/projects/my"><i class="icon-lock"></i> My Projects</a></li>
+										<li><a href="/projects/add"><i class="icon-plus"></i> Add Project</a></li>
+										<li class="divider"></li>
+										<li><a href="/projects/trending"><i class="icon-th-large"></i> All Projects</a></li>
+										<li><a href="/projects/trending"><i class="icon-th-list"></i> Trending Projects</a></li>
+									</ul>
+								</li>
+								<li class="dropdown" id="menu3">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#menu3">
+										Places
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="/places/all"><i class="icon-map-marker"></i> All Places</a></li>
+										<li><a href="/places/all#restaurant"><i class="icon-map-marker"></i> Restaurants</a></li>
+									</ul>
+								</li>
+								<?php if (isset($this->data['is_logged_in_admin']) && $this->data['is_logged_in_admin']) { ?>
+								<li class="dropdown" id="menu0">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#menu0">
+										Admin
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="/admin/dashboard">Dashboard</a></li>
+										<li><a href="/statistics">Statistics</a></li>
+										<li><a href="/events">Events</a></li>
+										<li><a href="/events">Events</a></li>
+										<li class="divider"></li>
+										<li><a href="/invitations">Invitation</a></li>
+									</ul>
+								</li>
+								<li class="divider-vertical"></li>
+								<li>
+									<form method="get" action="/search/" class="form-search">
+										<input name="q" type="text" class="input-medium search-query" placeholder="Search...">
+										<button type="submit" class="btn"><i class="icon-search"></i></button>
+									</form>
+								</li>
+								<?php } ?>
+							</ul>
 						</div>
-					</li>
-					<li>
-						<?php echo anchor('user/profile', $this -> session -> userdata['email'], array('from' => 'main'));?>
-					</li>
-					<li>
-						<?php echo anchor('settings', 'Settings', array('from' => 'main'));?>
-					</li>
-					<li>
-						<?php echo anchor('logout', 'Logout', array('from' => 'main'));?>
-					</li>          
-				</ul>
-				<?php } else {?>
-				<ul>
-					<li>
-						<?php echo anchor('login', 'Login', array('from' => 'main'));?>
-					</li>
-					<li>
-						<?php echo anchor('auth/signup', 'Signup', array('from' => 'main'));?>
-					</li>
-				</ul>
-				<?php }?>
+					<?php } ?>
+				</div>
+				
+				<div class="span4">
+					<div id="h-uacc" class="header-items">
+						<div id="lunchsparks-header-logo" class="brand header-items"></div>
+						<ul  class="nav pills">
+							<?php if ($is_logged_in) { ?>     
+							<li>
+								<div class="notification-toggle-container">
+									<div id="notification-toggle" class="notification" title="Notifications">
+										<span id="notification-toggle-count">0</span>
+									</div>
+								</div>
+							</li>
+							<li class="dropdown" id="menu10">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#menu10">
+									<?php echo $this -> session -> userdata['email'] ?>
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="/user/profile"><i class="icon-user"></i> My Profile</a></li>
+									<li><a href="/settings"><i class="icon-cog"></i> Settings</a></li>
+									<li class="divider"></li>
+									<li><a href="/settings"><i class="icon-flag"></i></i> Settings</a></li>
+									<li class="divider"></li>
+									<li><a href="/logout">Logout</a></li>
+								</ul>
+							</li>
+							<?php } else {?>
+							<li>
+								<?php echo anchor('login', 'Login', array('from' => 'main'));?>
+							</li>
+							<li>
+								<?php echo anchor('auth/signup', 'Signup', array('from' => 'main'));?>
+							</li>
+							<?php }?>
+						</ul>
+					</div>
+				</div>
 			</div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 </header>
+
+<script>
+jQuery('.dropdown-toggle').dropdown();
+</script>
+</script>

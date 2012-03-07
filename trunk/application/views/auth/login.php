@@ -28,12 +28,13 @@
 					<?php echo form_input($password);?>
 				</p>
 				<p>
-					<label for="remember">Remember Me:</label>
-					<?php echo form_checkbox('remember', '1', FALSE);?>
+					<label class="checkbox">
+						<?php echo form_checkbox('remember', '1', FALSE);?> Remember Me
+					</label>
 				</p>
 				<p class="button-set">
-					<?php echo form_submit('submit', 'Login');?>
-					<a href="/auth/signup" class="button box-shadow">Create Account</a>
+					<button type="submit" class="btn btn-primary btn-large"><i class="icon-user icon-white"></i> Login</button> or 
+					<a href="/auth/signup" class="btn">Create Account</a>
 				</p>
 				<p>
 					<small><?php echo anchor('auth/forgot_password', 'Forgot Password?');?></small>

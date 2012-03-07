@@ -293,7 +293,7 @@ a.a-s-icon-xlhdpi {
 	color: #212121;
 }
 #steps-completed {
-	width: 962px;
+	width: 100%;
 	margin: 10px auto;
 	overflow: hidden;
 }
@@ -309,11 +309,11 @@ a.a-s-icon-xlhdpi {
 	-webkit-border-radius: 0 0 5px 5px;
 }
 .steps-completed-item {
-	/*float: left;*/
 	display: inline-block;
+	vertical-align: middle;
 	text-align: center;
 	margin: 0 3px;
-	width: 224px;
+	width: 23.8%;
 	/*background: -moz-linear-gradient(top,#FFFFF5,#F5F3B4);
 	background: -moz-linear-gradient(center top,'#FFFFF5','#F5F3B4');
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fffff5',endColorstr='#f5f3b4');
@@ -535,6 +535,7 @@ height: 48px;
 .profile-summary-large .profile-name {
 	font-weight: bold;
 	font-size: 32px;
+	line-height: 35px;
 	text-shadow: 1px 1px 1px #CCC;
 }
 .profile-summary-large .headline {

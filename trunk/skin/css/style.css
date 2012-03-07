@@ -43,11 +43,6 @@ h3 {
 img {
 	border: none;
 }
-fieldset {
-	width: 300px;
-	margin-bottom: 2em;
-	display: block;
-}
 /* Container Size */
 #h-container {
 	min-width: 800px;
@@ -99,6 +94,7 @@ footer {
 	color: #FFFFFF;
 	text-shadow: black 1px 1px 1px;
 	box-shadow: inset 1px 1px 2px #000000;
+	background-image: url(../images/bg/bg.png);
 }
 footer.xl {
 	background: #232323 url(../images/bg/footer_bg_2.png) repeat-x 0 0;
@@ -279,17 +275,12 @@ footer ul li {
 .title {
 	font-weight: bold;
 }
-/* Form fields */
-label {
-	line-height: 30px;
-	font-weight: bold;
-}
 .caption {
 	font-size: 11px;
 	font-weight: normal;
 	color: #555555;
 }
-input[type=text], input[type=password], input[type=email], input[type=search], textarea {
+/*input[type=text], input[type=password], input[type=email], input[type=search], textarea {
 	display: block;
 	margin: 0.5em 0;
 	padding: 0.6em;
@@ -305,10 +296,18 @@ input[type=text], input[type=password], input[type=email], input[type=search], t
 }
 input[type=search], .search {
 	background: #FFFFFF url(/skin/images/32/search_gray.png) left center no-repeat;
-	/*padding-left: 34px !important;*/
 	box-shadow: inset 0 0 3px #CCC;
+	padding-left: 34px !important;
+}*/
+.form-search {
+	padding: 0px;
+	margin: 0px;
 }
-
+.form-search input {
+	margin-top: 5px;
+	display: inline-block;
+	vertical-align: middle;
+}
 .submit, .login {
 	line-height: 24px;
 	margin: 5px;

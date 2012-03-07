@@ -20,14 +20,6 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3f5f5f5', endColorstr='#f5f5f5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-.c-pages-delete {
-	
-}
-
-.c-pages p {
-	margin: 20px 0;
-}
-
 .page-img-container img {
 	border: 5px solid #EFEFEF;
 	box-shadow: 1px 1px 1px #ccc;
