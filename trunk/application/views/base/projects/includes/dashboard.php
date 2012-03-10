@@ -56,8 +56,8 @@
 			
 			<div class="ratings">
 				<div class="rating-points">
-					<span class="points"><?php echo $project['statistics']['favourite']; ?></span>
-					<div class="fields" style="">Favourite</div>
+					<span class="points"><?php echo $project['statistics']['favourites']; ?></span>
+					<div class="fields" style="">Favourites</div>
 				</div>
 			</div>
 		</div>
