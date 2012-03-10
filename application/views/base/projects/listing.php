@@ -5,11 +5,15 @@
 		
 			<div id="ProjectsListingModel">
 				<div id="masonry-container" data-bind="foreach: projects" class="">
-					<div class="pin">
+					<div class="pin" data-bind="">
 						<div class="pin-details">
-							<div class="pin-image"><img data-bind='attr: {src: logo}' /></div>
+							<a data-bind="attr: {href: '/projects/'+project_id}">
+								<div class="pin-image"><img data-bind='attr: {src: logo}' /></div>
+							</a>
 							<div class="pin-data">
-								<h3 data-bind='text: name'></h3>
+								<a data-bind="attr: {href: '/projects/'+project_id}">
+									<h3 data-bind='text: name'></h3>
+								</a>
 								<div data-bind='text: description'></div>
 							</div>
 							<div class="pin-stats" data-bind="foreach: statistics">
@@ -44,19 +48,23 @@
 </div>
 <div class="clearfix">&nbsp;</div>
 
+<?php var_dump($projects[0]); ?>
+
 <script>
 var initialData = <?php echo json_encode($projects); ?>;
  
-var ProjectsListingModel = function(contacts) {
+var ProjectsListingModel = function(projects) {
 	var self = this;
-	self.projects = ko.observableArray(ko.utils.arrayMap(contacts, function(contact) {
+	self.projects = ko.observableArray(ko.utils.arrayMap(projects, function(project) {
 		return { 
-			logo: contact.logo, 
-			name: contact.name, 
-			description: contact.description, 
-			status: contact.status,
-			statistics: ko.observableArray([contact.statistics]),
-			team_members: ko.observableArray(ko.utils.arrayMap(contact.team_members, function(team_member) {
+			project_id: project.project_id,
+			logo: project.logo, 
+			name: project.name, 
+			description: project.description, 
+			status: project.status,
+			external_urls: ko.observableArray([project.external_urls]),
+			statistics: ko.observableArray([project.statistics]),
+			team_members: ko.observableArray(ko.utils.arrayMap(project.team_members, function(team_member) {
 				return {
 					id: team_member.pub_profile.id,
 					profile_img: team_member.pub_profile.profile_img,
@@ -64,7 +72,7 @@ var ProjectsListingModel = function(contacts) {
 					ls_pub_url: team_member.pub_profile.ls_pub_url
 				}
 			})),
-			tags: ko.observableArray(ko.utils.arrayMap(contact.tags, function(tags) {
+			tags: ko.observableArray(ko.utils.arrayMap(project.tags, function(tags) {
 				return {
 					tag_data: ko.observableArray(ko.utils.arrayMap(tags.tags_data, function(tag_data) {
 						return {
