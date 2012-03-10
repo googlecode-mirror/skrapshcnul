@@ -48,6 +48,25 @@ class Projects extends CI_Controller {
 		$this -> json -> json_prep($this -> results);
 
 	}
+	
+	public function select_projects() {
+		
+		$requests = ($this -> input -> get());
+		
+		if (isset($requests['user_id'])) {
+			$fields['user_id'] = $requests['user_id'];
+		}
+		
+		if (isset($requests['page'])) {
+			$options['page'] = $requests['page'];
+		}
+		
+		var_dump($options);
+		var_dump($fields);
+		
+		$this -> data['projects'] = $this -> ls_projects -> select_all_projects($fields, $options);
+		
+	}
 
 	public function add() {
 		

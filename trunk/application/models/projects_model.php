@@ -495,14 +495,31 @@ class Projects_Model extends CI_Model {
 
 	}
 
-	function select_projects_all() {
+	function select_all_projects($fields = FALSE, $options = FALSE) {
+		$where = array();
+		
+		if (isset($fields['user_id'])) {
+			$where['user_id'] = $fields['user_id'];
+		}
+		
+		if (!isset($fields['limit_start'])) {
+			$limit_start =  0;
+		}
+		
+		if (!isset($fields['row_count'])) {
+			$row_count =  30;
+		}
+		
 		$this -> db -> select('*');
 		$this -> db -> from($this -> tables['projects'] . ' AS pj');
-		$this -> db -> join($this -> tables['projects_verification'] . ' AS pvt', 'pj.project_id = pvt.project_id', 'left');
+		$this -> db -> join($this -> tables['projects_verification'] . ' AS pvt', 'pvt.project_id = pj.project_id', 'left');
+		$this -> db -> join($this -> tables['projects_team'] . ' AS pt', 'pt.project_id = pj.project_id', 'left');
+		$this -> db -> where($where);
+		$this->db->limit($row_count, $limit_start);
 		$mysql_result = $this -> db -> get();
 
-		return $mysql_result -> result();
-
+		return $mysql_result -> result_array();
+		
 	}
 
 	function search_projects($keywords = FALSE) {

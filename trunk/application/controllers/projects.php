@@ -42,9 +42,12 @@ class Projects extends CI_Controller {
 			case 'add' :
 				$this -> add();
 				break;
-			case 'insert_test_data' :
-				$this -> insert_test_data();
+			case 'my' :
+				$this -> my_project();
 				break;
+			/*case 'insert_test_data' :
+				$this -> insert_test_data();
+				break;*/
 			default :
 				$this -> index();
 		}
@@ -52,17 +55,19 @@ class Projects extends CI_Controller {
 	
 	function index($value = FALSE) {
 
-		$projects_id = $this -> uri -> segment(2);
+		$project_id = $this -> uri -> segment(2);
 
 		## TODO
 		## If Projects_id is numeric, check for id,
 		## else, try to search for Projects name.
 
-		if (!is_numeric($projects_id)) {
+		if (!is_numeric($project_id)) {
 			return $this -> listing();
 		}
 		
-		$this -> data['project'] = $this -> ls_projects -> select_project($projects_id);
+		$fields['project_id'] = $project_id;
+		
+		$this -> data['project'] = $this -> ls_projects -> select_project($fields);
 		if ($this -> ls_projects -> has_edit_permission($this -> data['project'])) {
 			$this -> data['has_edit_permission'] = TRUE;
 		}
@@ -78,7 +83,7 @@ class Projects extends CI_Controller {
 	
 	function listing() {
 		
-		redirect('404');
+		$this -> data['projects'] = $this -> ls_projects -> select_all_projects();
 		
 		// Render view data
 		$this -> data['head_title'] = 'Projects Listing | Lunchsparks';
@@ -89,7 +94,23 @@ class Projects extends CI_Controller {
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 		
 	}
-
+	
+	function my_project() {
+		
+		$fields['user_id'] = $this -> user_id;
+		
+		$this -> data['projects'] = $this -> ls_projects -> select_all_projects($fields);
+		
+		// Render view data
+		$this -> data['head_title'] = 'My Projects | Lunchsparks';
+		$this -> data['tpl_page_id'] = 'projects#my';
+		$this -> data['tpl_page_title'] = "My Projects";
+		// Render views
+		$this -> data['main_content'] = 'base/projects/listing';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		
+	}
+	
 	function add() {
 
 		$fields = ($this -> input -> post());
@@ -111,13 +132,15 @@ class Projects extends CI_Controller {
 
 	function edit($value = FALSE) {
 
-		$projects_id = $this -> uri -> segment(3);
+		$project_id = $this -> uri -> segment(3);
 
-		if (!is_numeric($projects_id)) {
+		if (!is_numeric($project_id)) {
 			return FALSE;
 		}
+		
+		$fields['project_id'] = $project_id;
 
-		$this -> data['project'] = $this -> ls_projects -> select_project($projects_id);
+		$this -> data['project'] = $this -> ls_projects -> select_project($fields);
 
 		// Render view data
 		$this -> data['head_title'] = 'Places | Lunchsparks';

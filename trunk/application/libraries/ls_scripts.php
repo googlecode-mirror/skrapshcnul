@@ -49,6 +49,7 @@ class Ls_Scripts {
 			'skin/css/notification_icons.css',
 			'skin/css/notifications.css',
 			'skin/css/pages.css',
+			'skin/css/pin.css',
 			'skin/css/places.css',
 			'skin/css/preferences.css',
 			'skin/css/schedules.css',

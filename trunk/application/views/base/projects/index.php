@@ -1,4 +1,3 @@
-
 <div class="m-content">
 	<?php if ($has_edit_permission == TRUE) { ?>
 		<div class="edit-this-page">

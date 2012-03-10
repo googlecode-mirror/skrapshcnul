@@ -1,0 +1,45 @@
+.pin {
+	width: 220px;
+	margin: 5px;
+	float: left;
+	font-size: 11px;
+	background: #FFFFFF;
+	box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	opacity: 0.8;
+}
+.pin:hover {
+	opacity: 1;
+}
+.pin-details {
+	padding: 10px;
+}
+.pin-extras {
+	padding: 10px;
+	background: #F2F0F0;
+	border-top: 1px solid #FCFAFA;
+	border-bottom: 1px solid #D9D4D4;
+}
+.pin-image {
+	text-align: center;
+	border-top: 1px solid rgba(224, 224, 224, 0.1);
+	border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+	border-left: 1px solid rgba(224, 224, 224, 0.2);
+	border-right: 1px solid rgba(224, 224, 224, 0.2);
+	background: rgba(224, 224, 224, .2 );
+}
+.pin-image img {
+	max-width: 220px;
+}
+.pin-data {
+	text-align: left;
+}
+.pin-stats {
+	color: #8C7E7E;
+	margin: 5px 0;
+}
+#masonry-container {
+	padding-bottom: 50px;
+}
+
