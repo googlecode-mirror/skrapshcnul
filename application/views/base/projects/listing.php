@@ -26,6 +26,14 @@
 								</div>
 							</div>
 						</div>
+						<div class="pin-extras">
+							<h5>Team Members</h5>
+							<div data-bind="foreach: team_members">
+								<a data-bind="attr: {href: ls_pub_url, 'ls-data-userid': id}" class="profile-img-45 ls-profile-hover inset-image">
+									<img data-bind="attr : {src: profile_img, title: display_name} " />
+								</a>
+							</div>
+						</div>
 						<div class="clearfix"></div>
 					</div>
 				</div>
@@ -48,6 +56,14 @@ var ProjectsListingModel = function(contacts) {
 			description: contact.description, 
 			status: contact.status,
 			statistics: ko.observableArray([contact.statistics]),
+			team_members: ko.observableArray(ko.utils.arrayMap(contact.team_members, function(team_member) {
+				return {
+					id: team_member.pub_profile.id,
+					profile_img: team_member.pub_profile.profile_img,
+					display_name: team_member.pub_profile.display_name,
+					ls_pub_url: team_member.pub_profile.ls_pub_url
+				}
+			})),
 			tags: ko.observableArray(ko.utils.arrayMap(contact.tags, function(tags) {
 				return {
 					tag_data: ko.observableArray(ko.utils.arrayMap(tags.tags_data, function(tag_data) {

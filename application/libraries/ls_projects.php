@@ -52,6 +52,7 @@ class Ls_Projects {
 			$results = $this -> ci -> projects_model -> select_project($fields['project_id']);
 			$results['external_urls'] = $this -> ci -> projects_model -> select_project_external_url($fields['project_id']);
 			$results['tags'] = $this -> ci -> projects_model -> select_project_tags($fields['project_id']);
+			$results['team_members'] = $this -> ci -> projects_model -> select_project_team_member($fields['project_id']);
 		} else {
 			$results = $this -> ci -> projects_model -> select_project($fields['project_id']);
 			$results['apps'] = $this -> ci -> projects_model -> select_project_apps($fields['project_id']);
@@ -149,32 +150,6 @@ class Ls_Projects {
 		}
 		
 		return $result;
-	}
-
-	function search_projects($fields = FALSE, $options = FALSE) {
-
-		## Possible $fields keywords
-		## $fields['user_id']
-		## $fields['team_member']
-		## $fields['keywords']
-
-		if (!$fields) {
-			return FALSE;
-		}
-		
-		if ($fields['user_id']) {
-			$project_ids = $this -> ci -> projects_model -> search_projects_by_members($fields);
-		}
-		
-		
-		## Prepare Project Datas
-		$projects = array();
-		if (is_array($project_ids) && sizeof($project_ids) > 0) {
-			foreach ($project_ids as $key => $values) {
-				$projects[] = $this -> select_project($values['project_id'], $options);
-			}
-		}
-		return ($projects);
 	}
 
 	function insertProjects_test_data() {

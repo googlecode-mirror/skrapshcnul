@@ -496,11 +496,6 @@ class Projects_Model extends CI_Model {
 	}
 
 	function select_all_projects($fields = FALSE, $options = FALSE) {
-		$where = array();
-		
-		if (isset($fields['user_id'])) {
-			$where['user_id'] = $fields['user_id'];
-		}
 		
 		if (!isset($fields['limit_start'])) {
 			$limit_start =  0;
@@ -513,8 +508,11 @@ class Projects_Model extends CI_Model {
 		$this -> db -> select('*');
 		$this -> db -> from($this -> tables['projects'] . ' AS pj');
 		$this -> db -> join($this -> tables['projects_verification'] . ' AS pvt', 'pvt.project_id = pj.project_id', 'left');
-		$this -> db -> join($this -> tables['projects_team'] . ' AS pt', 'pt.project_id = pj.project_id', 'left');
-		$this -> db -> where($where);
+		
+		if (isset($fields['user_id'])) {
+			$this -> db -> join($this -> tables['projects_team'] . ' AS pt', 'pt.project_id = pj.project_id', 'left');
+			$this -> db -> like('user_id', $fields['user_id']);
+		}
 		$this->db->limit($row_count, $limit_start);
 		$mysql_result = $this -> db -> get();
 
@@ -532,29 +530,6 @@ class Projects_Model extends CI_Model {
 		$this -> db -> from($this -> tables['projects'] . ' AS pj');
 		$this -> db -> like('name', $keywords);
 		$this -> db -> or_like('description', $keywords);
-		$query = $this -> db -> get();
-
-		if ($query -> num_rows() > 0) {
-			return ($query -> result_array());
-		} else {
-			return FALSE;
-		}
-
-	}
-
-	function search_projects_by_members($fields = FALSE) {
-
-		if (!$fields) {
-			return FALSE;
-		}
-
-		if (isset($fields['user_id'])) {
-			$this -> db -> like('user_id', $fields['user_id']);
-		}
-
-		$this -> db -> select('pt.project_id');
-		$this -> db -> from($this -> tables['projects'] . ' AS pj');
-		$this -> db -> join($this -> tables['projects_team'] . ' AS pt', 'pj.project_id = pt.project_id');
 		$query = $this -> db -> get();
 
 		if ($query -> num_rows() > 0) {
