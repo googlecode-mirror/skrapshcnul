@@ -24,15 +24,7 @@ a:hover {
 	text-decoration: underline;
 }
 h1, h2 {
-	/*font-family: Georgia, Times, sans-serif;
-	text-shadow: 0 1px 0 #CCCCCC;
-	color: #5F82AD;*/
-	margin: 0 0 10px 0;
-	font-size: 20px;
-	font-weight: bold;
-	text-shadow: 1px 1px 0 white;
-	color: #495961;
-	
+	text-shadow: 1px 1px 0 #EFEFEF;
 }
 .sub-heading {
 	text-shadow: 1px 1px 0 white;
@@ -300,7 +292,8 @@ input[type=search], .search {
 	padding: 0px;
 	margin: 0px;
 }
-.form-search input {
+
+#h-container .form-search input {
 	margin-top: 5px;
 	display: inline-block;
 	vertical-align: middle;

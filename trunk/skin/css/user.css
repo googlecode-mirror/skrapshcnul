@@ -111,7 +111,12 @@
 	border: 1px solid #CCC;
 	padding: 2px;
 }
-.profile-img-45,
+.profile-img-45 {
+	height: 45px;
+	width: 45px;
+	overflow: hidden;
+	background: #FFFFFF url("../images/50/image-placeholder.png") no-repeat;
+}
 .profile-img-45 img {
 	max-width: 45px;
 	max-height: 45px;

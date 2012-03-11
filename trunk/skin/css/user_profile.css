@@ -37,6 +37,7 @@
 .ls-profile-hover,
 .hover-profile-card {
 	display: inline-block;
+	vertical-align: middle;
 }
 .profile-selector-frame {
 	padding:5px; 

@@ -98,20 +98,29 @@ class Search extends CI_Controller {
 	}
 
 	function people() {
-
-		// Render views data
+		
 		try {
-			$this -> data['head_title'] = 'Search | Lunchsparks';
-			$this -> data['tpl_page_id'] = "search#people";
-			$this -> data['tpl_page_title'] = "Search People";
-			$this -> data['users'] = $this -> ls_search -> people();
-			// Render Views
-			$this -> data['main_content'] = 'base/search/people';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
-
+			
+			$requests = $this -> input -> get();
+			$fields = array();
+			
+			if (isset($requests['q'])) {
+				$fields['q'] = $requests['q'];
+			}
+		
+			$this -> data['users'] = $this -> ls_search -> people($fields);
+			
 		} catch(exception $e) {
 			//echo "Exception Caught $e";
 		}
+		
+		// Render views data
+		$this -> data['head_title'] = 'Search | Lunchsparks';
+		$this -> data['tpl_page_id'] = "search#people";
+		$this -> data['tpl_page_title'] = "Search People";
+		// Render Views
+		$this -> data['main_content'] = 'base/search/people';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 
 	}
 
