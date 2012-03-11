@@ -270,6 +270,26 @@ class Ls_Profile {
 		
 		
 	}
-
+	
+	function select_lunch_wishlist($fields = FALSE, $options = FALSE) {
+		
+		if (!$fields['user_id']) return FALSE; 	
+		
+		$results = $this -> ci -> user_lunch_wishlist_model->select_list($fields['user_id']);
+		
+		if (!$results) return FALSE;
+		
+		## TODO - fix the return result.
+		$results = json_decode(json_encode($results), TRUE);
+		
+		foreach ($results as $key => $user_data) {
+			$results[$key]['kind'] = "ls#person";
+			$results[$key] = $this -> ci -> ls_profile -> getPublicProfile($user_data['user_id']);
+		}
+		
+		return $results;
+		
+	}
+	
 }
 ?>

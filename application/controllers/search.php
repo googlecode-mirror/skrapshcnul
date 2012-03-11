@@ -106,6 +106,7 @@ class Search extends CI_Controller {
 			
 			if (isset($requests['q'])) {
 				$fields['q'] = $requests['q'];
+				$this -> data['q'] = $requests['q'];
 			}
 		
 			$this -> data['users'] = $this -> ls_search -> people($fields);

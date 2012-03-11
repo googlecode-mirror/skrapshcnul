@@ -13,13 +13,13 @@ class Ls_Search {
 
 	function __construct() {
 		$this -> ci = &get_instance();
-		$this -> ci -> load -> model('user_profile_model');
+		$this -> ci -> load -> model('user_model');
 		$this -> ci -> load -> library('ls_profile');
 	}
 	
 	function people($fields = FALSE, $options = FALSE) {
 			
-		$results = $this -> ci -> user_profile_model -> select_all();
+		$results = $this -> ci -> user_model -> select_all_users($fields, $options);
 		
 		foreach ($results as $key => $user_data) {
 			$results[$key]['kind'] = "ls#person";

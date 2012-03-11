@@ -5,6 +5,15 @@
  */
 class User_model extends CI_Model {
 	
+	function __construct() {
+		$this -> load -> config('tables/users', TRUE);
+		$this -> load -> library('session');
+
+		## Initialize
+		$this -> tables = $this -> config -> item('tables', 'tables/users');
+		$this -> user_id = $this -> session -> userdata('user_id');
+	}
+	
 	function select_user($user_id = NULL) {
 		
 		if (!isset($user_id)) {
@@ -51,21 +60,6 @@ class User_model extends CI_Model {
 		}
 	}
 	
-	public function getAll($value = '') {
-		$q = $this -> db -> get('lss_users');
-
-		if ($q -> num_rows() > 0) {
-			foreach ($q->result() as $row) {
-				$data = $row;
-			}
-
-			return $data;
-		} else {
-			return NULL;
-		}
-
-	}
-
 	function validate() {
 		try {
 			// Username doesn't exist
@@ -94,7 +88,7 @@ class User_model extends CI_Model {
 
 		}
 	}
-
+	
 	function create_user() {
 		try {
 			if (!$this -> _is_username_exist()) {
@@ -108,14 +102,44 @@ class User_model extends CI_Model {
 		}
 	}
 	
+	public function select_all_users($fields = FALSE, $options = FALSE) {
+		
+		if (!isset($fields['limit_start'])) {
+			$limit_start =  0;
+		}
+		
+		if (!isset($fields['row_count'])) {
+			$row_count =  30;
+		}
+		
+		$this -> db -> select('*');
+		$this -> db -> from($this -> tables['users'] . ' AS u');
+		$this -> db -> join($this -> tables['users_profile'] . ' AS up', 'up.user_id = u.id', 'left');
+		
+		if (isset($fields['q'])) {
+			$this -> db -> like('username', $fields['q']);
+			$this -> db -> or_like('email', $fields['q']);
+			$this -> db -> or_like('alias', $fields['q']);
+			$this -> db -> or_like('firstname', $fields['q']);
+			$this -> db -> or_like('lastname', $fields['q']);
+		}
+		
+		$this -> db -> limit($row_count, $limit_start);
+		$mysql_result = $this -> db -> get();
+		
+		return $mysql_result -> result_array();
+		
+	}
+	
 	/*
 	 *  Private function to encryp/decryp password 
-	 * */
-	function _prep_password($value='')
+	 */
+	private function _prep_password($value='')
 	{
 		$secret = "THIS IS THE SECRET KEY TO ENCRYP THE PASSWORD";
 		return sha1($value.$secret);
 	}
+	
 	
 
 }

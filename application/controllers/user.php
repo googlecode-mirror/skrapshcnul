@@ -216,6 +216,20 @@ class User extends CI_Controller {
 		$this -> data['main_content'] = 'user/invites';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
+	
+	function wishlist() {
+		
+		$this -> data['users'] = $this -> ls_profile -> select_lunch_wishlist($this->user_id);
+		
+		// Render views data
+		$this -> data['head_title'] = 'Wishlist | Lunchsparks';
+		$this -> data['tpl_page_id'] = "user#wishlist";
+		$this -> data['tpl_page_title'] = "My Lunch Wishlist";
+		// Render Views
+		$this -> data['main_content'] = 'base/user/wishlist';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		
+	}
 
 	function _json_prep($results) {
 		header('Cache-Control: no-cache, must-revalidate');
