@@ -50,7 +50,7 @@
 										<b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">
-										<li><a href="/people/wishlist"><i class="icon-lock"></i> My Lunch Wishlist</a></li>
+										<li><a href="/user/wishlist"><i class="icon-lock"></i> My Lunch Wishlist</a></li>
 										<li class="divider"></li>
 										<li><a href="/search/people/"><i class="icon-th-large"></i> All Users</a></li>
 									</ul>

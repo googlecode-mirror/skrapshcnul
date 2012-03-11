@@ -4,13 +4,9 @@
 			<div class="row-fluid">
   				<div class="span8">
 					<h1><?php echo $tpl_page_title ?></h1>
-					<p class="lead">Awesome users on Lunchsparks.</p>
+					<p class="lead"></p>
   				</div>
   				<div class="span4">
-  					<form action="/search/people/" class="form-search pull-right">
-						<input name="q" type="text" class="input-medium search-query" placeholder="search..." value="<?php echo isset($q) ? $q : '' ?>">
-						<button type="submit" class="btn">Search</button>
-  					</form>
   				</div>
   			</div>
 			
@@ -36,7 +32,7 @@
 				<div data-bind="visible: people().length < 1">
 					<div class="row-fluid">
 						<div class="span4">&nbsp;</div>
-						<div class="span4 well pagination-centered">Opps... No Results found for "<em><strong><?php echo isset($q) ? $q : '' ?></strong></em>".</div>
+						<div class="span4 well pagination-centered">Opps... no one in your wishlist yet.</div>
 						<div class="span4">&nbsp;</div>
 					</div>
 				</div> 

@@ -2,7 +2,7 @@
 #notifications-mini-area {
 	position: fixed;
 	display: none;
-	top: 53px;
+	top: 35px;
 	right: 10px;
 }
 #notifications-mini-area iframe {
