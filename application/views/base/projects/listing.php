@@ -5,7 +5,7 @@
 		
 			<div id="ProjectsListingModel">
 				<div id="masonry-container" data-bind="foreach: projects" class="">
-					<div class="pin" data-bind="">
+					<div class="pin">
 						<div class="pin-details">
 							<a data-bind="attr: {href: '/projects/'+project_id}">
 								<div class="pin-image"><img data-bind='attr: {src: logo}' /></div>
@@ -48,7 +48,7 @@
 </div>
 <div class="clearfix">&nbsp;</div>
 
-<?php var_dump($projects[0]); ?>
+<?php //var_dump($projects[0]); ?>
 
 <script>
 var initialData = <?php echo json_encode($projects); ?>;

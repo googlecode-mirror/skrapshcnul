@@ -1,57 +1,82 @@
 <div class="m-content">
-	<div class="c-pages shadow-rounded">
-		
-		<div>
-		<div style="float: right;">
-			<input type="text" class="search" placeholder="Search tag..." value="<?php echo isset($query_result['keyword']) ? $query_result['keyword'] : "" ?>" />
-		</div>
-		<h1><?php echo $tpl_page_title ?></h1>
-		<div class="clearfix"></div>
-		</div>
-		
-		<div id="results-container">
-		<?php if(isset($query_result)) { ?>
+	<div id="people-container" class="c-pages shadow-rounded">
+		<div style="padding:20px; min-height: 500px;">
+			<div class="row-fluid">
+  				<div class="span8">
+					<h1><?php echo $tpl_page_title ?></h1>
+					<p class="lead">Awesome users on Lunchsparks.</p>
+  				</div>
+  				<div class="span4">
+  					<form action="/search/people/" class="form-search pull-right">
+						<input type="text" class="input-medium search-query" placeholder="search..." value="<?php echo isset($query_result['q']) ? $query_result['q'] : '' ?>">
+						<button type="submit" class="btn">Search</button>
+  					</form>
+  				</div>
+  			</div>
 			
-			<div>
-			<?php echo $query_result['count'] ?> person found for <?php echo isset($query_result['keyword']) ? $query_result['keyword'] : "" ?>
-			</div>
-				
-			<div>
-			<?php if(isset($query_result['similar_keywords']) && count($query_result['similar_keywords']) > 1) { ?>
-				Similar results 
-				<?php foreach ($query_result['similar_keywords'] as $keyword) { ?>
-					<a href="/search/tag/<?php echo $keyword ?>"><?php echo $keyword ?></a>,
-				<?php } ?>
-			<?php } ?>
-			<?php //var_dump($query_result); ?>
-				
-			</div>
-		<?php } ?>
-		
-		<div>
-		<?php if (isset($users) && count($users) > 0) { ?>
-			<?php $i = 0 ?>
-			<?php foreach ($users as $user) { ?>
-				<div class="profile-img-45 hover-profile-card" ls:uid="<?php echo !empty($user['user_id']) ? $user['user_id'] : '' ?>">
-					<a href="/pub/<?php echo !empty($user['alias']) ? $user['alias'] : $user['user_id'] ?>">
-						<img title="<?php echo ($user['firstname']) ?>" 
-							src="<?php echo ($user['profile_img']) ?>">
-					</a>
+			<div id="PeopleListingModel">
+				<div id="masonry-container" data-bind="foreach: people" class="">
+					<div class="pin">
+						<div class="pin-details">
+							<a data-bind="attr: {href: ls_pub_url}">
+								<div class="pin-image"><img data-bind='attr: {src: profile_img}' /></div>
+							</a>
+							<div class="pin-data">
+								<a data-bind="attr: {href: ls_pub_url}">
+									<h3 data-bind='text: display_name'></h3>
+								</a>
+								<div data-bind='text: headline'></div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
 				</div>
-				<?php //var_dump($user); ?>
-				
-				
-				<?php $profileImg_mapPin = base_url('/media/images/profile/32/'.$user['user_id'].'.jpg') ?>
-				
-			<?php } ?>
-		<?php } ?>
-		</div>
-		<div class="clearfix"></div>
+			</div>
 		
+		</div>
+		<div>
+		
+		<div class="clearfix"></div>
 		</div>
 	</div>
 </div>
-<script>
-var persons = <?php echo json_encode($person_arr); ?>;
-</script>
 
+<?php //var_dump($users) ?>
+
+<script>
+var initialData = <?php echo json_encode($users); ?>;
+ 
+var PeopleListingModel = function(people) {
+	var self = this;
+	self.people = ko.observableArray(ko.utils.arrayMap(people, function(user) {
+		return { 
+			id: user.id,
+			display_name: user.display_name, 
+			profile_img: user.profile_img, 
+			headline: user.headline, 
+			ls_pub_url: user.ls_pub_url,
+			verification: ko.observableArray([user.verification])
+		};
+	}));
+	
+	self.loadmore = function() {
+    }
+};
+
+ko.applyBindings(new PeopleListingModel(initialData), document.getElementById('PeopleListingModel'));
+
+jQuery('#masonry-container').imagesLoaded(function(){
+	jQuery('#masonry-container').masonry({
+		// options
+		itemSelector : '.pin'
+	});
+});
+
+jQuery(window).scroll(function () { 
+   if (jQuery(window).scrollTop() >= jQuery(document).height() - jQuery(window).height() - 10) {
+      if(window.console) console.log('end of page');
+   }
+});
+
+</script>

@@ -76,7 +76,7 @@ class Pub extends CI_Controller {
 		## Select Users Projects 
 		$keywords['user_id'] = $this -> data['target_user_id'];
 		$options['simple'] = TRUE;
-		$this -> data['projects'] = $this -> ls_projects -> search_projects($keywords, $options);
+		$this -> data['projects'] = $this -> ls_projects -> select_all_projects($keywords, $options);
 		
 		// Render views
 		$this -> data['tpl_page_id'] = 'profile';
