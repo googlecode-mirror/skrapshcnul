@@ -96,13 +96,6 @@ class Ls_Places{
 		return $results;
 	}
 	
-	function selectPlace_all() {
-		
-		$results = $this -> ci -> places_model -> selectPlace_all();
-		
-		return $results;
-	}
-	
 	function selectPlace_xtra_restaurant($fields = FALSE) {
 		
 		if (!$fields) { return FALSE;}
@@ -115,6 +108,18 @@ class Ls_Places{
 		$verified_status['remarks'] = "Coffee partner, discount 10%;";*/
 		
 		$results = $this -> ci -> places_model -> selectPlace_xtra_restaurant($fields['place_id']);
+		
+		return $results;
+	}
+	
+	function select_all_places() {
+		
+		$results = $this -> ci -> places_model -> select_all_places();
+		
+		foreach($results as $key => $value) {
+			$results[$key]['statistics']['rating'] = 0;
+			$results[$key]['statistics']['favourites'] = 0;
+		}
 		
 		return $results;
 	}

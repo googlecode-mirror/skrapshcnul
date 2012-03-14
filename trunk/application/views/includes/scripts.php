@@ -39,6 +39,7 @@
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26287683-1']);
   _gaq.push(['_trackPageview']);
+  _gaq.push(["_setCustomVar",1,'memory_usage','{memory_usage}',3]);  
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -46,7 +47,6 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-
 <!--[if gte IE 9]>
   <style type="text/css">
     .gradient {

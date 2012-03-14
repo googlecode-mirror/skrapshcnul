@@ -11,7 +11,7 @@
 	<div id="header" class="navbar navbar-static">
 		<div id="h-container" class="navbar-inner">
 			<div class=" row-fluid">
-				<div class="span8">
+				<div class="span9">
 					<div id="lunchsparks-header-logo" class="brand header-items">
 						<?php echo anchor('', '<img src="'.base_url().'skin/images/140/ls_logo_wide_white.png" height="40px" style="display: block;">', array('from' => 'main'));?>
 					</div>
@@ -93,7 +93,7 @@
 					<?php } ?>
 				</div>
 				
-				<div class="span4">
+				<div class="span3">
 					<div id="h-uacc" class="header-items">
 						<div id="lunchsparks-header-logo" class="brand header-items"></div>
 						<ul  class="nav pills">
