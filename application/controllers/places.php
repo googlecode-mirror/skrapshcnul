@@ -42,8 +42,8 @@ class Places extends CI_Controller {
 			case 'add' :
 				$this -> add();
 				break;
-			case 'restaurant' :
-				$this -> restaurant();
+			case 'all' :
+				$this -> all();
 				break;
 			default :
 				$this -> index();
@@ -107,7 +107,17 @@ class Places extends CI_Controller {
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
 	
-	function restaurant($value = FALSE) {
+	function all($value = FALSE) {
+		
+		$this -> data['places'] = $this -> ls_places -> select_all_places();
+
+		// Render view data
+		$this -> data['head_title'] = 'Places | Lunchsparks';
+		$this -> data['tpl_page_id'] = 'places#all';
+		$this -> data['tpl_page_title'] = "All Places";
+		// Render views
+		$this -> data['main_content'] = 'base/places/listing';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
 		
 	}
 	

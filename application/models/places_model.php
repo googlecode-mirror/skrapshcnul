@@ -8,6 +8,16 @@ class Places_Model extends CI_Model {
 	const _PLACES_VERIFIED_TABLE = "lss_places_verification_status";
 	const _PLACES_XTRA_RESTAURANT_TABLE = "lss_places_xtra_restaurant";
 
+	function __construct() {
+		$this -> load -> config('tables/places', TRUE);
+		$this -> load -> library('session');
+
+		## Initialize DB
+		$this -> tables = $this -> config -> item('tables', 'tables/places');
+
+		$this -> user_id = $this -> session -> userdata('user_id');
+	}
+
 	/*
 	 *  Delete tables
 	 *  Warning: Only for testing.
@@ -224,28 +234,39 @@ class Places_Model extends CI_Model {
 		return $mysql_result -> row_array();
 	}
 
-	function selectPlace_all() {
+	function select_all_places($fields = FALSE, $options = FALSE) {
+
+		if (!isset($fields['limit_start'])) {
+			$limit = 0;
+		}
+
+		if (!isset($fields['row_count'])) {
+			$row_count = 30;
+		}
+
 		$this -> db -> select('*');
-		$this -> db -> from(self::_PLACES_TABLE_ . ' AS pt');
-		$this -> db -> join(self::_PLACES_VERIFIED_TABLE . ' AS pvt', 'pt.place_id = pvt.place_id', 'left');
+		$this -> db -> from($this -> tables['places'] . ' AS pt');
+		$this -> db -> join($this -> tables['places_verification'] . ' AS pvt', 'pt.place_id = pvt.place_id', 'left');
+		$this -> db -> join($this -> tables['places_xtra_restaurant'] . ' AS pxr', 'pt.place_id = pxr.place_id', 'left');
+		$this -> db -> limit($row_count, $limit);
 		$mysql_result = $this -> db -> get();
 
-		return $mysql_result -> result();
+		return $mysql_result -> result_array();
 
 	}
 
 	function searchPlace($keywords = FALSE) {
-		
+
 		if (!$keywords) {
 			return FALSE;
 		}
-		
+
 		$this -> db -> select('*');
 		$this -> db -> from(self::_PLACES_TABLE_ . ' AS lup');
 		$this -> db -> like('name', $keywords);
 		$this -> db -> or_like('location', $keywords);
 		$query = $this -> db -> get();
-		
+
 		if ($query -> num_rows() > 0) {
 			return ($query -> result_array());
 		} else {
