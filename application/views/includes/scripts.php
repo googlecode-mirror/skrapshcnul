@@ -3,6 +3,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo base_url();?>skin/css/ext-icons/css/ext-icons.css" type="text/css" media="screen" charset="utf-8" />
 
 <?php /* ## Fonts ?>
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />

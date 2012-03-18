@@ -48,9 +48,11 @@
 				Apply for membership today. We're letting people into our alpha on a rolling basis.
 			</div>
 			<div style="text-align: center;margin: 10px auto;">
-				<a href="/auth/signup" class="button box-shadow xl">Sign Up!</a>
+				<a href="/auth/signup" class="btn btn-primary btn-large">Sign Up!</a>
 			</div>
-			
+			<?php /*<div style="text-align: center;margin: 10px auto;">
+				<a href="/auth/facebook" class="btn btn-primary btn-large">Login with Facebook</a>
+			</div> */ ?>
 		</div>
 		
 	</div>

@@ -2,16 +2,16 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 /**
- * Name:  Ion Auth Config
+ * Name:	Projects tables
  *
- * Author: @stiucsib86
- * Created:  17.12.2011
+ * Author:	@stiucsib86
+ * Created:	20120301
  */
 
 /**
  * Tables.
  **/
 
-$config['tables']['statistics_total_users'] = "lss_statistics_total_users";
+$config['tables']['facebook_data'] = "lss_ext_facebook_data";
 
 /* End of file /tables/events.php */

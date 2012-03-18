@@ -2,15 +2,9 @@
 /**
 * Name:  Ion Auth Model
 *
-* Author:  Ben Edmunds
-* 		   ben.edmunds@gmail.com
-*	  	   @benedmunds
-*
-* Added Awesomeness: Phil Sturgeon
-*
-* Location: http://github.com/benedmunds/CodeIgniter-Ion-Auth
-*
-* Created:  10.01.2009
+* Author:  Bing Han
+* 		   stiucsib86@gmail.com
+*	  	   @stiucsib86
 *
 * Description:  Modified auth system based on redux_auth with extensive customization.  This is basically what Redux Auth 2 should be.
 * Original Author name has been kept but that does not mean that the method has not been modified.
@@ -114,7 +108,6 @@ class Oauth_model extends CI_Model
 	 *
 	 * @var string
 	 **/
-	protected $messages;
 
 	/**
 	 * error message (uses lang file)
@@ -147,6 +140,7 @@ class Oauth_model extends CI_Model
 		$this->load->helper('date');
 		$this->load->library('session');
 		$this->lang->load('ion_auth');
+		$this->load->model('ion_auth_model');
 
 		//initialize db tables data
 		$this->tables  = $this->config->item('tables', 'ion_auth');
@@ -169,167 +163,115 @@ class Oauth_model extends CI_Model
 		//initialize our hooks object
 		$this->_hooks = new stdClass;
 		
-		$this->trigger_events('model_constructor');
 	}
 
 	/**
 	 * register
 	 *
 	 * @return bool
-	 * @author Mathew
+	 * @author stiucsib86
 	 **/
-	public function register_twitter($username, $password, $email, $additional_data = false, $groups = array())
-	{
-		$this->trigger_events('pre_register');
+	public function register($email) {
 		
-	    if ($this->identity_column == 'email' && $this->email_check($email))
-	    {
-			$this->ion_auth->set_error('account_creation_duplicate_email');
-			return FALSE;
-	    }
-	    elseif ($this->identity_column == 'username' && $this->username_check($username))
-	    {
-			$this->ion_auth->set_error('account_creation_duplicate_username');
-			return FALSE;
-	    }
-
-	    // If username is taken, use username1 or username2, etc.
-	    if ($this->identity_column != 'username')
-	    {
-			for($i = 0; $this->username_check($username); $i++)
+		if (!isset($email)) return FALSE;
+		
+	    if ($this->identity_column == 'email' && $this->ion_auth_model->email_check($email)) {
+			// Existing Account
+			// Proceed to login
+			$this -> login($email);
+			
+	    } else {
+	    	
+	    	// Create a new account
+			$username = $email;
+			
+		    // IP Address
+		    $ip_address = $this->input->ip_address();
+	
+		    // Users table.
+		    $data = array(
+				'username'   => $username,
+				'email'      => $email,
+				'ip_address' => $ip_address,
+				'created_on' => now(),
+				'last_login' => now(),
+				'active'     => 1
+				 );
+		    
+		    $this->db->insert($this->tables['users'], $data);
+	
+		    $id = $this->db->insert_id();
+			
+			//add to default group if not already set
+			$default_group = $this->ion_auth_model->where('name', $this->config->item('default_group', 'ion_auth'))->group()->row();
+			if (isset($default_group->id) && isset($groups) && !empty($groups) && !in_array($default_group->id, $groups) || !isset($groups) || empty($groups))
 			{
-				if($i > 0)
+				$this->ion_auth_model->add_to_group($default_group->id, $id);
+			}
+			
+		    // Meta table.
+		    $data = array($this->join['users'] => $id);
+	
+		    if (!empty($this->columns))
+		    {
+				foreach ($this->columns as $input)
 				{
-					$username .= $i;
+					if (is_array($additional_data) && isset($additional_data[$input]))
+					{
+						$data[$input] = $additional_data[$input];
+					}
 				}
-			}
+		    }
+	
+		    $this->db->insert($this->tables['meta'], $data);
+	
+		    return $this->db->affected_rows() > 0 ? $id : false;
 	    }
-		
-	    // IP Address
-	    $ip_address = $this->input->ip_address();
-	    $salt       = $this->store_salt ? $this->salt() : FALSE;
-	    $password	= $this->hash_password($password, $salt);
-
-	    // Users table.
-	    $data = array(
-			'username'   => $username,
-			'password'   => $password,
-			'email'      => $email,
-			'ip_address' => $ip_address,
-			'created_on' => now(),
-			'last_login' => now(),
-			'active'     => 1
-			 );
-
-	    if ($this->store_salt)
-	    {
-			$data['salt'] = $salt;
-	    }
-	    
-	    $this->trigger_events('extra_set');
-
-	    $this->db->insert($this->tables['users'], $data);
-
-	    $id = $this->db->insert_id();
-
-
-		if (!empty($groups))
-		{
-			//add to groups
-			foreach ($groups as $group)
-			{
-				$this->add_to_group($group, $id);
-			}
-		}
-		
-		//add to default group if not already set
-		$default_group = $this->where('name', $this->config->item('default_group', 'ion_auth'))->group()->row();
-		if (isset($default_group->id) && isset($groups) && !empty($groups) && !in_array($default_group->id, $groups) || !isset($groups) || empty($groups))
-		{
-			$this->add_to_group($default_group->id, $id);
-		}
-
-
-	    // Meta table.
-	    $data = array($this->join['users'] => $id);
-
-	    if (!empty($this->columns))
-	    {
-			foreach ($this->columns as $input)
-			{
-				if (is_array($additional_data) && isset($additional_data[$input]))
-				{
-					$data[$input] = $additional_data[$input];
-				}
-			}
-	    }
-
-	    $this->db->insert($this->tables['meta'], $data);
-
-		$this->trigger_events('post_register');
-		
-	    return $this->db->affected_rows() > 0 ? $id : false;
 	}
 
 	/**
 	 * login
 	 *
 	 * @return bool
-	 * @author Mathew
+	 * @author stiucsib86
 	 **/
-	public function login($identity, $password, $remember=FALSE)
-	{
-		$this->trigger_events('pre_login');
+	public function login($identity, $remember=FALSE) {
 		
-	    if (empty($identity) || empty($password) || !$this->identity_check($identity))
-	    {
-			$this->set_message('login_unsuccessful');
+	    if (empty($identity) || !$this->ion_auth_model->identity_check($identity)) {
 			return FALSE;
 	    }
 
-	    $this->trigger_events('extra_where');
-		
-	    $query = $this->db->select($this->identity_column.', id, password')
-		                  ->where($this->identity_column, $identity)
-		                  ->where('active', 1)
-		                  ->limit(1)
-		                  ->get($this->tables['users']);
+	    $this->db->select($this->identity_column.', id');
+		$this->db->where($this->identity_column, $identity);
+		$this->db->where('active', 1);
+		$this->db->limit(1);
+		$query = $this->db->get($this->tables['users']);
 
 	    $result = $query->row();
 
-	    if ($query->num_rows() == 1)
-	    {
-			$password = $this->hash_password_db($identity, $password);
+	    if ($query->num_rows() == 1) {
+			
+			$this->ion_auth_model->update_last_login($result->id);
 
-			if ($result->password === $password)
+			$session_data = array(
+						$this->identity_column => $result->{$this->identity_column},
+						'id'                   => $result->id, //kept for backwards compatibility
+						'user_id'              => $result->id, //everyone likes to overwrite id so we'll use user_id
+					 );
+
+			$this->session->set_userdata($session_data);
+
+			if ($remember && $this->config->item('remember_users', 'ion_auth'))
 			{
-				$this->update_last_login($result->id);
-
-				$session_data = array(
-							$this->identity_column => $result->{$this->identity_column},
-							'id'                   => $result->id, //kept for backwards compatibility
-							'user_id'              => $result->id, //everyone likes to overwrite id so we'll use user_id
-						 );
-
-				$this->session->set_userdata($session_data);
-
-				if ($remember && $this->config->item('remember_users', 'ion_auth'))
-				{
-					$this->remember_user($result->id);
-				}
-				
-				// Update Login Histroy Table
-				$this->add_login_history($identity);
-				
-				$this->trigger_events(array('post_login', 'post_login_successful'));
-				$this->set_message('login_successful');
-
-				return TRUE;
+				$this->ion_auth_model->remember_user($result->id);
 			}
+			
+			// Update Login Histroy Table
+			$this->ion_auth_model->add_login_history($identity);
+			
+			return TRUE;
 	    }
-
-		$this->trigger_events('post_login_unsuccessful');
-		$this->set_message('login_unsuccessful');
+		
 	    return FALSE;
 	}
 

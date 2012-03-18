@@ -20,12 +20,16 @@
 								</div>
 							</a>
 						</div>
-						<div style="display: inline-block;">
+						<div style="display: inline-block; vertical-align: middle;">
 							<div style="padding: 20px;" class="radio_buttonset">
-								<input type="radio" id="radio<?php echo $item['index'] ?>_1" name="user_recommendation_radio<?php echo $item['index'] ?>" <?php echo $item['selected'] == 1 ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_confirm(this);" />
-								<label for="radio<?php echo $item['index'] ?>_1">Yes</label>
-								<input type="radio" id="radio<?php echo $item['index'] ?>_0" name="user_recommendation_radio<?php echo $item['index'] ?>" <?php echo $item['selected'] == -1 ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_reject(this);" />
-								<label for="radio<?php echo $item['index'] ?>_0">No</label>
+								<label class="radio">
+									<input type="radio" id="radio<?php echo $item['index'] ?>_1" name="user_recommendation_radio<?php echo $item['index'] ?>" <?php echo $item['selected'] == 1 ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_confirm(this);" />
+									Yes, I'm interested to meetup with this person.
+								</label>
+								<label class="radio">
+									<input type="radio" id="radio<?php echo $item['index'] ?>_0" name="user_recommendation_radio<?php echo $item['index'] ?>" <?php echo $item['selected'] == -1 ? 'checked="checked"' : ''; ?> ls-oid="<?php echo $item['index'] ?>" onclick="user_recommendation_reject(this);" />
+									No, I'm not interested.
+								</label>
 							</div>
 						</div>
 						
@@ -40,15 +44,15 @@
 		
 		<div class="clearfix">&nbsp;</div>
 		
-		<?php $this -> load -> view('base/events/_event_request');?>
+		<?php $this -> load -> view('base/events/_includes/event_request');?>
 		
 		<div class="clearfix">&nbsp;</div>
 		
-		<?php $this -> load -> view('base/events/_upcoming_events');?>
+		<?php $this -> load -> view('base/events/_includes/upcoming_events');?>
 		
 		<div class="clearfix">&nbsp;</div>
 		
-		<?php $this -> load -> view('base/events/_past_events');?>
+		<?php $this -> load -> view('base/events/_includes/past_events');?>
 		
 	</div>
 	<div class="clearfix">&nbsp;</div>

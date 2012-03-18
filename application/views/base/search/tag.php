@@ -32,7 +32,7 @@
 		<?php } ?>
 		
 		<div>
-		<?php if (isset($users) && count($users) > 0) { ?>
+		<?php if (isset($users) && is_array($users)) { ?>
 			<?php $i = 0 ?>
 			<?php foreach ($users as $user) { ?>
 				<div class="profile-img-45 hover-profile-card" ls:uid="<?php echo !empty($user['user_id']) ? $user['user_id'] : '' ?>">
