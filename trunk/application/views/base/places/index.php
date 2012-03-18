@@ -1,15 +1,17 @@
 <div class="m-content">
 	<div id="places-container" class="c-pages shadow-rounded" style="padding: 0px;">
 		
-		<div class="dashboard-activity">
-			<div class="places-summary-large">
-				<div class="places-logo">
-					<img src="<?php echo $places['logo'] ?>" />
+		<div class="dashboard-activity" style="padding: 15px 10px;">
+			<div class="row-fluid places-summary-large">
+				<div class="span2" style="text-align: center";> <?php //places-logo ?>
+					<?php if (isset($places['logo']) && $places['logo']) { ?>
+						<img src="<?php echo $places['logo'] ?>" />
+					<?php } ?>
 				</div>
-				<div class="places-featured-data">
+				<div class="span7 places-featured-data"> <?php // ?>
 					<?php $this -> load -> view("base/places/includes/place_info.php");?>
 				</div>
-				<div class="place-featured-statistics">
+				<div class="span3 place-featured-statistics"> <?php // ?>
 					<?php $this -> load -> view("base/places/includes/statistics.php");?>
 				</div>
 				<div class="clearfix"></div>

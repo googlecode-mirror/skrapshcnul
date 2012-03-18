@@ -24,6 +24,7 @@
 										<b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">
+										<li><a href="/synchronize"><i class="icon-refresh"></i> Synchronize</a></li>
 										<li><a href="/preferences"><i class="icon-tags"></i> Preferences</a></li>
 										<li><a href="/schedules"><i class="icon-time"></i> Schedules</a></li>
 										<li><a href="/events"><i class="icon-calendar"></i> Events</a></li>
@@ -97,7 +98,7 @@
 					<div id="h-uacc" class="header-items">
 						<div id="lunchsparks-header-logo" class="brand header-items"></div>
 						<ul  class="nav pills">
-							<?php if ($is_logged_in) { ?>     
+							<?php if (isset($is_logged_in) && $is_logged_in) { ?>     
 							<li>
 								<div class="notification-toggle-container">
 									<div id="notification-toggle" class="notification" title="Notifications">

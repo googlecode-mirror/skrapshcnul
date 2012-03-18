@@ -11,6 +11,8 @@ class Synchronize extends CI_Controller {
 		$this -> load -> library('ion_auth');
 		$this -> load -> library('session');
 		$this -> load -> library('form_validation');
+		$this -> load -> library('ls_facebook');
+		$this -> load -> library('ls_twitter');
 		$this -> load -> helper('logger');
 		$this -> load -> helper('url');
 		$this -> load -> helper('linkedin/linkedin_api');
@@ -39,9 +41,12 @@ class Synchronize extends CI_Controller {
 		
 	}
 
-	function index($value = '') {
+	public function index($value = '') {
 		
 		$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
+		$external_data['facebook'] = $this -> ls_facebook -> select_data();
+		$external_data['twitter'] = $this -> ls_twitter -> select_data();
+		
 		$this -> data['external_data'] = $external_data;
 
 		// Tpl setup
@@ -53,7 +58,29 @@ class Synchronize extends CI_Controller {
 		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
 	}
 	
-	function linkedIn($value = FALSE) {
+	public function facebook($fields = FALSE, $options = FALSE) {
+		
+		if ($this -> ls_facebook -> permission_denied()) {
+			redirect('/synchronize');
+		}
+		
+		if ($this -> ls_facebook -> update_data()) {
+			redirect('/synchronize');
+		} else {
+			echo("<script> top.location.href='/synchronize'</script>"); // Delayed redirection.
+		}
+		
+		
+	}
+	
+	public function twitter($value = FALSE) {
+		
+		$this -> ls_twitter -> update_data();
+		
+		redirect('/synchronize');
+	}
+	
+	public function linkedIn($value = FALSE) {
 		switch($this->uri->segment(3)) {
 			case 'pullLinkedInData' :
 				$this -> pullLinkedInData();

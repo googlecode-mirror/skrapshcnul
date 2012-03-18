@@ -9,7 +9,7 @@ class Projects_Model extends CI_Model {
 		$this -> load -> config('tables/projects', TRUE);
 		$this -> load -> library('session');
 
-		## Initialize DB
+		## Initialize tables
 		$this -> tables = $this -> config -> item('tables', 'tables/projects');
 
 		$this -> user_id = $this -> session -> userdata('user_id');

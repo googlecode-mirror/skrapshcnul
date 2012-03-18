@@ -9,24 +9,42 @@
 		</div>
 	<?php } ?>
 </div>
-<div class="others">
-<label>Location:</label> <?php echo isset($places['location']) ? $places['location'] : ""; ?>
+<div class="row-fluid">
+	<div class="span3">Location</div>
+	<div class="span9">
+		<?php echo isset($places['location']) ? $places['location'] : ""; ?>
+	</div>
 </div>
-<div class="others">
-<label>Phone:</label> <?php echo isset($places['primary_phone']) ? $places['primary_phone'] : ""; ?>
+<div class="row-fluid">
+	<div class="span3">Phone</div>
+	<div class="span9">
+		<?php echo isset($places['primary_phone']) ? $places['primary_phone'] : ""; ?>
+	</div>
 </div>
-<div class="others">
-<label>Homepage:</label> <?php echo isset($places['url']) ? $places['url'] : ""; ?>
+<div class="row-fluid">
+	<div class="span3">Homepage</div>
+	<div class="span9">
+		<?php echo isset($places['url']) ? $places['url'] : ""; ?>
+	</div>
 </div>
-<div class="others">
-<label>Cuisine:</label> <?php echo isset($places['restaurant_info']['cuisine']) ? $places['restaurant_info']['cuisine'] : ""; ?>
+<div class="row-fluid">
+	<div class="span3">Cuisine</div>
+	<div class="span9">
+		<?php echo isset($places['restaurant_info']['cuisine']) ? $places['restaurant_info']['cuisine'] : ""; ?>
+	</div>
 </div>
-<div class="others">
-<label>Opening Hours:</label> <?php echo isset($places['restaurant_info']['opening_hours']) ? $places['restaurant_info']['opening_hours'] : ""; ?>
+<div class="row-fluid">
+	<div class="span3">Opening Hours</div>
+	<div class="span9">
+		<?php echo isset($places['restaurant_info']['opening_hours']) ? $places['restaurant_info']['opening_hours'] : ""; ?>
+	</div>
 </div>
-<div class="others">
-<label>Special Features:</label> <?php echo isset($places['restaurant_info']['special_features']) ? $places['restaurant_info']['special_features'] : ""; ?>
+<div class="row-fluid">
+	<div class="span3">Special Features</div>
+	<div class="span9">
+		<?php echo isset($places['restaurant_info']['special_features']) ? $places['restaurant_info']['special_features'] : ""; ?>
+	</div>
 </div>
-<div class="others">
-<?php echo isset($places['restaurant_info']['extras']) ? $places['restaurant_info']['extras'] : ""; ?>
+<div class="row-fluid">
+	<?php echo isset($places['restaurant_info']['extras']) ? $places['restaurant_info']['extras'] : ""; ?>
 </div>

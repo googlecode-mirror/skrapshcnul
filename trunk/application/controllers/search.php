@@ -83,8 +83,10 @@ class Search extends CI_Controller {
 		//var_dump($this -> data['users']);
 
 		## Generate Thumbnail
-		foreach ($this -> data['users'] as $user) {
-			$this -> ls_profile -> generate_profile_image_pin($user['user_id'], $user['profile_img']);
+		if (isset($this -> data['users']) && is_array($this -> data['users'])) {
+			foreach ($this -> data['users'] as $user) {
+				$this -> ls_profile -> generate_profile_image_pin($user['user_id'], $user['profile_img']);
+			}
 		}
 
 		// Render views data

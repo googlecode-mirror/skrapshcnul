@@ -1,5 +1,5 @@
 .places-summary-large {
-	margin: 10px 20px;
+	margin: 10px 0px;
 }
 .places-logo {
 	width: 128px;
@@ -16,12 +16,12 @@
 .places-summary-large .places-featured-data {
 	display: inline-block;
 	vertical-align: middle;
-	padding: 0 10px;
-	width: 530px;
+	text-align: left;
 }
 .places-summary-large .places-name {
 	font-weight: bold;
 	font-size: 32px;
+	line-height: normal;
 	text-shadow: 1px 1px 1px #CCC;
 }
 .places-summary-large .others {
@@ -35,14 +35,15 @@
 	font-size: 13px;
 }
 #places_map {
-    height: 200px;
-	width: 690px;
+    height: 300px;
     border: 1px solid #CCCCCC;
 }
 .place-featured-statistics {
 	display: inline-block;
 	vertical-align: middle;
 	border-bottom: 1px solid #EFEFEF;
+	text-align: center;
+	margin: 50px auto;
 }
 .places-ratings {
 	display: inline-block;

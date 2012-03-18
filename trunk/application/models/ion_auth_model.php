@@ -475,7 +475,7 @@ class Ion_auth_model extends CI_Model
 	 * @return bool
 	 * @author Mathew
 	 **/
-	protected function identity_check($identity = '')
+	public function identity_check($identity = '')
 	{
 		$this->trigger_events('identity_check');
 		
@@ -718,7 +718,7 @@ class Ion_auth_model extends CI_Model
 		$this->set_message('login_unsuccessful');
 	    return FALSE;
 	}
-
+	
 	public function limit($limit)
 	{
 		$this->trigger_events('limit');

@@ -1,0 +1,38 @@
+
+[class^="ext-icons-24-"],
+[class*=" ext-icons-24-"] {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  vertical-align: text-bottom;
+  background-image: url("../img/icon-pack-24x24.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+  *margin-right: .3em;
+}
+[class^="ext-icons-24-"]:last-child,
+[class*=" ext-icons-24-"]:last-child {
+  *margin-left: 0;
+}
+.ext-icons-24-empty {
+  background-position: -2px -2px;
+}
+.ext-icons-24-facebook {
+  background-position: -114px -30px;
+}
+.ext-icons-24-fourquare {
+  background-position: -2px -58px;
+}
+.ext-icons-24-googleplus {
+  background-position: -142px -58px;
+}
+.ext-icons-24-linkedin {
+  background-position: -170px -86px;
+}
+.ext-icons-24-lunchsparks {
+  background-position: -198px -86px;
+}
+.ext-icons-24-twitter {
+  background-position: -30px -170px;
+}

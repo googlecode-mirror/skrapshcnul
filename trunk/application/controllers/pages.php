@@ -14,9 +14,6 @@ class Pages extends CI_Controller {
 		$this -> load -> database();
 		// Load Ion Auth
 		$this -> load -> library('ion_auth');
-		// Load Twitter Auth
-		$this -> load -> library('tweet');
-		$this -> tweet -> enable_debug(TRUE);
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 	}
