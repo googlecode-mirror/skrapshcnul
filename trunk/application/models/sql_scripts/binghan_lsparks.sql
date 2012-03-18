@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2012 at 12:10 AM
+-- Generation Time: Mar 18, 2012 at 06:58 PM
 -- Server version: 5.5.13
 -- PHP Version: 5.2.17
 
@@ -65,6 +65,36 @@ CREATE TABLE IF NOT EXISTS `lss_events_users` (
   `rsvp` tinyint(4) NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`event_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_ext_facebook_data`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_ext_facebook_data` (
+  `user_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `data` text NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lss_ext_twitter_data`
+--
+
+CREATE TABLE IF NOT EXISTS `lss_ext_twitter_data` (
+  `user_id` int(11) NOT NULL,
+  `tw_id` int(11) NOT NULL,
+  `data` text NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -135,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `lss_meta` (
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
 
 -- --------------------------------------------------------
 
@@ -246,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `lss_projects` (
   `created_on` datetime NOT NULL,
   `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`project_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -296,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `lss_projects_screenshots` (
   `screenshot_details` text NOT NULL,
   `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`project_screenshot_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -478,7 +508,7 @@ CREATE TABLE IF NOT EXISTS `lss_users` (
   `last_login` int(11) unsigned DEFAULT NULL,
   `active` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 -- --------------------------------------------------------
 
@@ -491,7 +521,7 @@ CREATE TABLE IF NOT EXISTS `lss_users_groups` (
   `user_id` mediumint(8) NOT NULL,
   `group_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=65 ;
 
 -- --------------------------------------------------------
 
@@ -534,9 +564,9 @@ CREATE TABLE IF NOT EXISTS `lss_users_login_history` (
   `user_id` varchar(100) NOT NULL,
   `ip_address` varchar(15) NOT NULL,
   `user_agent` varchar(100) NOT NULL,
-  `createdOn` datetime NOT NULL,
+  `createdOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=287 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
