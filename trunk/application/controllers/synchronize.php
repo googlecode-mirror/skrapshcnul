@@ -199,7 +199,9 @@ class Synchronize extends CI_Controller {
 					break;
 
 				default :
-					echo 'Error: No page found!';
+					// [BH] BAD CODING!
+					// SHOULDN'T ECHO ANYTHING IN CONTROLLERS.
+					//echo 'Error: No page found!';
 					break;
 			}
 		} catch(LinkedInException $e) {
