@@ -86,16 +86,7 @@ class Synchronize extends CI_Controller {
 				$this -> pullLinkedInData();
 		}
 
-		$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
-		$this -> data['external_data'] = $external_data;
-
-		// Tpl setup
-		$this -> data['tpl_page_id'] = "sync";
-		$this -> data['tpl_page_title'] = "Synchronize";
-
-		// Render view
-		$this -> data['main_content'] = 'base/synchronize/index';
-		$this -> load -> view('includes/tmpl_layout_withGuides', $this -> data);
+		redirect('/synchronize');
 		
 	}
 	
