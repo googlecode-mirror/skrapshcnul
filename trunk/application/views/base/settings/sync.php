@@ -15,7 +15,7 @@
 				</div>
 				<div class="content-table-2-col-right">
 					<?php if ($this->session->userdata('linkedin_pulled') == FALSE) { ?>
-						<form id="linkedin_sync_form" action="pullLinkedInData" method="get">
+						<form id="linkedin_sync_form" action="sync/pullLinkedInData" method="get">
 							<input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" /> 
 							<input type="submit" value="Sync with LinkedIn" /></form>
 					<?php } else { ?> 
@@ -31,7 +31,7 @@
 								<p>Connected to LinkedIn as <strong><?php echo ($linkedin_data->{'first-name'}); ?>, <?php echo ($linkedin_data->{'last-name'}); ?></strong></p>
 								<p><?php echo ($linkedin_data->{'headline'}); ?></p>
 								<p>Last profile update: <?php echo($external_data['linkedin']->timestamp); ?></p>
-								<form id="linkedin_sync_form" action="pullLinkedInData" method="get">
+								<form id="linkedin_sync_form" action="sync/pullLinkedInData" method="get">
 									<input type="hidden"
 									name="<?php echo LINKEDIN::_GET_TYPE;?>"
 									id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" />
