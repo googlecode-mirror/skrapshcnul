@@ -23,6 +23,10 @@ class Auth extends Controller {
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> fb_data = $this -> session -> userdata('fb_data');
+		//link me
+		$this -> load -> helper('linkedin/linkedin_api');
+		$this -> load -> model('linkedin/linkedin_model');
+		$this -> load -> config('linkedin_oauth', TRUE);
 	}
 
 	//redirect if needed, otherwise display the user list
@@ -511,5 +515,183 @@ class Auth extends Controller {
 		$this -> data['main_content'] = '/auth/email/activate.tpl.php';
 		$this -> load -> view('includes/tmpl_singlebox', $this -> data);
 	}
+
+
+function test($ltype='',$response='',$oauth_token='',$oauth_verfier='')
+{
+	$this -> data['success']= FALSE;
+	
+	function oauth_session_exists() {
+  if((is_array($_SESSION)) && (array_key_exists('oauth', $_SESSION))) {
+    return TRUE;
+  } else {
+    return FALSE;
+  }
+}
+try {
+  // include the LinkedIn class
+  //require_once('linkedin_3.2.0.class.php');
+  
+  // start the session
+  // if(!session_start()) {
+    // throw new LinkedInException('This script requires session support, which appears to be disabled according to session_start().');
+  // }
+  
+  // display constants
+  if (isset($_REQUEST['invitation_key'])) {
+			$this -> data['invitation_key_val'] = $_REQUEST['invitation_key'];
+		} elseif (($this -> input -> post('invitation_key'))) {
+			$this -> data['invitation_key_val'] = $this -> input -> post('invitation_key');
+		} else {
+			$this -> data['invitation_key_val'] = '';
+		}
+  
+  if (isset($_REQUEST['email_val'])) {
+			$this -> data['email_val'] = $_REQUEST['email_val'];
+		} elseif (($this -> input -> post('email_val'))) {
+			$this -> data['email_val'] = $this -> input -> post('email_val');
+		} else {
+			$this -> data['email_val'] = '';
+		}
+		
+  $API_CONFIG = array(
+    'appKey'       => 'ctfw9ywn6vrm',
+	  'appSecret'    => 'T2G5ccnIfGytPAdt',
+	  'callbackUrl'  => NULL 
+  );
+  define('DEMO_GROUP', '4010474');
+  define('DEMO_GROUP_NAME', 'Simple LI Demo');
+  define('PORT_HTTP', '80');
+  define('PORT_HTTP_SSL', '443');
+
+  // set index
+  echo "<script type='text/javascript'>console.log('@".LINKEDIN::_GET_TYPE."".print_r($this->uri)."')</script>";
+  $_REQUEST[LINKEDIN::_GET_TYPE] = (isset($_REQUEST[LINKEDIN::_GET_TYPE])) ? $_REQUEST[LINKEDIN::_GET_TYPE] : '';
+  echo "<script type='text/javascript'>console.log('@".$_REQUEST[LINKEDIN::_GET_TYPE]."')</script>";
+  switch($_REQUEST[LINKEDIN::_GET_TYPE]) {
+    case 'initiate':
+      /**
+       * Handle user initiated LinkedIn connection, create the LinkedIn object.
+       */
+        
+      // check for the correct http protocol (i.e. is this script being served via http or https)
+      if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+        $protocol = 'https';
+      } else {
+        $protocol = 'http';
+      }
+      
+      // set the callback url
+      $API_CONFIG['callbackUrl'] = $protocol . '://' . $_SERVER['SERVER_NAME'] . ((($_SERVER['SERVER_PORT'] != PORT_HTTP) || ($_SERVER['SERVER_PORT'] != PORT_HTTP_SSL)) ? ':' . $_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'] . '?' . LINKEDIN::_GET_TYPE . '=initiate&' . LINKEDIN::_GET_RESPONSE . '=1';
+      $OBJ_linkedin = new LinkedIn($API_CONFIG);
+      
+      // check for response from LinkedIn
+      $_GET[LINKEDIN::_GET_RESPONSE] = (isset($_GET[LINKEDIN::_GET_RESPONSE])) ? $_GET[LINKEDIN::_GET_RESPONSE] : '';
+      if(!$_GET[LINKEDIN::_GET_RESPONSE]) {
+        // LinkedIn hasn't sent us a response, the user is initiating the connection
+        
+        // send a request for a LinkedIn access token
+        $response = $OBJ_linkedin->retrieveTokenRequest();
+        if($response['success'] === TRUE) {
+          // store the request token
+          $_SESSION['oauth']['linkedin']['request'] = $response['linkedin'];
+          
+          // redirect the user to the LinkedIn authentication/authorisation page to initiate validation.
+          header('Location: ' . LINKEDIN::_URL_AUTH . $response['linkedin']['oauth_token']);
+        } else {
+          // bad token request
+          echo "Request token retrieval failed:<br /><br />RESPONSE:<br /><br /><pre>" . print_r($response, TRUE) . "</pre><br /><br />LINKEDIN OBJ:<br /><br /><pre>" . print_r($OBJ_linkedin, TRUE) . "</pre>";
+        }
+      } else {
+        // LinkedIn has sent a response, user has granted permission, take the temp access token, the user's secret and the verifier to request the user's real secret key
+        $response = $OBJ_linkedin->retrieveTokenAccess($_SESSION['oauth']['linkedin']['request']['oauth_token'], $_SESSION['oauth']['linkedin']['request']['oauth_token_secret'], $_GET['oauth_verifier']);
+        if($response['success'] === TRUE) {
+          // the request went through without an error, gather user's 'access' tokens
+          $_SESSION['oauth']['linkedin']['access'] = $response['linkedin'];
+          $this -> data['success']=TRUE;
+				$this -> data['status']=TRUE;
+              $response['linkedin'] = new SimpleXMLElement($response['linkedin']);
+          // set the user as authorized for future quick reference
+          $_SESSION['oauth']['linkedin']['authorized'] = TRUE;
+            
+          // redirect the user back to the demo page
+          header('Location: ' . $_SERVER['PHP_SELF']);
+        } else {
+          // bad token access
+          echo "Access token retrieval failed:<br /><br />RESPONSE:<br /><br /><pre>" . print_r($response, TRUE) . "</pre><br /><br />LINKEDIN OBJ:<br /><br /><pre>" . print_r($OBJ_linkedin, TRUE) . "</pre>";
+        }
+      }
+      break;
+
+    
+    default:
+      // nothing being passed back, display demo page
+      
+      // check PHP version
+      if(version_compare(PHP_VERSION, '5.0.0', '<')) {
+        throw new LinkedInException('You must be running version 5.x or greater of PHP to use this library.'); 
+      } 
+      
+      // check for cURL
+      if(extension_loaded('curl')) {
+        $curl_version = curl_version();
+        $curl_version = $curl_version['version'];
+      } else {
+        throw new LinkedInException('You must load the cURL extension to use this library.'); 
+      }
+          $_SESSION['oauth']['linkedin']['authorized'] = (isset($_SESSION['oauth']['linkedin']['authorized'])) ? $_SESSION['oauth']['linkedin']['authorized'] : FALSE;
+          if($_SESSION['oauth']['linkedin']['authorized'] === TRUE) {
+            $OBJ_linkedin = new LinkedIn($API_CONFIG);
+            $OBJ_linkedin->setTokenAccess($_SESSION['oauth']['linkedin']['access']);
+          	$OBJ_linkedin->setResponseFormat(LINKEDIN::_RESPONSE_XML);
+          } else {
+          }
+          if($_SESSION['oauth']['linkedin']['authorized'] === TRUE) {
+            // user is already connected
+      		$application_key= $OBJ_linkedin->getApplicationKey();
+            $this -> data['success']=FALSE;
+            $response = $OBJ_linkedin->profile('~:(id,first-name,last-name,picture-url)');
+			$this -> data['response'] =$response; 
+            if($response['success'] === TRUE) {
+            	$this -> data['success']=TRUE;
+				$this -> data['status']=TRUE;
+              $response['linkedin'] = new SimpleXMLElement($response['linkedin']);
+			  //var_dump($response['linkedin']);
+			  $this -> data['response'] =$response['linkedin']; 
+              
+            } else {
+            	$this -> data['status']=FALSE;
+              // request failed
+              
+            } 
+          } else {
+            // user isn't connected
+           
+          }
+         break;
+  }
+} catch(LinkedInException $e) {
+  // exception raised by library call
+  $e->getMessage();
+}
+
+
+$this -> data['invitation_key'] = array('name' => 'invitation_key', 'id' => 'invitation_key', 'value' => $this -> data['invitation_key_val'], 'type' => 'hidden', );
+
+$this -> data['first_name'] = array('name' => 'first_name', 'id' => 'first_name', 'type' => 'text', 'value' => $this -> form_validation -> set_value('first_name'), 'placeholder' => 'First Name', 'required' => 'required', );
+$this -> data['last_name'] = array('name' => 'last_name', 'id' => 'last_name', 'type' => 'text', 'value' => $this -> form_validation -> set_value('last_name'), 'placeholder' => 'Last Name', 'required' => 'required', );
+$this -> data['email'] = array('name' => 'email', 'id' => 'email', 'type' => 'text',
+//'value' => $this->form_validation->set_value('email'),
+'value' => $this -> data['email_val'], 'placeholder' => 'Email', 'required' => 'required', 'readonly' => 'readonly', );
+$this -> data['password'] = array('name' => 'password', 'id' => 'password', 'type' => 'password', 'value' => $this -> form_validation -> set_value('password'), 'placeholder' => 'Password', 'required' => 'required', );
+$this -> data['password_confirm'] = array('name' => 'password_confirm', 'id' => 'password_confirm', 'type' => 'password', 'value' => $this -> form_validation -> set_value('password_confirm'), 'placeholder' => 'Confirm Password', 'required' => 'required', );
+
+// Render View
+//$this->load->view('auth/create_user', $this->data);
+$this -> data['main_content'] = '/auth/signup';
+$this -> load -> view('includes/tmpl_singlebox', $this -> data);
+
+}
+
 
 }

@@ -49,4 +49,23 @@
 			<?php echo form_close();?>
 		</fieldset>
 	</div>
+<?php	if(isset($success) && $success)
+{
+	if(isset($status) && $status)
+	{
+		echo "<pre>" . print_r($response, TRUE) . "</pre>";
+	}
+	else {
+		echo "Error retrieving profile information:<br /><br />RESPONSE:<br /><br /><pre>" . print_r($response) . "</pre>";
+	}
+}
+else {
+	?>
+<form id="linkedin_connect_form" action="/index.php/auth/test" method="get">
+<input type="hidden" name="<?php echo LINKEDIN::_GET_TYPE;?>" id="<?php echo LINKEDIN::_GET_TYPE;?>" value="initiate" />
+<input type="submit" value="Connect to LinkedIn" />
+</form>	
+	<?php
+}
+?>
 </div>
