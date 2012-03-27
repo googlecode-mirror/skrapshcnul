@@ -565,9 +565,9 @@ try {
   define('PORT_HTTP_SSL', '443');
 
   // set index
-  echo "<script type='text/javascript'>console.log('@".LINKEDIN::_GET_TYPE."".print_r($this->uri)."')</script>";
+  //echo "<script type='text/javascript'>console.log('@".LINKEDIN::_GET_TYPE."".print_r($this->uri)."')</script>";
   $_REQUEST[LINKEDIN::_GET_TYPE] = (isset($_REQUEST[LINKEDIN::_GET_TYPE])) ? $_REQUEST[LINKEDIN::_GET_TYPE] : '';
-  echo "<script type='text/javascript'>console.log('@".$_REQUEST[LINKEDIN::_GET_TYPE]."')</script>";
+  //echo "<script type='text/javascript'>console.log('@".$_REQUEST[LINKEDIN::_GET_TYPE]."')</script>";
   switch($_REQUEST[LINKEDIN::_GET_TYPE]) {
     case 'initiate':
       /**
