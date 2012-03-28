@@ -1,8 +1,12 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title><?php echo isset($head_title) ? $head_title : 'Lunchsparks';?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo base_url();?>skin/js/bootstrap/css/bootstrap-responsive.min.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/ext-icons/css/ext-icons.css" type="text/css" media="screen" charset="utf-8" />
 
 <?php /* ## Fonts ?>
