@@ -36,5 +36,7 @@
 		</ul>
 		<div class="clearfix"></div>
 	</div>
+	<div class="clearfix"></div>
+	<p class="footer pull-right"><small>Page rendered in <strong>{elapsed_time}</strong> seconds</small></p>
 	<div class="clearfix">&nbsp;</div>
 </div>
