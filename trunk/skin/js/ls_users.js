@@ -163,7 +163,7 @@ function profile_hover_init() {
 			// handlerIn 
 			if (!jQuery("#ls-profile-card-holder-"+userid+".ls-profile-card-holder").length > 0) {
 				jQuery("body").append(jQuery(
-					'<div id="ls-profile-card-holder-'+userid+'" class="ls-profile-card-holder">'+
+					'<div id="ls-profile-card-holder-'+userid+'" class="ls-profile-card-holder visible-desktop">'+
 						'<div class="ls-profile-card-loader-overlay"><div class="ls-profile-card-loader loading-icon rotate2">&nbsp;</div></div>'+
 						'<div class="ls-profile-card-content"></div>'+
 					'</div>'));

@@ -9,15 +9,16 @@
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/bootstrap/css/bootstrap-responsive.min.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/css/ext-icons/css/ext-icons.css" type="text/css" media="screen" charset="utf-8" />
 
-<?php /* ## Fonts ?>
-<link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.0.22/webfont.js"></script><?php 
-*/ ?>
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery-ui/jquery-ui-1.8.17/css/smoothness/jquery-ui-1.8.17.custom.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.css" type="text/css" media="screen" charset="utf-8" />
+
+
+<!-- JavaScripts -->
+<?php ## Fonts ?>
+<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400' rel='stylesheet' type='text/css'>
+
 <script src="<?php echo base_url();?>skin/js/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript">$.noConflict();</script>
 <script src="<?php echo base_url();?>skin/js/jquery-ui/jquery-ui-1.8.17/js/jquery-ui-1.8.17.custom.min.js"></script>

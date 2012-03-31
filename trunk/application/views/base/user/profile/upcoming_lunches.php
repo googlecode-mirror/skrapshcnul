@@ -1,8 +1,8 @@
-<div class="dashboard-stream-box">
+<div class="dashboard-stream-box well-container">
 	
-	<div class="dashboard-stream-box-top">
+	<h3 class="dashboard-stream-box-top">
 		<div class="title"> Upcoming Lunches </div>
-	</div>
+	</h3>
 	
 	<div class="dashboard-stream-box-middle dashboard-stream-box-container">
 		<div class="activity-stream">

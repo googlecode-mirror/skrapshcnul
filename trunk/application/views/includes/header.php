@@ -1,20 +1,29 @@
 <div id="notifications-mini-area" class="floating-dialog">
-	<iframe id="notifications-mini-iframe" src="<?php echo site_url("notifications/minified");?>" scrolling="no" frameborder="0" allowtransparency="true"
-	hspace="0" tabindex="-1" vspace="0"
-	style="height: 100%">
-		<p>
-			Your browser does not support iframes. Please update your browser.
-		</p>
-	</iframe>
+	<div class="container">
+		<iframe id="notifications-mini-iframe" src="<?php echo site_url("notifications/minified");?>" scrolling="no" frameborder="0" allowtransparency="true"
+		hspace="0" tabindex="-1" vspace="0"
+		style="height: 100%">
+			<p>
+				Your browser does not support iframes. Please update your browser.
+			</p>
+		</iframe>
+	</div>
 </div>
-<header>
-	<div id="header" class="navbar navbar-static">
+<div> <!-- to replace with "header" tag -->
+	<div id="header" class="navbar navbar-fixed-top">
 		<div id="h-container" class="navbar-inner">
 			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+				</a>
+				<!-- Be sure to leave the brand out there if you want it shown -->
 				<a class="brand" href="/" style="padding: 5px;">
 						<img src="/skin/images/140/ls_logo_wide_white.png" height="40px" style="display: block;">
 				</a>
+				<!-- Everything you want hidden at 940px or less, place within here -->
 				<div class="nav-collapse">
 					<ul class="nav pull-right">
 						<?php if (isset($this->data['is_logged_in_admin']) && $this->data['is_logged_in_admin']) { ?>
@@ -72,7 +81,7 @@
 						</li>
 						<li class="dropdown" id="menu10">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#menu10">
-									<?php echo $this -> session -> userdata['email'] ?> <b class="caret"></b>
+								<?php echo $this -> session -> userdata['email'] ?> <b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
 								<li>
@@ -123,15 +132,19 @@
 						</li>
 						<?php }?>
 					</ul>
+					<?php if (isset($is_logged_in) && $is_logged_in) { ?>
 					<form class="navbar-search pull-right" action="/search/">
 						<input type="text" name="q" class="search-query span2" placeholder="Search">
 					</form>
+					<?php }?>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</header>
+</div>
 <script>
+jQuery(function() {
 	jQuery('.dropdown-toggle').dropdown();
+});
 </script>
