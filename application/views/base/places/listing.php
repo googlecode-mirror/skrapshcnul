@@ -40,7 +40,7 @@
 </div>
 <div class="clearfix">&nbsp;</div>
 
-<?php var_dump($places); ?>
+<?php //var_dump($places); ?>
 
 <script>
 var initialData = <?php echo json_encode($places); ?>;
