@@ -72,10 +72,10 @@
 								<li class="divider"></li>
 								<li class="nav-header">Restaurants</li>
 								<li>
-									<a href="/places/all#restaurant"><i class="icon-map-marker"></i> All</a>
+									<a href="/places/all/restaurant"><i class="icon-map-marker"></i> All</a>
 								</li>
 								<li>
-									<a href="/places/trending#restaurant"><i class="icon-map-marker"></i> Trending</a>
+									<a href="/places/all/restaurant/trending"><i class="icon-map-marker"></i> Trending</a>
 								</li>
 							</ul>
 						</li>
