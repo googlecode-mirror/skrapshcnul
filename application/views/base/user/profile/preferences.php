@@ -1,9 +1,8 @@
-<div id="preferences" class="dashboard-stream-box">
+<div id="preferences" class="dashboard-stream-box well-container">
 	
-	
-	<div class="dashboard-stream-box-top">
+	<h3 class="dashboard-stream-box-top">
 		<div class="title"> Tags </div>
-	</div>
+	</h3>
 	
 	<div class="clearfix">&nbsp;</div>
 	<?php if (!empty($preferences)) { ?>

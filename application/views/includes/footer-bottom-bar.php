@@ -1,42 +1,60 @@
-<div class="clearfix"></div>
-<div class="xs">
-	<div class="f-copyright">
-		<?php echo anchor('', '&copy; 2011 Lunchsparks.me', array('from' => 'main'));?>
+<footer>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse.footer"> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+				</a>
+				<!-- Be sure to leave the brand out there if you want it shown -->
+				<a class="brand" href="#" from="main">
+					&copy; 2011 Lunchsparks.me
+				</a>
+				<!-- Everything you want hidden at 940px or less, place within here -->
+				<div class="nav-collapse footer">
+					<!-- .nav, .navbar-search, .navbar-form, etc -->
+					<div class="pull-right">
+						<ul class="nav pull-right">
+							<li>
+								<?php echo anchor('pages/about', 'About', array('from' => 'main'));?>
+							</li>
+							<li>
+								<a href="https://www.facebook.com/pages/Lunchsparks/148121848608310">Facebook</a>
+							</li>
+							<li>
+								<a href="http://twitter.com/#!/lunchsparks">Twitter</a>
+							</li>
+							<li>
+								<a href="http://blog.lunchsparks.me/">Blog</a>
+							</li>
+							<li>
+								<?php echo anchor('pages/press', 'Press', array('from' => 'main'));?>
+							</li>
+							<li>
+								<?php echo anchor('pages/careers', 'Careers', array('from' => 'main'));?>
+							</li>
+							<li>
+								<?php echo anchor('pages/privacy', 'Privacy', array('from' => 'main'));?>
+							</li>
+							<li>
+								<?php echo anchor('pages/terms', 'Terms', array('from' => 'main'));?>
+							</li>
+							<li>
+								<?php echo anchor('pages/help', 'Help', array('from' => 'main'));?>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<?php if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') { ?> 
+				<div class="container">
+					<p class="footer pull-right">
+						<small>Page rendered in <strong>{elapsed_time}</strong> seconds</small>
+					</p>
+				</div>
+			<?php } ?>
+		</div>
 	</div>
-	<div class="f-language"></div>
-	<div class="f-sitemap">
-		<ul>
-			<li>
-				<?php echo anchor('pages/about', 'About', array('from' => 'main'));?>
-			</li>
-			<li>
-				<a href="https://www.facebook.com/pages/Lunchsparks/148121848608310">Facebook</a>
-			</li>
-			<li>
-				<a href="http://twitter.com/#!/lunchsparks">Twitter</a>
-			</li>
-			<li>
-				<a href="http://blog.lunchsparks.me/">Blog</a>
-			</li>
-			<li>
-				<?php echo anchor('pages/press', 'Press', array('from' => 'main'));?>
-			</li>
-			<li>
-				<?php echo anchor('pages/careers', 'Careers', array('from' => 'main'));?>
-			</li>
-			<li>
-				<?php echo anchor('pages/privacy', 'Privacy', array('from' => 'main'));?>
-			</li>
-			<li>
-				<?php echo anchor('pages/terms', 'Terms', array('from' => 'main'));?>
-			</li>
-			<li>
-				<?php echo anchor('pages/help', 'Help', array('from' => 'main'));?>
-			</li>
-		</ul>
-		<div class="clearfix"></div>
-	</div>
-	<div class="clearfix"></div>
-	<p class="footer pull-right"><small>Page rendered in <strong>{elapsed_time}</strong> seconds</small></p>
-	<div class="clearfix">&nbsp;</div>
-</div>
+</footer>

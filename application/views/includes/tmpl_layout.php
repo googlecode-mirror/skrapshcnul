@@ -6,13 +6,15 @@
 	<body onLoad="bodyLoad();">
 		<?php $this -> load -> view('includes/system_notifications');?><div class="clearfix"></div>
 		<?php $this -> load -> view('includes/header');?><div class="clearfix"></div>
+		
 		<div id="m-container-outer">
 			<div id="m-container">
 				<div class="m-wrapper">
 					<?php $this -> load -> view($main_content);?>
 				</div>
 			</div>
-		</div><div class="clearfix"></div>
-		<?php $this -> load -> view('includes/footer');?><div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+		<?php $this -> load -> view('includes/footer');?>
 	</body>
 </html>

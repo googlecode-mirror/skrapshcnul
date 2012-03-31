@@ -65,9 +65,5 @@
 	</footer>
 		
 <?php } else {?>
-	<footer class="xs">
-		<div id="f-container">
-			<?php $this -> load -> view('includes/footer-bottom-bar');?>
-		</div>
-	</footer>
+	<?php $this -> load -> view('includes/footer-bottom-bar');?>
 <?php }?>

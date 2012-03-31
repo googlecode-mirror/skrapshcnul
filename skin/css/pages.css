@@ -1,11 +1,7 @@
 
 .c-pages {
-	margin: 5px 0 15px 0px;
-	padding: 20px 20px;
 	text-align: justify;
-	/*border: 1px solid #BDBDBD;*/
 	background: #FFFFFF;
-	position: relative;
 }
 .radial-grey {
 	background: url(../images/bg/bg-grey.png);
