@@ -53,7 +53,7 @@ body {
 }
 /* Content */
 #m-container-outer {
-	background: #F5F5F5 url(../images/180/bg-grey.png);
+	/*background: #F5F5F5 url(../images/180/bg-grey.png);*/
 	padding: 40px 0 10px 0;
 }
 #m-container { 

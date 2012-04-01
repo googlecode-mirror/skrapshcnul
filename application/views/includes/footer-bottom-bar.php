@@ -9,7 +9,7 @@
 					<span class="icon-bar"></span> 
 				</a>
 				<!-- Be sure to leave the brand out there if you want it shown -->
-				<a class="brand" href="#" from="main">
+				<a class="brand small" href="#" from="main" style="font-size: 100%; padding: 10px 20px; margin: 5px;">
 					&copy; 2011 Lunchsparks.me
 				</a>
 				<!-- Everything you want hidden at 940px or less, place within here -->

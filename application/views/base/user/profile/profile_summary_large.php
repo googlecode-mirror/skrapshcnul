@@ -7,19 +7,11 @@
 					<div class="span8">
 						<div class="profile-name">
 							<span>Hey, I'm <?php echo $profile['first_name'];?>, <?php echo $profile['last_name'];?></span>
-							<div class="profile-stats">
-								<?php if(isset($profile['verification']) && $profile['verification']['status']) { ?>
-									<div id="user-verification" class="u-v-verified">
-										<div class="user-verification-icon user-verfied"> </div>
-										<div class="user-verification-text"> verified </div>
-									</div>
-								<?php } ?>
-							</div>
 						</div>
 					</div>
 					<div class="span4">
 						<div class="pull-right">
-							 Member since:
+							 Member since: <?php echo date("F j, Y", strtotime( $profile['created_on'] )); ?>
 						</div>
 					</div>
 				</div>

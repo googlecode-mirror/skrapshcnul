@@ -44,23 +44,6 @@ img {
 	position: relative;
 	/*background: url(../images/1/bg_opacity04.png);*/
 }
-.forms {
-	border: 1px solid #CCCCCC;
-	-moz-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
-	-webkit-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
-	-khtml-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
-	box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
-	background: #f0f0f0;
-	margin: 10px auto;
-	padding: 0 20px;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-}
-.error {
-	color: #393939;
-	font-size: 15px;
-}
 #login_form {
 }
 .notification-toggle-container:hover, #h-menu a:hover, #h-uacc a:hover {
@@ -533,10 +516,6 @@ body::-webkit-scrollbar-corner {
 	-khtml-box-shadow: rgba(0, 0, 0, 0.7) 0 2px 5px -1px;
 	box-shadow: rgba(0, 0, 0, 0.7) 0 2px 5px -1px;
 }
-.title {
-	/*color: #0E385F;*/
-	color: #7C7D7D;
-}
 .close-btn {
 	position: absolute;
 	top: 10px;
@@ -671,8 +650,6 @@ body::-webkit-scrollbar-corner {
 /* Others */
 #f-widgets .block {
 	text-align: justify;
-	float: left;
-	width: 200px;
 }
 #f-widgets .block p {
 	color: #BBBBBB;
@@ -681,10 +658,6 @@ body::-webkit-scrollbar-corner {
 }
 .f-sitemap {
 	float:right;
-}
-#f-widgets .block,
-.f-copyright {
-	padding: 0 25px 0 0;
 }
 .f-sitemap li {
 	float:left;

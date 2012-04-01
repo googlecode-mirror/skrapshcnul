@@ -1,19 +1,4 @@
 <div class="m-content">
-	<?php //?>
-	<div id="announcements" class="shadow" style="border-radius: 3px;">
-		<?php /*if (1 || $this->session->userdata('linkedin_pulled') == FALSE) {
-		 ?>
-		 <div  id="announcement-linkedin" class="ui-state-highlight ui-corner-all" style="padding: 10px; margin: 15px 0px;">
-		 <div class="close-btn" onclick="$('#announcement-linkedin').toggle('slow')"></div>
-		 <p>
-		 Opps, seems like we have no information about you yet!
-		 </p>
-		 <a href="<?php echo base_url().'synchronize/'; ?>" class="button" style="padding: 5px 10px;">Sync your profiles</a>
-		 <div class="clearfix"></div>
-		 </div>
-		 <?php } */
-		?>
-	</div>
 	<div class="container c-pages">
 		<div class="row-fluid">
 			<div class="span3">
@@ -65,6 +50,4 @@
 		</div>
 	</div>
 </div>
-<div class="clearfix">
-	&nbsp;
-</div>
+<div class="clearfix">&nbsp;</div>

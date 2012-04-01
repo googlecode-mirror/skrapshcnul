@@ -16,9 +16,6 @@ body.singlebox {
 	background: none;
 }
 .singlebox .m-wrapper {
-	max-width: 1000px;
-}
-.singlebox .m-wrapper {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;

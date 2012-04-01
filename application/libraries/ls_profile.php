@@ -46,10 +46,19 @@ class Ls_Profile {
 
 	function _init($user_id) {
 		
-		$this -> ci -> user_profile_model -> select($user_id);
-		$this -> ci -> user_profile_model -> select_social_links($user_id);
-		$this -> ci -> invitation_model -> selectInvitation($user_id);
+		$profile = $this -> ci -> user_profile_model -> select($user_id);
+		$social_links = $this -> ci -> user_profile_model -> select_social_links($user_id);
+		$invitation = $this -> ci -> invitation_model -> selectInvitation($user_id);
 		
+		$profile['first_name'] = $profile['firstname'];
+		$profile['last_name'] = $profile['lastname'];
+		
+		## Data Sanitization
+		if (!is_array($profile)) $social = json_decode(json_encode($profile), TRUE);
+		if (!is_array($social_links)) $social_links = json_decode(json_encode($social_links), TRUE);
+		if (!is_array($invitation)) $invitation = json_decode(json_encode($invitation), TRUE);
+		$results = array_merge($invitation, $social_links, $profile);
+		return $results;
 	}
 	
 	function getPublicProfile($user_id = FALSE) {
@@ -84,7 +93,8 @@ class Ls_Profile {
 		}
 		
 		try {
-			$this -> _init($user_id);
+			$this->data['profile'] = $this -> _init($user_id);
+			
 			$this -> _prepare_profile_data_default($user_id);
 			
 			#####################
@@ -174,7 +184,7 @@ class Ls_Profile {
 		// Setup Profile Picture
 		if (!isset($this->data['profile']['profile_img'])) {
 			$this->data['profile']['profile_img'] = base_url().'skin/images/100/icon_no_photo_no_border_offset_100x100.png';
-			$this->data['profile']['profile_img'] = base_url() . "skin/images/160/silhouette_male.jpg";
+			$this->data['profile']['profile_img'] = base_url() . "skin/images/svgs/silhouette_male.svg";
 		}
 		
 		$user_details = $this -> ci -> user_model -> select_user($user_id);
@@ -241,6 +251,14 @@ class Ls_Profile {
 		*/
 		
 		return $this->data['profile_stats'];
+		
+	}
+
+	function update($fields = FALSE, $options = FALSE) {
+		
+		if (!$fields) { return FALSE; }
+		
+		return $this -> user_profile_model($fields);
 		
 	}
 

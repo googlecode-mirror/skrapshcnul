@@ -63,6 +63,7 @@ class Ion_auth
 		$this->ci->load->library('session');
 		$this->ci->lang->load('ion_auth');
 		$this->ci->load->model('ion_auth_model');
+		$this->ci->load->model('user_profile_model');
 		$this->ci->load->helper('cookie');
 		
 		$mail_config['mailtype'] = 'html';
@@ -216,6 +217,16 @@ class Ion_auth
 			$id = $this->ci->ion_auth_model->register($username, $password, $email, $additional_data, $group_name);
 			if ($id !== FALSE)
 			{
+				## Pre-populate User Profile
+				if (isset($additional_data['first_name']))
+					$fields['firstname'] = $additional_data['first_name'];
+				if (isset($additional_data['last_name']))
+					$fields['lastname'] = $additional_data['last_name'];
+				if (isset($email))
+					$fields['delivery_email'] = $email;
+				$this -> ci -> user_profile_model -> update($id, $fields);
+				
+				## Finally
 				$this->set_message('account_creation_successful');
 				$this->ci->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful'));
 				return $id;

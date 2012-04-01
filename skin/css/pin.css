@@ -1,7 +1,12 @@
+#masonry-container {
+	text-align: left;
+}
 .pin {
 	width: 210px;
 	margin: 5px;
-	float: left;
+	/*float: left; */
+	display: inline-block;
+	vertical-align: top;
 	font-size: 11px;
 	background: #FFFFFF;
 	box-shadow: 0 1px 3px rgba(34,25,25,0.4);
@@ -34,13 +39,25 @@
 .pin-image img {
 	max-width: 190px;
 }
-.pin-data {
-	text-align: left;
-}
 .pin-stats {
 	color: #8C7E7E;
 	margin: 5px 0;
 }
+.pin-data {
+	text-align: left;
+}
+/*.pin-data.description {
+	height: 36px;
+	overflow: hidden;
+}
+.pin-extras.tags {
+	height: 60px;
+	overflow: hidden;
+}
+.pin-extras.team-members {
+	height: 65px;
+	overflow: hidden;
+}*/
 #masonry-container {
 	padding-bottom: 50px;
 }

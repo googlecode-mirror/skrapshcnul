@@ -1,7 +1,7 @@
 <div id="preferences" class="dashboard-stream-box well-container">
 	
 	<h3 class="dashboard-stream-box-top">
-		<div class="title"> Tags </div>
+		Tags
 	</h3>
 	
 	<div class="clearfix">&nbsp;</div>
