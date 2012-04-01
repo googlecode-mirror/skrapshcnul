@@ -1,5 +1,5 @@
 <div class="m-content">
-	<div id="places-container" class="c-pages shadow-rounded" style="padding: 0px;">
+	<div id="places-container" class="container" style="padding: 0px;">
 		<div style="padding:20px; min-height: 500px;">
 			<h1><?php echo $tpl_page_title; ?></h1>
 		
@@ -93,7 +93,8 @@ ko.applyBindings(new ProjectsListingModel(initialData), document.getElementById(
 jQuery('#masonry-container').imagesLoaded(function(){
 	jQuery('#masonry-container').masonry({
 		// options
-		itemSelector : '.pin'
+		itemSelector : '.pin',
+		columnWidth: 220
 	});
 });
 

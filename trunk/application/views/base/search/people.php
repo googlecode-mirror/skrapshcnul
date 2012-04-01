@@ -1,5 +1,5 @@
 <div class="m-content">
-	<div id="people-container" class="c-pages shadow-rounded">
+	<div id="people-container" class="container">
 		<div style="padding:20px; min-height: 500px;">
 			<div class="row-fluid">
   				<div class="span8">
@@ -76,12 +76,12 @@ var PeopleListingModel = function(people) {
 
 ko.applyBindings(new PeopleListingModel(initialData), document.getElementById('PeopleListingModel'));
 
-jQuery('#masonry-container').imagesLoaded(function(){
+<?php /* jQuery('#masonry-container').imagesLoaded(function(){
 	jQuery('#masonry-container').masonry({
 		// options
 		itemSelector : '.pin'
 	});
-});
+}); */ ?>
 
 jQuery(window).scroll(function () { 
    if (jQuery(window).scrollTop() >= jQuery(document).height() - jQuery(window).height() - 10) {

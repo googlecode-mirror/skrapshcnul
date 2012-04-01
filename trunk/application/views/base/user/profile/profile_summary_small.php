@@ -19,7 +19,9 @@
 		</div>
 	</div>
 	<div>
-		from <strong><a href="http://maps.google.com/maps?q=<?php echo $profile['location']['name'];?>" target="_blank"><?php echo $profile['location']['name'];?></a></strong>
+		<?php if (isset($profile['location']['name'])) { ?> 
+			from <strong><a href="http://maps.google.com/maps?q=<?php echo $profile['location']['name'];?>" target="_blank"><?php echo $profile['location']['name'];?></a></strong>
+		<?php } ?>
 	</div>
 </div>
 <div class="clearfix">&nbsp;</div>

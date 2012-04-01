@@ -510,6 +510,7 @@ height: 48px;
 	margin: 10px auto;
 	position: relative;
 	width: 90%;
+	max-width: 240px;
 }
 .profile-img-container .profile-img {
 	background: #FFFFFF;

@@ -1,5 +1,5 @@
-<div class="c-pages radial-grey shadow-rounded">
-	<div class="forms">
+<div class="container c-pages radial-grey shadow-rounded">
+	<div style="padding: 30px;">
 		<div class="row-fluid">
 			<div class="span6">
 				<div id="login_form">
@@ -7,8 +7,7 @@
 					<h1><?php echo $title;?></h1>
 					<div class="clearfix">&nbsp;</div>
 					
-					<div class="error-msg">
-						<?php if($this->session->flashdata('message' )) { ?>
+					<?php if($this->session->flashdata('message' )) { ?>
 						<div class="alert">
 							<i class="icon-warning-sign"></i> <?php echo $this -> session -> flashdata('message');?>.
 						</div>
@@ -17,8 +16,7 @@
 								jQuery( ".alert" ).effect('shake', 500);
 							});
 						</script>
-						<?php } ?>
-					</div>
+					<?php } ?>
 					
 					<?php echo form_open("auth/login");?>
 					<p>
@@ -38,8 +36,9 @@
 						<button type="submit" class="btn btn-primary btn-large"><i class="icon-user icon-white"></i> Login</button> or 
 						<a href="/auth/signup" class="btn">Create Account</a>
 					</p>
+					<div class="clearfix">&nbsp;</div>
 					<p>
-						<small><?php echo anchor('auth/forgot_password', 'Forgot Password?');?></small>
+						<?php echo anchor('auth/forgot_password', 'Forgot Password?');?>
 					</p>
 					<?php echo form_close(); ?>
 				</div>
