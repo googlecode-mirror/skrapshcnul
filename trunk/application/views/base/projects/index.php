@@ -1,10 +1,7 @@
-<div class="m-content">
-	<?php if ($has_edit_permission == TRUE) { ?>
-		<div class="edit-this-page">
-			<a href="/projects/edit/<?php echo $project['project_id']; ?>" class="button">Edit This Page</a>
-		</div>
-	<?php } ?>
+<div class="m-content container">
 	
+	<?php $this -> load -> view("base/projects/includes/_admin.php");?>
+			
 	<div id="places-container" class="c-pages" style="padding: 0px;">
 		
 		<div class="dashboard-activity">

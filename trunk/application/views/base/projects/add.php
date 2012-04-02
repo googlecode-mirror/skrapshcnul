@@ -1,5 +1,5 @@
-<div class="m-content">
-	<div id="places-container" class="c-pages shadow-rounded" style="padding: 10px;">
+<div class="container c-pages">
+	<div id="places-container" style="padding: 10px;">
 		<h1><?php echo $tpl_page_title; ?></h1>
 		
 		<form method="post" id="add-project" class="form-horizontal">

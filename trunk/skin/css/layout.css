@@ -54,7 +54,7 @@ body {
 /* Content */
 #m-container-outer {
 	/*background: #F5F5F5 url(../images/180/bg-grey.png);*/
-	padding: 40px 0 10px 0;
+	padding: 45px 0 10px 0;
 }
 #m-container { 
 	margin: auto;
@@ -239,6 +239,7 @@ body {
 	min-height: 150px;
 	max-height: 250px;
 	overflow: hidden;
+	text-align: center;
 	z-index: -1;
 	-webkit-transition-duration: .29s;
 	-webkit-transition-timing-function: ease-in-out;
@@ -289,6 +290,7 @@ body {
 .dashboard-featured-data .name {
 	font-weight: bold;
 	font-size: 32px;
+	line-height: 37px;
 	text-shadow: 1px 1px 1px #CCC;
 }
 .dashboard-featured-statistics {

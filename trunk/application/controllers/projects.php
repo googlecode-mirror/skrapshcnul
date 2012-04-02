@@ -66,8 +66,9 @@ class Projects extends CI_Controller {
 		}
 		
 		$fields['project_id'] = $project_id;
+		$options['include_default'] = TRUE; 
 		
-		$this -> data['project'] = $this -> ls_projects -> select_project($fields);
+		$this -> data['project'] = $this -> ls_projects -> select_project($fields, $options);
 		if ($this -> ls_projects -> has_edit_permission($this -> data['project'])) {
 			$this -> data['has_edit_permission'] = TRUE;
 		}
@@ -83,7 +84,15 @@ class Projects extends CI_Controller {
 	
 	function listing() {
 		
-		$this -> data['projects'] = $this -> ls_projects -> select_all_projects();
+		## Initialization
+		$fields = array();
+		
+		if($this -> input -> get('q')) {
+			$fields['q'] = $this -> input -> get('q');
+		}
+		
+		$options['include_default'] = TRUE; 
+		$this -> data['projects'] = $this -> ls_projects -> select_all_projects($fields, $options);
 		
 		// Render view data
 		$this -> data['head_title'] = 'Projects Listing | Lunchsparks';

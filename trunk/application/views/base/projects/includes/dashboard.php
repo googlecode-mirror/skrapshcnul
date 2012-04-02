@@ -15,7 +15,7 @@
 			<div class="name">
 				<span><?php echo $project['name']; ?></span>
 				<?php if(isset($project['verified_status']['status']) && $project['verified_status']['status']) { ?>
-					<div id="profile-stats">
+					<div class="profile-stats">
 						<div id="user-verification" class="u-v-verified">
 							<div class="user-verification-icon user-verfied"> </div>
 							<div class="user-verification-text"> verified </div>
@@ -26,12 +26,14 @@
 			<div class="others">
 				<?php if (isset($project['tags']) && sizeof($project['tags']) > 0) { ?>
 					<?php foreach ($project['tags'] as $tags) { ?>
-						<?php foreach ($tags['tags_data'] as $tag_value) { ?>
-							<div class="tag"> 
-								<a href="/search/tag/<?php echo $tag_value['name'] ?>">
-									<?php echo $tag_value['name'] ?>
-								</a>
-							</div>
+						<?php if (is_array($tags['tags_data']) && sizeof($tags['tags_data']) > 0) { ?>
+							<?php foreach ($tags['tags_data'] as $tag_value) { ?>
+								<div class="tag"> 
+									<a href="/search/tag/<?php echo $tag_value['name'] ?>">
+										<?php echo $tag_value['name'] ?>
+									</a>
+								</div>
+							<?php } ?>
 						<?php } ?>
 					<?php } ?>
 				<?php } ?>

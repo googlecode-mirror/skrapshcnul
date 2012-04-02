@@ -12,9 +12,9 @@
 					<a href='#' data-bind='click: $root.removeTag'>[x]</a>
 				</div>
 			</div>
-			<div class="edit-control">
+			<div class="edit-control form-horizontal">
 				<input type="text" name="add_tag" placeholder="Add tag" style="display: inline-block; vertical-align: middle;" />
-				<button class="button" data-bind='click: $root.addTag'>Add</button>
+				<button class="btn btn-small" data-bind='click: $root.addTag'>Add</button>
 			</div>
 		</div>
 		

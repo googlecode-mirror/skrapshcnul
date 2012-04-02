@@ -1,5 +1,5 @@
-<div class="m-content">
-	<div id="places-container" class="c-pages shadow-rounded" style="padding: 10px;">
+<div class="m-content container">
+	<div id="places-container" class="c-pages" style="padding: 10px;">
 		<form id="update-places">
 			<div class="section row-item">
 				<div class="section-top">
@@ -255,7 +255,7 @@
 		</form>
 		
 		<div class="clearfix">&nbsp;</div>
-		<div><a href="/projects/<?php echo $project['project_id'] ?>" class="button">Back</a></div>
+		<div><a href="/projects/<?php echo $project['project_id'] ?>" class="btn btn-large">Back</a></div>
 		<div class="clearfix">&nbsp;</div>
 		
 	</div>
