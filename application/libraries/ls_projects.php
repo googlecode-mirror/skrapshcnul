@@ -67,7 +67,12 @@ class Ls_Projects {
 		## Dummy Data - statistics
 		$results['statistics']['followers'] = 0;
 		$results['statistics']['favourites'] = 0;
-
+		
+		## Data Default Value
+		$results = $this -> _set_default_values($results, $options);
+		
+		## Privacy and Permission
+		
 		if (isset($results['created_by']) && is_numeric($results['created_by'])) {
 			$results['created_by'] = $this -> ci -> ls_profile -> getPublicProfile($results['created_by']);
 		}
@@ -105,6 +110,9 @@ class Ls_Projects {
 				$param['project_id'] = $project['project_id'];
 				$options['simple'] = TRUE;
 				$results[$key] = $this -> select_project($param, $options);
+				
+				## Data Default Value
+				$results[$key] = $this -> _set_default_values($results[$key], $options);
 			}
 		}
 		
@@ -172,6 +180,21 @@ class Ls_Projects {
 			return TRUE;
 		}
 	}
+	
+	protected function _set_default_values($results, $options) {
+		
+		## Data Default Value
+		if (isset($options['include_default']) && $options['include_default']) {
+			if (!($results['cover_img'])) {
+				$results['cover_img'] = '/skin/images/bg/world6-equirectangular.jpg';
+			}
+			if (!($results['logo'])) {
+				$results['logo'] = '/skin/images/svgs/question.svg';
+			}
+		}
+		
+		return $results;
+	} 
 
 }
 ?>

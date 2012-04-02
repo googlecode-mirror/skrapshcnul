@@ -145,7 +145,10 @@ class Projects_Model extends CI_Model {
 		$data = array();
 		if (isset($obj['project_id'])) { $data['project_id'] = ($obj['project_id']);
 		}
-		if (isset($obj['tags_type_id'])) { $data['tags_type_id'] = ($obj['tags_type_id']);
+		if (isset($obj['tags_type_id'])) {
+			$data['tags_type_id'] = ($obj['tags_type_id']);
+		} else {
+			$data['tags_type_id'] = 1;
 		}
 		if (isset($obj['tags_cat_id'])) { $data['tags_cat_id'] = ($obj['tags_cat_id']);
 		}
@@ -451,9 +454,9 @@ class Projects_Model extends CI_Model {
 		$where = array();
 		$where['project_id'] = $project_id;
 
-		$this -> db -> select('*');
+		$this -> db -> select('ptxf.*, pt.*');
 		$this -> db -> from($this -> tables['projects_tags'] . ' AS pt');
-		$this -> db -> join($this -> tables['projects_tags_xref'] . ' AS ptxf', 'ptxf.tags_type_id = pt.tags_type_id');
+		$this -> db -> join($this -> tables['projects_tags_xref'] . ' AS ptxf', 'ptxf.tags_type_id = pt.tags_type_id', 'right');
 		$this -> db -> where($where);
 
 		$mysql_result = $this -> db -> get();
@@ -461,7 +464,14 @@ class Projects_Model extends CI_Model {
 		if ($mysql_result -> num_rows() > 0) {
 			$results = $mysql_result -> result_array();
 			foreach ($results as $key => $value) {
-				$results[$key]['tags_data'] = json_decode($results[$key]['tags_data'], TRUE);
+				if (($results[$key]['tags_data'])) {
+					$array = json_decode($results[$key]['tags_data'], TRUE);
+					if (sizeof($array) > 0 ) {
+						$results[$key]['tags_data'] = json_decode($results[$key]['tags_data'], TRUE);
+					} else {
+						$results[$key]['tags_data'] = array();
+					}
+				}
 			}
 			return $results;
 		} else {
@@ -503,6 +513,14 @@ class Projects_Model extends CI_Model {
 
 		if (!isset($fields['row_count'])) {
 			$row_count = 30;
+		}
+		
+		## Search 
+		if (isset($fields['q'])) {
+			$this -> db -> like('name', $fields['q']);
+		}
+		if (isset($fields['q'])) {
+			$this -> db -> or_like('description', $fields['q']);
 		}
 
 		$this -> db -> select('*');

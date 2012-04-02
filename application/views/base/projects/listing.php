@@ -1,8 +1,13 @@
 <div class="m-content">
 	<div id="places-container" class="container" style="padding: 0px;">
 		<div style="padding:20px; min-height: 500px;">
+			
+			<?php $this -> load -> view("base/projects/includes/_menu.php");?>
+			
 			<h1><?php echo $tpl_page_title; ?></h1>
-		
+			<?php $this -> load -> view("base/projects/includes/_search.php");?>
+			<div class="clearfix">&nbsp;</div>
+			
 			<div id="ProjectsListingModel">
 				<div id="masonry-container" data-bind="foreach: projects" class="">
 					<div class="pin">
@@ -90,13 +95,13 @@ var ProjectsListingModel = function(projects) {
 
 ko.applyBindings(new ProjectsListingModel(initialData), document.getElementById('ProjectsListingModel'));
 
-jQuery('#masonry-container').imagesLoaded(function(){
+/*jQuery('#masonry-container').imagesLoaded(function(){
 	jQuery('#masonry-container').masonry({
 		// options
 		itemSelector : '.pin',
 		columnWidth: 220
 	});
-});
+});*/
 
 jQuery(window).scroll(function () { 
    if (jQuery(window).scrollTop() >= jQuery(document).height() - jQuery(window).height() - 10) {
