@@ -1,3 +1,5 @@
+<legend>Tags </legend>
+
 <div id="ProjectsTagsModel">
 	<div data-bind="foreach: tags">
 		

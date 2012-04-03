@@ -23,7 +23,7 @@
 						<label for="mce-EMAIL" style="color: #FFF;">Want to start connecting now <strong>right now</strong>? Sign up <?php echo anchor('http://eepurl.com/ftkI-/', 'here', 'style="color: #FFFFFF;"');?>.</label>
 						<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="enter email address" required style="float: left;width: 305px;">
 						<div class="clearfix">
-							<input type="submit" value="Signup to be Alpha Testers" name="subscribe" id="mc-embedded-subscribe" class="button" style="min-width: 321px;margin: 0;padding:5px 55px;;font-size: 110%;box-shadow: 1px 1px 1px #333;">
+							<input type="submit" value="Signup to be Alpha Testers" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" style="min-width: 321px;margin: 0;padding:5px 55px;;font-size: 110%;box-shadow: 1px 1px 1px #333;">
 						</div>
 					</form>
 				</div>

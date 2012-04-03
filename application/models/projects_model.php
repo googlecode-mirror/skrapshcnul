@@ -213,6 +213,8 @@ class Projects_Model extends CI_Model {
 		}
 		if (isset($obj['description'])) { $data['description'] = ($obj['description']);
 		}
+		if (isset($obj['logo'])) { $data['logo'] = ($obj['logo']);
+		}
 		if (isset($obj['cover_img'])) { $data['cover_img'] = ($obj['cover_img']);
 		}
 		if (isset($obj['video_src'])) { $data['video_src'] = ($obj['video_src']);
