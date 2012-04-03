@@ -112,20 +112,15 @@ class Projects extends CI_Controller {
 		
 	}
 
-	public function update_field() {
+	public function update() {
 		// Prepare _REQUEST data
 		
-		if (isset($_REQUEST['datafld']) && isset($_REQUEST['value']) && isset($_REQUEST['oid'])) {
-			
-			$fields = array();
-			$fields['project_id'] = isset($_REQUEST['oid']) ? $_REQUEST['oid'] : FALSE;
-			$fields[$_REQUEST['datafld']] = $_REQUEST['value'];
-			
-			if (isset($this -> user_id)) $fields['updated_by'] = $this -> user_id;
-			
-			$this -> data['results'] = $this -> ls_projects -> update_project($fields);
+		$fields = ($this -> input -> get());
+		
+		if (!isset($fields['project_id'])) {
+			$this -> data['results'] = $this -> ls_projects -> insert_project($fields);
 		} else {
-			$result = FALSE;
+			$this -> data['results'] = $this -> ls_projects -> update_project($fields);
 		}
 		
 		$this -> json -> json_prep($this -> data);

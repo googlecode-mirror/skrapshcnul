@@ -137,7 +137,10 @@ class Ls_Projects {
 		if (!isset($fields['project_id'])) {
 			return FALSE;
 		}
-
+		
+		if (isset($fields['name']) || isset($fields['description']) || isset($fields['logo']) || isset($fields['cover_img'])) {
+			$result = $this -> ci -> projects_model -> update_project($fields);
+		}
 		if (isset($fields['ios_app_store_url']) || isset($fields['android_market_url']) || isset($fields['wp_market_url'])) {
 			$result = $this -> ci -> projects_model -> update_project_apps($fields);
 		}

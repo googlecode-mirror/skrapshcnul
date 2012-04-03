@@ -26,7 +26,7 @@ class Ls_Search {
 			$results[$key] = $this -> ci -> ls_profile -> getPublicProfile($user_data['user_id']);
 		}
 		
-		var_dump($results);
+		//var_dump($results);
 		
 		return $results;
 		

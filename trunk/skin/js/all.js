@@ -3,7 +3,7 @@
 jQuery(function(){jQuery('.bubbleInfo').each(function(){var distance=10;var time=250;var hideDelay=500;var hideDelayTimer=null;var beingShown=false;var shown=false;var trigger=jQuery('.trigger',this);var popup=jQuery('.popup',this).css('opacity',0);var trigger_position=trigger.position();jQuery([trigger.get(0),popup.get(0)]).mouseover(function(){if(hideDelayTimer)clearTimeout(hideDelayTimer);if(beingShown||shown){return;}else{beingShown=true;popup.css({top:trigger_position.top+20,left:trigger_position.left+10,display:'block'}).animate({top:'-='+distance+'px',opacity:1},time,'swing',function(){beingShown=false;shown=true;});}}).mouseout(function(){if(hideDelayTimer)clearTimeout(hideDelayTimer);hideDelayTimer=setTimeout(function(){hideDelayTimer=null;popup.animate({top:'-='+distance+'px',opacity:0},time,'swing',function(){shown=false;popup.css('display','none');});},hideDelay);});});});
 
 // @fileRef ls_cover_img.js 
-jQuery(document).ready(function(){jQuery('.cover_background').hover(function(){jQuery('.after_cover_background').slideToggle('slow');},function(){jQuery('.after_cover_background').slideToggle('slow');});});
+jQuery(document).ready(function(){jQuery('.cover_background').hover(function(){jQuery('.after_cover_background').fadeTo(0.5);},function(){jQuery('.after_cover_background').fadeTo(1);});});
 
 // @fileRef ls_guide.js 
 var cookie_name_steps_completed="cn_stepcompleted"
