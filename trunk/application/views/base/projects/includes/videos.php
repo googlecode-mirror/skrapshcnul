@@ -5,7 +5,13 @@
 	
 	<div class="dashboard-stream-box-middle dashboard-stream-box-container">
 		<div class="activity-stream">
-			<?php echo isset($project['video_src']) ? $project['video_src'] : ""; ?>
+			<?php if (isset($project['video_src']) && $project['video_src']) { ?>
+				<?php echo $project['video_src'] ?>
+			<?php } else { ?>
+				 <div class="content-unavailable">
+					No videos.
+				 </div>
+			<?php } ?>
 		</div>
 	</div>
 </div>

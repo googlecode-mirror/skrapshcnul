@@ -34,13 +34,10 @@
 									<a href="/admin/dashboard"><i class="icon-asterisk"></i> Dashboard</a>
 								</li>
 								<li>
-									<a href="/statistics"><i class="icon-asterisk"></i> Statistics</a>
+									<a href="/statistics/users"><i class="icon-asterisk"></i> Statistics</a>
 								</li>
 								<li>
-									<a href="/events"><i class="icon-asterisk"></i> Events</a>
-								</li>
-								<li>
-									<a href="/events"><i class="icon-asterisk"></i> Events</a>
+									<a href="/admin/dashboard/events"><i class="icon-asterisk"></i> Events</a>
 								</li>
 								<li class="divider"></li>
 								<li>

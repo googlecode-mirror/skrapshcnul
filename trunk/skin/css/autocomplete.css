@@ -1,0 +1,24 @@
+.profile-autocomplete {
+	
+}
+.profile-autocomplete .image {
+	float:left;
+}
+.profile-autocomplete .text {
+	float:left;
+	padding: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.profile-autocomplete .name,
+.profile-autocomplete .headline {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.profile-autocomplete .name {
+	font-size: 110%;
+	font-weight: bold;
+}
+.profile-autocomplete .headline {
+	font-size: 95%;
+}

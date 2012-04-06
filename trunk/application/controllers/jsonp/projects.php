@@ -72,28 +72,45 @@ class Projects extends CI_Controller {
 		
 		$fields = ($this -> input -> get());
 		
-		if ($fields) {
-			$place_id = $this -> ls_places -> updatePlace();
-			if ($place_id) {
-				$this -> data['results']['place_id'] = $place_id;
-			};
+		$uri_segment = $this->uri->segment(4);
+		if (isset($uri_segment)) {
+			switch($uri_segment) {
+				case 'members' :
+					$this -> data['results'] = $this -> ls_projects -> insert_project_team_member($fields);
+				default :
+					break;
+			} 
+		} else {
+			if ($fields) {
+				//$place_id = $this -> ls_places -> updatePlace();
+				if ($place_id) {
+					//$this -> data['results']['place_id'] = $place_id;
+				};
+			}
 		}
 		
 		$this -> json -> json_prep($this -> data);
 	}
-
-	public function delete() {
-		// Prepare _REQUEST data
-		$fields['user_id'] = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : FALSE;
-		$fields['target_user_id'] = isset($_REQUEST['target_user_id']) ? $_REQUEST['target_user_id'] : FALSE;
-
-		//$this -> data['results'] = $this -> ls_user_recommendation -> delete($fields);
-
-		## TODO
+	
+	public function remove() {
+		
+		$fields = ($this -> input -> get());
+		
+		$uri_segment = $this->uri->segment(4);
+		if (isset($uri_segment)) {
+			switch($uri_segment) {
+				case 'members' :
+					$this -> data['results'] = $this -> ls_projects -> remove_project_team_member($fields);
+				default :
+					break;
+			} 
+		}
+		
+		$this -> json -> json_prep($this -> data);
 		
 	}
 	
-	public function update_all_tags() {
+	public function update_tags() {
 		
 		$input = json_decode(stripcslashes($_REQUEST['value']), TRUE);
 		
@@ -115,12 +132,12 @@ class Projects extends CI_Controller {
 	public function update() {
 		// Prepare _REQUEST data
 		
-		$fields = ($this -> input -> get());
+		$input = ($this -> input -> get());
 		
 		if (!isset($fields['project_id'])) {
-			$this -> data['results'] = $this -> ls_projects -> insert_project($fields);
+			$this -> data['results'] = $this -> ls_projects -> insert_project($input);
 		} else {
-			$this -> data['results'] = $this -> ls_projects -> update_project($fields);
+			$this -> data['results'] = $this -> ls_projects -> update_project($input);
 		}
 		
 		$this -> json -> json_prep($this -> data);

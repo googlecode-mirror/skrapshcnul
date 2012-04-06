@@ -21,6 +21,16 @@ class Ls_Search {
 			
 		$results = $this -> ci -> user_model -> select_all_users($fields, $options);
 		
+		## Scope
+		if (!isset($options['scope'])) {
+			switch($options['scope']) {
+				case 'friends' :
+				case 'extended_network' :
+				default:
+					break;
+			}
+		}
+		
 		foreach ($results as $key => $user_data) {
 			$results[$key]['kind'] = "ls#person";
 			$results[$key] = $this -> ci -> ls_profile -> getPublicProfile($user_data['user_id']);

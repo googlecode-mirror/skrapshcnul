@@ -46,6 +46,7 @@ var ProjectsTagsModel = function(contacts) {
 		tags.tags_data.push({
 			name: jQuery('input[name=add_tag]').val()
 		});
+		jQuery('input[name=add_tag]').val('');
 		self.save();
 	};
 	
@@ -56,7 +57,7 @@ var ProjectsTagsModel = function(contacts) {
 	
 	self.save = function() {
 		var value = (JSON.stringify(ko.toJS(self.tags)));
-		jQuery.getJSON('/jsonp/projects/update_all_tags?alt=json&callback=?', {
+		jQuery.getJSON('/jsonp/projects/update_tags?alt=json&callback=?', {
 			value: value
 		}, function(data) {
 			console.log(data);

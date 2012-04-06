@@ -5,9 +5,17 @@
 	
 	<div class="dashboard-stream-box-middle dashboard-stream-box-container">
 		<div class="activity-stream">
-			<div data-bind="foreach: screenshots">
-				<div data-bind="if: src"><img data-bind='attr: { src: src }' style="max-width: 150px;" /></div>
-			</div>
+			<?php if (!is_array($project['screenshots']) && sizeof($project['screenshots']) > 0 ) { ?>
+				 <?php foreach ($project['screenshots'] as $screenshot) { ?>
+			 	 <div>
+			 	 	<img src="<?php echo $screenshot['src'] ?>" style="max-width: 150px;" />
+			 	 </div>
+				 <?php } ?>
+			<?php } else { ?>
+				 <div class="content-unavailable">
+					No screenshot.
+				 </div>
+			<?php } ?>
 		</div>
 	</div>
 </div>

@@ -3,7 +3,7 @@
 		<h4 class="widget-title">Created by</h4>
 	</div>
 	<div class="widget-box-container">
-		<ul class="others">
+		<ul class="unstyled">
 			<li>
 				<?php if (isset($project['created_by'])) { ?> 
 					<a href="<?php echo $project['created_by']['ls_pub_url']; ?>">
