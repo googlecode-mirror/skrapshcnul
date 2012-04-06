@@ -10,7 +10,7 @@
 	background: url(../images/1/btn-bg-light-grey.png) repeat bottom;
 }
 .widget-box-container {
-	padding: 10px 0;
+	padding: 10px;
 	background: #F8F8F8;
 	border: 1px solid #EFEFEF;
 	border-radius: 0 0 5px 5px;
@@ -27,7 +27,7 @@
 	margin: 0 0 10px 0;
 }
 .widget-box-simple {
-	font-size: 11px;
+	font-size: 12px;
 	background: #F8F8F8;
 	border-top: 1px solid #EFEFEF;
 	border-left: 1px solid #EFEFEF;
@@ -36,10 +36,11 @@
 	list-style: none;
 	padding: 0 5px;
 }
-.widget-box-simple h4 {
-	padding: 10px 10px 0 10px;
-	font-size: 12px;
-	margin: 0;
+.widget-box-title {
+	padding: 10px 10px 10px 10px;
+	border-top: 1px solid #F8F8F8;
+	border-bottom: 1px solid #DDDDDD;
+	background: #EFEFEF;
 }
 .widget-box-simple .widget-box-container {
 	background: none;
@@ -47,8 +48,6 @@
 	border-bottom: none;
 	border-left: none;
 	border-right: none;
-}
-.widget-box-container li {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

@@ -17,6 +17,7 @@ class Ls_Scripts {
 		$this -> ci -> load -> driver('minify');
 		
 		$this -> js_files = array(
+			'skin/js/ls-autocomplete.js',
 			'skin/js/ls_bubble_info.js',
 			'skin/js/ls_cover_img.js',
 			'skin/js/ls_guide.js',
@@ -35,6 +36,7 @@ class Ls_Scripts {
 			
 		$this -> css_files = array(
 			'skin/css/animation.css',
+			'skin/css/autocomplete.css',
 			'skin/css/buttons.css',
 			'skin/css/bubble_info.css',
 			'skin/css/boxes.css',

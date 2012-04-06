@@ -163,6 +163,38 @@ class Ls_Projects {
 		return $result;
 	}
 
+	function insert_project_team_member($fields = FALSE, $options = FALSE) {
+		
+		if (!isset($fields['project_id'])) {
+			return FALSE;
+		}
+		
+		if (!isset($fields['user_id'])) {
+			return FALSE;
+		}
+		
+		$result = $this -> ci -> projects_model -> insert_project_team_member($fields);
+		
+		return $result;
+		
+	}
+	
+	function remove_project_team_member($fields = FALSE, $options = FALSE) {
+		
+		if (!isset($fields['project_id'])) {
+			return FALSE;
+		}
+		
+		if (!isset($fields['user_id'])) {
+			return FALSE;
+		}
+		
+		$result = $this -> ci -> projects_model -> remove_project_team_member($fields);
+		
+		return $result;
+		
+	}
+
 	function insertProjects_test_data() {
 
 		return $this -> ci -> projects_model -> insert_projects_test_data();

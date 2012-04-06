@@ -1,4 +1,4 @@
-<div class="m-content">
+<div class="m-content container">
 	<div id="announcements" class="shadow">
 	</div>
 	

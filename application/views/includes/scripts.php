@@ -19,8 +19,7 @@
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1' rel='stylesheet' type='text/css' />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400' rel='stylesheet' type='text/css'>
 
-<script src="<?php echo base_url();?>skin/js/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript">$.noConflict();</script>
+<script src="<?php echo base_url();?>skin/js/jquery/jquery-1.7.2.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-ui/jquery-ui-1.8.17/js/jquery-ui-1.8.17.custom.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/desandro-masonry/jquery.masonry.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-cookie/jquery.cookie.js"></script>
