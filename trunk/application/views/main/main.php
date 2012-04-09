@@ -5,7 +5,7 @@
 </div>
 <div id="statistic-bar">
 	<div class="m-wrapper">
-		<div class="g-content-container">
+		<div class="container">
 			<div class="counter-stats-container">
 				<div class="title">
 					<span style="line-height: 40px;">Users on Lunchsparks: </span>
@@ -28,13 +28,7 @@
 </div>
 <div id="m-content" class="main-page-content-bg">
 	<div class="m-wrapper">
-		<div class="g-content-container">
-			<div class="main-content-sidebar">
-				
-			</div>
-			<div class="main-content-left">
-				
-			</div>
+		<div class="container">
 			<?php $this -> load -> view('main/_featured_users');?>
 			<?php $this -> load -> view('main/_features');?>
 			<?php //$this -> load -> view('main/_testimonial');?>

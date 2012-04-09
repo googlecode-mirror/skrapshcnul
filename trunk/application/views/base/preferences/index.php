@@ -1,6 +1,6 @@
 <?php ## <div class="m-content" ng:controller="PreferenceCtrl"> ?>
-<div class="m-content"">
-	<div class="c-pages shadow-rounded">
+<div class="container c-pages">
+	<div>
 		
 		<h2><?php echo $tpl_page_title; ?></h2>
 		<h3 class="sub-heading">Enter your preferences here. Our system will pickup the keywords from here.</h3>

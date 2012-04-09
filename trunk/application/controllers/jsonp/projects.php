@@ -134,7 +134,7 @@ class Projects extends CI_Controller {
 		
 		$input = ($this -> input -> get());
 		
-		if (!isset($fields['project_id'])) {
+		if (!isset($input['project_id'])) {
 			$this -> data['results'] = $this -> ls_projects -> insert_project($input);
 		} else {
 			$this -> data['results'] = $this -> ls_projects -> update_project($input);

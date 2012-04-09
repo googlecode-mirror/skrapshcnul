@@ -25,8 +25,12 @@ class User_Profile_model extends CI_Model {
 			return FALSE;
 		}
 
-		$query = " SELECT * FROM " . self::_TABLE_ . " WHERE `user_id` = '$user_id' ;";
-		$mysql_result = $this -> db -> query($query);
+		$this -> db -> select('*');
+		$this -> db -> from($this -> tables['users'] . ' AS u');
+		$this -> db -> join($this -> tables['users_profile'] . ' AS up', 'up.user_id = u.id', 'left');
+		$this -> db -> where('user_id', $user_id);
+		
+		$mysql_result = $this -> db -> get();
 		if ($mysql_result -> num_rows() > 0) {
 			$result = ($mysql_result -> row_array());
 			if (trim($result['alias'])) {
@@ -101,7 +105,7 @@ class User_Profile_model extends CI_Model {
 		if (isset($fields['location'])) {
 			$data['location'] = trim($fields['location']);
 		}
-		
+
 		// DB Query
 		if (!$this -> select($user_id)) {
 			## Do an INSERT
@@ -112,7 +116,7 @@ class User_Profile_model extends CI_Model {
 			$this -> db -> where('user_id', $user_id);
 			$result = $this -> db -> update($this -> tables['users_profile'], $data);
 		}
-		
+
 		// if Alias changed, update Social Link
 		if (!empty($alias)) {
 			$fields['lunchsparks'] = base_url() . "pub/" . $alias;
@@ -121,7 +125,7 @@ class User_Profile_model extends CI_Model {
 			$fields['lunchsparks'] = base_url() . "pub/" . $user_id;
 			$this -> update_social_links($user_id, $fields);
 		}
-		
+
 		return $result;
 
 	}

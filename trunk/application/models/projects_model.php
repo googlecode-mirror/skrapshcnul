@@ -15,6 +15,21 @@ class Projects_Model extends CI_Model {
 		$this -> user_id = $this -> session -> userdata('user_id');
 	}
 
+	private function _init_params($fields = FALSE, $options = FALSE) {
+
+		$this -> fields = $fields;
+		$this -> options = $options;
+
+		## Set Default Values
+		if (!isset($this -> options['offset'])) {
+			$options['offset'] = 0;
+		}
+		if (!isset($this -> options['row_count'])) {
+			$options['row_count'] = 30;
+		}
+		
+	}
+
 	/*
 	 * Insert
 	 */
@@ -140,7 +155,6 @@ class Projects_Model extends CI_Model {
 		if (!isset($obj['tags_type_id'])) {
 			return FALSE;
 		}
-		
 
 		## Validate tags data as JSON string.
 		if (is_array($obj['tags_data'])) { $obj['tags_data'] = json_encode($obj['tags_data']);
@@ -148,13 +162,13 @@ class Projects_Model extends CI_Model {
 
 		$data = array();
 		if (isset($obj['project_id'])) {
-			 $data['project_id'] = ($obj['project_id']);
+			$data['project_id'] = ($obj['project_id']);
 		}
 		if (isset($obj['tags_type_id'])) {
 			$data['tags_type_id'] = ($obj['tags_type_id']);
 		}
 		if (isset($obj['tags_data'])) {
-			 $data['tags_data'] = ($obj['tags_data']);
+			$data['tags_data'] = ($obj['tags_data']);
 		}
 		$this -> db -> set('created_on', 'NOW()', FALSE);
 
@@ -162,14 +176,14 @@ class Projects_Model extends CI_Model {
 	}
 
 	public function insert_project_team_member($obj = FALSE) {
-		
+
 		if (!isset($obj['project_id'])) {
 			return FALSE;
 		}
 
 		$data = array();
 		if (isset($obj['project_id'])) {
-			 $data['project_id'] = ($obj['project_id']);
+			$data['project_id'] = ($obj['project_id']);
 		}
 		if (isset($obj['user_id'])) {
 			$data['user_id'] = ($obj['user_id']);
@@ -181,7 +195,7 @@ class Projects_Model extends CI_Model {
 			$data['date_leaved'] = ($obj['date_leaved']);
 		}
 		$this -> db -> set('created_on', 'NOW()', FALSE);
-		
+
 		return $this -> db -> insert($this -> tables['projects_team'], $data);
 
 	}
@@ -213,19 +227,26 @@ class Projects_Model extends CI_Model {
 		}
 
 		$data = array();
-		if (isset($obj['project_type_id'])) { $data['project_type_id'] = ($obj['project_type_id']);
+		if (isset($obj['project_type_id'])) {
+			$data['project_type_id'] = ($obj['project_type_id']);
 		}
-		if (isset($obj['name'])) { $data['name'] = ($obj['name']);
+		if (isset($obj['name'])) {
+			$data['name'] = ($obj['name']);
 		}
-		if (isset($obj['description'])) { $data['description'] = ($obj['description']);
+		if (isset($obj['description'])) {
+			$data['description'] = ($obj['description']);
 		}
-		if (isset($obj['logo'])) { $data['logo'] = ($obj['logo']);
+		if (isset($obj['logo'])) {
+			$data['logo'] = ($obj['logo']);
 		}
-		if (isset($obj['cover_img'])) { $data['cover_img'] = ($obj['cover_img']);
+		if (isset($obj['cover_img'])) {
+			$data['cover_img'] = ($obj['cover_img']);
 		}
-		if (isset($obj['video_src'])) { $data['video_src'] = ($obj['video_src']);
+		if (isset($obj['video_src'])) {
+			$data['video_src'] = ($obj['video_src']);
 		}
-		if (isset($obj['created_by'])) { $data['created_by'] = ($obj['created_by']);
+		if (isset($obj['created_by'])) {
+			$data['created_by'] = ($obj['created_by']);
 		}
 		$where = array('project_id' => isset($obj['project_id']) ? trim($obj['project_id']) : FALSE);
 
@@ -325,7 +346,7 @@ class Projects_Model extends CI_Model {
 	}
 
 	function update_project_tags($obj = FALSE) {
-		
+
 		if (!isset($obj['project_id'])) {
 			return FALSE;
 		}
@@ -335,7 +356,7 @@ class Projects_Model extends CI_Model {
 
 		$data = array();
 		if (isset($obj['tags_data'])) {
-			 $data['tags_data'] = ($obj['tags_data']);
+			$data['tags_data'] = ($obj['tags_data']);
 		}
 		if (isset($obj['project_id'])) {
 			$where['project_id'] = trim($obj['project_id']);
@@ -343,15 +364,15 @@ class Projects_Model extends CI_Model {
 		if (isset($obj['tags_type_id'])) {
 			$where['tags_type_id'] = trim($obj['tags_type_id']);
 		}
-		
+
 		$mysql_result = $this -> db -> get_where($this -> tables['projects_tags'], $where);
 		if ($mysql_result -> num_rows() > 0) {
-			## DO AN UPDATE 
+			## DO AN UPDATE
 			return $this -> db -> update($this -> tables['projects_tags'], $data, $where);
 		} else {
 			return $this -> insert_project_tags($obj);
 		}
-		
+
 		return FALSE;
 	}
 
@@ -469,28 +490,28 @@ class Projects_Model extends CI_Model {
 		}
 
 		$mysql_result = $this -> db -> get($this -> tables['projects_tags_xref']);
-		
+
 		if ($mysql_result -> num_rows() > 0) {
 			$results = $mysql_result -> result_array();
 			foreach ($results as $key => $value) {
-				
+
 				// SELECT TAGS DATA
 				$where = array();
 				$where['tags_type_id'] = $value['tags_type_id'];
 				$where['project_id'] = $project_id;
-				
+
 				$mysql_result = $this -> db -> get_where($this -> tables['projects_tags'], $where);
 				if ($mysql_result -> num_rows() > 0) {
 					$results_tags = $mysql_result -> row_array();
-					
+
 					if ($results_tags['tags_data']) {
 						$array = json_decode($results_tags['tags_data'], TRUE);
-						if (sizeof($array) > 0 ) {
+						if (sizeof($array) > 0) {
 							$results_tags['tags_data'] = json_decode($results_tags['tags_data'], TRUE);
 						} else {
 							$results_tags['tags_data'] = array();
 						}
-						
+
 					}
 				} else {
 					$results_tags['tags_data'] = array();
@@ -533,59 +554,45 @@ class Projects_Model extends CI_Model {
 
 	function select_all_projects($fields = FALSE, $options = FALSE) {
 
-		if (!isset($fields['limit_start'])) {
-			$limit = 0;
-		}
+		$this -> _init_params($fields, $options);
 
-		if (!isset($fields['row_count'])) {
-			$row_count = 30;
-		}
-		
-		## Search 
-		if (isset($fields['q'])) {
-			$this -> db -> like('name', $fields['q']);
-		}
-		if (isset($fields['q'])) {
-			$this -> db -> or_like('description', $fields['q']);
-		}
-
+		## Build Query
 		$this -> db -> select('*');
 		$this -> db -> from($this -> tables['projects'] . ' AS pj');
-		$this -> db -> join($this -> tables['projects_verification'] . ' AS pvt', 'pvt.project_id = pj.project_id', 'left');
-
-		if (isset($fields['user_id'])) {
-			$this -> db -> join($this -> tables['projects_team'] . ' AS pt', 'pt.project_id = pj.project_id', 'left');
-			$this -> db -> like('user_id', $fields['user_id']);
+		
+		## Search Filter
+		if (isset($this -> fields['user_id'])) {
+			$this -> db -> join($this -> tables['projects_team'] . ' AS ptm', 'ptm.project_id = pj.project_id', 'left');
+			$this -> db -> like('user_id', $this -> fields['user_id']);
 		}
-		$this -> db -> limit($row_count, $limit);
-		$mysql_result = $this -> db -> get();
+		if (isset($this -> fields['q']) && !empty($this -> fields['q'])) {
+			$this -> db -> or_like('name', $this -> fields['q']);
+			$this -> db -> or_like('description', $this -> fields['q']);
+		}
+		
+		if (isset($this -> fields['tags'])) {
+			$this -> db -> join($this -> tables['projects_tags'] . ' AS pt', 'pt.project_id = pj.project_id', 'left');
+			$this -> db -> like('tags_data', $this -> fields['tags']);
+			$this -> db -> group_by('pj.project_id');
+		}
+		if (isset($this -> fields['verification'])) {
+			$this -> db -> join($this -> tables['projects_verification'] . ' AS pvt', 'pvt.project_id = pj.project_id', 'left');
+		}
+
+		## Return results array OR result counts
+		if (isset($this -> options['count_all_results']) && $this -> options['count_all_results'] == TRUE) {
+			return $this -> db -> count_all_results();
+		} else {
+			$this -> db -> limit($this -> options['row_count'], $this -> options['offset']);
+			$mysql_result = $this -> db -> get();
+		}
 
 		return $mysql_result -> result_array();
 
 	}
 
-	function search_projects($keywords = FALSE) {
-
-		if (!$keywords) {
-			return FALSE;
-		}
-
-		$this -> db -> select('*');
-		$this -> db -> from($this -> tables['projects'] . ' AS pj');
-		$this -> db -> like('name', $keywords);
-		$this -> db -> or_like('description', $keywords);
-		$query = $this -> db -> get();
-
-		if ($query -> num_rows() > 0) {
-			return ($query -> result_array());
-		} else {
-			return FALSE;
-		}
-
-	}
-
 	function remove_project_team_member($fields = FALSE, $options = FALSE) {
-		
+
 		if (!isset($fields['project_id'])) {
 			return FALSE;
 		}
@@ -597,9 +604,9 @@ class Projects_Model extends CI_Model {
 		if (isset($fields['user_id'])) {
 			$where['user_id'] = ($fields['user_id']);
 		}
-		
-		return $this -> db -> delete($this -> tables['projects_team'], $where); 
-		
+
+		return $this -> db -> delete($this -> tables['projects_team'], $where);
+
 	}
 
 	## TESTING PURPOSE

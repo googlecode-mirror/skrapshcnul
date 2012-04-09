@@ -84,6 +84,8 @@ class Projects extends CI_Controller {
 	
 	function listing() {
 		
+		redirect('/search/projects/?'.$_SERVER['QUERY_STRING']);
+		
 		## Initialization
 		$fields = array();
 		

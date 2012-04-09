@@ -9,16 +9,21 @@
 	<div class="hr">
 		<h2 class="hr-text">Users on Lunchsparks</h2>
 	</div>
-	<?php foreach($featured_users as $item) { ?>
-	<div class="featured-user">
-		<div class="photo">
-			<img src="/skin/images/p/featured_users/<?php echo $item['photo']; ?>" />
-		</div>
-		<div class="name">
-			<span><?php echo $item['name']; ?></span>
-		</div>
-		<div class="company"><?php echo $item['company']; ?></div>
+	<div class="row-fluid">
+			
 	</div>
+	<?php foreach($featured_users as $item) { ?>
+		<div class="span2">
+			<div class="featured-user">
+				<div class="photo">
+					<img src="/skin/images/p/featured_users/<?php echo $item['photo']; ?>" />
+				</div>
+				<div class="name">
+					<strong><span><?php echo $item['name']; ?></span></strong>
+				</div>
+				<div class="company"><?php echo $item['company']; ?></div>
+			</div>
+		</div>
 	<?php } ?>
 	<div class="clearfix"></div>
 </div>

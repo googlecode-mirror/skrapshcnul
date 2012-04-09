@@ -44,7 +44,80 @@ class Ls_Profile {
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
 	}
 
-	function _init($user_id) {
+	function getPublicProfile($user_id = FALSE) {
+		
+		if(!$user_id || !is_numeric($user_id)) {
+			return FALSE;
+		}
+		
+		$data = $this -> ci -> user_profile_model -> select($user_id);
+		$data2 = $this -> prepare_profile_data($user_id);
+		
+		## Default Values
+		if (empty($data['profile_img']) || !@getimagesize($data['profile_img'])) {
+			$data['profile_img'] = base_url() . "skin/images/svgs/silhouette_male.svg";
+		};
+		if (empty($data['firstname'])) {
+			$data['firstname'] = $data['username'];
+		};
+		
+		## Output Data
+		$result['kind'] = "ls#person";
+		$result['id'] = $user_id;
+		$result['display_name'] = $data['firstname'];
+		$result['fullname']['first'] = $data['firstname'];
+		$result['fullname']['last'] = $data['lastname'];
+		$result['profile_img'] = $data['profile_img'];
+		$result['headline'] = $data2['headline'];
+		$result['ls_pub_url'] = $data['ls_pub_url'];
+		$result['verification'] = $data2['verification'];
+		
+		return $result;
+		
+	}
+
+	public function select_all_users($fields = FALSE, $options = FALSE) {
+		
+		## ---------- Pagination ----------
+		if (!isset($options['offset'])) {
+			$options['offset'] = 0;
+		}
+		if (!isset($options['row_count'])) {
+			$options['row_count'] = 30;
+		}
+		if (isset($options['page'])) {
+			if (!isset($options['offset'])) {
+				$options['offset'] = ($options['page'] - 1) * $options['row_count'];
+			}
+		}
+		if (isset($options['count_all_results']) && $options['count_all_results']) {
+			return $this -> ci -> user_model -> select_all_users($fields, $options);
+		}
+		## ---------- [END] Pagination ----------
+		
+		$results = $this -> ci -> user_model -> select_all_users($fields, $options);
+		
+		## TODO Filter by Scope
+		if (isset($options['scope'])) {
+			switch($options['scope']) {
+				case 'friends' :
+				case 'extended_network' :
+				default:
+					break;
+			}
+		}
+		
+		## Get User Public Data
+		foreach ($results as $key => $user_data) {
+			$results[$key] = $this -> ci -> ls_profile -> getPublicProfile($user_data['user_id']);
+		}
+		
+		return $results;
+		
+		
+	}
+	
+	private function _init($user_id) {
 		
 		$profile = $this -> ci -> user_profile_model -> select($user_id);
 		$social_links = $this -> ci -> user_profile_model -> select_social_links($user_id);
@@ -59,31 +132,6 @@ class Ls_Profile {
 		if (!is_array($invitation)) $invitation = json_decode(json_encode($invitation), TRUE);
 		$results = array_merge($invitation, $social_links, $profile);
 		return $results;
-	}
-	
-	function getPublicProfile($user_id = FALSE) {
-		
-		if(!$user_id || !is_numeric($user_id)) {
-			return FALSE;
-		}
-		
-		$data = $this -> ci -> user_profile_model -> select($user_id);
-		$data2 = $this -> prepare_profile_data($user_id);
-		
-		## TODO - include "headline" in user_profile_model -> select;
-		
-		$result['kind'] = "ls#person";
-		$result['id'] = $user_id;
-		$result['display_name'] = $data['firstname'];
-		$result['fullname']['first'] = $data['firstname'];
-		$result['fullname']['last'] = $data['lastname'];
-		$result['profile_img'] = $data['profile_img'];
-		$result['headline'] = $data2['headline'];
-		$result['ls_pub_url'] = $data['ls_pub_url'];
-		$result['verification'] = $data2['verification'];
-		
-		return $result;
-		
 	}
 	
 	function prepare_profile_data($user_id = FALSE) {

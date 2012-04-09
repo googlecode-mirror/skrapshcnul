@@ -92,16 +92,22 @@ class Ls_Projects {
 	
 	function select_all_projects($fields = FALSE, $options = FALSE) {
 		
-		if (!isset($options['limit_start'])) {
-			$options['limit_start'] = 0;
+		## ---------- Pagination ----------
+		if (!isset($options['offset'])) {
+			$options['offset'] = 0;
 		}
 		if (!isset($options['row_count'])) {
 			$options['row_count'] = 30;
 		}
-		
 		if (isset($options['page'])) {
-			$options['limit_start'] = ($options['page'] - 1) * $options['row_count'];
+			if (!isset($options['offset'])) {
+				$options['offset'] = ($options['page'] - 1) * $options['row_count'];
+			}
 		}
+		if (isset($options['count_all_results']) && $options['count_all_results']) {
+			return $this -> ci -> projects_model -> select_all_projects($fields, $options);
+		}
+		## ---------- [END] Pagination ----------
 		
 		$results = $this -> ci -> projects_model -> select_all_projects($fields, $options);
 		
@@ -115,7 +121,6 @@ class Ls_Projects {
 				$results[$key] = $this -> _set_default_values($results[$key], $options);
 			}
 		}
-		
 		
 		return $results;
 	}
@@ -219,13 +224,12 @@ class Ls_Projects {
 	protected function _set_default_values($results, $options) {
 		
 		## Data Default Value
-		if (isset($options['include_default']) && $options['include_default']) {
-			if (!($results['cover_img'])) {
-				$results['cover_img'] = '/skin/images/bg/world6-equirectangular.jpg';
-			}
-			if (!($results['logo'])) {
-				$results['logo'] = '/skin/images/svgs/question.svg';
-			}
+		if (!isset($results['cover_img']) || !@getimagesize ($results['cover_img'])) {
+			$results['cover_img'] = base_url() . '/skin/images/bg/world6-equirectangular.jpg';
+		}
+	
+		if (!isset($results['logo']) || !@getimagesize($results['logo'])) {
+			$results['logo'] = base_url() . '/skin/images/svgs/question.svg';
 		}
 		
 		return $results;

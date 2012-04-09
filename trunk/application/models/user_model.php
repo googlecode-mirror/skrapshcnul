@@ -14,6 +14,21 @@ class User_model extends CI_Model {
 		$this -> user_id = $this -> session -> userdata('user_id');
 	}
 	
+	private function _init_params($fields = FALSE, $options = FALSE) {
+		
+		$this -> fields = $fields;
+		$this -> options = $options;
+
+		## Set Default Values
+		if (!isset($this -> options['offset'])) {
+			$options['offset'] = 0;
+		}
+		if (!isset($this -> options['row_count'])) {
+			$options['row_count'] = 30;
+		}
+		
+	}
+	
 	function select_user($user_id = NULL) {
 		
 		if (!isset($user_id)) {
@@ -42,6 +57,39 @@ class User_model extends CI_Model {
 				return FALSE;
 			}
 		}
+	}
+	
+	public function select_all_users($fields = FALSE, $options = FALSE) {
+		
+		## Build Query
+		$this -> db -> select('*');
+		$this -> db -> from($this -> tables['users'] . ' AS u');
+		$this -> db -> join($this -> tables['users_profile'] . ' AS up', 'up.user_id = u.id', 'left');
+		
+		## Search Filter
+		if (isset($fields['q'])) {
+			$this -> db -> like('username', $this -> fields['q']);
+			$this -> db -> or_like('email', $this -> fields['q']);
+			$this -> db -> or_like('alias', $this -> fields['q']);
+			$this -> db -> or_like('firstname', $this -> fields['q']);
+			$this -> db -> or_like('lastname', $this -> fields['q']);
+		}
+		if (isset($this -> fields['tags'])) {
+			$this -> db -> join($this -> tables['users_preferences'] . ' AS upref', 'upref.user_id = u.id', 'left');
+			$this -> db -> like('data', $this -> fields['tags']);
+			$this -> db -> group_by('u.id');
+		}
+		
+		## Return results array OR result counts
+		if (isset($this -> options['count_all_results']) && $this -> options['count_all_results'] == TRUE) {
+			return $this -> db -> count_all_results();
+		} else {
+			$this -> db -> limit($this -> options['row_count'], $this -> options['offset']);
+			$mysql_result = $this -> db -> get();
+		}
+		
+		return $mysql_result -> result_array();
+		
 	}
 	
 	function is_user_account_valid($user_id) {
@@ -100,35 +148,6 @@ class User_model extends CI_Model {
 		} catch (Exception $e) {
 
 		}
-	}
-	
-	public function select_all_users($fields = FALSE, $options = FALSE) {
-		
-		if (!isset($fields['limit_start'])) {
-			$limit_start =  0;
-		}
-		
-		if (!isset($fields['row_count'])) {
-			$row_count =  30;
-		}
-		
-		$this -> db -> select('*');
-		$this -> db -> from($this -> tables['users'] . ' AS u');
-		$this -> db -> join($this -> tables['users_profile'] . ' AS up', 'up.user_id = u.id', 'left');
-		
-		if (isset($fields['q'])) {
-			$this -> db -> like('username', $fields['q']);
-			$this -> db -> or_like('email', $fields['q']);
-			$this -> db -> or_like('alias', $fields['q']);
-			$this -> db -> or_like('firstname', $fields['q']);
-			$this -> db -> or_like('lastname', $fields['q']);
-		}
-		
-		$this -> db -> limit($row_count, $limit_start);
-		$mysql_result = $this -> db -> get();
-		
-		return $mysql_result -> result_array();
-		
 	}
 	
 	/*

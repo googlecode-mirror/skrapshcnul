@@ -56,10 +56,9 @@ class Auth extends Controller {
 	function login() {
 
 		if ($this -> data['is_logged_in']) {
-			//redirect them to the profile page
-			redirect('user/profile', 'refresh');
+			redirect('dashboard', 'refresh');
 		}
-
+		
 		$this -> data['title'] = "Login";
 		$this -> data['fb_data'] = $this->fb_data;
 
