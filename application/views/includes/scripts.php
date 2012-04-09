@@ -26,6 +26,7 @@
 <script src="<?php echo base_url();?>skin/js/jquery-flip-0.9.9/jquery.flip.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-tipsy/javascripts/jquery.tipsy.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery-ui-timepicker-addon.js"></script>
+<script src="<?php echo base_url();?>skin/js/paulirish-infinite-scroll/jquery.infinitescroll.min.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery.iphone-switch/jquery.iphone-switch.js"></script>
 <script src="<?php echo base_url();?>skin/js/jquery.ui.stars-3.0/jquery.ui.stars.js"></script>
 <script src="<?php echo base_url();?>skin/js/knockout/knockout-2.0.0.js"></script>

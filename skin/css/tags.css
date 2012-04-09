@@ -1,10 +1,11 @@
 .tag {
-	display: inline-block;
 	background-color: #1E5799;
+	color: #CCCCCC;
+	display: inline-block;
 	font-size: 12px;
+	font-weight: 500;
 	padding: 3px 6px;
 	margin: 2px;
-	font-weight: 500;
 	-moz-border-radius-topleft: 2px;
 	-moz-border-radius-topright: 2px;
 	-moz-border-radius-bottomright: 2px;

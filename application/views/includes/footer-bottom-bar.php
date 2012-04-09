@@ -51,7 +51,8 @@
 			<?php if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') { ?> 
 				<div class="container">
 					<p class="footer pull-right">
-						<small>Page rendered in <strong>{elapsed_time}</strong> seconds</small>
+						<small>Page rendered in <strong>{elapsed_time}</strong> seconds</small> | 
+						<small>Memory usage: {memory_usage}</small>
 					</p>
 				</div>
 			<?php } ?>

@@ -61,10 +61,10 @@
 								<li class="divider"></li>
 								<li class="nav-header">Projects</li>
 								<li>
-									<a href="/projects/all"><i class="icon-folder-open"></i> All</a>
+									<a href="/search/projects/"><i class="icon-folder-open"></i> All</a>
 								</li>
 								<li>
-									<a href="/projects/trending"><i class="icon-folder-open"></i> Trending</a>
+									<a href="/search/projects/trending"><i class="icon-folder-open"></i> Trending</a>
 								</li>
 								<li class="divider"></li>
 								<li class="nav-header">Restaurants</li>

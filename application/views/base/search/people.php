@@ -1,92 +1,62 @@
 <div class="m-content">
 	<div id="people-container" class="container">
 		<div style="padding:20px; min-height: 500px;">
-			<div class="row-fluid">
-  				<div class="span8">
-					<h1><?php echo $tpl_page_title ?></h1>
-					<p class="lead">Awesome users on Lunchsparks.</p>
-  				</div>
-  				<div class="span4">
-  					<form action="/search/people/" class="form-search pull-right">
-						<input name="q" type="text" class="input-medium search-query" placeholder="search..." value="<?php echo isset($q) ? $q : '' ?>">
-						<button type="submit" class="btn">Search</button>
-  					</form>
-  				</div>
-  			</div>
+			<div class="clearfix">&nbsp;</div>
 			
-			<div id="PeopleListingModel">
-				<div id="masonry-container" data-bind="foreach: people" class="">
-					<div class="pin">
+			<?php $this -> load -> view("base/search/includes/_people_menu.php");?>
+			<div class="clearfix">&nbsp;</div>
+			
+			<div class="clearfix">&nbsp;</div>
+			
+			<div id="content" class="PeopleListingModel masonry-container">
+				<?php if (is_array($users) && sizeof($users) > 0) { ?>
+					<?php foreach ($users as $user) { ?>
+					<div class="pin people">
 						<div class="pin-details">
-							<a data-bind="attr: {href: ls_pub_url}">
-								<div class="pin-image"><img data-bind='attr: {src: profile_img}' /></div>
-							</a>
+							<div class="pin-image">
+								<a href="<?php echo $user['ls_pub_url'] ?>"> <img src="<?php echo $user['profile_img'] ?>" /> </a>
+							</div>
 							<div class="pin-data">
-								<a data-bind="attr: {href: ls_pub_url}">
-									<h3 data-bind='text: display_name'></h3>
-								</a>
-								<div data-bind='text: headline'></div>
+								<a href="<?php echo $user['ls_pub_url'] ?>"> <h3><?php echo $user['display_name']
+								?></h3> </a>
+								<div>
+									<?php echo $user['headline']
+									?>
+								</div>
 							</div>
 						</div>
 						<div class="clearfix"></div>
 					</div>
-					
-				</div>
-				
-				<div data-bind="visible: people().length < 1">
-					<div class="row-fluid">
-						<div class="span4">&nbsp;</div>
-						<div class="span4 well pagination-centered">Opps... No Results found for "<em><strong><?php echo isset($q) ? $q : '' ?></strong></em>".</div>
-						<div class="span4">&nbsp;</div>
-					</div>
-				</div> 
-				
+					<?php }?>
+				<?php } ?>
 			</div>
 			
+			<div class="navigation pagination-centered hidden">
+				<ul>
+					<li>
+						<a href="<?php echo isset($pagination['next_page_url']) ? $pagination['next_page_url'] : ''; ?>">Load More</a>
+					</li>
+				</ul>
+			</div>
 			
+			<div class="clearfix">&nbsp;</div>
 		</div>
-		<div>
-		
 		<div class="clearfix"></div>
-		</div>
 	</div>
 </div>
 
-<?php //var_dump($users) ?>
-
 <script>
-var initialData = <?php echo json_encode($users); ?>;
+$('#content').infinitescroll({
  
-var PeopleListingModel = function(people) {
-	var self = this;
-	self.people = ko.observableArray(ko.utils.arrayMap(people, function(user) {
-		return { 
-			id: user.id,
-			display_name: user.display_name, 
-			profile_img: user.profile_img, 
-			headline: user.headline, 
-			ls_pub_url: user.ls_pub_url,
-			verification: ko.observableArray([user.verification])
-		};
-	}));
-	
-	self.loadmore = function() {
-    }
-};
-
-ko.applyBindings(new PeopleListingModel(initialData), document.getElementById('PeopleListingModel'));
-
-<?php /* jQuery('#masonry-container').imagesLoaded(function(){
-	jQuery('#masonry-container').masonry({
-		// options
-		itemSelector : '.pin'
-	});
-}); */ ?>
-
-jQuery(window).scroll(function () { 
-   if (jQuery(window).scrollTop() >= jQuery(document).height() - jQuery(window).height() - 10) {
-      if(window.console) console.log('end of page');
-   }
+navSelector  : "div.navigation",            
+               // selector for the paged navigation (it will be hidden)
+nextSelector : "div.navigation a:first",    
+               // selector for the NEXT link (to page 2)
+itemSelector : "#content div.pin",          
+               // selector for all items you'll retrieve
+loading      : {
+	msgText      : "Loading more results...",
+	finishedMsg  : "End of results."
+}
 });
-
 </script>

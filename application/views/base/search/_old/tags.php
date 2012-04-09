@@ -2,11 +2,11 @@
 	<div class="c-pages shadow-rounded">
 		
 		<div>
-		<div style="float: right;">
-			<input type="text" class="search" placeholder="Search tag..." value="<?php echo isset($query_result['keyword']) ? $query_result['keyword'] : "" ?>" />
-		</div>
-		<h1><?php echo $tpl_page_title ?></h1>
-		<div class="clearfix"></div>
+			<div style="float: right;">
+				<input type="text" class="search" placeholder="Search tag..." value="<?php echo isset($query_result['keyword']) ? $query_result['keyword'] : "" ?>" />
+			</div>
+			<h1><?php echo $tpl_page_title ?></h1>
+			<div class="clearfix"></div>
 		</div>
 		
 		<div id="map_canvas" style="width:100%; height:300px; border: 1px solid #CCC;"></div>

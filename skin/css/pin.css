@@ -37,7 +37,7 @@
 	background: rgba(224, 224, 224, .2 );
 }
 .pin-image img {
-	max-width: 190px;
+	width: 190px;
 }
 .pin-stats {
 	color: #8C7E7E;
