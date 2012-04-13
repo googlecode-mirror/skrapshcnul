@@ -44,12 +44,7 @@
 					<?php }?>
 				</div>
 			</div>
-			<div class="clearfix">
-				&nbsp;
-			</div>
-		</div>
-		<div class="clearfix">
-			&nbsp;
+			<div class="clearfix"></div>
 		</div>
 		<div class="f-socialmedia">
 			<div class="clearfix"></div>

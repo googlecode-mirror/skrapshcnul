@@ -18,7 +18,7 @@
 <ul class="nav nav-pills pull-right">
 	<li>
 		<form method="get" class="search pull-left" style="margin: 6px 10px 0 10px">
-			<input name="q" value="<?php echo isset($q) ? $q : '' ?>" type="text" class="search-query span2" placeholder="Search">
+			<input name="q[people]" value="<?php echo isset($q['people']) ? $q['people'] : '' ?>" type="text" class="search-query span2" placeholder="Search">
 		</form>
 	</li>
 </ul>

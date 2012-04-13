@@ -56,6 +56,8 @@ class Search extends CI_Controller {
 		}
 
 		$this -> options['offset'] = ($this -> options['page'] - 1) * $this -> options['row_count'];
+		
+		$this -> fields = $this -> input -> get();
 
 	}
 
