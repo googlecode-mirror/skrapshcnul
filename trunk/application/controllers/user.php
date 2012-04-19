@@ -72,6 +72,8 @@ class User extends CI_Controller {
 
 	function profile() {
 		
+		$this -> data['permissions']['edit'] = true;
+		
 		$this -> data['user_id'] = $this -> session -> userdata('user_id');
 		$this -> data['target_user_id'] = $this -> session -> userdata('user_id');
 		

@@ -71,8 +71,12 @@ body {
 	position: relative;
 }
 .content-area {
-	background-color: white;
-	padding-top: 15px;
+	background-color: rgba(255,255,255,0.8);
+	padding: 10px 20px;
+}
+.hasLeftCol {
+	border-left: 1px solid #DDDDDD;
+	margin-left: 0px !important;
 }
 .m-content-2-col-left { /* with sidebar */
 	width: 200px;
@@ -80,13 +84,6 @@ body {
 	padding: 0;
 	position: absolute;
 	word-wrap: break-word;
-}
-.m-content-2-col-right { /* with sidebar */
-	padding: 0 0 50px 15px;
-	border-left: 1px solid #DDDDDD;
-	margin-left: 201px;
-	width: 740px;
-	min-height: 300px;
 }
 .m-content-2-col-left-xl {
 	width: 72%;
@@ -162,7 +159,6 @@ body {
 }
 .row-menu-item {
 	padding: 4px 10px;
-	background: #ECECEC;
 	color: #666;
 	border-top: 1px solid #FFEFEF;
 	cursor: pointer;
@@ -306,5 +302,4 @@ body {
 	display: inline-block;
 	margin: 10px;
 	min-width: 90px;
-	
 }

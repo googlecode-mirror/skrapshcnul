@@ -1,5 +1,8 @@
 <div class="m-content">
 	<div class="container c-pages">
+		
+		<div class="clearfix">&nbsp;</div>
+		
 		<div class="row-fluid">
 			<div class="span3">
 				<?php $this -> load -> view("base/user/profile/profile_summary_small.php");?>
@@ -11,6 +14,7 @@
 			</div>
 			<div class="span9">
 				<div style="padding: 5px;border-left: 1px solid #EFEFEF;">
+					<?php $this -> load -> view("base/user/includes/admin.php");?>
 					<div class="tabbable">
 						<ul class="nav nav-tabs">
 							<li class="active">

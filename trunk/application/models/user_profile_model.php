@@ -28,9 +28,9 @@ class User_Profile_model extends CI_Model {
 		$this -> db -> select('*');
 		$this -> db -> from($this -> tables['users'] . ' AS u');
 		$this -> db -> join($this -> tables['users_profile'] . ' AS up', 'up.user_id = u.id', 'left');
-		$this -> db -> where('user_id', $user_id);
-		
+		$this -> db -> where('up.user_id', $user_id);
 		$mysql_result = $this -> db -> get();
+
 		if ($mysql_result -> num_rows() > 0) {
 			$result = ($mysql_result -> row_array());
 			if (trim($result['alias'])) {
@@ -40,17 +40,43 @@ class User_Profile_model extends CI_Model {
 			}
 			return $result;
 		} else {
-			$query = " INSERT INTO " . self::_TABLE_ . " (user_id, updated_on) " . " VALUES ('$user_id', NOW()) ";
-			$this -> db -> query($query);
-
+			## Initialize row
+			$data = array('user_id' => $fields['user_id']);
+			$this -> db -> insert($this -> tables['users_profile'], $data);
+			
 			return $this -> select($user_id);
 		}
 	}
 
-	function select_all() {
+	public function select_statistics($fields = NULL, $options = NULL) {
 
-		$query = " SELECT * FROM " . self::_TABLE_;
-		$query .= " WHERE 1;";
+		if (!isset($fields['user_id']) || !is_numeric($fields['user_id'])) {
+			return FALSE;
+		}
+
+		$this -> db -> select('*');
+		$this -> db -> from($this -> tables['users_profile_stats'] . ' AS ups');
+		$this -> db -> where('ups.user_id', $fields['user_id']);
+		$mysql_result = $this -> db -> get();
+
+		if ($mysql_result -> num_rows() > 0) {
+			
+			$result = ($mysql_result -> row_array());
+			return $result;
+			
+		} else {
+			## Initialize row
+			$data = array('user_id' => $fields['user_id']);
+			$this -> db -> insert($this -> tables['users_profile_stats'], $data);
+			
+			return $this -> select_statistics($fields['user_id']);
+		}
+	}
+
+	function select_all($fields = NULL, $options = NULL) {
+
+		$this -> db -> select('*');
+		$this -> db -> from($this -> tables['users_profile'] . ' AS up');
 		$mysql_result = $this -> db -> query($query);
 
 		if ($mysql_result -> num_rows() > 0) {
@@ -67,7 +93,6 @@ class User_Profile_model extends CI_Model {
 			}
 			return $final;
 		} else {
-
 			return FALSE;
 		}
 	}
@@ -101,6 +126,9 @@ class User_Profile_model extends CI_Model {
 		}
 		if (isset($fields['profile_img'])) {
 			$data['profile_img'] = trim($fields['profile_img']);
+		}
+		if (isset($fields['headline'])) {
+			$data['headline'] = trim($fields['headline']);
 		}
 		if (isset($fields['location'])) {
 			$data['location'] = trim($fields['location']);
