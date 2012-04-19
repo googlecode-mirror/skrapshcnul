@@ -54,7 +54,8 @@ class People extends CI_Controller {
 		## TODO - Map to functions
 		$asso_array = ($this -> uri -> uri_to_assoc(4));
 		
-		$this -> data['results'][] = $this -> ls_profile -> getPublicProfile($userid);
+		$fields['user_id'] = $userid;
+		$this -> data['results'][] = $this -> ls_profile -> getPublicProfile($fields);
 		
 		$this -> json -> json_prep($this -> data);
 

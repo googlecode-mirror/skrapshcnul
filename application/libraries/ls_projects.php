@@ -74,13 +74,14 @@ class Ls_Projects {
 		## Privacy and Permission
 		
 		if (isset($results['created_by']) && is_numeric($results['created_by'])) {
-			$results['created_by'] = $this -> ci -> ls_profile -> getPublicProfile($results['created_by']);
+			$obj['user_id'] = $results['created_by'];
+			$results['created_by'] = $this -> ci -> ls_profile -> getPublicProfile($obj);
 		}
 		
 		if (isset($results['team_members']) && is_array($results['team_members'])) {
 			foreach ($results['team_members'] as $key => $value) {
 				if ($user_id = $value['user_id'] && is_numeric($value['user_id'])) {
-					$results['team_members'][$key]['pub_profile'] = $this -> ci -> ls_profile -> getPublicProfile($value['user_id']);
+					$results['team_members'][$key]['pub_profile'] = $this -> ci -> ls_profile -> getPublicProfile($value);
 				}
 			}
 		}

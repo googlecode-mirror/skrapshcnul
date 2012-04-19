@@ -8,9 +8,10 @@ class Settings extends CI_Controller {
 		parent::__construct();
 		$this -> load -> database();
 		$this -> load -> config('linkedin_oauth', TRUE);
-		$this -> load -> library('ion_auth');
-		$this -> load -> library('session');
 		$this -> load -> library('form_validation');
+		$this -> load -> library('ion_auth');
+		$this -> load -> library('ls_user_settings');
+		$this -> load -> library('session');
 		$this -> load -> helper('logger');
 		$this -> load -> helper('url');
 		$this -> load -> helper('linkedin/linkedin_api');
@@ -19,24 +20,24 @@ class Settings extends CI_Controller {
 		$this -> load -> model('user_settings_model');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
-		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
+		$this -> data['is_logged_in_admin'] = $this -> ion_auth -> is_admin();
 		$this -> session -> set_flashdata('system_message', '');
 
 		if (!$this -> ion_auth -> logged_in()) {
 			// Not Logged in? Redirect them back to login page.
 			redirect('login', 'refresh');
 		}
-		
-		$this->user_id = $this -> session -> userdata('user_id');
-		
-		// Request Params: alt = json | , 
+
+		$this -> user_id = $this -> session -> userdata('user_id');
+
+		// Request Params: alt = json | ,
 		$this -> alt = (isset($_REQUEST['alt'])) ? $_REQUEST['alt'] : '';
 		$this -> call = (isset($_REQUEST['call'])) ? $_REQUEST['call'] : '';
 		$this -> callback = (isset($_REQUEST['callback'])) ? $_REQUEST['callback'] : '';
 		$this -> request_method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : '';
-		
+
 		$this -> start_time = time();
-		
+
 	}
 
 	function index($value = '') {
@@ -45,24 +46,24 @@ class Settings extends CI_Controller {
 	}
 
 	function overview($value = '') {
-		
+
 		if ($this -> alt == 'json') {
 			$datafld = isset($_REQUEST['datafld']) ? $_REQUEST['datafld'] : '';
 			$value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
 			if ($datafld && $value) {
 				$fields = array($datafld => $value);
-				$result = $this -> user_profile_model -> update($this->user_id, $fields);
+				$result = $this -> user_profile_model -> update($this -> user_id, $fields);
 			} else {
 				$result = FALSE;
 			}
-			
+
 			$this -> _json_prep($result);
 		} else {
-			
-			$this -> data['settings'] = $this -> user_profile_model -> select($this->user_id);
+
+			$this -> data['settings'] = $this -> user_profile_model -> select($this -> user_id);
 
 			// Render views data
-			$this -> data['head_title']		= 'Settings | Lunchsparks';
+			$this -> data['head_title'] = 'Settings | Lunchsparks';
 			$this -> data['tpl_page_id'] = "overview";
 			$this -> data['tpl_page_title'] = "Account Overview";
 			// Render Views
@@ -96,21 +97,21 @@ class Settings extends CI_Controller {
 			$value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
 			if (!empty($datafld)) {
 				$fields = array($datafld => $value);
-				$result = $this -> user_settings_model -> update_security($this->user_id, $fields);
+				$result = $this -> user_settings_model -> update_security($this -> user_id, $fields);
 			} else {
 				$result = FALSE;
 			}
-			
+
 			$this -> _json_prep($result);
 		} else {
-			
-			$this -> data['settings']['security'] = $this -> user_settings_model -> select_security($this->user_id);
+
+			$this -> data['settings']['security'] = $this -> user_settings_model -> select_security($this -> user_id);
 			//var_dump($this -> data['settings']['security']);
-			
+
 			// Tpl setup
 			$this -> data['tpl_page_id'] = "security";
 			$this -> data['tpl_page_title'] = "Security";
-	
+
 			// Render view
 			$this -> data['main_content'] = 'base/settings/security';
 			$this -> load -> view('includes/tmpl_layout', $this -> data);
@@ -141,30 +142,35 @@ class Settings extends CI_Controller {
 
 	function notifications() {
 
-		if ($this -> alt == 'json') {
-			$datafld = isset($_REQUEST['datafld']) ? $_REQUEST['datafld'] : '';
-			$value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
-			if (!empty($datafld)) {
-				$fields = array($datafld => $value);
-				$result = $this -> user_settings_model -> update_notification($this->user_id, $fields);
-			} else {
-				$result = FALSE;
-			}
+		if ($this -> input -> post()) {
+			$inputs = $this -> input -> post();
+			$fields['email']['system_notification'] = isset($inputs['email_system_notification']) ? TRUE : FALSE;
+			$fields['email']['event_notification'] = isset($inputs['email_event_notification']) ? TRUE : FALSE;
+			$fields['email']['lunch_suggestion'] = isset($inputs['email_lunch_suggestion']) ? TRUE : FALSE;
+			$fields['email']['lunch_wishlist'] = isset($inputs['email_lunch_wishlist']) ? TRUE : FALSE;
+			$fields['email']['project_follow'] = isset($inputs['email_project_follow']) ? TRUE : FALSE;
+			$fields['email']['project_favaourite'] = isset($inputs['email_project_favaourite']) ? TRUE : FALSE;
+			$fields['phone']['system_notification'] = isset($inputs['phone_system_notification']) ? TRUE : FALSE;
+			$fields['phone']['event_notification'] = isset($inputs['phone_event_notification']) ? TRUE : FALSE;
+			$fields['phone']['lunch_suggestion'] = isset($inputs['phone_lunch_suggestion']) ? TRUE : FALSE;
+			$fields['phone']['lunch_wishlist'] = isset($inputs['phone_lunch_wishlist']) ? TRUE : FALSE;
+			$fields['phone']['project_follow'] = isset($inputs['phone_project_follow']) ? TRUE : FALSE;
+			$fields['phone']['project_favaourite'] = isset($inputs['phone_project_favaourite']) ? TRUE : FALSE;
 			
-			$this -> _json_prep($result);
-		} else {
-			
-			$this -> data['settings']['notification'] = $this -> user_settings_model -> select_notification($this->user_id);
-			//var_dump($this -> data['settings']['notification']);
-			
-			// Tpl setup
-			$this -> data['tpl_page_id'] = "notifications";
-			$this -> data['tpl_page_title'] = "Notifications";
-	
-			// Render view
-			$this -> data['main_content'] = 'base/settings/notifications';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
+			$result = $this -> ls_user_settings -> update_notifications($fields, $fields);
 		}
+
+		$this -> data['settings']['notification'] = $this -> ls_user_settings -> select_notifications($this -> user_id);
+		//var_dump($this -> data['settings']['notification']);
+
+		// Tpl setup
+		$this -> data['tpl_page_id'] = "notifications";
+		$this -> data['tpl_page_title'] = "Notifications";
+
+		// Render view
+		$this -> data['main_content'] = 'base/settings/notifications';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+
 	}
 
 	function applications() {
@@ -199,12 +205,13 @@ class Settings extends CI_Controller {
 		$this -> data['main_content'] = 'base/settings/Payments';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
+
 	function pullLinkedInData() {
 		/**
 		 * Helper function that checks to see that we have a 'set' $_SESSION that we can
 		 * use for the demo.
 		 */
-		
+
 		function oauth_session_exists() {
 			if ((is_array($_SESSION)) && (array_key_exists('oauth', $_SESSION))) {
 				return TRUE;
@@ -228,7 +235,7 @@ class Settings extends CI_Controller {
 
 			switch($_REQUEST[LINKEDIN::_GET_TYPE]) {
 				case 'initiate' :
-				// check for the correct http protocol (i.e. is this script being served via http or https)
+					// check for the correct http protocol (i.e. is this script being served via http or https)
 					if (!empty($_SERVER['HTTPS'])) {
 						$protocol = 'https';
 					} else {
@@ -248,10 +255,10 @@ class Settings extends CI_Controller {
 
 						// send a request for a LinkedIn access token
 						$response = $OBJ_linkedin -> retrieveTokenRequest();
-						if ($response['success'] === TRUE) {		
+						if ($response['success'] === TRUE) {
 							// store the request token
 							$_SESSION['oauth']['linkedin']['request'] = $response['linkedin'];
-					
+
 							// redirect the user to the LinkedIn authentication/authorisation page to initiate validation.
 							header('Location: ' . LINKEDIN::_URL_AUTH . $response['linkedin']['oauth_token']);
 						} else {
@@ -306,14 +313,15 @@ class Settings extends CI_Controller {
 			echo $e -> getMessage();
 		}
 	}
+
 	function _json_prep($result) {
 		header('Cache-Control: no-cache, must-revalidate');
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 		header('Content-type: application/json');
-		
-		$json_result['completed_in'] =  number_format(time() - $this -> start_time, 3, '.', '');
+
+		$json_result['completed_in'] = number_format(time() - $this -> start_time, 3, '.', '');
 		$json_result['results'] = $result;
-		print_r($this -> callback. '('.json_encode($json_result) .')');
+		print_r($this -> callback . '(' . json_encode($json_result) . ')');
 	}
 
 }

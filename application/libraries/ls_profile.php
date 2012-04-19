@@ -44,14 +44,15 @@ class Ls_Profile {
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
 	}
 
-	function getPublicProfile($user_id = FALSE) {
+	function getPublicProfile($fields = FALSE, $options = FALSE) {
 		
-		if(!$user_id || !is_numeric($user_id)) {
+		if (!$fields) return FALSE;
+		
+		if(!isset($fields['user_id']) || !is_numeric($fields['user_id'])) {
 			return FALSE;
 		}
 		
-		$data = $this -> ci -> user_profile_model -> select($user_id);
-		$data2 = $this -> prepare_profile_data($user_id);
+		$data = $this -> ci -> user_profile_model -> select($fields['user_id']);
 		
 		## Default Values
 		if (empty($data['profile_img']) || !@getimagesize($data['profile_img'])) {
@@ -63,14 +64,24 @@ class Ls_Profile {
 		
 		## Output Data
 		$result['kind'] = "ls#person";
-		$result['id'] = $user_id;
+		$result['id'] = $data['id'];
 		$result['display_name'] = $data['firstname'];
+		if (isset($data['lastname']) && !empty($data['lastname'])) {
+			$result['display_name'] .= ', ' . $data['lastname'];
+		}
 		$result['fullname']['first'] = $data['firstname'];
 		$result['fullname']['last'] = $data['lastname'];
 		$result['profile_img'] = $data['profile_img'];
-		$result['headline'] = $data2['headline'];
+		$result['headline'] = $data['headline'];
+		$result['location'] = $data['location'];
 		$result['ls_pub_url'] = $data['ls_pub_url'];
-		$result['verification'] = $data2['verification'];
+		if (isset($data['verification']))
+			$result['verification'] = $data['verification'];
+		
+		// Options
+		if (1 || isset($options['stats'])) {
+			$result['statistics'] = $this -> ci -> user_profile_model -> select_statistics($fields['user_id']);
+		}
 		
 		return $result;
 		
@@ -109,7 +120,8 @@ class Ls_Profile {
 		
 		## Get User Public Data
 		foreach ($results as $key => $user_data) {
-			$results[$key] = $this -> ci -> ls_profile -> getPublicProfile($user_data['user_id']);
+			$fields['user_id'] = $user_data['user_id'];
+			$results[$key] = $this -> ci -> ls_profile -> getPublicProfile($fields);
 		}
 		
 		return $results;
@@ -350,7 +362,8 @@ class Ls_Profile {
 		
 		foreach ($results as $key => $user_data) {
 			$results[$key]['kind'] = "ls#person";
-			$results[$key] = $this -> ci -> ls_profile -> getPublicProfile($user_data['user_id']);
+			$fields['user_id'] = 
+			$results[$key] = $this -> ci -> ls_profile -> getPublicProfile($fields);
 		}
 		
 		return $results;

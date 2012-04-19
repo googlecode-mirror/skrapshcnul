@@ -147,13 +147,10 @@ footer ul li {
 	width: 650px;
 }
 .main-content-sidebar {
-	/*width: 300px;
-	float: right;*/
-	background: url(../images/200/left-sidebar-bg.png) bottom left no-repeat;
-	background-color: #ECECEC;
-	/*border-right: 1px solid #BDBDBD;*/
-	border-left: 1px solid #BDBDBD;
-	height: 95%;
+	/*background: url(../images/200/left-sidebar-bg.png) bottom left no-repeat;
+	background-color: #ECECEC;*/
+	/*border-right: 1px solid #BDBDBD;
+	border-left: 1px solid #BDBDBD;*/
 }
 .counter-stats-container {
 	float: left;
