@@ -7,9 +7,12 @@
 		<div class="span9 hasLeftCol">
 			<div class="content-area">
 				
-				<div class="hr">
-					<h2 class="hr-text"><?php echo $tpl_page_title; ?></h2>
-				</div>
+				<!--<div class="hr">
+					<h2 class="hr-text"></h2>
+				</div>-->
+				
+				<h2><?php echo $tpl_page_title; ?></h2>
+				<div class="clearfix">&nbsp;</div>
 				
 				<form method="post" class="form-horizontal">
 					<fieldset>

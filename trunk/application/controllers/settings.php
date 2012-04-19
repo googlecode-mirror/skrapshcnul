@@ -10,6 +10,7 @@ class Settings extends CI_Controller {
 		$this -> load -> config('linkedin_oauth', TRUE);
 		$this -> load -> library('form_validation');
 		$this -> load -> library('ion_auth');
+		$this -> load -> library('ls_profile');
 		$this -> load -> library('ls_user_settings');
 		$this -> load -> library('session');
 		$this -> load -> helper('logger');
@@ -47,29 +48,29 @@ class Settings extends CI_Controller {
 
 	function overview($value = '') {
 
-		if ($this -> alt == 'json') {
-			$datafld = isset($_REQUEST['datafld']) ? $_REQUEST['datafld'] : '';
-			$value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
-			if ($datafld && $value) {
-				$fields = array($datafld => $value);
-				$result = $this -> user_profile_model -> update($this -> user_id, $fields);
-			} else {
-				$result = FALSE;
-			}
+		if ($this -> input -> post()) {
+			$inputs = $this -> input -> post();
+			$fields['alias'] = isset($inputs['alias']) ? $inputs['alias'] : '';
+			$fields['firstname'] = isset($inputs['firstname']) ? $inputs['firstname'] : '';
+			$fields['lastname'] = isset($inputs['lastname']) ? $inputs['lastname'] : '';
+			$fields['location'] = isset($inputs['location']) ? $inputs['location'] : '';
+			$fields['delivery_email'] = isset($inputs['delivery_email']) ? $inputs['delivery_email'] : '';
+			$fields['mobile_number'] = isset($inputs['mobile_number']) ? $inputs['mobile_number'] : '';
+			
+			$result = $this -> ls_profile -> update($fields, $fields);
+			
+		} 
+		
+		$this -> data['settings'] = $this -> user_profile_model -> select($this -> user_id);
 
-			$this -> _json_prep($result);
-		} else {
-
-			$this -> data['settings'] = $this -> user_profile_model -> select($this -> user_id);
-
-			// Render views data
-			$this -> data['head_title'] = 'Settings | Lunchsparks';
-			$this -> data['tpl_page_id'] = "overview";
-			$this -> data['tpl_page_title'] = "Account Overview";
-			// Render Views
-			$this -> data['main_content'] = 'base/settings/overview';
-			$this -> load -> view('includes/tmpl_layout', $this -> data);
-		}
+		// Render views data
+		$this -> data['head_title'] = 'Settings | Lunchsparks';
+		$this -> data['tpl_page_id'] = "overview";
+		$this -> data['tpl_page_title'] = "Account Overview";
+		// Render Views
+		$this -> data['main_content'] = 'base/settings/overview';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		
 	}
 
 	function sync() {

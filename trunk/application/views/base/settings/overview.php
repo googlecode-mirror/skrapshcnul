@@ -1,118 +1,119 @@
 <div class="container">
-	
+
 	<div class="row-fluid">
 		<div class="span3">
-			<?php $this -> load -> view('base/settings/includes/sidetab');?>
+			<?php $this -> load -> view('base/settings/includes/sidetab'); ?>
 		</div>
 		<div class="span9 hasLeftCol">
 			<div class="content-area">
+
+				<h2>General Account Settings</h2>
+				<div class="clearfix">&nbsp;</div>
 				
-				<div class="hr">
-					<h2 class="hr-text">Account Settings Overview</h2>
-				</div>
-				
-				<div id="settings-profile">
-					<h3>Profile</h3>
-					<div class="row-item xl">
-						<div class="content-table-2-col-left">
-							First Name
-						</div>
-						<div class="content-table-2-col-right">
-							<div class="editable">
-								<span title="firstname" class="editable-value">
-									<?php echo !empty($settings['firstname']) ? ($settings['firstname']) : '<i>[firstname]</i>' ?>
-								</span>
-							</div>
-							<div style="display: none;">
-								<input title="firstname" type="text" value="<?php echo !empty($settings['firstname']) ? ($settings['firstname']) : '' ?>" placeholder="firstname" />
+				<form name="account_settings" method="post" class="form-horizontal">
+					<fieldset>
+
+						<legend>
+							System Notifications
+						</legend>
+
+						<div class="control-group">
+							<label class="control-label" for="alias">Alias</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" id="alias" name="alias" value="<?php echo !empty($settings['alias']) ? ($settings['alias']) : '' ?>" placeholder="username" > <span class="help-inline hidden"></span>
+								<p class="help-block"><span class="label">Tips</span> You alias will be the identifier for your profile. E.g. http://lunchsparks.me/pub/<i>username</i></p>
 							</div>
 						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="firstname">First Name</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" id="firstname" name="firstname" value="<?php echo !empty($settings['firstname']) ? ($settings['firstname']) : '' ?>" placeholder="firstname" >
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="lastname">Last Name</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" id="lastname" name="lastname" value="<?php echo !empty($settings['lastname']) ? ($settings['lastname']) : '' ?>" placeholder="lastname" >
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="alias">Current City</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" id="location" name="location" value="<?php echo !empty($settings['location']) ? ($settings['location']) : '' ?>" placeholder="location" >
+							</div>
+						</div>
+						
+					</fieldset>
+					
+					<fieldset>
+						
+						<legend>
+							Notification
+						</legend>
+						
+						<div class="control-group">
+							<label class="control-label" for="alias">Email</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" id="delivery_email" name="delivery_email" value="<?php echo !empty($settings['delivery_email']) ? ($settings['delivery_email']) : '' ?>" placeholder="email@example.com" >
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="alias">Phone</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" id="mobile_number" name="mobile_number" value="<?php echo !empty($settings['mobile_number']) ? ($settings['mobile_number']) : '' ?>" placeholder="+6599998888">
+							</div>
+						</div>
+						
+						
+					</fieldset>
+					
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary btn-large">
+							Save changes
+						</button>
 					</div>
-					<div class="row-item xl">
-						<div class="content-table-2-col-left">
-							Last Name
-						</div>
-						<div class="content-table-2-col-right">
-							<div class="editable">
-								<span title="lastname" class="editable-value">
-									<?php echo !empty($settings['lastname']) ? ($settings['lastname']) : '<i>[lastname]</i>' ?>
-								</span>
-							</div>
-							<div style="display: none;">
-								<input title="lastname" type="text" value="<?php echo !empty($settings['lastname']) ? ($settings['lastname']) : '' ?>" placeholder="lastname" />
-							</div>
-						</div>
-					</div>
-					<div class="row-item xl">
-						<div class="content-table-2-col-left">
-							Alias
-						</div>
-						<div class="content-table-2-col-right">
-							<?php if (empty($settings['alias'])) { ?>
-								<div title="alias" class="editable">
-									http://lunchsparks.me/pub/<span class="editable-value" style="font-weight: bold;"><?php echo !empty($settings['alias']) ? ($settings['alias']) : '<i>[username]</i>' ?></span>
-								</div>
-								<div style="display: none;">
-									<input title="alias" type="text" value="<?php echo !empty($settings['alias']) ? ($settings['alias']) : '' ?>" placeholder="username" />
-								</div>
-							<?php } else { ?>
-								<div title="alias">
-									http://lunchsparks.me/pub/<span class="editable-value" style="font-weight: bold;"><?php echo !empty($settings['alias']) ? ($settings['alias']) : '<i>[username]</i>' ?></span>
-								</div>
-							<?php } ?>
-							
-						</div>
-					</div>
-					<div class="row-item xl">
-						<div class="content-table-2-col-left">
-							Public Location
-						</div>
-						<div class="content-table-2-col-right">
-							<div title="location" class="editable">
-								<span title="location" class="editable-value">
-								<?php echo (isset($settings['location']) && !empty($settings['location'])) ? ($settings['location']) : '<i>location</i>' ?></span>
-								</span>
-							</div>
-							<div style="display: none;">
-								<input title="location" type="text" value="<?php echo !empty($settings['location']) ? ($settings['location']) : '' ?>" placeholder="location" />
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="divider"></div>
-				<div id="settings-delivery-preferences">
-					<h3>Delivery</h3>
-					<div class="row-item xl">
-						<div class="content-table-2-col-left">
-							Email
-						</div>
-						<div class="content-table-2-col-right">
-							<div class="editable">
-								<span title="delivery_email" class="editable-value"><?php echo !empty($settings['delivery_email']) ? ($settings['delivery_email']) : '<i>[email@example.com]</i>' ?></span>
-							</div>
-							<div style="display: none;">
-								<input title="delivery_email" type="text" value="<?php echo !empty($settings['delivery_email']) ? ($settings['delivery_email']) : '' ?>" placeholder="email@example.com" />
-							</div>
-						</div>
-					</div>
-					<div class="row-item xl">
-						<div class="content-table-2-col-left">
-							Phone
-						</div>
-						<div class="content-table-2-col-right">
-							<div class="editable">
-								<span title="mobile_number" class="editable-value"><?php echo !empty($settings['mobile_number']) ? ($settings['mobile_number']) : '<i>[+6599998888]</i>' ?></span>
-							</div>
-							<div style="display: none;">
-								<input title="mobile_number" type="text" value="<?php echo !empty($settings['mobile_number']) ? ($settings['mobile_number']) : '' ?>" placeholder="+6599998888" />
-							</div>
-						</div>
-					</div>
-				</div>
+					
+				</form>
 				
 			</div>
 		</div>
 	</div>
 	<div class="clearfix"></div>
 </div>
+
+<script>
+jQuery(function() {
+	jQuery('input[name=alias]').change(function() {
+		is_alias_available();
+	});
+});
+
+function is_alias_available() {
+	
+	var dfd = new jQuery.Deferred();
+	
+	var alias = jQuery('input[name=alias]').val();
+	jQuery.getJSON('/jsonp/profile/is_alias_available?alt=json&callback=?', {
+		alias: alias
+	}, function(data) {
+		console.log(data);
+		if (data.results) {
+			jQuery('input[name=alias]').next().addClass('hidden');
+			jQuery('input[name=alias]').parentsUntil('.control-group').parent().removeClass('warning');
+			dfd.resolve(true);
+		} else {
+			jQuery('input[name=alias]').parentsUntil('.control-group').parent().addClass('warning');
+			jQuery('input[name=alias]').next().html('Alias not available.');
+			jQuery('input[name=alias]').next().removeClass('hidden');
+			dfd.reject(false);
+		}
+	})
+	
+	// Return the Promise so caller can't change the Deferred
+	return dfd.promise();
+}
+</script>

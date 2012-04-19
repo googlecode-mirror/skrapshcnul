@@ -97,17 +97,17 @@ class User_Profile_model extends CI_Model {
 		}
 	}
 
-	function update($user_id, $fields) {
+	function update($fields = FALSE, $options = FALSE) {
 
-		if (!$user_id) {
+		if (!$fields['user_id']) {
 			return FALSE;
 		}
-
+		
 		// Check for unique alias
-		if (isset($fields['alias']) && !$this -> is_alias_available($fields['alias'])) {
-			return FALSE;
+		if (isset($fields['alias']) && !$this -> is_alias_available($fields)) {
+			unset($fields['alias']);
 		}
-
+		
 		// Prepare Data to Write to DB
 		if (isset($fields['alias']) && (trim($fields['alias'])) != '') {
 			$data['alias'] = trim($fields['alias']);
@@ -133,27 +133,30 @@ class User_Profile_model extends CI_Model {
 		if (isset($fields['location'])) {
 			$data['location'] = trim($fields['location']);
 		}
-
+		
 		// DB Query
-		if (!$this -> select($user_id)) {
+		if (!$this -> select($fields['user_id'])) {
 			## Do an INSERT
-			$data['user_id'] = $user_id;
+			$data['user_id'] = $fields['user_id'];
 			$result = $this -> db -> insert($this -> tables['users_profile'], $data);
 		} else {
 			## Do an UPDATE
-			$this -> db -> where('user_id', $user_id);
+			$this -> db -> where('user_id', $fields['user_id']);
 			$result = $this -> db -> update($this -> tables['users_profile'], $data);
 		}
 
 		// if Alias changed, update Social Link
-		if (!empty($alias)) {
-			$fields['lunchsparks'] = base_url() . "pub/" . $alias;
-			$this -> update_social_links($user_id, $fields);
-		} else {
-			$fields['lunchsparks'] = base_url() . "pub/" . $user_id;
-			$this -> update_social_links($user_id, $fields);
+		{
+			$user = $this -> select($fields['user_id']);
+			if (trim($user['alias'])) {
+				$fields['lunchsparks'] = base_url() . "pub/" . $user['alias'];
+				$this -> update_social_links($fields['user_id'], $fields);
+			} else {
+				$fields['lunchsparks'] = base_url() . "pub/" . $fields['user_id'];
+				$this -> update_social_links($fields['user_id'], $fields);
+			}
 		}
-
+		
 		return $result;
 
 	}
@@ -225,13 +228,21 @@ class User_Profile_model extends CI_Model {
 		}
 	}
 
-	function is_alias_available($alias) {
-		if (!$alias) {
+	function is_alias_available($fields = NULL) {
+		
+		if (!isset($fields['alias'])) {
+			return FALSE;
+		}
+		if (!isset($fields['user_id'])) {
 			return FALSE;
 		}
 
-		$query = " SELECT * FROM " . self::_TABLE_ . " WHERE `alias` = '$alias' ";
-		$mysql_result = $this -> db -> query($query);
+		$this -> db -> select('*');
+		$this -> db -> from($this -> tables['users_profile'] . ' AS up');
+		$this -> db -> where('alias', $fields['alias']);
+		$this -> db -> where('user_id !=', $fields['user_id']);
+		$mysql_result = $this -> db -> get();
+		
 		if ($mysql_result -> num_rows() > 0) {
 			return FALSE;
 		} else {

@@ -17,10 +17,10 @@ class Ls_Profile {
 		$this -> ci -> load -> database();
 		$this -> ci -> load -> config('linkedin_oauth', TRUE);
 		$this -> ci -> load -> config('users', TRUE);
-		$this -> ci -> load -> library('ion_auth');
-		$this -> ci -> load -> library('session');
 		$this -> ci -> load -> library('form_validation');
 		$this -> ci -> load -> library('input');
+		$this -> ci -> load -> library('session');
+		$this -> ci -> load -> library('ion_auth');
 		$this -> ci -> load -> helper('image/image_resize');
 		$this -> ci -> load -> helper('logger');
 		$this -> ci -> load -> helper('linkedin/linkedin_api');
@@ -42,6 +42,9 @@ class Ls_Profile {
 		}
 
 		$this -> ci -> ion_auth_model -> trigger_events('library_constructor');
+		
+		$this -> user_id = $this -> ci -> session -> userdata('user_id');
+		
 	}
 
 	function getPublicProfile($fields = FALSE, $options = FALSE) {
@@ -126,6 +129,26 @@ class Ls_Profile {
 		
 		return $results;
 		
+		
+	}
+
+	public function is_alias_available($fields = FALSE) {
+		
+		if (!$fields) { return FALSE; }
+		
+		$fields['user_id'] = $this -> user_id;
+		
+		return $this -> ci -> user_profile_model -> is_alias_available($fields);
+		
+	}
+
+	function update($fields = FALSE, $options = FALSE) {
+		
+		if (!$fields) { return FALSE; }
+		
+		$fields['user_id'] = $this -> user_id;
+		
+		return $this -> ci -> user_profile_model -> update($fields);
 		
 	}
 	
@@ -311,14 +334,6 @@ class Ls_Profile {
 		*/
 		
 		return $this->data['profile_stats'];
-		
-	}
-
-	function update($fields = FALSE, $options = FALSE) {
-		
-		if (!$fields) { return FALSE; }
-		
-		return $this -> user_profile_model($fields);
 		
 	}
 
