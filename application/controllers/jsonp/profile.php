@@ -7,13 +7,13 @@ class Profile extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		$this -> load -> library('ion_auth');
-		$this -> load -> library('session');
 		$this -> load -> library('form_validation');
-		$this -> load -> library('ls_notifications');
-		$this -> load -> library('ion_auth');
 		$this -> load -> library('input');
+		$this -> load -> library('ion_auth');
 		$this -> load -> library('json');
+		$this -> load -> library('ls_notifications');
+		$this -> load -> library('ls_profile');
+		$this -> load -> library('session');
 		$this -> load -> database();
 		$this -> load -> helper('url');
 		$this -> load -> model('invitation_model');
@@ -35,6 +35,18 @@ class Profile extends CI_Controller {
 
 	function index () {
 		echo "Welcome to Lunchsparks JSON.";
+	}
+	
+	function is_alias_available() {
+		
+		if ($this -> input -> get()) {
+			$input = $this -> input -> get();
+			
+			$this -> data['results'] = $this -> ls_profile -> is_alias_available($input);
+			
+		}
+		
+		$this -> json -> json_prep($this -> data);
 	}
 	
 }
