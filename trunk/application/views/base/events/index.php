@@ -1,5 +1,5 @@
-<div class="m-content">
-	<div class="c-pages shadow-rounded event_page">
+<div class="container">
+	<div class="c-pages event_page">
 		<h2><?php echo $tpl_page_title; ?></h2>
 		<h3 class="sub-heading">Events listed below requires your attention.</h3>
 		

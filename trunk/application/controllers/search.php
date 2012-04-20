@@ -33,8 +33,9 @@ class Search extends CI_Controller {
 		$this -> pagination = $this -> config -> item('pagination', 'pagination');
 		## User Id Check
 		$this -> user_id = $this -> session -> userdata('user_id');
-
+		
 		$this -> _init();
+		
 	}
 
 	private function _init() {

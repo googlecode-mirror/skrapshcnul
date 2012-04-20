@@ -95,6 +95,10 @@
 	overflow: hidden;
 	float: left;
 }
+[class^="profile-img-"] img {
+	width: 100%;
+}
+.profile-img-100,
 .profile-img-100 img {
 	max-width: 100px;
 	overflow: hidden;
@@ -467,6 +471,7 @@ height: 48px;
 	box-shadow: 1px 1px 3px #333;
 	border-radius: 0 5px 5px 0;
 	background: #232323;
+	line-height: 1;
 }
 .preferences-data-item-content div::before {
 	content: "";

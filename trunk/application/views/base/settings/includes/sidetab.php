@@ -1,7 +1,7 @@
 <div id="account-setting-sidebar" class="main-content-sidebar">
 	<ul>
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'overview') ? 'active' : '';?>">
-			<?php echo anchor('settings/overview', 'Account Overview', 'id="a-s-overview" class="a-s-icon-xlhdpi"'); ?>
+			<?php echo anchor('settings/overview', 'Profile', 'id="a-s-overview" class="a-s-icon-xlhdpi"'); ?>
 		</li>
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'sync') ? 'active' : '';?>">
 			<?php echo anchor('settings/sync', 'Linked Account', 'id="a-s-sync" class="a-s-icon-xlhdpi"'); ?>
@@ -9,7 +9,7 @@
 		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'security') ? 'active' : '';?>">
 			<?php echo anchor('settings/security', 'Security', 'id="a-s-security" class="a-s-icon-xlhdpi"'); ?>
 		</li>
-		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'mobile') ? 'active' : '';?>">
+		<li class="sideNavItem row-menu-item <?php echo ($tpl_page_id == 'notifications') ? 'active' : '';?>">
 			<?php echo anchor('settings/notifications', 'Notifications', 'id="a-s-mobile" class="a-s-icon-xlhdpi"'); ?>
 		</li>
 		<?php /*

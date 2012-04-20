@@ -484,6 +484,14 @@ class Auth extends Controller {
 		$this -> data['main_content'] = '/auth/facebook_authed';
 		$this -> load -> view('includes/tmpl_layout', $this -> data);
 	}
+	
+	function github() {
+		
+	}
+	
+	function github_authed() {
+		
+	}
 
 	function _users_provider_write($user) {
 
