@@ -10,7 +10,9 @@ class Settings extends CI_Controller {
 		$this -> load -> config('linkedin_oauth', TRUE);
 		$this -> load -> library('form_validation');
 		$this -> load -> library('ion_auth');
+		$this -> load -> library('ls_facebook');
 		$this -> load -> library('ls_profile');
+		$this -> load -> library('ls_twitter');
 		$this -> load -> library('ls_user_settings');
 		$this -> load -> library('session');
 		$this -> load -> helper('logger');
@@ -80,6 +82,8 @@ class Settings extends CI_Controller {
 		}
 
 		$external_data['linkedin'] = $this -> linkedin_model -> selectLinkedInDataForCurrentUser();
+		$external_data['facebook'] = $this -> ls_facebook -> select_data();
+		$external_data['twitter'] = $this -> ls_twitter -> select_data();
 		$this -> data['external_data'] = $external_data;
 
 		// Tpl setup

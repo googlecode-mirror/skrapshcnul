@@ -1,6 +1,6 @@
 <script src="<?php echo base_url();?>skin/js/angularjs/angular-0.9.19.min.js" ng:autobind></script>
-<div class="m-content">
-	<div class="c-pages shadow-rounded">
+<div class="container">
+	<div class="c-pages">
 		<h2><?php echo $tpl_page_title; ?></h2>
 		<h3 class="sub-heading">Enter your schedule here, so our system can arrange the timing that suits you.</h3>
 		

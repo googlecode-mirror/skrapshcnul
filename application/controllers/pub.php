@@ -42,6 +42,8 @@ class Pub extends CI_Controller {
 		$this -> request_method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : '';
 		
 		$this -> start_time = time();
+		
+		$this->output->cache(60);
 	}
 
 	function _remap($method) {

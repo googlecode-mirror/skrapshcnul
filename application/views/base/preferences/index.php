@@ -2,8 +2,7 @@
 <div class="container c-pages">
 	<div>
 		
-		<h2><?php echo $tpl_page_title; ?></h2>
-		<h3 class="sub-heading">Enter your preferences here. Our system will pickup the keywords from here.</h3>
+		<h2><?php echo $tpl_page_title; ?> <small>Enter your preferences here. </small></h2>
 		
 		<?php if (!empty($preferences)) { ?>
 			<?php foreach($preferences as $value) { ?>
@@ -27,8 +26,14 @@
 								</div>
 							<?php } ?>
 						</div>
-						<input type="text" id="tag_value_<?php echo $value['preferences_ref_id']; ?>" class ="ls_user_autocomplete" name="tag_value_<?php echo $value['preferences_ref_id']; ?>" size="35" placeholder="Entrepreneur, Technical, Anyone" style="display: inline-block;">
-			      		<input type="submit" value="add" required="required" class="preference-tag-btn-add" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>" />
+						
+						<div class="clearfix">&nbsp;</div>
+						
+						<div class="form-horizontal">
+							<input type="text" id="tag_value_<?php echo $value['preferences_ref_id']; ?>" class ="span3 ls_user_autocomplete" name="tag_value_<?php echo $value['preferences_ref_id']; ?>" size="35" placeholder="Entrepreneur, Technical, Anyone" style="display: inline-block;">
+							<button value="add" required="required" class="btn btn-small preference-tag-btn-add" ls:pref_id="<?php echo $value['preferences_ref_id']; ?>">Add</div>
+						</div>
+						
 					</div>
 				</div>
 				<div class="clearfix">&nbsp;</div>
