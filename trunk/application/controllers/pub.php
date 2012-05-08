@@ -43,7 +43,8 @@ class Pub extends CI_Controller {
 		
 		$this -> start_time = time();
 		
-		$this->output->cache(60);
+		$this->output->cache(30);
+		
 	}
 
 	function _remap($method) {

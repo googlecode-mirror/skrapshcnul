@@ -2,8 +2,9 @@ html.singlebox {
 	background-image: url(../images/bg/denim-blue.png);
 }
 body.singlebox {
-	text-shadow: 1px 1px 1px #CCC;
 	background: none;
+	padding: 0;
+	text-shadow: 1px 1px 1px #CCC;
 }
 .singlebox .m-content,
 .singlebox .forms,
@@ -14,6 +15,7 @@ body.singlebox {
 	-khtml-box-shadow: none;
 	box-shadow: none;
 	background: none;
+	padding-top: 60px;
 }
 .singlebox .m-wrapper {
 	-webkit-border-radius: 5px;
