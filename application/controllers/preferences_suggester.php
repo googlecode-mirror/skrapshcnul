@@ -126,7 +126,7 @@ class Preferences_suggester extends CI_Controller {
 			}
 		}
 	
-		//var_dump(json_encode($result));
+		var_dump(json_encode($result));
 		return $result;
 	}	
 }
