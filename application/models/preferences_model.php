@@ -177,7 +177,16 @@ class Preferences_Model extends CI_Model {
 	## Global Preference Data ##
 	############################
 	
-	function global_preferences_select_count($keywords) {
+	function global_preferences_select() 
+	{
+		$query = " SELECT * FROM " . $this->tables['global_preferences'];
+		$mysql_result = $this -> db -> query($query);
+		
+		return $mysql_result->result_array();
+	}
+	
+	function global_preferences_select_count($keywords) 
+	{
 		$keywords = urldecode($keywords);
 		
 		$query = 

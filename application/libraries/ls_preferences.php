@@ -45,10 +45,13 @@ class Ls_Preferences {
 	}
 
 	function selectForCurrentUser() {
-		
-		return $this -> ci -> preferences_model -> selectForCurrentUser();;
-		
+		return $this -> ci -> preferences_model -> selectForCurrentUser();
 	}
+	
+	function getAllPreferenceKeywords() {
+		return $this -> ci -> preferences_model -> global_preferences_select();
+	}
+	
 
 }
 ?>
