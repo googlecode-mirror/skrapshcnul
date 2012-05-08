@@ -21,7 +21,7 @@
 				</a>
 				<!-- Be sure to leave the brand out there if you want it shown -->
 				<a class="brand" href="/" style="padding: 5px;">
-						<img src="/skin/images/140/ls_logo_wide_white.png" height="40px" style="display: block;">
+						<img src="/skin/images/140/ls_logo_wide_white.png" style="display: block;">
 				</a>
 				<!-- Everything you want hidden at 940px or less, place within here -->
 				<div class="nav-collapse">
@@ -82,7 +82,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="/synchronize"><i class="icon-refresh"></i> Synchronize</a>
+									<a href="/settings/sync"><i class="icon-refresh"></i> Synchronize</a>
 								</li>
 								<li>
 									<a href="/preferences"><i class="icon-tags"></i> Preferences</a>

@@ -35,24 +35,32 @@
 <script src="<?php echo base_url();?>skin/js/highcharts/highcharts.js"></script>
 <script src="<?php echo base_url();?>skin/js/yqlgeo/yqlgeo.js"></script>
 <script src="<?php echo base_url();?>skin/js/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDNZh2NM04KwYoWEs_H9hGIF-mj9MOZvu4&sensor=true&libraries=geometry,places"></script>
+
+<?php /* <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDBdQW29PbSbvaurDGVQpd36gseJjEiBNE&sensor=true&libraries=geometry,places"></script> */ ?>
+
 <?php echo $css_combined; ?>
 <?php echo $js_combined; ?>
 <?php ## Dynamic scripts?>
 <script language="javascript"><?php $this->load->view('includes/js/ls_notifications'); ?></script>
 
+<!-- Googe Analytics -->
 <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-26287683-1']);
-  _gaq.push(['_trackPageview']);
-  _gaq.push(["_setCustomVar",1,'memory_usage','{memory_usage}',3]);  
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-26287683-1']);
+	_gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+
+	_gaq.push(['_trackEvent', 'Memory Usage', 'action', '<?php echo $_SERVER['REQUEST_URI']?>', <?php echo intval(memory_get_usage()/1024/1024)  ?>, true]);
 </script>
+
 <!--[if gte IE 9]>
   <style type="text/css">
     .gradient {

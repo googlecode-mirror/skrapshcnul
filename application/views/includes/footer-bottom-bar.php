@@ -3,7 +3,7 @@
 		<div class="">
 			<div class="">
 				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse.footer"> 
+				<a class="btn btn-navbar hidden" data-toggle="collapse" data-target=".nav-collapse.footer"> 
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span> 

@@ -18,7 +18,21 @@ class Dashboard extends CI_Controller {
 	}
 
 	function index() {
-		redirect('user/profile', 'refresh');
+		
+		
+		
+		// Render view data
+		$this -> data['head_title']		= 'Dashboard | Lunchsparks'; 
+		$this -> data['tpl_page_id']	= 'user#profile';
+		$this -> data['tpl_page_title'] = "Profile Overview";
+		// Render view layout
+		$this -> data['main_content']	= 'base/dashboard/index';
+		$this -> load -> view('includes/tmpl_layout', $this -> data);
+		
+	}
+	
+	function profile() {
+		
 	}
 }
 ?>

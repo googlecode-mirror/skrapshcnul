@@ -6,7 +6,7 @@
 	<body onload="bodyLoad()">
 		<?php $this -> load -> view('includes/system_notifications');?><div class="clearfix"></div>
 		<?php $this -> load -> view('includes/header');?><div class="clearfix"></div>
-		<div id="m-container-outer">
+		<div id="m-container-outer" style="padding: 0;">
 			<div id="m-container">
 				<?php $this -> load -> view($main_content);?>
 			</div>

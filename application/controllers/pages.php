@@ -24,32 +24,32 @@ class Pages extends CI_Controller {
 	}
 
 	public function about($value = '') {
-		$this -> data['main_content'] = '/pages/about';
+		$this -> data['main_content'] = '/base/pages/about';
 		$this -> load -> view('includes/tmpl_public', $this -> data);
 	}
 
 	public function press($value = '') {
-		$this -> data['main_content'] = '/pages/press';
+		$this -> data['main_content'] = '/base/pages/press';
 		$this -> load -> view('includes/tmpl_public', $this -> data);
 	}
 
 	public function careers($value = '') {
-		$this -> data['main_content'] = '/pages/careers';
+		$this -> data['main_content'] = '/base/pages/careers';
 		$this -> load -> view('includes/tmpl_public', $this -> data);
 	}
 
 	public function privacy($value = '') {
-		$this -> data['main_content'] = '/pages/privacy';
+		$this -> data['main_content'] = '/base/pages/privacy';
 		$this -> load -> view('includes/tmpl_public', $this -> data);
 	}
 
 	public function terms($value = '') {
-		$this -> data['main_content'] = '/pages/terms';
+		$this -> data['main_content'] = '/base/pages/terms';
 		$this -> load -> view('includes/tmpl_public', $this -> data);
 	}
 
 	public function help($value = '') {
-		$this -> data['main_content'] = '/pages/help';
+		$this -> data['main_content'] = '/base/pages/help';
 		$this -> load -> view('includes/tmpl_public', $this -> data);
 	}
 
