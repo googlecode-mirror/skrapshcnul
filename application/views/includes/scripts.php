@@ -35,8 +35,7 @@
 <script src="<?php echo base_url();?>skin/js/highcharts/highcharts.js"></script>
 <script src="<?php echo base_url();?>skin/js/yqlgeo/yqlgeo.js"></script>
 <script src="<?php echo base_url();?>skin/js/bootstrap/js/bootstrap.min.js"></script>
-
-<?php /* <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDBdQW29PbSbvaurDGVQpd36gseJjEiBNE&sensor=true&libraries=geometry,places"></script> */ ?>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyApOFb7Kw0EGguo5j2Al7gUUq9JNqIH4aM&sensor=true&libraries=geometry,places"></script>
 
 <?php echo $css_combined; ?>
 <?php echo $js_combined; ?>
