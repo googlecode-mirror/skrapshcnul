@@ -21,12 +21,13 @@ class REST_Controller extends CI_Controller {
 	protected $_args = array();
 	protected $_allow = TRUE;
 	protected $_zlib_oc = FALSE; // Determines if output compression is enabled
+	protected $_reroute_offset = 2;
 
 	// List all supported methods, the first will be the default format
 	protected $_supported_formats = array(
+		'json' => 'application/json',
 		'xml' => 'application/xml',
 		'rawxml' => 'application/xml',
-		'json' => 'application/json',
 		'jsonp' => 'application/javascript',
 		'serialized' => 'application/vnd.php.serialized',
 		'php' => 'text/plain',
@@ -46,7 +47,7 @@ class REST_Controller extends CI_Controller {
 
 		// How is this request being made? POST, DELETE, GET, PUT?
 		$this->request->method = $this->_detect_method();
-
+		
 		// Set up our GET variables
 		$this->_get_args = array_merge($this->_get_args, $this->uri->ruri_to_assoc());
 
@@ -60,7 +61,9 @@ class REST_Controller extends CI_Controller {
 
 		// Some Methods cant have a body
 		$this->request->body = NULL;
-
+		
+		$this->_reroute_offset = $this -> _detect_reroute_offset();
+		
 		switch ($this->request->method)
 		{
 			case 'get':
@@ -179,7 +182,7 @@ class REST_Controller extends CI_Controller {
 		// Get that useless shitty key out of here
 		if (config_item('rest_enable_keys') AND $use_key AND $this->_allow === FALSE)
 		{
-      if (config_item('rest_enable_logging') AND $log_method)
+			if (config_item('rest_enable_logging') AND $log_method)
 			{
 				$this->_log_request();
 			}
@@ -236,6 +239,10 @@ class REST_Controller extends CI_Controller {
 	public function response($data = array(), $http_code = null)
 	{
 		global $CFG;
+		
+		// Profiling
+		//  by @stiucsib86
+		$data['execution_time'] = $this ->benchmark->elapsed_time('total_execution_time_start','controller_end');
 
 		// If data is empty and not code provide, error and bail
 		if (empty($data) && $http_code === null)
@@ -262,7 +269,7 @@ class REST_Controller extends CI_Controller {
 			}
 			
 			is_numeric($http_code) OR $http_code = 200;
-
+			
 			// If the format method exists, call and return the output in that format
 			if (method_exists($this, '_format_'.$this->response->format))
 			{
@@ -376,7 +383,6 @@ class REST_Controller extends CI_Controller {
 					// If not HTML or XML assume its right and send it on its way
 					if ($format != 'html' AND $format != 'xml')
 					{
-
 						return $format;
 					}
 
@@ -510,6 +516,15 @@ class REST_Controller extends CI_Controller {
 
 		// Nope, just return the string
 		return $lang;
+	}
+	
+	protected function _detect_reroute_offset() {
+		
+		// TODO - check this again when switch to api.domain.com
+		if ($this -> uri -> segment(1) == 'api') {
+			return 2;
+		}
+		
 	}
 
 	/*
