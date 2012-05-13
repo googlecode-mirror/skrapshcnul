@@ -1,8 +1,5 @@
 <div class="m-content">
 	
-	<script data-main="/skin/js/main"></script>
-	
-	
 	<div class="container c-pages">
 		
 		<div class="clearfix">&nbsp;</div>
