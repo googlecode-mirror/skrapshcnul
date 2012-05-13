@@ -1,8 +1,8 @@
-window.HomeView = Backbone.View.extend({
+window.ActivitiesListView = Backbone.View.extend({
 
     initialize:function () {
-        console.log('Initializing Home View');
-        this.template = _.template(tpl.get('home'));
+        console.log('Initializing Activities List View');
+        this.template = _.template(tpl.get('activity/activities-listview'));
     },
 
     events:{

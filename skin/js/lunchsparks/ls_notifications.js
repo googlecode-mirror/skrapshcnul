@@ -74,7 +74,7 @@ LS_notifications.init = function() {
 	// Refresh notification bar every 3 seconds
 	refresh_notifications();
 	// Schedule Refresh Interval
-	setInterval("refresh_notifications()", 10000);
+	setInterval("refresh_notifications()", 20000);
 	
 	/*jQuery('.unread-notification').hover(function() {
 		var result = jQuery.post("/json/set_notifications_new_as_read", {

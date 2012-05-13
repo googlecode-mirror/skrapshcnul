@@ -25,6 +25,10 @@ class User extends REST_Controller {
 		$this -> load -> database();
 		$this -> load -> helper('url');
 		
+		// Set Global Variables
+		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
+		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
+		$this->user_id = $this -> session -> userdata('user_id');
 	}
 
 	/**
