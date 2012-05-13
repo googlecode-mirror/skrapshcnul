@@ -17,21 +17,21 @@ class Ls_Scripts {
 		$this -> ci -> load -> driver('minify');
 		
 		$this -> js_files = array(
-			'skin/js/ls-autocomplete.js',
-			'skin/js/ls_bubble_info.js',
-			'skin/js/ls_cover_img.js',
-			'skin/js/ls_guide.js',
-			'skin/js/ls_invitations.js',
-			'skin/js/ls_notifications.js', 
-			'skin/js/ls_preferences.js',
-			'skin/js/ls_recommendations.js',
-			'skin/js/ls_schedules.js',
-			'skin/js/ls_search.js',
-			'skin/js/ls_settings.js',
-			'skin/js/ls_steps_completed.js',
-			'skin/js/ls_users.js',
-			'skin/js/lunchsparks.js',
-			'skin/js/googlemap/ls_googlemap.js',
+			'skin/js/lunchsparks/ls_autocomplete.js',
+			'skin/js/lunchsparks/ls_bubble_info.js',
+			'skin/js/lunchsparks/ls_cover_img.js',
+			'skin/js/lunchsparks/ls_googlemap.js',
+			'skin/js/lunchsparks/ls_guide.js',
+			'skin/js/lunchsparks/ls_invitations.js',
+			'skin/js/lunchsparks/ls_notifications.js', 
+			'skin/js/lunchsparks/ls_preferences.js',
+			'skin/js/lunchsparks/ls_recommendations.js',
+			'skin/js/lunchsparks/ls_schedules.js',
+			'skin/js/lunchsparks/ls_search.js',
+			'skin/js/lunchsparks/ls_settings.js',
+			'skin/js/lunchsparks/ls_steps_completed.js',
+			'skin/js/lunchsparks/ls_users.js',
+			'skin/js/lunchsparks/lunchsparks.js',
 		);
 			
 		$this -> css_files = array(
@@ -66,7 +66,6 @@ class Ls_Scripts {
 			'skin/css/user_profile.css',
 			'skin/css/fonts/droid_sans.css',
 			'skin/css/fonts/open_sans.css',
-			'skin/js/jquery-tipsy/stylesheets/tipsy.css'
 		);
 		
 		$this->_minify_css();
