@@ -21,10 +21,12 @@ class User extends REST_Controller {
 		parent::__construct();
 		$this -> load -> library('session');
 		$this -> load -> library('ion_auth');
+		$this -> load -> library('ls_exception');
 		$this -> load -> library('ls_profile');
+		$this -> load -> library('ls_preferences');
+		$this -> load -> library('ls_projects');
 		$this -> load -> database();
 		$this -> load -> helper('url');
-		
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
@@ -36,91 +38,86 @@ class User extends REST_Controller {
 	 */
 	function _remap($method = FALSE) {
 		
-		$this->ruri_assoc = $this -> uri -> ruri_to_assoc();
+		//
+		// first, get user_id
+		//
+		$user_id = $method;
 		
-		if (isset($this->ruri_assoc['details']) && method_exists($this, $this->ruri_assoc['details'])) {
-			$this -> {$this->ruri_assoc['details']}();
-		} else {
-			
-			$this -> _index($method);
-			
-		}
-
-	}
-	
-	protected function _index($user_id = FALSE) {
+		$this -> ruri_assoc = $this -> uri -> ruri_to_assoc();
 		
 		if (!is_numeric($user_id)) {
-			// If its not numeric, then search for alias.
-			// Convert alias to user_id, if exist
-			
-			// TODO : Check for alias
-			$user_id = 1;
-			
+			//	If its not numeric, then search for alias.
+			//	Convert alias to user_id, if exist
+			if ($user_id == "me") {
+				$user_id = $this -> session -> userdata('user_id');
+				if (!$user_id) {
+					$error = $this -> ls_exception -> get_error("ApiException",	
+																"MeNotLoggedIn", 
+																"");
+					$this -> json_result['errors'][] = $error;  
+					$this -> response($this -> json_result, 404);
+				}
+			}
+			else {
+				$error = $this -> ls_exception -> get_error("ApiException",	
+															"IncorrectAlias",				
+															"$user_id.");
+				$this -> json_result['errors'][] = $error;
+				$this -> response($this -> json_result, 404);
+			}
 		}
-		
-		if (!$user_id) {
+				
+		//
+		// second, get method
+		//
+		if (isset($this->ruri_assoc['details'])) {
 			
-			$error['type'] = "OAuthException";
-			$error['code'] = 803;
-			$error['message'] = "Some of the aliases you requested do not exist: $user_id";
-			$this -> json_result['errors'][] = $error;
-			$this -> response($this -> json_result, 404);
+			$method = $this->ruri_assoc['details'];
 			
-		}
-		
-		## TODO Temp: Forced function call "index"
-		$this -> index_public(1);
-		
-		## TODO: Check for access validity
-		##   redirect to $this -> index_public() if not.
-		
-		// Set me to current user_id
-		if (!$this -> session -> userdata('user_id')) {
-			// There is no user session, or user is not logged in
-			return $this -> index_public($user_id);
+			if (method_exists($this, $method)) {
+				$this -> {$this->ruri_assoc['details']}($user_id, $this -> ruri_assoc);
+			}
+			else {
+				$error = $this -> ls_exception -> get_error("ApiException",
+															"IncorrectMethod",
+															"$method");
+				$this -> json_result['errors'][] = $error;
+				$this -> response($this -> json_result, 404);
+			}
 		} else {
-			$this -> index($user_id);
+			$this -> profile($user_id);
 		}
+	}
+	
+	/**
+	 * handle query of the form /user/$user_id; return the general info for 
+	 * account $user_id
+	 */
+	protected function profile($user_id = FALSE) {
 		
+		//	Check for access validity
+		if ($this -> session -> userdata('user_id') == $user_id) {
+			$this -> full_profile($user_id);
+		} else {
+			$this -> public_profile($user_id);
+		}
 	}
 
-	protected function index($user_id = FALSE) {
+	/**
+	 * return full profile for user $user_id
+	 */
+	private function full_profile($user_id = FALSE) {
 		
-		// TODO @iamneit
-		//   Reference for data structure https://sites.google.com/a/lunchsparks.me/developers-api-internal/api/user
+		$results = $this -> ls_profile -> prepare_profile_data($user_id);
 		
-		
-		$results['kind'] = "ls#peopleFeed";
-		$results['title'] = "People Search Feed";
-		$results['selfLink'] = "";
-		$results['nextPage'] = "";
 		$this -> json_result['results'][] = $results;
-		
 		$this -> response($this -> json_result);
-
 	}
 
-	protected function index_public($user_id = FALSE) {
-		
-		// TODO @iamneit
-		//   convert the following by retrieving from database.
-		
-		// Retrieve public data
-		/*
-		$results['kind'] = "ls#user";
-		$results['id'] = "1";
-		$results['name']['display_name'] = "Bing Han, Goh";
-		$results['name']['first_name'] = "Bing Han";
-		$results['name']['last_name'] = "Goh";
-		$results['link'] = "https://lunchsparks.me/pub/stiucsib86";
-		$results['headline'] = "Application developer at Lunchsparks";
-		$results['location']['city'] = "Singapore";
-		$results['verification']['status'] = TRUE;
-		$results['ratings']['reputation'] = 19;
-		$results['added_to_wishlist']['status'] = FALSE;
-		$results['added_to_wishlist']['enabled'] = FALSE;
-		*/
+	/**
+	 * return public profile for user $user_id
+	 */
+	private function _public_profile($user_id = FALSE) {
 		
 		$fields['user_id'] = $user_id;
 		$results = $this -> ls_profile -> getPublicProfile($fields);
@@ -129,14 +126,23 @@ class User extends REST_Controller {
 		$this -> response($this -> json_result);
 		
 	}
-
-	protected function accounts($value = FALSE) {
+	
+	protected function preferences($user_id = FALSE) {
 		
-		/*$error['type'] = "OAuthException";
-		$error['code'] = 803;
-		$error['message'] = "You do not have access to the user data: $user_id";
-		$this -> json_result['errors'][] = $error;
-		$this -> response($error, 404);*/
+		$result = $this -> ls_preferences -> selectPreferences($user_id);
+		$this -> json_result['results'][] = $result;
+		$this -> response($this -> json_result);
+		
+	}
+	
+	protected function projects($user_id = FALSE, $options = FALSE) {
+		
+		## TODO: add fields
+		
+		$fields['user_id'] = $user_id;
+		$result = $this -> ls_projects -> select_all_projects($fields, $options);
+		$this -> json_result['results'][] = $result;
+		$this -> response($this -> json_result);
 	}
 	
 	

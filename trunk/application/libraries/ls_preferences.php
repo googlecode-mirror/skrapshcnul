@@ -52,6 +52,10 @@ class Ls_Preferences {
 		return $this -> ci -> preferences_model -> global_preferences_select();
 	}
 	
+	function selectPreferences($user_id) {
+		return $this -> ci -> preferences_model -> selectPreferences($user_id);
+	}
+	
 
 }
 ?>
