@@ -15,7 +15,7 @@ RewriteRule ^(.*)$ /index.php?/$1 [L]
 RewriteCond %{REQUEST_URI} ^application.*
 RewriteRule ^(.*)$ /index.php?/$1 [L]
 
-RewriteCond $1 !^(index\.php|skin|media|css|images|robots\.txt|css)
+RewriteCond $1 !^(index\.php|skin|application|media|css|images|robots\.txt|css)
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} !-f
