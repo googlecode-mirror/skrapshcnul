@@ -17,7 +17,7 @@ class Auth extends Controller {
 		$this -> load -> database();
 		$this -> load -> model('invitation_model');
 		$this -> load -> library('ion_auth'); // Load Ion Auth
-		$this -> load -> library('ls_facebook'); // Load Twitter Auth
+		$this -> load -> library('ls_facebook'); // Load Facebook Auth
 		$this -> load -> library('ls_twitter'); // Load Twitter Auth
 		$this -> tweet -> enable_debug(TRUE);
 		// Set Global Variables

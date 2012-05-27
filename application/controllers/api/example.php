@@ -18,6 +18,15 @@ require APPPATH.'/libraries/REST_Controller.php';
 
 class Example extends REST_Controller
 {
+    function index() {
+        echo "Hello world";
+    }
+    
+    function __construct() {
+        parent::__construct();
+        $this -> load -> model('p_model');
+    }
+
 	function user_get()
     {
         if(!$this->get('id'))
