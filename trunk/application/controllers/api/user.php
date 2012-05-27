@@ -25,6 +25,8 @@ class User extends REST_Controller {
 		$this -> load -> library('ls_profile');
 		$this -> load -> library('ls_preferences');
 		$this -> load -> library('ls_projects');
+		$this -> load -> library('ls_wishlist');
+		$this -> load -> library('ls_lunch_buddy');
 		$this -> load -> database();
 		$this -> load -> helper('url');
 		// Set Global Variables
@@ -145,6 +147,22 @@ class User extends REST_Controller {
 		$this -> response($this -> json_result);
 	}
 	
+	protected function wishlist($user_id = FALSE, $options = FALSE) {
+		
+		$result = $this -> ls_wishlist -> wishlist($user_id);
+		$this -> json_result['results'][] = $result;
+		$this -> response($this -> json_result);
+	}
 	
+	protected function buddylist($user_id = FALSE) {
+		$result = $this -> ls_lunch_buddy -> buddylist($user_id);
+		$this -> json_result['results'][] = $result;
+		$this -> response($this -> json_result);
+	}
+	
+	protected function similar_people($user_id = FALSE) {
+		$this -> json_result['result'][] = "";
+		$this -> response($this -> json_result);
+	}
 }
 ?>
