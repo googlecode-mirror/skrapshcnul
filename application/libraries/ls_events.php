@@ -98,7 +98,7 @@ class Ls_Events {
 		return $this -> ci -> events_model -> event_RSVP($fields);
 	}
 	
-	function _verify($users) {
+	private function _verify($users) {
 		$cnt = count($users);
 		for ($i = 0; $i < $cnt; ++$i) {
 			for ($j = 0; $j < $cnt; ++$j) if ($i != $j &&

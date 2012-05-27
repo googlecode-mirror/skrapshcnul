@@ -1,17 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Example
- *
- * This is an example of a few basic user interaction methods you could use
- * all done with a hardcoded array.
- *
- * @package		CodeIgniter
- * @subpackage	Rest Server
- * @category	Controller
- * @author		@stiucsib86
- */
-
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 require APPPATH . '/libraries/REST_Controller.php';
 
@@ -19,16 +7,17 @@ class User extends REST_Controller {
 
 	function __construct() {
 		parent::__construct();
-		$this -> load -> library('session');
-		$this -> load -> library('ion_auth');
-		$this -> load -> library('ls_exception');
-		$this -> load -> library('ls_profile');
-		$this -> load -> library('ls_preferences');
-		$this -> load -> library('ls_projects');
-		$this -> load -> library('ls_wishlist');
-		$this -> load -> library('ls_lunch_buddy');
-		$this -> load -> database();
-		$this -> load -> helper('url');
+		$this->load->library('session');
+		$this->load->library('ion_auth');
+		$this->load->library('ls_exception');
+		$this->load->library('ls_profile');
+		$this->load->library('ls_preferences');
+		$this->load->library('ls_projects');
+		$this->load->library('ls_wishlist');
+		$this->load->library('ls_lunch_buddy');
+		$this->load->library('ls_events');
+		$this->load->database();
+		$this->load->helper('url');
 		// Set Global Variables
 		$this -> data['is_logged_in'] = $this -> ion_auth -> logged_in();
 		$this -> data['is_logged_in_admin'] = $this->ion_auth->is_admin();
@@ -144,25 +133,40 @@ class User extends REST_Controller {
 		$fields['user_id'] = $user_id;
 		$result = $this -> ls_projects -> select_all_projects($fields, $options);
 		$this -> json_result['results'][] = $result;
-		$this -> response($this -> json_result);
+		$this -> response($this -> json_result, 200);
 	}
 	
 	protected function wishlist($user_id = FALSE, $options = FALSE) {
 		
 		$result = $this -> ls_wishlist -> wishlist($user_id);
 		$this -> json_result['results'][] = $result;
-		$this -> response($this -> json_result);
+		$this -> response($this -> json_result, 200);
 	}
 	
 	protected function buddylist($user_id = FALSE) {
 		$result = $this -> ls_lunch_buddy -> buddylist($user_id);
 		$this -> json_result['results'][] = $result;
-		$this -> response($this -> json_result);
+		$this -> response($this -> json_result, 200);
 	}
 	
 	protected function similar_people($user_id = FALSE) {
 		$this -> json_result['result'][] = "";
-		$this -> response($this -> json_result);
+		$this -> response($this -> json_result, 200);
+	}
+	
+	/*
+	 * /api/user/me/details/events/format/json/s0/0/s1/1
+	 */
+	protected function events($user_id = FALSE, $options = FALSE) {
+		$status = array();
+		if (isset($options['s0'])) $status[] = $options['s0'];
+		if (isset($options['s1'])) $status[] = $options['s1'];
+		if (isset($options['s2'])) $status[] = $options['s2'];
+		if (isset($options['s3'])) $status[] = $options['s3'];
+		
+		$result = $this->ls_events->getEvents($user_id, $status);
+		$this->json_result['results'] = $result;
+		$this->response($this->json_result, 200);
 	}
 }
 ?>

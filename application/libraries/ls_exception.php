@@ -24,7 +24,9 @@ class Ls_Exception {
 		define("cApiExceptionIncorrectAlias", 1);
 		define("cApiExceptionMeNotLoggedIn", 2);
 		define("cApiExceptionIncorrectUser", 3);
-		define("cApiExceptionIncorrectMethod", 10);
+		define("cApiExceptionIncorrectMethod", 99);
+		
+		define("cApiExceptionIncorrectEventId", 11);
 	}
 	
 	/*

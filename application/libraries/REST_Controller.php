@@ -420,8 +420,7 @@ class REST_Controller extends CI_Controller {
 	 *
 	 * Detect which method (POST, PUT, GET, DELETE) is being used
 	 */
-
-	protected function _detect_method()
+	protected function detect_method()
 	{
 		$method = strtolower($this->input->server('REQUEST_METHOD'));
         
@@ -443,6 +442,10 @@ class REST_Controller extends CI_Controller {
 		}
 
 		return 'get';
+	}
+
+	protected function _detect_method() {
+		return $this -> detect_method();
 	}
 
 	/*
