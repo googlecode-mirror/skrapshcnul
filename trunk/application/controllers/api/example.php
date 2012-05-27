@@ -24,7 +24,6 @@ class Example extends REST_Controller
     
     function __construct() {
         parent::__construct();
-        $this -> load -> model('p_model');
     }
 
 	function user_get()
